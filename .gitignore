@@ -229,3 +229,5 @@ Projects/**/*_backup_*/
 # RAPTor 執行時產出（session、impact-matrix 等，各專案獨立）
 # 如果你想版控 .raptor/，把下面這行註解掉
 # Projects/**/.raptor/
+
+ccwLog/
