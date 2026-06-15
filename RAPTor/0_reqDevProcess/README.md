@@ -249,14 +249,14 @@ graph LR
 - 擴展 Phase 4/5 模板以支援 haARM 引用驗證
 - 建立從 Phase 1 角色識別 → Phase 2 haARM 建模 → Phase 4 規格引用 → Phase 5 一致性驗證的完整追溯鏈
 
-### v1.1.0 (2025-01-14)
+### v1.1.0 (2025-11-14)
 - 新增 haPDL 七規格檔案體系整合方案
 - 引入 Phase 1.5：High-level Gherkin 撰寫階段
 - 擴展 Phase 4：新增 Intent Layer 設計子階段（haAPI + haPDL）
 - 建立七規格檔案架構：DBML → High-level Gherkin → haAPI/haPDL → TypeSpec/PDL/Low-level Gherkin
 - 提供自動化工具鏈建議與實施路線圖
 
-### v1.0.0 (2025-01-06)
+### v1.0.0 (2025-10-06)
 - 初始版本
 - 整合 BDD、Event Storming、User Journey、API-First 等方法論
 - 建立完整的七階段流程
