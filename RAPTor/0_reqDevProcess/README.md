@@ -276,4 +276,4 @@ graph LR
 
 ---
 
-**版權聲明**：本文件屬於 WA-RAPTor 專案，採用 MIT 授權。
+**版權聲明**：本文件屬於 WA-RAPTor 專案，採用 Apache 2.0 授權。

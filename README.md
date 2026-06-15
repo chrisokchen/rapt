@@ -1,16 +1,16 @@
 # RAPTor (Requirements Analysis & Prototype Tools)
 
-> **RAPTor** 是一套結合 BDD (Behavior-Driven Development) 與 AI 技術的「規格即程式碼」(Specification-as-Code) 開發體系與工具集。
+> **RAPTor** 是一套結合 BDD (Behavior-Driven Development)、自定 DSLs (Domain-Specific Languages) 與 AI 技術的「規格即程式碼」(Specification-as-Code) 開發體系與工具集。
 
 ## 🌐 專案目錄結構 (Workspace Directories)
 
-本工作區包含了 RAPTor 核心工具、實作專案：
+本工作區包含了 RAPTor 核心工具、示範專案：
 
 - **[RAPTor/](RAPTor/)**  
   **核心流程與工具庫**。包含了完整的七階段需求發掘流程指南 (`0_reqDevProcess/`)、AI 技能庫 (`.agents/skills/`) 以及相關的新手與進階培訓教材。
 
 - **[Projects/](Projects/)**  
-  **專案與示範案例**。用於存放使用 RAPTor 體系建立的實際專案（如 `smallBiz` 系列專案），展示從原始需求到可執行規格的轉化過程。
+  **專案與示範案例**。用於存放使用 RAPTor 體系建立的示範專案（如 `smallBiz` 系列專案），展示從原始需求到可執行規格的轉化過程。
 
 ## 🚀 快速開始
 
