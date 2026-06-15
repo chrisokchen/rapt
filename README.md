@@ -16,8 +16,9 @@
 
 若您是第一次接觸 RAPTor，建議按照以下順序探索：
 1. 閱讀 **[RAPTor/README.md](RAPTor/README.md)** 了解核心理念與規格體系。
-2. 查看 **[RAPTor/course_script.md](RAPTor/course_script.md)** 體驗「以終為始」的開發旅程。
-3. 進入 **[Projects/](Projects/)** 查看實際專案的 `docs/ssot/` (Single Source of Truth) 與生成的規格。
+2. 查看 **[WA-RAPTor 新手村旅程：以終為始的規格驅動開發](RAPTor/course_script.md)** 體驗「以終為始」的開發旅程。
+3. 閱讀 **[需求發掘與分析旅程：從混沌到秩序](RAPTor/requirements_discovery_course.md)** 了解需求探索流程。
+4. 進入 **[Projects/](Projects/)** 查看實際專案的 `docs/ssot/` (Single Source of Truth) 與生成的規格。
 
 ## 🛠️ 試試自己的專案 (Try It Yourself)
 
