@@ -1,0 +1,28 @@
+schema_version: 1
+updated_at: "2026-06-13T10:05:00+08:00"
+entries:
+  - id: REC-260613-001
+    source_report: docs/reports/verify-report.yml
+    findings:
+      - FIND-260613-001
+      - FIND-260613-002
+      - FIND-260613-003
+    artifacts_changed:
+      - docs/ssot/habdd/inventory-control.ha.feature
+      - docs/ssot/habdd/checkout-payment.ha.feature
+      - docs/ssot/habdd/membership-loyalty.ha.feature
+      - docs/ssot/habdd/order-fulfillment.ha.feature
+      - docs/ssot/habdd/promotion-coupon.ha.feature
+      - docs/ssot/habdd/return-refund.ha.feature
+      - docs/ssot/haapi/member-account.haapi.yaml
+      - docs/ssot/haapi/platform-admin.haapi.yaml
+      - docs/ssot/hapdl/member-registration.hapdl.yaml
+      - docs/ssot/hapdl/platform-admin-access.hapdl.yaml
+      - .raptor/traceability.md
+      - .raptor/session.md
+    impact:
+      traceability: L2/L3 coverage repaired for Phase 5 blockers.
+      intent: Added missing member-account and platform-admin intent artifacts.
+      behavior: Added scenario_id/entities metadata only; business steps unchanged.
+    next_action: /rapt-verify
+

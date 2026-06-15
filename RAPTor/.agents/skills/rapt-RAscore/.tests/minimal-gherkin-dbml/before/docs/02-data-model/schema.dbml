@@ -1,0 +1,17 @@
+Table Order {
+  id int [pk]
+  status OrderStatus
+  customer_id int
+}
+
+Table AuditLog {
+  id int [pk]
+  action varchar
+}
+
+Enum OrderStatus {
+  pending
+  cancelled
+  paid
+}
+

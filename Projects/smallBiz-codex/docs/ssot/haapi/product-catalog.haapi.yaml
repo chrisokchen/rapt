@@ -1,0 +1,54 @@
+api: product-catalog
+schema_version: "3.3"
+entity: Product
+title: 商品目錄 API
+description: 支援商家商品、SKU 與公開商品瀏覽的意圖規格。
+exposes:
+  standard: [list, read, create, update]
+  list:
+    filters:
+      - {field: merchantId, operators: [eq]}
+      - {field: categoryId, operators: [eq]}
+      - {field: productStatus, operators: [eq]}
+      - {field: productName, operators: [contains]}
+    sorting: {fields: [createdAt, updatedAt, productName], default: updatedAt:desc}
+    pagination: {style: offset, default_size: 20}
+  operations:
+    - {name: publish_product, method: POST, path: "/{id}/publish"}
+    - {name: deactivate_product, method: POST, path: "/{id}/deactivate"}
+access:
+  authentication: {type: bearer, required: true}
+  endpoints:
+    list:
+      required_roles: [public-shopper, merchant-owner]
+      required_permissions:
+        - {id: product_read_public}
+        - {id: product_crud_merchant}
+    read:
+      required_roles: [public-shopper, merchant-owner]
+      required_permissions:
+        - {id: product_read_public}
+        - {id: product_crud_merchant}
+    create:
+      required_roles: [merchant-owner]
+      required_permissions:
+        - {id: product_crud_merchant}
+    update:
+      required_roles: [merchant-owner]
+      required_permissions:
+        - {id: product_crud_merchant}
+  operations:
+    publish_product:
+      required_roles: [merchant-owner]
+      required_permissions:
+        - {id: product_crud_merchant}
+    deactivate_product:
+      required_roles: [merchant-owner]
+      required_permissions:
+        - {id: product_crud_merchant}
+source_evidence:
+  - "docs/ssot/habdd/product-catalog.ha.feature"
+  - "docs/ssot/habdd/product-discovery.ha.feature"
+  - "docs/ssot/dbml/schema.dbml#Table:Product"
+  - "docs/ssot/haarm/smallbiz.haarm.yaml#permission:product_crud_merchant"
+

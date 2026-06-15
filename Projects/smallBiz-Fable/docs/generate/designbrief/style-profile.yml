@@ -1,0 +1,39 @@
+audit:
+  id: PREVIEW-20260613-003
+  skill: rapt-design-brief
+  generated_at: "2026-06-13T15:37:00+08:00"
+  source_artifacts:
+    - docs/ssot/hapdl/ （34 個 *.hapdl.yaml）
+    - docs/ssot/dbml/schema.dbml
+    - docs/ssot/haarm/smallBiz.haarm.yaml
+  output_artifact: docs/generate/designbrief/design-brief.md
+  status: ok
+  metrics:
+    hapdl_pages: 34
+    dbml_tables: 28
+    haarm_roles: 5
+    haarm_actors: 8
+    md_size_kb: 49
+    sections:
+      - Design System
+      - Page Navigation Map
+      - Page Specifications
+      - Generation Instructions
+  assumptions:
+    - 以 haPDL canonical key 解析 34 頁；Design System（色彩/字型/間距/元件）為工具預設規範，非 SSoT 來源。
+    - 逐頁規格之欄位定義、widget 類型、enum 值、sensitive 遮罩、action 取自 DBML label/ref_code/sensitive 與 haPDL view/form。
+    - 範例 JSON 資料為依欄位型別合成的示意資料，非真實業務資料。
+  findings:
+    - id: PREVIEW-FIND-001
+      route: NOTE_ONLY
+      can_fix: false
+      artifact: docs/generate/designbrief/design-brief.md
+      location: Design System
+      summary: 色彩/字型/間距為生成器預設風格規範，非源自 SSoT；交付 AI 設計工具時可依品牌調整。
+    - id: PREVIEW-FIND-002
+      route: NOTE_ONLY
+      can_fix: false
+      artifact: docs/ssot/hapdl/merchant-report-dashboard.hapdl.yaml
+      location: type:dashboard
+      summary: dashboard 頁的圖表/聚合視覺由 AI 設計工具依 Generation Instructions 詮釋；brief 僅提供資料欄位與意圖，非最終視覺。
+  downstream_note: findings 皆 NOTE_ONLY；design-brief 為交付 AI 設計工具的 inspection artifact，不回寫 SSoT。

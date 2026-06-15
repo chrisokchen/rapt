@@ -1,0 +1,562 @@
+project: "SmallBiz 電商管理"
+rascore_version: "0.1"
+generated_at: "2026-06-13T02:18:10.402794+00:00"
+advisory_only: true
+score:
+  total: 87.69
+  raw_grade: "A"
+  grade: "A"
+  veto:
+    triggered: false
+    rules:
+      []
+dimensions:
+  A:
+    name: "需求覆蓋與保真度"
+    weight: 0.2
+    average: 2.67
+    weighted_score: 17.78
+    criteria:
+      - "A1"
+      - "A2"
+      - "A3"
+  B:
+    name: "Gherkin 行為規格品質"
+    weight: 0.18
+    average: 2.8
+    weighted_score: 16.8
+    criteria:
+      - "B1"
+      - "B2"
+      - "B3"
+      - "B4"
+      - "B5"
+  C:
+    name: "DBML 領域模型品質"
+    weight: 0.14
+    average: 2.75
+    weighted_score: 12.83
+    criteria:
+      - "C1"
+      - "C2"
+      - "C3"
+      - "C4"
+  D:
+    name: "Gherkin ↔ DBML 跨規格一致性"
+    weight: 0.24
+    average: 2.5
+    weighted_score: 20.0
+    criteria:
+      - "D1"
+      - "D2"
+      - "D3"
+      - "D4"
+  E:
+    name: "追溯性與決策記錄"
+    weight: 0.14
+    average: 2.67
+    weighted_score: 12.44
+    criteria:
+      - "E1"
+      - "E2"
+      - "E3"
+  F:
+    name: "可驗證與生成準備度"
+    weight: 0.07
+    average: 2.5
+    weighted_score: 5.83
+    criteria:
+      - "F1"
+      - "F2"
+  G:
+    name: "流程穩定性"
+    weight: 0.03
+    average: 2.0
+    weighted_score: 2.0
+    criteria:
+      - "G1"
+      - "G2"
+criteria:
+  A1:
+    score: 3
+    confidence: "high"
+    review_mode: "llm-assisted"
+    reason: "核心業務流程已由 discovery、10 個高階 Gherkin feature、DBML、haARM、haAPI、haPDL 覆蓋，且 verify report 顯示 completeness PASS。"
+    evidence:
+      -
+        artifact: "docs/reports/verify-report.yml"
+        location: "summary.completeness"
+        note: "completeness 為 PASS"
+      -
+        artifact: "docs/ssot/habdd"
+        location: "10 feature files"
+        note: "商品、購物車、結帳、庫存、訂單、會員、促銷、退貨、報表、權限邊界皆有情境"
+    findings:
+      []
+  A2:
+    score: 3
+    confidence: "high"
+    review_mode: "llm-assisted"
+    reason: "原先 CiC GAP 已完成釐清並回寫 constraints、Gherkin 與 traceability；verify coverage 顯示 must-have 與 should-have 皆完成。"
+    evidence:
+      -
+        artifact: "docs/reports/verify-report.yml"
+        location: "summary.coverage"
+        note: "coverage 為 PASS"
+      -
+        artifact: "docs/ssot/dbml/constraints.md"
+        location: "CON-CLARIFY-001..006"
+        note: "六項釐清決策已回寫為約束"
+    findings:
+      []
+  A3:
+    score: 2
+    confidence: "medium"
+    review_mode: "llm-assisted"
+    reason: "規格大致維持 MVP 範圍，且 generated 狀態仍 deferred；但會員、點數、退款、報表等能力已有較完整延伸，後續仍需產品 owner 確認是否全屬 MVP。"
+    evidence:
+      -
+        artifact: ".raptor/arguments.yml"
+        location: "generated.status"
+        note: "downstream generated artifacts deferred"
+      -
+        artifact: "docs/ssot/habdd/membership-loyalty.ha.feature"
+        location: "SCN-MEMBER-*"
+        note: "會員與點數有多個業務情境"
+    findings:
+      -
+        severity: "low"
+        category: "scope-creep"
+        artifact: "docs/ssot/habdd"
+        location: "membership-loyalty / return-refund / merchant-reporting"
+        issue: "部分能力已接近完整產品範圍，尚未在 RAscore 階段重新確認 MVP 優先級。"
+        recommendation: "在進入實作規劃前標註 MVP/next phase，避免將低優先能力納入首版交付。"
+        owner_skill: "manual-review"
+        recommended_action_type: "manual_review"
+  B1:
+    score: 3
+    confidence: "high"
+    review_mode: "llm-assisted"
+    reason: "情境多以業務語言描述結果，未出現 UI 控制或 API 低階實作細節污染。"
+    evidence:
+      -
+        artifact: "docs/reports/rascore-precheck.json"
+        location: "gherkin.ui_detail_terms"
+        note: "precheck 未列出 UI detail terms"
+      -
+        artifact: "docs/ssot/habdd/checkout-payment.ha.feature"
+        location: "Scenario: 顯示可追溯的訂單金額"
+        note: "以訂單金額可追溯作為業務結果"
+    findings:
+      []
+  B2:
+    score: 3
+    confidence: "high"
+    review_mode: "llm-assisted"
+    reason: "正式 verify 口徑追蹤 45 個 scenario，情境拆分涵蓋正向、例外與決策補充，粒度可作為 SSoT。"
+    evidence:
+      -
+        artifact: "docs/reports/verify-report.yml"
+        location: "summary.counts.scenarios"
+        note: "正式 scenario count 為 45"
+      -
+        artifact: "docs/ssot/habdd"
+        location: "SCN-*"
+        note: "每個 feature 以多個 scenario 拆分業務行為"
+    findings:
+      []
+  B3:
+    score: 3
+    confidence: "high"
+    review_mode: "llm-assisted"
+    reason: "precheck 未發現缺少 Given、When 或 Then 的情境，GWT 結構穩定。"
+    evidence:
+      -
+        artifact: "docs/reports/rascore-precheck.json"
+        location: "gherkin.scenarios_without_given/when/then"
+        note: "三類缺漏皆為空"
+    findings:
+      []
+  B4:
+    score: 3
+    confidence: "high"
+    review_mode: "llm-assisted"
+    reason: "Gherkin 覆蓋 happy path、資格不符、庫存不足、付款逾時、退貨限制、空報表與權限邊界。"
+    evidence:
+      -
+        artifact: "docs/ssot/habdd/product-discovery.ha.feature"
+        location: "SCN-DISC-004"
+        note: "商品售完時不可加入購物車"
+      -
+        artifact: "docs/ssot/habdd/merchant-reporting.ha.feature"
+        location: "SCN-REPORT-003"
+        note: "無銷售資料時呈現空報表"
+      -
+        artifact: "docs/ssot/habdd/access-boundary.ha.feature"
+        location: "SCN-AUTH-001..003"
+        note: "權限邊界情境"
+    findings:
+      []
+  B5:
+    score: 2
+    confidence: "medium"
+    review_mode: "llm-assisted"
+    reason: "大多數名詞能對應 glossary 與 DBML，但 traceability L2 有 9 個 low confidence row，表示部分業務詞與資料詞的穩定度仍可提高。"
+    evidence:
+      -
+        artifact: "docs/reports/verify-report.yml"
+        location: "findings.FIND-260613-004"
+        note: "9 個 L2 row low confidence"
+      -
+        artifact: ".raptor/traceability.md"
+        location: "L2 Scenario Data Mapping"
+        note: "部分 row confidence 為 low"
+    findings:
+      -
+        severity: "medium"
+        category: "traceability-gap"
+        artifact: ".raptor/traceability.md"
+        location: "L2 Scenario Data Mapping"
+        issue: "9 個 scenario 的 L2 mapping 仍為 low confidence，業務詞與資料詞對應尚未完全穩定。"
+        recommendation: "補強這 9 個 row 的 read_tables、write_tables、fields 或 constraints，並將 confidence 提升為 medium/high。"
+        owner_skill: "rapt-reconcile"
+        recommended_action_type: "traceability_mapping"
+  C1:
+    score: 3
+    confidence: "high"
+    review_mode: "llm-assisted"
+    reason: "DBML 包含 24 個 table，覆蓋帳號、商家、商品、庫存、購物車、訂單、付款、物流、會員、促銷、退貨、通知等核心域。"
+    evidence:
+      -
+        artifact: "docs/reports/verify-report.yml"
+        location: "summary.counts.tables"
+        note: "tables = 24"
+      -
+        artifact: "docs/ssot/dbml/schema.dbml"
+        location: "Table Account..Notification"
+        note: "核心 domain table 完整"
+    findings:
+      []
+  C2:
+    score: 3
+    confidence: "high"
+    review_mode: "llm-assisted"
+    reason: "schema.dbml 明確列出 PK/FK ref，主要關聯均有外鍵；帳號、商家、商品、訂單、退貨等關係可追溯。"
+    evidence:
+      -
+        artifact: "docs/ssot/dbml/schema.dbml"
+        location: "Ref: lines"
+        note: "Merchant、Product、SalesOrder、ReturnRequest 等皆有 Ref"
+    findings:
+      []
+  C3:
+    score: 3
+    confidence: "high"
+    review_mode: "llm-assisted"
+    reason: "欄位普遍標註 not null、default、unique、ref_code、label、group 與 sensitive，狀態與枚舉口徑足以支撐 DSL 與 codegen readiness。"
+    evidence:
+      -
+        artifact: "docs/ssot/dbml/schema.dbml"
+        location: "Account/ProductSku/SalesOrder fields"
+        note: "欄位約束與 metadata 完整"
+      -
+        artifact: "docs/ssot/dbml/seeds.md"
+        location: "ref_code seeds"
+        note: "狀態與代碼種子有獨立文件"
+    findings:
+      []
+  C4:
+    score: 2
+    confidence: "medium"
+    review_mode: "llm-assisted"
+    reason: "資料模型具備良好正規化與關聯，但優惠/點數/稅金/庫存預留等複合規則主要落在 constraints.md，部分欄位層級稽核或計算來源仍偏後續設計。"
+    evidence:
+      -
+        artifact: "docs/ssot/dbml/constraints.md"
+        location: "CON-CLARIFY-001..006"
+        note: "複合規則以 constraints 表述"
+      -
+        artifact: "docs/ssot/dbml/schema.dbml"
+        location: "SalesOrder amount fields"
+        note: "金額欄位存在，但計算來源需搭配 constraints"
+    findings:
+      -
+        severity: "low"
+        category: "dbml-quality"
+        artifact: "docs/ssot/dbml/schema.dbml"
+        location: "SalesOrder / InventoryItem / PointLedger"
+        issue: "部分複合規則尚以 constraints 補充，欄位級計算來源與稽核欄位仍可更明確。"
+        recommendation: "若後續要直接 codegen，補充金額計算、庫存預留釋放與點數折抵的稽核欄位或 rule metadata。"
+        owner_skill: "rapt-modeling"
+        recommended_action_type: "modeling_revision"
+  D1:
+    score: 2
+    confidence: "medium"
+    review_mode: "llm-assisted"
+    reason: "Gherkin 與 DBML 大致對齊，verify cross-DSL consistency PASS；但多數 L2 row 未填 read/write tables，使語意對齊仍仰賴名詞與 glossary。"
+    evidence:
+      -
+        artifact: "docs/reports/verify-report.yml"
+        location: "summary.cross_dsl_consistency"
+        note: "cross-DSL consistency 為 PASS"
+      -
+        artifact: ".raptor/traceability.md"
+        location: "L2 Scenario Data Mapping"
+        note: "部分 row read/write table 欄位仍空白"
+    findings:
+      []
+  D2:
+    score: 2
+    confidence: "medium"
+    review_mode: "llm-assisted"
+    reason: "每個 scenario 都有 L2 mapping，且新增 DEC-CLR 情境有較完整 table/field mapping；但舊有情境多停在 entities/glossary terms。"
+    evidence:
+      -
+        artifact: "docs/reports/verify-report.yml"
+        location: "summary.traceability"
+        note: "traceability 為 PASS"
+      -
+        artifact: ".raptor/traceability.md"
+        location: "SCN-INV-006..SCN-RETURN-005"
+        note: "釐清後新增情境含 read/write tables 與 fields"
+    findings:
+      -
+        severity: "medium"
+        category: "cross-spec-gap"
+        artifact: ".raptor/traceability.md"
+        location: "L2 Scenario Data Mapping"
+        issue: "許多舊有 scenario 的 read_tables、write_tables、fields 仍空白，從 scenario 到 DBML 的欄位級可驗證性不足。"
+        recommendation: "針對舊有 medium/low confidence rows 補入具體 tables 與 fields，讓情境可直接驅動資料層驗收。"
+        owner_skill: "rapt-reconcile"
+        recommended_action_type: "traceability_mapping"
+  D3:
+    score: 3
+    confidence: "high"
+    review_mode: "llm-assisted"
+    reason: "DBML 主要 table 都能在業務情境、L2 mapping 或 constraints 中找到對應用途，未見明顯孤立核心 table。"
+    evidence:
+      -
+        artifact: "docs/ssot/dbml/schema.dbml"
+        location: "24 tables"
+        note: "table 對應主要 feature domain"
+      -
+        artifact: ".raptor/traceability.md"
+        location: "L2 Scenario Data Mapping"
+        note: "scenario entities 涵蓋主要資料概念"
+    findings:
+      []
+  D4:
+    score: 3
+    confidence: "high"
+    review_mode: "llm-assisted"
+    reason: "六項釐清決策均以 constraint_id 回寫，且相關新增 scenario 連到 CON-CLARIFY-*，業務規則與資料約束一致。"
+    evidence:
+      -
+        artifact: "docs/ssot/dbml/constraints.md"
+        location: "CON-CLARIFY-001..006"
+        note: "決策轉為資料/流程約束"
+      -
+        artifact: ".raptor/traceability.md"
+        location: "SCN-INV-006..SCN-RETURN-005"
+        note: "新增情境映射到對應 constraints"
+    findings:
+      []
+  E1:
+    score: 3
+    confidence: "high"
+    review_mode: "llm-assisted"
+    reason: "traceability 檔包含 L2 與 L3 mapping，verify report 顯示 45 個正式 scenario 均已映射。"
+    evidence:
+      -
+        artifact: "docs/reports/verify-report.yml"
+        location: "summary.traceability"
+        note: "traceability PASS"
+      -
+        artifact: ".raptor/traceability.md"
+        location: "L2 / L3 sections"
+        note: "包含 scenario data mapping 與 intent mapping"
+    findings:
+      []
+  E2:
+    score: 3
+    confidence: "high"
+    review_mode: "llm-assisted"
+    reason: "L3 mapping 已將 45 個 scenario 全部追到 haAPI/haPDL 與 haARM permission，verify 無 untraced 或 bad operation。"
+    evidence:
+      -
+        artifact: "docs/reports/verify-report.yml"
+        location: "summary.traceability"
+        note: "l3_untraced 為空，bad operations 為空"
+      -
+        artifact: ".raptor/traceability.md"
+        location: "L3 Intent Mapping"
+        note: "45 個 scenario 都有 intent mapping"
+    findings:
+      []
+  E3:
+    score: 2
+    confidence: "medium"
+    review_mode: "llm-assisted"
+    reason: "verify report 可作為客觀驗證依據，但 RAscore precheck 與 verify 對 scenario count 的口徑不同，需避免後續自動化誤判。"
+    evidence:
+      -
+        artifact: "docs/reports/verify-report.yml"
+        location: "summary.counts.scenarios"
+        note: "verify 正式口徑為 45"
+      -
+        artifact: "docs/reports/rascore-precheck.json"
+        location: "gherkin.scenario_count"
+        note: "precheck 寬鬆掃描為 48"
+    findings:
+      -
+        severity: "low"
+        category: "process-gap"
+        artifact: "docs/reports/rascore-precheck.json"
+        location: "gherkin.scenario_count"
+        issue: "RAscore precheck 與 verify 的 scenario count 口徑不同，可能造成報告解讀混淆。"
+        recommendation: "後續調整 precheck parser，使其沿用 verify 的 scenario metadata 口徑。"
+        owner_skill: "manual-review"
+        recommended_action_type: "process_revision"
+  F1:
+    score: 2
+    confidence: "medium"
+    review_mode: "llm-assisted"
+    reason: "大多數 Then 可驗收，但部分情境仍屬高階業務結果，尚未完全落到欄位級或狀態轉移級驗收條件。"
+    evidence:
+      -
+        artifact: "docs/ssot/habdd"
+        location: "Scenario Then steps"
+        note: "高階 BDD 用語適合需求 SSoT"
+      -
+        artifact: ".raptor/traceability.md"
+        location: "L2 Scenario Data Mapping"
+        note: "欄位級 mapping 未全面填滿"
+    findings:
+      []
+  F2:
+    score: 3
+    confidence: "high"
+    review_mode: "llm-assisted"
+    reason: "haAPI、haPDL、haARM 均已存在並通過 verify；schema_version 為 3.3，API/page/permission references 已檢查通過。"
+    evidence:
+      -
+        artifact: "docs/reports/verify-report.yml"
+        location: "summary.cross_dsl_consistency"
+        note: "intent DSL consistency PASS"
+      -
+        artifact: "docs/ssot/haapi"
+        location: "11 haAPI files"
+        note: "backend intent 層完整"
+      -
+        artifact: "docs/ssot/hapdl"
+        location: "11 haPDL files"
+        note: "frontend intent 層完整"
+    findings:
+      []
+  G1:
+    score: 2
+    confidence: "medium"
+    review_mode: "llm-assisted"
+    reason: "規格結構與產物齊全，但 RAscore skill 輸出模板本身部分文字編碼顯示異常，且 report render script 的固定文字路徑仍有 .raptor/reports 遺留字樣。"
+    evidence:
+      -
+        artifact: ".agents/skills/rapt-RAscore/SKILL.md"
+        location: "render/output contract"
+        note: "終端顯示有 mojibake，但檔案可用 UTF-8 寫入"
+      -
+        artifact: ".agents/skills/rapt-RAscore/scripts/rascore_render.py"
+        location: "render_report"
+        note: "固定文字仍提到 .raptor/reports"
+    findings:
+      -
+        severity: "low"
+        category: "process-gap"
+        artifact: ".agents/skills/rapt-RAscore/scripts/rascore_render.py"
+        location: "render_report"
+        issue: "RAscore render 模板的部分固定文字與目前 reports_dir 不一致，且終端顯示有編碼雜訊。"
+        recommendation: "修正 skill 模板與 render script 的文字，確保報告內容與 docs/reports 路徑一致。"
+        owner_skill: "manual-review"
+        recommended_action_type: "process_revision"
+  G2:
+    score: 2
+    confidence: "medium"
+    review_mode: "llm-assisted"
+    reason: "目前流程已能從 discovery 到 verify 再到 RAscore 形成閉環，但 RAscore findings 仍需人工解讀與後續修正策略，不宜視為自動 gate。"
+    evidence:
+      -
+        artifact: "docs/reports/verify-report.yml"
+        location: "phase_gate.can_continue"
+        note: "Phase 5 可繼續"
+      -
+        artifact: "docs/reports/rascore-scorecard.draft.json"
+        location: "review_mode"
+        note: "LLM-assisted advisory-only"
+    findings:
+      []
+findings:
+  -
+    severity: "medium"
+    category: "traceability-gap"
+    artifact: ".raptor/traceability.md"
+    location: "L2 Scenario Data Mapping"
+    issue: "9 個 scenario 的 L2 mapping 仍為 low confidence，業務詞與資料詞對應尚未完全穩定。"
+    recommendation: "補強這 9 個 row 的 read_tables、write_tables、fields 或 constraints，並將 confidence 提升為 medium/high。"
+    owner_skill: "rapt-reconcile"
+    recommended_action_type: "traceability_mapping"
+    criterion: "B5"
+    id: "RA-B5-001"
+  -
+    severity: "medium"
+    category: "cross-spec-gap"
+    artifact: ".raptor/traceability.md"
+    location: "L2 Scenario Data Mapping"
+    issue: "許多舊有 scenario 的 read_tables、write_tables、fields 仍空白，從 scenario 到 DBML 的欄位級可驗證性不足。"
+    recommendation: "針對舊有 medium/low confidence rows 補入具體 tables 與 fields，讓情境可直接驅動資料層驗收。"
+    owner_skill: "rapt-reconcile"
+    recommended_action_type: "traceability_mapping"
+    criterion: "D2"
+    id: "RA-D2-001"
+  -
+    severity: "low"
+    category: "scope-creep"
+    artifact: "docs/ssot/habdd"
+    location: "membership-loyalty / return-refund / merchant-reporting"
+    issue: "部分能力已接近完整產品範圍，尚未在 RAscore 階段重新確認 MVP 優先級。"
+    recommendation: "在進入實作規劃前標註 MVP/next phase，避免將低優先能力納入首版交付。"
+    owner_skill: "manual-review"
+    recommended_action_type: "manual_review"
+    criterion: "A3"
+    id: "RA-A3-001"
+  -
+    severity: "low"
+    category: "dbml-quality"
+    artifact: "docs/ssot/dbml/schema.dbml"
+    location: "SalesOrder / InventoryItem / PointLedger"
+    issue: "部分複合規則尚以 constraints 補充，欄位級計算來源與稽核欄位仍可更明確。"
+    recommendation: "若後續要直接 codegen，補充金額計算、庫存預留釋放與點數折抵的稽核欄位或 rule metadata。"
+    owner_skill: "rapt-modeling"
+    recommended_action_type: "modeling_revision"
+    criterion: "C4"
+    id: "RA-C4-001"
+  -
+    severity: "low"
+    category: "process-gap"
+    artifact: "docs/reports/rascore-precheck.json"
+    location: "gherkin.scenario_count"
+    issue: "RAscore precheck 與 verify 的 scenario count 口徑不同，可能造成報告解讀混淆。"
+    recommendation: "後續調整 precheck parser，使其沿用 verify 的 scenario metadata 口徑。"
+    owner_skill: "manual-review"
+    recommended_action_type: "process_revision"
+    criterion: "E3"
+    id: "RA-E3-001"
+  -
+    severity: "low"
+    category: "process-gap"
+    artifact: ".agents/skills/rapt-RAscore/scripts/rascore_render.py"
+    location: "render_report"
+    issue: "RAscore render 模板的部分固定文字與目前 reports_dir 不一致，且終端顯示有編碼雜訊。"
+    recommendation: "修正 skill 模板與 render script 的文字，確保報告內容與 docs/reports 路徑一致。"
+    owner_skill: "manual-review"
+    recommended_action_type: "process_revision"
+    criterion: "G1"
+    id: "RA-G1-001"

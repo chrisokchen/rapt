@@ -1,0 +1,45 @@
+api: platform-admin
+schema_version: "3.3"
+entity: Account
+title: 平台管理 API
+description: 支援平台管理員檢視與維護平台帳戶、商家與全站資料邊界。
+exposes:
+  standard: [list, read, update]
+  list:
+    filters:
+      - {field: accountType, operators: [eq]}
+      - {field: accountStatus, operators: [eq]}
+    sorting: {fields: [createdAt, updatedAt], default: createdAt:desc}
+    pagination: {style: offset, default_size: 20}
+  operations:
+    - {name: review_merchant_boundary, method: GET, path: "/merchant-boundary"}
+    - {name: read_platform_data, method: GET, path: "/platform-data"}
+access:
+  authentication: {type: bearer, required: true}
+  endpoints:
+    list:
+      required_roles: [platform-admin]
+      required_permissions:
+        - {id: account_admin}
+    read:
+      required_roles: [platform-admin]
+      required_permissions:
+        - {id: account_admin}
+    update:
+      required_roles: [platform-admin]
+      required_permissions:
+        - {id: account_admin}
+  operations:
+    review_merchant_boundary:
+      required_roles: [platform-admin]
+      required_permissions:
+        - {id: merchant_admin}
+    read_platform_data:
+      required_roles: [platform-admin]
+      required_permissions:
+        - {id: platform_data_read_all}
+source_evidence:
+  - "docs/ssot/habdd/access-boundary.ha.feature#SCN-AUTH-003"
+  - "docs/ssot/dbml/schema.dbml#Table:Account"
+  - "docs/ssot/haarm/smallbiz.haarm.yaml#permission:account_admin"
+

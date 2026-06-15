@@ -1,0 +1,35 @@
+page: return-refund-workbench
+schema_version: "3.3"
+type: list
+entity: ReturnRequest
+api: return-refund
+title: 退貨退款處理
+view:
+  filters:
+    - {field: returnStatus, label: 退貨狀態, type: eq, ref_code: ReturnStatus}
+    - {field: requestedAt, label: 申請時間, type: range}
+    - {field: consumerId, label: 消費者, type: eq}
+  columns:
+    - {field: returnRequestId, label: 退貨申請編號, link: true}
+    - {field: orderId, label: 訂單編號}
+    - {field: consumerId, label: 消費者}
+    - {field: returnStatus, label: 狀態, format: badge, ref_code: ReturnStatus}
+    - {field: requestedAt, label: 申請時間, format: date, sortable: true}
+    - {field: reviewedAt, label: 審核時間, format: date}
+  actions:
+    standard: [read, update]
+    custom: [approve_return, reject_return, complete_original_refund]
+    placement:
+      row: [read, approve_return, reject_return, complete_original_refund]
+security:
+  permission_refs:
+    view:
+      - {id: return_request_read_merchant}
+    update:
+      - {id: return_request_update_merchant}
+  datasource_scope: department
+source_evidence:
+  - "docs/ssot/haapi/return-refund.haapi.yaml"
+  - "docs/ssot/habdd/return-refund.ha.feature"
+  - "docs/ssot/dbml/constraints.md#CON-CLARIFY-006"
+

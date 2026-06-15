@@ -1,0 +1,33 @@
+# 程式碼生成配置模板
+
+# Mock Server 配置
+mockServer:
+  port: 3000
+  fakerLocale: zh_TW
+  delay: 100  # 模擬網路延遲 (ms)
+
+# UI 元件生成配置
+uiGeneration:
+  framework: react  # react | vue | angular
+  uiLibrary: ant-design  # ant-design | material-ui
+  typescript: true
+
+# 測試生成配置
+testGeneration:
+  framework: playwright  # playwright | cypress
+  browsers:
+    - chromium
+    - firefox
+
+# haARM 權限模型配置
+haarmSource:
+  file: ./phase2-access-control.haarm.yaml
+  # 以下為未來 Phase B/C 的預留配置
+  # lintOnBuild: true
+  # crossDslValidation: true
+
+# 輸出目錄
+output:
+  mockServer: ./mock-server
+  components: ./src/pages
+  tests: ./e2e-tests

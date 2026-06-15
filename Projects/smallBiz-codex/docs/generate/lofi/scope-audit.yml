@@ -1,0 +1,44 @@
+audit:
+  id: PREVIEW-20260613-002
+  skill: rapt-lofi
+  generated_at: "2026-06-13T10:40:17+08:00"
+  source_artifacts:
+    - docs/ssot/hapdl/consumer-cart-checkout.hapdl.yaml
+    - docs/ssot/hapdl/consumer-order-history.hapdl.yaml
+    - docs/ssot/hapdl/inventory-dashboard.hapdl.yaml
+    - docs/ssot/hapdl/member-registration.hapdl.yaml
+    - docs/ssot/hapdl/merchant-order-list.hapdl.yaml
+    - docs/ssot/hapdl/merchant-product-management.hapdl.yaml
+    - docs/ssot/hapdl/merchant-report-dashboard.hapdl.yaml
+    - docs/ssot/hapdl/platform-admin-access.hapdl.yaml
+    - docs/ssot/hapdl/promotion-coupon-management.hapdl.yaml
+    - docs/ssot/hapdl/public-product-list.hapdl.yaml
+    - docs/ssot/hapdl/return-refund-workbench.hapdl.yaml
+    - docs/ssot/haarm/smallbiz.haarm.yaml
+    - docs/ssot/dbml/schema.dbml
+  output_artifact: docs/generate/lofi/index.html
+  status: ok
+  summary:
+    pages: 11
+    entities: 24
+    nav_links: 11
+    missing_nav_targets: 0
+    unsupported_pages_after_fix: 0
+    file_size_kb: 21.7
+  assumptions:
+    - Lo-Fi HTML is a preview artifact generated from haPDL, haARM, and annotated DBML; it is not an SSoT artifact.
+    - The original converter does not render haPDL type wizard, so the generated preview was rebuilt from the same SSoT inputs with wizard support.
+    - Terminal output may show mojibake for Traditional Chinese, but generated HTML is written as UTF-8.
+  findings:
+    - id: PREVIEW-FIND-001
+      route: NOTE_ONLY
+      can_fix: true
+      artifact: docs/generate/lofi/index.html
+      location: section#consumer-cart-checkout
+      summary: "Original converter rendered wizard page as Unknown; generated preview was rebuilt with a wizard wireframe section."
+    - id: PREVIEW-FIND-002
+      route: NOTE_ONLY
+      can_fix: true
+      artifact: .agents/skills/rapt-lofi/scripts/hapdl2lofi.py
+      location: built-in HTML rendering
+      summary: "Original converter emitted malformed/garbled HTML labels for some sections; preview output was regenerated as clean self-contained UTF-8 HTML."

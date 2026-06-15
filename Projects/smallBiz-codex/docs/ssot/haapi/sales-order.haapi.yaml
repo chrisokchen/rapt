@@ -1,0 +1,59 @@
+api: sales-order
+schema_version: "3.3"
+entity: SalesOrder
+title: 訂單 API
+description: 支援消費者訂單查詢、商家訂單管理、付款逾時取消與出貨前取消退款。
+exposes:
+  standard: [list, read, create, update]
+  list:
+    filters:
+      - {field: merchantId, operators: [eq]}
+      - {field: consumerId, operators: [eq]}
+      - {field: orderStatus, operators: [eq]}
+      - {field: placedAt, operators: [gte, lte]}
+    sorting: {fields: [placedAt, totalAmount], default: placedAt:desc}
+    pagination: {style: offset, default_size: 20}
+  operations:
+    - {name: cancel_unpaid_order, method: POST, path: "/{id}/cancel-unpaid"}
+    - {name: cancel_paid_before_shipment, method: POST, path: "/{id}/cancel-paid-before-shipment"}
+    - {name: mark_shipped, method: POST, path: "/{id}/mark-shipped"}
+access:
+  authentication: {type: bearer, required: true}
+  endpoints:
+    list:
+      required_roles: [consumer, merchant-owner]
+      required_permissions:
+        - {id: sales_order_read_own}
+        - {id: sales_order_read_merchant}
+    read:
+      required_roles: [consumer, merchant-owner]
+      required_permissions:
+        - {id: sales_order_read_own}
+        - {id: sales_order_read_merchant}
+    create:
+      required_roles: [consumer]
+      required_permissions:
+        - {id: sales_order_create_own}
+    update:
+      required_roles: [merchant-owner]
+      required_permissions:
+        - {id: sales_order_update_merchant}
+  operations:
+    cancel_unpaid_order:
+      required_roles: [smallbiz-platform]
+      required_permissions:
+        - {id: system_order_process}
+    cancel_paid_before_shipment:
+      required_roles: [consumer]
+      required_permissions:
+        - {id: sales_order_read_own}
+    mark_shipped:
+      required_roles: [merchant-owner]
+      required_permissions:
+        - {id: shipment_crud_merchant}
+source_evidence:
+  - "docs/ssot/habdd/order-fulfillment.ha.feature"
+  - "docs/ssot/dbml/constraints.md#CON-CLARIFY-004"
+  - "docs/ssot/dbml/schema.dbml#Table:SalesOrder"
+  - "docs/ssot/haarm/smallbiz.haarm.yaml#permission:sales_order_update_merchant"
+

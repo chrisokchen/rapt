@@ -1,0 +1,46 @@
+api: cart-checkout
+schema_version: "3.3"
+entity: Cart
+title: 購物車與結帳 API
+description: 支援購物車、結帳金額試算與建立訂單。
+exposes:
+  standard: [read, update]
+  operations:
+    - {name: add_cart_item, method: POST, path: "/{id}/items"}
+    - {name: remove_cart_item, method: DELETE, path: "/{id}/items/{itemId}"}
+    - {name: calculate_checkout, method: POST, path: "/{id}/calculate-checkout"}
+    - {name: create_order, method: POST, path: "/{id}/create-order"}
+access:
+  authentication: {type: bearer, required: true}
+  endpoints:
+    read:
+      required_roles: [consumer]
+      required_permissions:
+        - {id: cart_crud_own}
+    update:
+      required_roles: [consumer]
+      required_permissions:
+        - {id: cart_crud_own}
+  operations:
+    add_cart_item:
+      required_roles: [consumer]
+      required_permissions:
+        - {id: cart_item_crud_own}
+    remove_cart_item:
+      required_roles: [consumer]
+      required_permissions:
+        - {id: cart_item_crud_own}
+    calculate_checkout:
+      required_roles: [consumer]
+      required_permissions:
+        - {id: cart_crud_own}
+    create_order:
+      required_roles: [consumer]
+      required_permissions:
+        - {id: sales_order_create_own}
+source_evidence:
+  - "docs/ssot/habdd/product-discovery.ha.feature"
+  - "docs/ssot/habdd/checkout-payment.ha.feature"
+  - "docs/ssot/dbml/constraints.md#CON-CLARIFY-005"
+  - "docs/ssot/dbml/schema.dbml#Table:Cart"
+

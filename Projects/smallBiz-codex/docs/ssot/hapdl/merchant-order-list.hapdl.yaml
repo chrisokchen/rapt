@@ -1,0 +1,34 @@
+page: merchant-order-list
+schema_version: "3.3"
+type: list
+entity: SalesOrder
+api: sales-order
+title: 商家訂單管理
+view:
+  filters:
+    - {field: merchantId, label: 商家, type: eq}
+    - {field: orderStatus, label: 訂單狀態, type: eq, ref_code: OrderStatus}
+    - {field: placedAt, label: 下單時間, type: range}
+  columns:
+    - {field: orderId, label: 訂單編號, link: true}
+    - {field: consumerId, label: 消費者}
+    - {field: orderStatus, label: 狀態, format: badge, ref_code: OrderStatus}
+    - {field: totalAmount, label: 訂單金額, format: currency}
+    - {field: placedAt, label: 下單時間, format: date, sortable: true}
+  actions:
+    standard: [read, update]
+    custom: [mark_shipped]
+    placement:
+      row: [read, update, mark_shipped]
+security:
+  permission_refs:
+    view:
+      - {id: sales_order_read_merchant}
+    update:
+      - {id: sales_order_update_merchant}
+  datasource_scope: department
+source_evidence:
+  - "docs/ssot/haapi/sales-order.haapi.yaml"
+  - "docs/ssot/habdd/order-fulfillment.ha.feature"
+  - "docs/ssot/haarm/smallbiz.haarm.yaml#permission:sales_order_read_merchant"
+

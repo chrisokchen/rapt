@@ -1,0 +1,40 @@
+{
+  "findings": [
+    {
+      "severity": "medium",
+      "category": "cross-spec-gap",
+      "issue": "會員等級門檻金額未定，tier 場景無法量化斷言",
+      "recommendation": "待平台提案後補門檻金額並量化 Then；目前以規則層變數承接",
+      "owner_skill": "rapt-clarify",
+      "criterion": "F1",
+      "artifact": "",
+      "location": "",
+      "recommended_action_type": "traceability_mapping",
+      "id": "RA-F1-001"
+    },
+    {
+      "severity": "low",
+      "category": "naming-drift",
+      "issue": "feature 內 entities 偶用『物流單』『SKU』等同義詞",
+      "recommendation": "下一輪重渲染時統一為 glossary canonical term",
+      "owner_skill": "rapt-behavior",
+      "criterion": "B5",
+      "artifact": "",
+      "location": "",
+      "recommended_action_type": "manual_review",
+      "id": "RA-B5-001"
+    },
+    {
+      "severity": "low",
+      "category": "data-orphan",
+      "issue": "AuditLog/Invoice/Payment/Refund 等支援實體無直接行為場景",
+      "recommendation": "可選擇補稽核/發票/退款的明確 scenario，或維持為支援實體保留",
+      "owner_skill": "rapt-behavior",
+      "criterion": "D3",
+      "artifact": "",
+      "location": "",
+      "recommended_action_type": "manual_review",
+      "id": "RA-D3-001"
+    }
+  ]
+}

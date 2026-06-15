@@ -1,0 +1,61 @@
+session:
+  id: REC-260613-001
+  generated_at: "2026-06-13T10:05:00+08:00"
+  source_report: docs/reports/verify-report.yml
+  status: completed
+
+classification:
+  can_fix:
+    - FIND-260613-001
+    - FIND-260613-002
+    - FIND-260613-003
+  need_human: []
+  delegate_skill: []
+  skill_gap: []
+
+fixes_applied:
+  - finding: FIND-260613-001
+    action: added_scenario_metadata
+    artifacts:
+      - docs/ssot/habdd/inventory-control.ha.feature
+      - docs/ssot/habdd/checkout-payment.ha.feature
+      - docs/ssot/habdd/membership-loyalty.ha.feature
+      - docs/ssot/habdd/order-fulfillment.ha.feature
+      - docs/ssot/habdd/promotion-coupon.ha.feature
+      - docs/ssot/habdd/return-refund.ha.feature
+    summary: 為 6 個 DEC-CLR 情境補上 scenario_id 與 entities 註解。
+  - finding: FIND-260613-001
+    action: added_l2_traceability_rows
+    artifacts:
+      - .raptor/traceability.md
+    summary: 新增 SCN-INV-006、SCN-CHECKOUT-006、SCN-MEMBER-006、SCN-ORDER-006、SCN-PROMO-005、SCN-RETURN-005 的 L2 mapping。
+  - finding: FIND-260613-002
+    action: completed_l3_intent_mapping
+    artifacts:
+      - .raptor/traceability.md
+      - docs/ssot/haapi/member-account.haapi.yaml
+      - docs/ssot/haapi/platform-admin.haapi.yaml
+      - docs/ssot/hapdl/member-registration.hapdl.yaml
+      - docs/ssot/hapdl/platform-admin-access.hapdl.yaml
+    summary: 補齊所有 scenario 的 L3 mapping，並補上會員帳戶與平台管理的缺漏意圖。
+  - finding: FIND-260613-003
+    action: left_note_only
+    artifacts:
+      - .raptor/traceability.md
+    summary: low confidence row 未阻擋 gate；後續可再補 read/write tables 與 fields 提升 RAscore readiness。
+
+validation:
+  yaml_parse: PASS
+  haapi_hapdl_permission_refs: PASS
+  l2_scenario_mapping: PASS
+  l3_intent_mapping: PASS
+  scenario_total: 45
+  l2_missing: 0
+  l3_missing: 0
+  haapi_files: 11
+  hapdl_files: 11
+
+archive:
+  - .raptor/reconcile/archive/REC-260613-001/verify-report.input.yml
+  - .raptor/reconcile/archive/REC-260613-001/traceability.after.md
+

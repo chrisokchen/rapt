@@ -1,0 +1,49 @@
+arguments_schema_version: 2
+
+project:
+  name: SmallBiz 電商平台
+  description: 月租制、開箱即用的 B2C 電商平台，讓中小商家能管理商品、庫存、訂單、會員、促銷、金流、物流與基本報表。
+  language: zh-hant
+  mode: greenfield
+
+paths:
+  docs_dir: docs/
+  discovery_dir: docs/discovery/
+  reports_dir: docs/reports/
+  clarify_dir: .clarify/
+  traceability_file: .raptor/traceability.md
+  impact_matrix_file: .raptor/impact-matrix.yml
+
+  ssot_dir: docs/ssot/
+  data_model_dir: docs/ssot/dbml/
+  high_gherkin_dir: docs/ssot/habdd/
+  access_control_dir: docs/ssot/haarm/
+  backend_intent_dir: docs/ssot/haapi/
+  frontend_intent_dir: docs/ssot/hapdl/
+
+generated:
+  status: deferred
+  generated_dir: docs/generate/
+  pdl_dir: docs/generate/pdl/
+  low_gherkin_dir: docs/generate/isabdd/
+  openapi_dir: docs/generate/openapi/
+  lofi_dir: docs/generate/lofi/
+  designbrief_dir: docs/generate/designbrief/
+
+dsl_versions:
+  dbml: "3.3.0"
+  habdd: "3.3.0"
+  haarm: "3.3.0"
+  haapi: "3.3.0"
+  hapdl: "3.3.0"
+
+anchors:
+  dslspec_root: RAPTor/DSLspec
+  req_process_root: RAPTor/0_reqDevProcess
+  templates_root: RAPTor/0_reqDevProcess/templates
+  prompts_root: RAPTor/0_prompts
+
+policy:
+  write_mode: deny-by-default
+  clarify_batch_size: 5
+  cic_notes_enabled: true

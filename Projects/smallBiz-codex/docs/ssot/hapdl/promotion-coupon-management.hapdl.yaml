@@ -1,0 +1,38 @@
+page: promotion-coupon-management
+schema_version: "3.3"
+type: list
+entity: Promotion
+api: promotion-coupon
+title: 促銷與優惠券管理
+view:
+  filters:
+    - {field: merchantId, label: 商家, type: eq}
+    - {field: promotionStatus, label: 狀態, type: eq, ref_code: PromotionStatus}
+    - {field: startsAt, label: 開始時間, type: range}
+  columns:
+    - {field: promotionId, label: 活動編號, link: true}
+    - {field: promotionName, label: 活動名稱}
+    - {field: promotionType, label: 類型, ref_code: PromotionType}
+    - {field: promotionStatus, label: 狀態, format: badge, ref_code: PromotionStatus}
+    - {field: startsAt, label: 開始, format: date, sortable: true}
+    - {field: endsAt, label: 結束, format: date}
+  actions:
+    standard: [create, update]
+    custom: [calculate_discount_stack]
+    placement:
+      header: [create]
+      row: [update, calculate_discount_stack]
+security:
+  permission_refs:
+    view:
+      - {id: promotion_crud_merchant}
+    create:
+      - {id: promotion_crud_merchant}
+    update:
+      - {id: promotion_crud_merchant}
+  datasource_scope: department
+source_evidence:
+  - "docs/ssot/haapi/promotion-coupon.haapi.yaml"
+  - "docs/ssot/habdd/promotion-coupon.ha.feature"
+  - "docs/ssot/dbml/constraints.md#CON-CLARIFY-002"
+

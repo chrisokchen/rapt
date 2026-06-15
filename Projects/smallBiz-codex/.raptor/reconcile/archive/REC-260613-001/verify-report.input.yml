@@ -1,0 +1,144 @@
+report:
+  id: VERIFY-260613-001
+  project: smallBiz-codex
+  generated_at: "2026-06-13T10:00:00+08:00"
+  status: FAIL
+  schema_version: 2
+
+summary:
+  completeness: PASS
+  consistency: PASS
+  traceability: FAIL
+  coverage: PASS
+  error_count: 2
+  warning_count: 1
+
+metrics:
+  artifacts:
+    dbml_tables: 24
+    feature_files: 10
+    scenarios: 45
+    haapi_files: 9
+    hapdl_files: 9
+  coverage:
+    must_have:
+      total: 15
+      covered: 15
+      pct: "100%"
+    should_have:
+      total: 3
+      covered: 3
+      pct: "100%"
+    overall:
+      total: 18
+      covered: 18
+      pct: "100%"
+  traceability:
+    l2:
+      total_scenarios: 45
+      mapped: 39
+      missing_count: 6
+      low_confidence_count: 9
+    l3:
+      total_scenarios: 45
+      traced: 23
+      untraced_count: 22
+
+findings:
+  - id: FIND-260613-001
+    severity: high
+    category: trace_gap
+    route: NEED_TO_FIX
+    can_fix: true
+    owner_skill: rapt-reconcile
+    artifact: docs/ssot/habdd/*.ha.feature
+    location: appended DEC-CLR clarification scenarios
+    summary: 6 個釐清後新增的 Gherkin 情境沒有正式 scenario_id，因此無法建立 L2 Scenario Data Mapping。
+    evidence:
+      - docs/ssot/habdd/inventory-control.ha.feature
+      - docs/ssot/habdd/checkout-payment.ha.feature
+      - docs/ssot/habdd/membership-loyalty.ha.feature
+      - docs/ssot/habdd/order-fulfillment.ha.feature
+      - docs/ssot/habdd/promotion-coupon.ha.feature
+      - docs/ssot/habdd/return-refund.ha.feature
+    affected_items:
+      - checkout-payment.ha.feature:8
+      - inventory-control.ha.feature:14
+      - membership-loyalty.ha.feature:20
+      - order-fulfillment.ha.feature:28
+      - promotion-coupon.ha.feature:40
+      - return-refund.ha.feature:45
+    suggested_action: 由 rapt-reconcile 為 DEC-CLR 新增情境補上穩定 scenario_id、entities 註解與 L2 traceability row。
+
+  - id: FIND-260613-002
+    severity: high
+    category: trace_gap
+    route: NEED_TO_FIX
+    can_fix: true
+    owner_skill: rapt-intent
+    artifact: .raptor/traceability.md
+    location: L3 Intent Mapping
+    summary: 22 個 scenario 未映射到 haAPI operation 或 haPDL page，Phase 5 traceability gate 不通過。
+    evidence:
+      - .raptor/traceability.md#L3 Intent Mapping
+      - docs/ssot/haapi/
+      - docs/ssot/hapdl/
+    affected_items:
+      - SCN-AUTH-003
+      - SCN-CATALOG-004
+      - SCN-CHECKOUT-003
+      - SCN-CHECKOUT-004
+      - SCN-DISC-002
+      - SCN-DISC-004
+      - SCN-INV-002
+      - SCN-INV-003
+      - SCN-INV-004
+      - SCN-MEMBER-001
+      - SCN-MEMBER-004
+      - SCN-ORDER-003
+      - SCN-PROMO-002
+      - SCN-PROMO-003
+      - SCN-REPORT-003
+      - SCN-RETURN-004
+      - checkout-payment.ha.feature:8
+      - inventory-control.ha.feature:14
+      - membership-loyalty.ha.feature:20
+      - order-fulfillment.ha.feature:28
+      - promotion-coupon.ha.feature:40
+      - return-refund.ha.feature:45
+    suggested_action: 補齊 L3 Intent Mapping；若 scenario 已由現有 haAPI/haPDL 覆蓋，加入 mapping row；若沒有意圖規格，回到 rapt-intent 補 haAPI/haPDL。
+
+  - id: FIND-260613-003
+    severity: low
+    category: evidence_weak
+    route: NOTE_ONLY
+    can_fix: true
+    owner_skill: rapt-reconcile
+    artifact: .raptor/traceability.md
+    location: L2 Scenario Data Mapping confidence
+    summary: 9 個 L2 row 仍為 low confidence，雖不阻擋 coverage，但會降低 RAscore readiness。
+    evidence:
+      - SCN-DISC-002
+      - SCN-INV-002
+      - SCN-CHECKOUT-003
+      - SCN-MEMBER-002
+      - SCN-MEMBER-003
+      - SCN-MEMBER-004
+      - SCN-RETURN-001
+      - SCN-RETURN-002
+      - SCN-RETURN-003
+    suggested_action: 補 read_tables、write_tables、fields 與 constraints 後提升 confidence。
+
+phase_gate:
+  can_continue: false
+  blockers:
+    - FIND-260613-001
+    - FIND-260613-002
+  next:
+    NEED_TO_FIX:
+      - FIND-260613-001
+      - FIND-260613-002
+    NEED_TO_CLARIFY: []
+    NOTE_ONLY:
+      - FIND-260613-003
+

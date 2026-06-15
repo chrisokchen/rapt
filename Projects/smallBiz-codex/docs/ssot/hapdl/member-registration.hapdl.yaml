@@ -1,0 +1,25 @@
+page: member-registration
+schema_version: "3.3"
+type: form
+entity: ConsumerProfile
+api: member-account
+title: 會員註冊
+form:
+  mode: create
+  fields:
+    - {field: accountId, label: 帳戶, type: text, required: true}
+    - {field: displayName, label: 顯示名稱, type: text}
+    - {field: phone, label: 聯絡電話, type: text}
+  actions:
+    submit: register_with_email
+    cancel: public-product-list
+security:
+  permission_refs:
+    submit:
+      - {id: consumer_profile_update_own}
+  datasource_scope: own
+source_evidence:
+  - "docs/ssot/haapi/member-account.haapi.yaml"
+  - "docs/ssot/habdd/membership-loyalty.ha.feature#SCN-MEMBER-001"
+  - "docs/ssot/haarm/smallbiz.haarm.yaml#permission:consumer_profile_update_own"
+

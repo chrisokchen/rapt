@@ -1,0 +1,47 @@
+api: loyalty
+schema_version: "3.3"
+entity: PointLedger
+title: 會員點數 API
+description: 支援點數查詢、點數累積與點數折抵；會員分級於 MVP 採手動維護。
+exposes:
+  standard: [list, read, create]
+  list:
+    filters:
+      - {field: consumerId, operators: [eq]}
+      - {field: pointType, operators: [eq]}
+      - {field: occurredAt, operators: [gte, lte]}
+    sorting: {fields: [occurredAt, expiresAt], default: occurredAt:desc}
+    pagination: {style: offset, default_size: 20}
+  operations:
+    - {name: redeem_points, method: POST, path: "/redeem"}
+    - {name: adjust_member_level, method: POST, path: "/member-level/adjust"}
+access:
+  authentication: {type: bearer, required: true}
+  endpoints:
+    list:
+      required_roles: [consumer]
+      required_permissions:
+        - {id: point_ledger_read_own}
+    read:
+      required_roles: [consumer]
+      required_permissions:
+        - {id: point_ledger_read_own}
+    create:
+      required_roles: [smallbiz-platform]
+      required_permissions:
+        - {id: system_order_process}
+  operations:
+    redeem_points:
+      required_roles: [consumer]
+      required_permissions:
+        - {id: point_ledger_read_own}
+    adjust_member_level:
+      required_roles: [platform-admin]
+      required_permissions:
+        - {id: member_level_admin}
+source_evidence:
+  - "docs/ssot/habdd/membership-loyalty.ha.feature"
+  - "docs/ssot/dbml/constraints.md#CON-CLARIFY-003"
+  - "docs/ssot/dbml/schema.dbml#Table:PointLedger"
+  - "docs/ssot/haarm/smallbiz.haarm.yaml#permission:point_ledger_read_own"
+

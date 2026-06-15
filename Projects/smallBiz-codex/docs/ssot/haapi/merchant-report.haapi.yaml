@@ -1,0 +1,39 @@
+api: merchant-report
+schema_version: "3.3"
+entity: SalesOrder
+title: 商家報表 API
+description: 支援商家查看銷售、商品與零銷售期間報表。
+exposes:
+  standard: [list]
+  list:
+    filters:
+      - {field: merchantId, operators: [eq]}
+      - {field: placedAt, operators: [gte, lte]}
+      - {field: orderStatus, operators: [eq]}
+    sorting: {fields: [placedAt, totalAmount], default: placedAt:desc}
+    pagination: {style: offset, default_size: 50}
+  operations:
+    - {name: sales_summary, method: GET, path: "/sales-summary"}
+    - {name: product_performance, method: GET, path: "/product-performance"}
+access:
+  authentication: {type: bearer, required: true}
+  endpoints:
+    list:
+      required_roles: [merchant-owner]
+      required_permissions:
+        - {id: merchant_report_read}
+  operations:
+    sales_summary:
+      required_roles: [merchant-owner]
+      required_permissions:
+        - {id: merchant_report_read}
+    product_performance:
+      required_roles: [merchant-owner]
+      required_permissions:
+        - {id: merchant_report_read}
+source_evidence:
+  - "docs/ssot/habdd/merchant-reporting.ha.feature"
+  - "docs/ssot/dbml/constraints.md#CON-REPORT-001"
+  - "docs/ssot/dbml/schema.dbml#Table:SalesOrder"
+  - "docs/ssot/haarm/smallbiz.haarm.yaml#permission:merchant_report_read"
+

@@ -1,0 +1,56 @@
+audit:
+  id: PREVIEW-20260613-003
+  skill: rapt-design-brief
+  generated_at: "2026-06-13T10:45:20+08:00"
+  source_artifacts:
+    - docs/ssot/hapdl/consumer-cart-checkout.hapdl.yaml
+    - docs/ssot/hapdl/consumer-order-history.hapdl.yaml
+    - docs/ssot/hapdl/inventory-dashboard.hapdl.yaml
+    - docs/ssot/hapdl/member-registration.hapdl.yaml
+    - docs/ssot/hapdl/merchant-order-list.hapdl.yaml
+    - docs/ssot/hapdl/merchant-product-management.hapdl.yaml
+    - docs/ssot/hapdl/merchant-report-dashboard.hapdl.yaml
+    - docs/ssot/hapdl/platform-admin-access.hapdl.yaml
+    - docs/ssot/hapdl/promotion-coupon-management.hapdl.yaml
+    - docs/ssot/hapdl/public-product-list.hapdl.yaml
+    - docs/ssot/hapdl/return-refund-workbench.hapdl.yaml
+    - docs/ssot/haarm/smallbiz.haarm.yaml
+    - docs/ssot/dbml/schema.dbml
+  output_artifact: docs/generate/designbrief/design-brief.md
+  status: ok
+  summary:
+    pages: 11
+    entities: 24
+    page_specs: 11
+    coverage_supplements: true
+    file_size_kb: 23.1
+  style_profile:
+    product_type: "B2C ecommerce management console"
+    language: "zh-hant"
+    target_design: "dense operational SaaS UI"
+    recommended_frameworks:
+      - "React + TypeScript"
+      - "Ant Design"
+      - "shadcn/ui"
+    layout_guidance:
+      - "Use left sidebar navigation and top utility bar."
+      - "Prefer tables, filters, KPI cards, drawers, and forms over marketing sections."
+      - "Keep cards shallow and functional; avoid nested decorative cards."
+      - "Use status badges, primary/secondary/danger buttons, and inline validation states."
+  assumptions:
+    - Design Brief is a generated preview artifact and does not replace haPDL, haARM, or DBML SSoT.
+    - Project title and description were supplied explicitly to avoid terminal mojibake from arguments.yml display.
+    - Coverage supplements were appended for wizard, dashboard, and form.fields patterns not fully rendered by the baseline converter.
+  findings:
+    - id: PREVIEW-FIND-001
+      route: NOTE_ONLY
+      can_fix: true
+      artifact: docs/generate/designbrief/design-brief.md
+      location: "Coverage Supplements"
+      summary: "Baseline converter emitted metadata-only sections for wizard/dashboard pages; generated brief was supplemented with explicit design guidance."
+    - id: PREVIEW-FIND-002
+      route: NOTE_ONLY
+      can_fix: true
+      artifact: .agents/skills/rapt-design-brief/scripts/hapdl2brief.py
+      location: "_generate_form_brief"
+      summary: "Baseline converter reads view.fields for forms but member-registration uses form.fields; generated brief was supplemented with the missing form field table."

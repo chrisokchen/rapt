@@ -1,0 +1,35 @@
+audit:
+  id: PREVIEW-20260613-002
+  skill: rapt-lofi
+  generated_at: "2026-06-13T15:30:00+08:00"
+  source_artifacts:
+    - docs/ssot/hapdl/ （34 個 *.hapdl.yaml）
+    - docs/ssot/dbml/schema.dbml
+    - docs/ssot/haarm/smallBiz.haarm.yaml
+  output_artifact: docs/generate/lofi/index.html
+  status: ok
+  metrics:
+    hapdl_pages: 34
+    dbml_tables: 28
+    haarm_roles: 5
+    haarm_actors: 8
+    html_size_kb: 86
+    rendered_page_sections: 34
+  assumptions:
+    - 以 haPDL canonical key（page / type / entity / api / view / form / security.permission_refs）解析；script 正確讀入 34 頁。
+    - list 頁渲染 filter bar + sortable table + pagination；form 頁渲染 label-value + enum dropdown + sensitive mask；detail/dashboard 以 key-value + action 呈現。
+    - enum 下拉值取自 DBML ref_code 對應的 seeds.md 值域；sensitive 欄位（password/email/phone/後五碼）以遮罩呈現。
+  findings:
+    - id: PREVIEW-FIND-001
+      route: NOTE_ONLY
+      can_fix: false
+      artifact: .claude/skills/rapt-lofi/scripts/hapdl2lofi.py
+      location: page auth 讀取
+      summary: 依 hapdl-canonical-keys 記載，腳本歷史上使用 auth_roles/primary_actor outlier 鍵；本專案 haPDL 採正規 auth.roles。頁面已正確載入，但每頁角色徽章顯示可能不完整（屬腳本側 outlier，非 SSoT 缺陷）。
+    - id: PREVIEW-FIND-002
+      route: NOTE_ONLY
+      can_fix: false
+      artifact: docs/ssot/hapdl/merchant-report-dashboard.hapdl.yaml
+      location: type:dashboard
+      summary: dashboard 型頁面以 list/table 佈局近似呈現；實際聚合圖表（銷售概況/排行）為 codegen 階段細化，wireframe 僅示意資料欄位。
+  downstream_note: findings 皆 NOTE_ONLY；wireframe 為 inspection artifact，發現問題不直接改 SSoT，必要時交 rapt-verify / 對應 owner skill。

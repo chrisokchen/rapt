@@ -1,0 +1,110 @@
+# ============================================================
+# 角色/權限/存取控制模型模板 (haARM v2)
+# ============================================================
+# 階段: Phase 2 - 領域建模
+# 目的: 定義系統的角色、資源、權限與存取控制規則
+# 參考: 0_reqDevProcess/haARM-Specification_v2.md
+#
+# 填寫指南:
+# 1. metadata: 填入專案資訊
+# 2. actors: 從 Phase 1 Event Storming 的「相關角色」欄位萃取
+# 3. roles: 將 actors 分組為角色，定義繼承關係
+# 4. resources: 對應 DBML entity，每個 entity 至少一個 resource
+# 5. permissions: 為每個 resource 定義 CRUD+ 權限
+# 6. access_control: 定義哪些角色有哪些權限
+# 7. constraints: 定義互斥、依賴等治理約束（選填）
+#
+# 命名規範:
+# - ID 使用 snake_case
+# - resource ID 可用點號階層 (e.g., orders.details)
+# - role/permission 的 ID 應在整個專案中唯一
+#
+# 與其他 DSL 的關聯:
+# - resource.id 應對應 DBML 的 Table 名稱
+# - role.id 會被 haPDL 的 auth.roles[] 引用
+# - permission.id 會被 haAPI 的 @useAuth() 引用
+# - actor + role 會被 Gherkin 的 Given 步驟引用
+# ============================================================
+
+metadata:
+  title: "[專案名稱] 角色/權限模型"
+  version: "1.0.0"
+  namespace: "[com.example.project.auth]"
+  description: "[專案的角色存取控制模型]"
+
+# ============================================================
+# Actors（演員）
+# 來源: Phase 1 Event Storming 的「相關角色」欄位
+# ============================================================
+actors:
+  - id: "[actor_id]"              # 唯一識別碼 (snake_case)
+    name: "[演員名稱]"             # 可讀名稱
+    type: user                     # user | system | service | external
+    description: "[角色描述]"
+    # properties:                  # 選填：自訂屬性
+    #   department: "[部門]"
+
+# ============================================================
+# Roles（角色）
+# 將 Actors 歸類為角色群組，定義權限集合
+# ============================================================
+roles:
+  - id: "[role_id]"
+    name: "[角色名稱]"
+    description: "[角色描述]"
+    # parent_roles: [parent_role_id]  # 選填：角色繼承
+    permissions:
+      - "[permission_id]"
+
+# ============================================================
+# Resources（資源） — v2 新增
+# 對應 DBML entity，建立可引用驗證的資源清單
+# ============================================================
+resources:
+  - id: "[resource_id]"           # 對應 DBML Table 名稱
+    name: "[資源名稱]"
+    type: entity                   # entity | collection | action | view
+    description: "[資源描述]"
+    # parent: "[parent_resource_id]"  # 選填：階層關係
+    # fields: [field1, field2]        # 選填：欄位清單
+
+# ============================================================
+# Permissions（權限）
+# 為每個 resource 定義操作權限
+# ============================================================
+permissions:
+  - id: "[permission_id]"         # 命名建議: resource_action (e.g., order_read)
+    resource: "[resource_id]"      # 引用 resources 區段的 ID
+    action: read                   # read|write|create|update|delete|execute|admin|自訂
+    # scope: all                   # 選填: all|own|department|team|自訂
+    description: "[權限描述]"
+    # conditions:                  # 選填：條件約束
+    #   - field: "[field.path]"
+    #     operator: "=="
+    #     value: "[value]"
+
+# ============================================================
+# Access Control（存取控制規則）
+# 定義誰（actor/roles）有什麼權限（permissions）
+# 注意: actor 與 roles 至少填一個
+# ============================================================
+access_control:
+  - id: "[rule_id]"
+    roles: ["[role_id]"]           # 或使用 actor: "[actor_id]"
+    permissions:
+      - "[permission_id]"
+    effect: allow                  # allow | deny
+    priority: 100                  # 選填：數字越小優先級越高
+    # conditions: []               # 選填：額外條件
+
+# ============================================================
+# Constraints（治理約束）— 選填
+# 定義角色間的互斥、依賴等規則
+# ============================================================
+# constraints:
+#   - id: "[constraint_id]"
+#     type: mutual_exclusion       # mutual_exclusion|dependency|cardinality|custom
+#     rule:                        # 結構化語法（推薦）
+#       not_both: [role_a, role_b]
+#     severity: error              # error | warning
+#     description: "[約束描述]"

@@ -1,0 +1,54 @@
+api: promotion-coupon
+schema_version: "3.3"
+entity: Promotion
+title: 促銷與優惠券 API
+description: 支援商家促銷、優惠券、會員等級資格與折扣疊加規則。
+exposes:
+  standard: [list, read, create, update]
+  list:
+    filters:
+      - {field: merchantId, operators: [eq]}
+      - {field: promotionStatus, operators: [eq]}
+      - {field: startsAt, operators: [gte, lte]}
+    sorting: {fields: [startsAt, endsAt], default: startsAt:desc}
+    pagination: {style: offset, default_size: 20}
+  operations:
+    - {name: validate_coupon, method: POST, path: "/validate-coupon"}
+    - {name: calculate_discount_stack, method: POST, path: "/calculate-discount-stack"}
+access:
+  authentication: {type: bearer, required: true}
+  endpoints:
+    list:
+      required_roles: [merchant-owner, platform-marketer]
+      required_permissions:
+        - {id: promotion_crud_merchant}
+        - {id: promotion_read_all}
+    read:
+      required_roles: [merchant-owner, platform-marketer]
+      required_permissions:
+        - {id: promotion_crud_merchant}
+        - {id: promotion_read_all}
+    create:
+      required_roles: [merchant-owner]
+      required_permissions:
+        - {id: promotion_crud_merchant}
+    update:
+      required_roles: [merchant-owner, platform-marketer]
+      required_permissions:
+        - {id: promotion_crud_merchant}
+        - {id: promotion_update_all}
+  operations:
+    validate_coupon:
+      required_roles: [consumer]
+      required_permissions:
+        - {id: sales_order_create_own}
+    calculate_discount_stack:
+      required_roles: [consumer]
+      required_permissions:
+        - {id: sales_order_create_own}
+source_evidence:
+  - "docs/ssot/habdd/promotion-coupon.ha.feature"
+  - "docs/ssot/dbml/constraints.md#CON-CLARIFY-002"
+  - "docs/ssot/dbml/schema.dbml#Table:Promotion"
+  - "docs/ssot/haarm/smallbiz.haarm.yaml#permission:promotion_crud_merchant"
+

@@ -1,0 +1,77 @@
+report:
+  id: VERIFY-260613-002
+  project: smallBiz-codex
+  generated_at: "2026-06-13T10:15:00+08:00"
+  status: PASS
+  schema_version: 2
+
+summary:
+  completeness: PASS
+  consistency: PASS
+  traceability: PASS
+  coverage: PASS
+  error_count: 0
+  warning_count: 1
+
+metrics:
+  artifacts:
+    dbml_tables: 24
+    feature_files: 10
+    scenarios: 45
+    haapi_files: 11
+    hapdl_files: 11
+  coverage:
+    must_have:
+      total: 15
+      covered: 15
+      pct: "100%"
+    should_have:
+      total: 3
+      covered: 3
+      pct: "100%"
+    overall:
+      total: 18
+      covered: 18
+      pct: "100%"
+  traceability:
+    l2:
+      total_scenarios: 45
+      mapped: 45
+      missing_count: 0
+      low_confidence_count: 9
+    l3:
+      total_scenarios: 45
+      traced: 45
+      untraced_count: 0
+
+findings:
+  - id: FIND-260613-004
+    severity: low
+    category: evidence_weak
+    route: NOTE_ONLY
+    can_fix: true
+    owner_skill: rapt-reconcile
+    artifact: .raptor/traceability.md
+    location: L2 Scenario Data Mapping confidence
+    summary: 9 個 L2 row 仍為 low confidence；不阻擋 Phase 5 gate，但會影響 RAscore readiness。
+    evidence:
+      - SCN-DISC-002
+      - SCN-INV-002
+      - SCN-CHECKOUT-003
+      - SCN-MEMBER-002
+      - SCN-MEMBER-003
+      - SCN-MEMBER-004
+      - SCN-RETURN-001
+      - SCN-RETURN-002
+      - SCN-RETURN-003
+    suggested_action: 後續可補 read_tables、write_tables、fields 與 constraints，提升 L2 evidence 強度。
+
+phase_gate:
+  can_continue: true
+  blockers: []
+  next:
+    NEED_TO_FIX: []
+    NEED_TO_CLARIFY: []
+    NOTE_ONLY:
+      - FIND-260613-004
+

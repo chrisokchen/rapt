@@ -1,0 +1,31 @@
+page: consumer-cart-checkout
+schema_version: "3.3"
+type: wizard
+entity: Cart
+api: cart-checkout
+title: 購物車結帳
+view:
+  steps:
+    - {id: cart_items, label: 確認購物車}
+    - {id: checkout_amount, label: 確認金額}
+    - {id: payment, label: 選擇付款}
+    - {id: confirmation, label: 建立訂單}
+  actions:
+    standard: [update]
+    custom: [add_cart_item, remove_cart_item, calculate_checkout, create_order]
+    placement:
+      footer: [calculate_checkout, create_order]
+security:
+  permission_refs:
+    view:
+      - {id: cart_crud_own}
+    update:
+      - {id: cart_crud_own}
+    submit:
+      - {id: sales_order_create_own}
+  datasource_scope: own
+source_evidence:
+  - "docs/ssot/haapi/cart-checkout.haapi.yaml"
+  - "docs/ssot/habdd/checkout-payment.ha.feature"
+  - "docs/ssot/dbml/constraints.md#CON-CLARIFY-005"
+

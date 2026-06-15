@@ -1,0 +1,13 @@
+// 資料模型規格模板 (DBML)
+// (可重用 phase2-domain-model.dbml 的格式)
+
+Table users {
+  id uuid [primary key]
+  email varchar(255) [unique, not null]
+  name varchar(100) [not null]
+  created_at timestamp [not null, default: `now()`]
+
+  indexes {
+    email [unique]
+  }
+}

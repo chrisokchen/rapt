@@ -1,0 +1,34 @@
+page: inventory-dashboard
+schema_version: "3.3"
+type: dashboard
+entity: InventoryItem
+api: inventory
+title: 庫存控管
+view:
+  filters:
+    - {field: skuId, label: SKU, type: eq}
+    - {field: availableQty, label: 可售庫存, type: range}
+  columns:
+    - {field: inventoryItemId, label: 庫存項目, link: true}
+    - {field: skuId, label: SKU}
+    - {field: onHandQty, label: 帳面庫存, format: number}
+    - {field: availableQty, label: 可售庫存, format: number}
+    - {field: lowStockThreshold, label: 低庫存門檻, format: number}
+    - {field: updatedAt, label: 更新時間, format: date, sortable: true}
+  actions:
+    standard: [update]
+    custom: [adjust_inventory]
+    placement:
+      row: [update, adjust_inventory]
+security:
+  permission_refs:
+    view:
+      - {id: inventory_item_crud_merchant}
+    update:
+      - {id: inventory_item_crud_merchant}
+  datasource_scope: department
+source_evidence:
+  - "docs/ssot/haapi/inventory.haapi.yaml"
+  - "docs/ssot/habdd/inventory-control.ha.feature"
+  - "docs/ssot/haarm/smallbiz.haarm.yaml#permission:inventory_item_crud_merchant"
+

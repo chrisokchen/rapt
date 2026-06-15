@@ -1,0 +1,37 @@
+page: platform-admin-access
+schema_version: "3.3"
+type: dashboard
+entity: Account
+api: platform-admin
+title: 平台權限邊界
+view:
+  filters:
+    - {field: accountType, label: 帳戶類型, type: eq, ref_code: AccountType}
+    - {field: accountStatus, label: 帳戶狀態, type: eq, ref_code: AccountStatus}
+  columns:
+    - {field: accountId, label: 帳戶編號, link: true}
+    - {field: email, label: Email}
+    - {field: accountType, label: 類型, format: badge, ref_code: AccountType}
+    - {field: accountStatus, label: 狀態, format: badge, ref_code: AccountStatus}
+    - {field: updatedAt, label: 更新時間, format: date, sortable: true}
+  actions:
+    standard: [read, update]
+    custom: [review_merchant_boundary, read_platform_data]
+    placement:
+      row: [read, update]
+      header: [review_merchant_boundary, read_platform_data]
+security:
+  permission_refs:
+    view:
+      - {id: account_admin}
+    update:
+      - {id: account_admin}
+    admin:
+      - {id: merchant_admin}
+      - {id: platform_data_read_all}
+  datasource_scope: all
+source_evidence:
+  - "docs/ssot/haapi/platform-admin.haapi.yaml"
+  - "docs/ssot/habdd/access-boundary.ha.feature#SCN-AUTH-003"
+  - "docs/ssot/haarm/smallbiz.haarm.yaml#permission:account_admin"
+

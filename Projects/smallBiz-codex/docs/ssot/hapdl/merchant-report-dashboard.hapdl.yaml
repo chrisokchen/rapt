@@ -1,0 +1,29 @@
+page: merchant-report-dashboard
+schema_version: "3.3"
+type: dashboard
+entity: SalesOrder
+api: merchant-report
+title: 商家營運報表
+view:
+  filters:
+    - {field: merchantId, label: 商家, type: eq}
+    - {field: placedAt, label: 報表期間, type: range}
+    - {field: orderStatus, label: 訂單狀態, type: eq, ref_code: OrderStatus}
+  metrics:
+    - {field: totalAmount, label: 銷售額, format: currency}
+    - {field: orderId, label: 訂單數, format: number}
+    - {field: consumerId, label: 消費者數, format: number}
+  actions:
+    custom: [sales_summary, product_performance]
+    placement:
+      header: [sales_summary, product_performance]
+security:
+  permission_refs:
+    view:
+      - {id: merchant_report_read}
+  datasource_scope: department
+source_evidence:
+  - "docs/ssot/haapi/merchant-report.haapi.yaml"
+  - "docs/ssot/habdd/merchant-reporting.ha.feature"
+  - "docs/ssot/dbml/constraints.md#CON-REPORT-001"
+

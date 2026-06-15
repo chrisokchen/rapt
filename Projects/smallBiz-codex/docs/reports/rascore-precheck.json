@@ -1,0 +1,4474 @@
+{
+  "inputs": {
+    "features": "docs\\ssot\\habdd",
+    "dbml": "docs\\ssot\\dbml",
+    "glossary": "docs\\ssot\\dbml\\glossary.md",
+    "seeds": "docs\\ssot\\dbml\\seeds.md",
+    "constraints": "docs\\ssot\\dbml\\constraints.md",
+    "trace": ".raptor\\traceability.md"
+  },
+  "missing_inputs": {
+    "features": false,
+    "dbml": false,
+    "glossary": false,
+    "seeds": false,
+    "constraints": false,
+    "trace": false
+  },
+  "gherkin": {
+    "feature_count": 10,
+    "scenario_count": 48,
+    "scenarios": [
+      {
+        "file": "docs\\ssot\\habdd\\access-boundary.ha.feature",
+        "name": "商家只能管理自己的商店資料",
+        "step_count": 4
+      },
+      {
+        "file": "docs\\ssot\\habdd\\access-boundary.ha.feature",
+        "name": "消費者只能查看自己的訂單",
+        "step_count": 4
+      },
+      {
+        "file": "docs\\ssot\\habdd\\access-boundary.ha.feature",
+        "name": "平台管理員管理平台層級資料",
+        "step_count": 4
+      },
+      {
+        "file": "docs\\ssot\\habdd\\checkout-payment.ha.feature",
+        "name": "以必要資訊提交訂單",
+        "step_count": 4
+      },
+      {
+        "file": "docs\\ssot\\habdd\\checkout-payment.ha.feature",
+        "name": "使用支援的付款方式完成付款",
+        "step_count": 4
+      },
+      {
+        "file": "docs\\ssot\\habdd\\checkout-payment.ha.feature",
+        "name": "顯示可追溯的訂單金額",
+        "step_count": 4
+      },
+      {
+        "file": "docs\\ssot\\habdd\\checkout-payment.ha.feature",
+        "name": "優惠不符合資格時維持原訂單金額",
+        "step_count": 4
+      },
+      {
+        "file": "docs\\ssot\\habdd\\checkout-payment.ha.feature",
+        "name": "稅基規則已依釐清決策裁決",
+        "step_count": 4
+      },
+      {
+        "file": "docs\\ssot\\habdd\\checkout-payment.ha.feature",
+        "name": "依決策計算 5% 營業稅",
+        "step_count": 5
+      },
+      {
+        "file": "docs\\ssot\\habdd\\inventory-control.ha.feature",
+        "name": "設定 SKU 庫存與補貨水位",
+        "step_count": 4
+      },
+      {
+        "file": "docs\\ssot\\habdd\\inventory-control.ha.feature",
+        "name": "訂單成立後扣減庫存",
+        "step_count": 4
+      },
+      {
+        "file": "docs\\ssot\\habdd\\inventory-control.ha.feature",
+        "name": "庫存低於水位時提醒商家",
+        "step_count": 4
+      },
+      {
+        "file": "docs\\ssot\\habdd\\inventory-control.ha.feature",
+        "name": "庫存不足時不建立可履約訂單",
+        "step_count": 4
+      },
+      {
+        "file": "docs\\ssot\\habdd\\inventory-control.ha.feature",
+        "name": "庫存預留規則已依釐清決策裁決",
+        "step_count": 4
+      },
+      {
+        "file": "docs\\ssot\\habdd\\inventory-control.ha.feature",
+        "name": "依決策建立庫存預留並於付款完成扣減",
+        "step_count": 5
+      },
+      {
+        "file": "docs\\ssot\\habdd\\membership-loyalty.ha.feature",
+        "name": "使用 Email 註冊會員",
+        "step_count": 4
+      },
+      {
+        "file": "docs\\ssot\\habdd\\membership-loyalty.ha.feature",
+        "name": "依消費金額累積點數",
+        "step_count": 4
+      },
+      {
+        "file": "docs\\ssot\\habdd\\membership-loyalty.ha.feature",
+        "name": "使用點數折抵訂單",
+        "step_count": 4
+      },
+      {
+        "file": "docs\\ssot\\habdd\\membership-loyalty.ha.feature",
+        "name": "會員等級符合專屬優惠資格",
+        "step_count": 4
+      },
+      {
+        "file": "docs\\ssot\\habdd\\membership-loyalty.ha.feature",
+        "name": "會員分級與點數生命週期已依釐清決策裁決",
+        "step_count": 4
+      },
+      {
+        "file": "docs\\ssot\\habdd\\membership-loyalty.ha.feature",
+        "name": "MVP 啟用點數並手動維護會員分級",
+        "step_count": 5
+      },
+      {
+        "file": "docs\\ssot\\habdd\\merchant-reporting.ha.feature",
+        "name": "查看指定期間的銷售概況",
+        "step_count": 4
+      },
+      {
+        "file": "docs\\ssot\\habdd\\merchant-reporting.ha.feature",
+        "name": "查看商品銷售排行",
+        "step_count": 4
+      },
+      {
+        "file": "docs\\ssot\\habdd\\merchant-reporting.ha.feature",
+        "name": "無銷售資料時呈現空報表",
+        "step_count": 4
+      },
+      {
+        "file": "docs\\ssot\\habdd\\order-fulfillment.ha.feature",
+        "name": "依狀態查看待處理訂單",
+        "step_count": 4
+      },
+      {
+        "file": "docs\\ssot\\habdd\\order-fulfillment.ha.feature",
+        "name": "標記訂單出貨",
+        "step_count": 4
+      },
+      {
+        "file": "docs\\ssot\\habdd\\order-fulfillment.ha.feature",
+        "name": "消費者追蹤配送進度",
+        "step_count": 4
+      },
+      {
+        "file": "docs\\ssot\\habdd\\order-fulfillment.ha.feature",
+        "name": "訂單狀態變更時通知消費者",
+        "step_count": 4
+      },
+      {
+        "file": "docs\\ssot\\habdd\\order-fulfillment.ha.feature",
+        "name": "付款逾時與取消規則已依釐清決策裁決",
+        "step_count": 4
+      },
+      {
+        "file": "docs\\ssot\\habdd\\order-fulfillment.ha.feature",
+        "name": "依決策處理付款逾時與出貨前取消",
+        "step_count": 7
+      },
+      {
+        "file": "docs\\ssot\\habdd\\product-catalog.ha.feature",
+        "name": "建立多規格商品",
+        "step_count": 4
+      },
+      {
+        "file": "docs\\ssot\\habdd\\product-catalog.ha.feature",
+        "name": "上架已完成設定的商品",
+        "step_count": 4
+      },
+      {
+        "file": "docs\\ssot\\habdd\\product-catalog.ha.feature",
+        "name": "缺少可銷售規格時維持草稿",
+        "step_count": 4
+      },
+      {
+        "file": "docs\\ssot\\habdd\\product-catalog.ha.feature",
+        "name": "下架不再販售的商品",
+        "step_count": 4
+      },
+      {
+        "file": "docs\\ssot\\habdd\\product-discovery.ha.feature",
+        "name": "取得可販售商品資訊",
+        "step_count": 4
+      },
+      {
+        "file": "docs\\ssot\\habdd\\product-discovery.ha.feature",
+        "name": "收藏尚未立即購買的商品",
+        "step_count": 4
+      },
+      {
+        "file": "docs\\ssot\\habdd\\product-discovery.ha.feature",
+        "name": "保留購物車內容",
+        "step_count": 4
+      },
+      {
+        "file": "docs\\ssot\\habdd\\product-discovery.ha.feature",
+        "name": "商品售完時不可加入購物車",
+        "step_count": 4
+      },
+      {
+        "file": "docs\\ssot\\habdd\\promotion-coupon.ha.feature",
+        "name": "建立有檔期的促銷活動",
+        "step_count": 4
+      },
+      {
+        "file": "docs\\ssot\\habdd\\promotion-coupon.ha.feature",
+        "name": "建立有限制條件的優惠券",
+        "step_count": 4
+      },
+      {
+        "file": "docs\\ssot\\habdd\\promotion-coupon.ha.feature",
+        "name": "一筆訂單最多使用一張優惠券",
+        "step_count": 4
+      },
+      {
+        "file": "docs\\ssot\\habdd\\promotion-coupon.ha.feature",
+        "name": "折扣疊加規則已依釐清決策裁決",
+        "step_count": 4
+      },
+      {
+        "file": "docs\\ssot\\habdd\\promotion-coupon.ha.feature",
+        "name": "依決策計算可疊加折扣",
+        "step_count": 5
+      },
+      {
+        "file": "docs\\ssot\\habdd\\return-refund.ha.feature",
+        "name": "消費者申請退貨",
+        "step_count": 4
+      },
+      {
+        "file": "docs\\ssot\\habdd\\return-refund.ha.feature",
+        "name": "商家核准退貨後安排取件",
+        "step_count": 4
+      },
+      {
+        "file": "docs\\ssot\\habdd\\return-refund.ha.feature",
+        "name": "退回商品確認後完成退款",
+        "step_count": 4
+      },
+      {
+        "file": "docs\\ssot\\habdd\\return-refund.ha.feature",
+        "name": "退貨政策已依釐清決策裁決",
+        "step_count": 4
+      },
+      {
+        "file": "docs\\ssot\\habdd\\return-refund.ha.feature",
+        "name": "依決策審核退貨期限與退款路徑",
+        "step_count": 7
+      }
+    ],
+    "scenarios_without_given": [],
+    "scenarios_without_when": [],
+    "scenarios_without_then": [],
+    "ui_detail_terms": [],
+    "long_scenarios": [],
+    "entity_hints": [
+      {
+        "file": "docs\\ssot\\habdd\\access-boundary.ha.feature",
+        "scenario": "商家只能管理自己的商店資料",
+        "scenario_id": "SCN-AUTH-002",
+        "entities": [
+          "消費者",
+          "訂單"
+        ]
+      },
+      {
+        "file": "docs\\ssot\\habdd\\access-boundary.ha.feature",
+        "scenario": "消費者只能查看自己的訂單",
+        "scenario_id": "SCN-AUTH-003",
+        "entities": [
+          "平台管理員",
+          "商家"
+        ]
+      },
+      {
+        "file": "docs\\ssot\\habdd\\access-boundary.ha.feature",
+        "scenario": "平台管理員管理平台層級資料",
+        "scenario_id": "",
+        "entities": [
+          "平台管理員",
+          "商家"
+        ]
+      },
+      {
+        "file": "docs\\ssot\\habdd\\checkout-payment.ha.feature",
+        "scenario": "以必要資訊提交訂單",
+        "scenario_id": "SCN-CHECKOUT-002",
+        "entities": [
+          "訂單",
+          "付款"
+        ]
+      },
+      {
+        "file": "docs\\ssot\\habdd\\checkout-payment.ha.feature",
+        "scenario": "使用支援的付款方式完成付款",
+        "scenario_id": "SCN-CHECKOUT-003",
+        "entities": [
+          "訂單",
+          "優惠",
+          "運費",
+          "稅金"
+        ]
+      },
+      {
+        "file": "docs\\ssot\\habdd\\checkout-payment.ha.feature",
+        "scenario": "顯示可追溯的訂單金額",
+        "scenario_id": "SCN-CHECKOUT-004",
+        "entities": [
+          "訂單",
+          "優惠"
+        ]
+      },
+      {
+        "file": "docs\\ssot\\habdd\\checkout-payment.ha.feature",
+        "scenario": "優惠不符合資格時維持原訂單金額",
+        "scenario_id": "SCN-CHECKOUT-005",
+        "entities": [
+          "訂單",
+          "稅金"
+        ]
+      },
+      {
+        "file": "docs\\ssot\\habdd\\checkout-payment.ha.feature",
+        "scenario": "稅基規則已依釐清決策裁決",
+        "scenario_id": "SCN-CHECKOUT-006",
+        "entities": [
+          "訂單",
+          "稅金",
+          "優惠",
+          "運費"
+        ]
+      },
+      {
+        "file": "docs\\ssot\\habdd\\checkout-payment.ha.feature",
+        "scenario": "依決策計算 5% 營業稅",
+        "scenario_id": "",
+        "entities": [
+          "訂單",
+          "稅金",
+          "優惠",
+          "運費"
+        ]
+      },
+      {
+        "file": "docs\\ssot\\habdd\\inventory-control.ha.feature",
+        "scenario": "設定 SKU 庫存與補貨水位",
+        "scenario_id": "SCN-INV-002",
+        "entities": [
+          "SKU",
+          "庫存異動",
+          "訂單"
+        ]
+      },
+      {
+        "file": "docs\\ssot\\habdd\\inventory-control.ha.feature",
+        "scenario": "訂單成立後扣減庫存",
+        "scenario_id": "SCN-INV-003",
+        "entities": [
+          "SKU",
+          "庫存水位"
+        ]
+      },
+      {
+        "file": "docs\\ssot\\habdd\\inventory-control.ha.feature",
+        "scenario": "庫存低於水位時提醒商家",
+        "scenario_id": "SCN-INV-004",
+        "entities": [
+          "SKU",
+          "訂單"
+        ]
+      },
+      {
+        "file": "docs\\ssot\\habdd\\inventory-control.ha.feature",
+        "scenario": "庫存不足時不建立可履約訂單",
+        "scenario_id": "SCN-INV-005",
+        "entities": [
+          "SKU",
+          "訂單"
+        ]
+      },
+      {
+        "file": "docs\\ssot\\habdd\\inventory-control.ha.feature",
+        "scenario": "庫存預留規則已依釐清決策裁決",
+        "scenario_id": "SCN-INV-006",
+        "entities": [
+          "SKU",
+          "庫存預留",
+          "訂單"
+        ]
+      },
+      {
+        "file": "docs\\ssot\\habdd\\inventory-control.ha.feature",
+        "scenario": "依決策建立庫存預留並於付款完成扣減",
+        "scenario_id": "",
+        "entities": [
+          "SKU",
+          "庫存預留",
+          "訂單"
+        ]
+      },
+      {
+        "file": "docs\\ssot\\habdd\\membership-loyalty.ha.feature",
+        "scenario": "使用 Email 註冊會員",
+        "scenario_id": "SCN-MEMBER-002",
+        "entities": [
+          "會員",
+          "點數",
+          "訂單"
+        ]
+      },
+      {
+        "file": "docs\\ssot\\habdd\\membership-loyalty.ha.feature",
+        "scenario": "依消費金額累積點數",
+        "scenario_id": "SCN-MEMBER-003",
+        "entities": [
+          "會員",
+          "點數",
+          "訂單"
+        ]
+      },
+      {
+        "file": "docs\\ssot\\habdd\\membership-loyalty.ha.feature",
+        "scenario": "使用點數折抵訂單",
+        "scenario_id": "SCN-MEMBER-004",
+        "entities": [
+          "會員",
+          "會員等級",
+          "優惠券"
+        ]
+      },
+      {
+        "file": "docs\\ssot\\habdd\\membership-loyalty.ha.feature",
+        "scenario": "會員等級符合專屬優惠資格",
+        "scenario_id": "SCN-MEMBER-005",
+        "entities": [
+          "會員",
+          "會員等級",
+          "點數"
+        ]
+      },
+      {
+        "file": "docs\\ssot\\habdd\\membership-loyalty.ha.feature",
+        "scenario": "會員分級與點數生命週期已依釐清決策裁決",
+        "scenario_id": "SCN-MEMBER-006",
+        "entities": [
+          "會員",
+          "會員等級",
+          "點數"
+        ]
+      },
+      {
+        "file": "docs\\ssot\\habdd\\membership-loyalty.ha.feature",
+        "scenario": "MVP 啟用點數並手動維護會員分級",
+        "scenario_id": "",
+        "entities": [
+          "會員",
+          "會員等級",
+          "點數"
+        ]
+      },
+      {
+        "file": "docs\\ssot\\habdd\\merchant-reporting.ha.feature",
+        "scenario": "查看指定期間的銷售概況",
+        "scenario_id": "SCN-REPORT-002",
+        "entities": [
+          "報表",
+          "商品"
+        ]
+      },
+      {
+        "file": "docs\\ssot\\habdd\\merchant-reporting.ha.feature",
+        "scenario": "查看商品銷售排行",
+        "scenario_id": "SCN-REPORT-003",
+        "entities": [
+          "報表",
+          "商家"
+        ]
+      },
+      {
+        "file": "docs\\ssot\\habdd\\merchant-reporting.ha.feature",
+        "scenario": "無銷售資料時呈現空報表",
+        "scenario_id": "",
+        "entities": [
+          "報表",
+          "商家"
+        ]
+      },
+      {
+        "file": "docs\\ssot\\habdd\\order-fulfillment.ha.feature",
+        "scenario": "依狀態查看待處理訂單",
+        "scenario_id": "SCN-ORDER-002",
+        "entities": [
+          "訂單",
+          "出貨",
+          "物流"
+        ]
+      },
+      {
+        "file": "docs\\ssot\\habdd\\order-fulfillment.ha.feature",
+        "scenario": "標記訂單出貨",
+        "scenario_id": "SCN-ORDER-003",
+        "entities": [
+          "訂單",
+          "物流"
+        ]
+      },
+      {
+        "file": "docs\\ssot\\habdd\\order-fulfillment.ha.feature",
+        "scenario": "消費者追蹤配送進度",
+        "scenario_id": "SCN-ORDER-004",
+        "entities": [
+          "訂單",
+          "通知"
+        ]
+      },
+      {
+        "file": "docs\\ssot\\habdd\\order-fulfillment.ha.feature",
+        "scenario": "訂單狀態變更時通知消費者",
+        "scenario_id": "SCN-ORDER-005",
+        "entities": [
+          "訂單",
+          "退款",
+          "庫存"
+        ]
+      },
+      {
+        "file": "docs\\ssot\\habdd\\order-fulfillment.ha.feature",
+        "scenario": "付款逾時與取消規則已依釐清決策裁決",
+        "scenario_id": "SCN-ORDER-006",
+        "entities": [
+          "訂單",
+          "退款",
+          "庫存"
+        ]
+      },
+      {
+        "file": "docs\\ssot\\habdd\\order-fulfillment.ha.feature",
+        "scenario": "依決策處理付款逾時與出貨前取消",
+        "scenario_id": "",
+        "entities": [
+          "訂單",
+          "退款",
+          "庫存"
+        ]
+      },
+      {
+        "file": "docs\\ssot\\habdd\\product-catalog.ha.feature",
+        "scenario": "建立多規格商品",
+        "scenario_id": "SCN-CATALOG-002",
+        "entities": [
+          "商品",
+          "SKU"
+        ]
+      },
+      {
+        "file": "docs\\ssot\\habdd\\product-catalog.ha.feature",
+        "scenario": "上架已完成設定的商品",
+        "scenario_id": "SCN-CATALOG-003",
+        "entities": [
+          "商品",
+          "SKU"
+        ]
+      },
+      {
+        "file": "docs\\ssot\\habdd\\product-catalog.ha.feature",
+        "scenario": "缺少可銷售規格時維持草稿",
+        "scenario_id": "SCN-CATALOG-004",
+        "entities": [
+          "商品"
+        ]
+      },
+      {
+        "file": "docs\\ssot\\habdd\\product-catalog.ha.feature",
+        "scenario": "下架不再販售的商品",
+        "scenario_id": "",
+        "entities": [
+          "商品"
+        ]
+      },
+      {
+        "file": "docs\\ssot\\habdd\\product-discovery.ha.feature",
+        "scenario": "取得可販售商品資訊",
+        "scenario_id": "SCN-DISC-002",
+        "entities": [
+          "商品",
+          "願望清單"
+        ]
+      },
+      {
+        "file": "docs\\ssot\\habdd\\product-discovery.ha.feature",
+        "scenario": "收藏尚未立即購買的商品",
+        "scenario_id": "SCN-DISC-003",
+        "entities": [
+          "購物車",
+          "SKU"
+        ]
+      },
+      {
+        "file": "docs\\ssot\\habdd\\product-discovery.ha.feature",
+        "scenario": "保留購物車內容",
+        "scenario_id": "SCN-DISC-004",
+        "entities": [
+          "商品",
+          "SKU"
+        ]
+      },
+      {
+        "file": "docs\\ssot\\habdd\\product-discovery.ha.feature",
+        "scenario": "商品售完時不可加入購物車",
+        "scenario_id": "",
+        "entities": [
+          "商品",
+          "SKU"
+        ]
+      },
+      {
+        "file": "docs\\ssot\\habdd\\promotion-coupon.ha.feature",
+        "scenario": "建立有檔期的促銷活動",
+        "scenario_id": "SCN-PROMO-002",
+        "entities": [
+          "優惠券",
+          "會員等級"
+        ]
+      },
+      {
+        "file": "docs\\ssot\\habdd\\promotion-coupon.ha.feature",
+        "scenario": "建立有限制條件的優惠券",
+        "scenario_id": "SCN-PROMO-003",
+        "entities": [
+          "優惠券",
+          "訂單"
+        ]
+      },
+      {
+        "file": "docs\\ssot\\habdd\\promotion-coupon.ha.feature",
+        "scenario": "一筆訂單最多使用一張優惠券",
+        "scenario_id": "SCN-PROMO-004",
+        "entities": [
+          "促銷活動",
+          "優惠券",
+          "會員折扣",
+          "點數"
+        ]
+      },
+      {
+        "file": "docs\\ssot\\habdd\\promotion-coupon.ha.feature",
+        "scenario": "折扣疊加規則已依釐清決策裁決",
+        "scenario_id": "SCN-PROMO-005",
+        "entities": [
+          "促銷活動",
+          "優惠券",
+          "會員折扣",
+          "點數",
+          "訂單"
+        ]
+      },
+      {
+        "file": "docs\\ssot\\habdd\\promotion-coupon.ha.feature",
+        "scenario": "依決策計算可疊加折扣",
+        "scenario_id": "",
+        "entities": [
+          "促銷活動",
+          "優惠券",
+          "會員折扣",
+          "點數",
+          "訂單"
+        ]
+      },
+      {
+        "file": "docs\\ssot\\habdd\\return-refund.ha.feature",
+        "scenario": "消費者申請退貨",
+        "scenario_id": "SCN-RETURN-002",
+        "entities": [
+          "退貨申請",
+          "物流",
+          "退款"
+        ]
+      },
+      {
+        "file": "docs\\ssot\\habdd\\return-refund.ha.feature",
+        "scenario": "商家核准退貨後安排取件",
+        "scenario_id": "SCN-RETURN-003",
+        "entities": [
+          "退貨申請",
+          "退款",
+          "訂單"
+        ]
+      },
+      {
+        "file": "docs\\ssot\\habdd\\return-refund.ha.feature",
+        "scenario": "退回商品確認後完成退款",
+        "scenario_id": "SCN-RETURN-004",
+        "entities": [
+          "退貨申請",
+          "訂單"
+        ]
+      },
+      {
+        "file": "docs\\ssot\\habdd\\return-refund.ha.feature",
+        "scenario": "退貨政策已依釐清決策裁決",
+        "scenario_id": "SCN-RETURN-005",
+        "entities": [
+          "退貨申請",
+          "訂單",
+          "退款"
+        ]
+      },
+      {
+        "file": "docs\\ssot\\habdd\\return-refund.ha.feature",
+        "scenario": "依決策審核退貨期限與退款路徑",
+        "scenario_id": "",
+        "entities": [
+          "退貨申請",
+          "訂單",
+          "退款"
+        ]
+      }
+    ],
+    "entity_hint_coverage": {
+      "with_entities": 48,
+      "total_scenarios": 48,
+      "ratio": 1.0
+    },
+    "terms": [
+      "001",
+      "001庫存扣減與預留策略",
+      "002",
+      "002折扣疊加與計算順序",
+      "003",
+      "003會員分級與點數生命週期",
+      "004",
+      "004付款逾時取消與退款",
+      "005",
+      "0055",
+      "006",
+      "006退貨期限不可退範圍與退款路徑",
+      "100",
+      "260613",
+      "30",
+      "AUTH",
+      "CATALOG",
+      "CHECKOUT",
+      "CLR",
+      "DEC",
+      "DISC",
+      "Email",
+      "Examples",
+      "INV",
+      "MEMBER",
+      "MVP",
+      "ORDER",
+      "Outline",
+      "PROMO",
+      "PayPal",
+      "REPORT",
+      "RETURN",
+      "SCN",
+      "SKU",
+      "batch",
+      "cic",
+      "clarification_decision",
+      "clarify",
+      "decisions",
+      "entities",
+      "gap",
+      "md",
+      "q1",
+      "q2",
+      "q3",
+      "q4",
+      "q5",
+      "q6",
+      "scenario_id",
+      "source",
+      "一筆訂單最多使用一張優惠券",
+      "上架已完成設定的商品",
+      "下架不再販售的商品",
+      "不符合資格的會員不取得該優惠資格",
+      "不能被重複註冊",
+      "付款",
+      "付款完成時正式扣減庫存",
+      "付款方式",
+      "付款逾時與取消規則已依釐清決策裁決",
+      "以必要資訊提交訂單",
+      "使用",
+      "使用上限",
+      "使用支援的付款方式完成付款",
+      "使用點數折抵訂單",
+      "依決策審核退貨期限與退款路徑",
+      "依決策建立庫存預留並於付款完成扣減",
+      "依決策處理付款逾時與出貨前取消",
+      "依決策計算",
+      "依決策計算可疊加折扣",
+      "依消費金額累積點數",
+      "依狀態查看待處理訂單",
+      "促銷活動",
+      "促銷活動具有起訖時間與適用範圍",
+      "促銷類型",
+      "保留購物車內容",
+      "信用卡",
+      "個人化商品或耗材",
+      "個人化或屬於耗材",
+      "優惠",
+      "優惠不符合資格時維持原訂單金額",
+      "優惠券",
+      "優惠券具有唯一代碼",
+      "優惠券與會員折扣互斥",
+      "優惠與運費",
+      "優惠資格",
+      "元得",
+      "具有可販售庫存與補貨門檻",
+      "出貨",
+      "分鐘仍未付款",
+      "分鐘未付款自動取消為準",
+      "分鐘逾時取消與預留釋放為準",
+      "分類",
+      "原價與庫存狀態",
+      "取得可販售商品資訊",
+      "可販售庫存",
+      "可販售庫存減少訂購數量",
+      "可販售庫存維持不變",
+      "售價",
+      "售價與分類",
+      "售價與庫存",
+      "商品",
+      "商品不再接受新的購買",
+      "商品不是已拆封商品",
+      "商品仍呈現目前可販售狀態",
+      "商品包含可辨識的",
+      "商品售完時不可加入購物車",
+      "商品尚未建立任何可銷售規格",
+      "商品已上架且仍有可販售庫存",
+      "商品已有名稱",
+      "商品成為可販售商品",
+      "商品目前沒有可販售庫存",
+      "商品目前為可販售商品",
+      "商品維持",
+      "商品被保存到消費者的願望清單",
+      "商家",
+      "商家上架商品",
+      "商家下架商品",
+      "商家乙的資料不包含在結果中",
+      "商家依訂單狀態查看訂單",
+      "商家取得暢銷商品與滯銷商品清單",
+      "商家取得符合該狀態的訂單清單",
+      "商家取得缺少銷售規格的說明",
+      "商家取得該",
+      "商家取得該期間的訂單數",
+      "商家取得零銷售的報表結果",
+      "商家只能管理自己的商店資料",
+      "商家可判斷下一批待處理訂單",
+      "商家可用報表判斷營運表現",
+      "商家可用庫存狀態安排補貨",
+      "商家可用排行安排補貨與促銷",
+      "商家可降低優惠券被濫用的風險",
+      "商家在指定期間沒有任何訂單",
+      "商家已選定促銷適用範圍",
+      "商家建立商品與每個可銷售規格",
+      "商家有多筆不同狀態的訂單",
+      "商家查看商品排行",
+      "商家查看銷售概況",
+      "商家核准後退款必須原路退回",
+      "商家核准退貨後安排取件",
+      "商家核准退貨申請",
+      "商家標記訂單出貨",
+      "商家準備販售一個",
+      "商家準備販售一項有多種規格的商品",
+      "商家甲只取得自己商店的商品與訂單",
+      "商家甲與商家乙各自擁有商品與訂單",
+      "商家甲要求管理商店資料",
+      "商家與消費者看到一致的訂單金額",
+      "商家要求上架商品",
+      "商家要發放優惠券",
+      "商家設定庫存數量與低庫存水位",
+      "商家選定一段報表期間",
+      "啟用點數並手動維護會員分級",
+      "固定金額折抵",
+      "圖片",
+      "報表",
+      "報表不產生誤導性的銷售數字",
+      "增加",
+      "多位消費者同時購買同一個低庫存",
+      "天內可退與原路退款為準",
+      "天內申請退貨",
+      "完成付款",
+      "已付款",
+      "已出貨",
+      "已核准",
+      "已確認",
+      "已退款",
+      "平台營運",
+      "平台管理員",
+      "平台管理員取得跨商家的營運管理資訊",
+      "平台管理員查看平台層級資料",
+      "平台管理員管理平台層級資料",
+      "平台管理員行為保留可追蹤紀錄",
+      "平台管理員負責維護平台營運",
+      "平台需要判定會員等級與點數效期",
+      "庫存",
+      "庫存不足時不建立可履約訂單",
+      "庫存低於水位時提醒商家",
+      "庫存已低於商家設定的補貨水位",
+      "庫存水位",
+      "庫存異動",
+      "庫存與補貨水位",
+      "庫存預留",
+      "庫存預留規則已依釐清決策裁決",
+      "建立多規格商品",
+      "建立有檔期的促銷活動",
+      "建立有限制條件的優惠券",
+      "待付款",
+      "待審核",
+      "後續規格必須以",
+      "後續規格必須以到貨後",
+      "後續規格必須以折扣與點數折抵後的商品金額為稅基",
+      "後續規格必須以點數最後折抵為準",
+      "成為會員",
+      "手動維護會員分級為準",
+      "折扣疊加規則已依釐清決策裁決",
+      "收藏尚未立即購買的商品",
+      "新優惠券未納入該筆訂單金額",
+      "最低消費",
+      "會員",
+      "會員分級由商家或平台手動維護",
+      "會員分級與點數生命週期已依釐清決策裁決",
+      "會員可使用點數同步減少",
+      "會員在訂單中使用點數折抵",
+      "會員完成一筆可回饋點數的訂單",
+      "會員已有一個會員等級",
+      "會員折扣",
+      "會員折扣與點數折抵",
+      "會員折扣與點數折抵後的商品金額",
+      "會員折扣與點數折抵條件",
+      "會員擁有可使用點數",
+      "會員等級",
+      "會員等級符合專屬優惠資格",
+      "會員點數依",
+      "有效期間與會員等級資格",
+      "未付款訂單逾時取消時釋放預留庫存",
+      "查看商品銷售排行",
+      "查看指定期間的銷售概況",
+      "標記訂單出貨",
+      "此情境遵循",
+      "歷史訂單保留商品快照",
+      "活動價可與優惠券或會員折扣擇一疊加",
+      "活動在有效期間內影響符合條件的商品",
+      "活動折扣",
+      "消費",
+      "消費者",
+      "消費者乙的訂單不包含在結果中",
+      "消費者以",
+      "消費者再套用另一張優惠券",
+      "消費者取得付款完成通知",
+      "消費者取得商品名稱",
+      "消費者取得目前訂單狀態與配送狀態",
+      "消費者取得退款完成通知",
+      "消費者取得退貨取件安排",
+      "消費者取消訂單",
+      "消費者只能查看自己的訂單",
+      "消費者可取得商品資訊與庫存狀態",
+      "消費者可繼續準備結帳",
+      "消費者嘗試加入購物車",
+      "消費者在到貨後",
+      "消費者套用優惠",
+      "消費者完成可累積點數的訂單",
+      "消費者尚未以該",
+      "消費者已將商品加入購物車",
+      "消費者已確認購物車商品與收件資訊",
+      "消費者建立訂單後尚未付款",
+      "消費者得知優惠未被採用的原因",
+      "消費者得知商品目前無法購買",
+      "消費者提交包含庫存商品的訂單",
+      "消費者提交的訂單包含一個有庫存的",
+      "消費者提交訂單",
+      "消費者收到對應狀態通知",
+      "消費者收藏商品",
+      "消費者日後可找回該商品",
+      "消費者有一筆訂單",
+      "消費者查看訂單進度",
+      "消費者瀏覽商品",
+      "消費者甲只取得自己的訂單",
+      "消費者甲查看訂單",
+      "消費者甲與消費者乙各自擁有訂單",
+      "消費者申請退貨",
+      "消費者申請退貨的商品已拆封",
+      "消費者的訂單不符合優惠使用資格",
+      "消費者的購買數量大於",
+      "消費者看到感興趣的可販售商品",
+      "消費者稍後回到商店",
+      "消費者能判斷商品是否已送達",
+      "消費者能判斷商品是否符合購買需求",
+      "消費者要退回特價商品或已拆封商品",
+      "消費者註冊會員",
+      "消費者追蹤配送進度",
+      "減少",
+      "無銷售資料時呈現空報表",
+      "營業稅",
+      "營業稅率為",
+      "營業稅稅基",
+      "營業額與客單價",
+      "物流",
+      "狀態",
+      "百分比折扣",
+      "的庫存預留規則",
+      "的折扣疊加規則",
+      "的會員忠誠規則",
+      "的稅基規則",
+      "的訂單保留規則",
+      "的退貨政策",
+      "稅基不包含運費",
+      "稅基為商品小計扣除活動",
+      "稅基規則已依釐清決策裁決",
+      "稅金",
+      "稅金與應付總額",
+      "符合資格的會員可使用該等級優惠",
+      "系統依訂單規則扣減庫存",
+      "系統允許建立退貨申請",
+      "系統判定會員是否符合專屬優惠資格",
+      "系統完成退款",
+      "系統建立一筆具有唯一編號的訂單",
+      "系統建立一筆待驗證會員資料",
+      "系統建立一筆退貨申請",
+      "系統建立原路退款流程",
+      "系統建立庫存預留並鎖定可販售庫存",
+      "系統拒絕退貨申請",
+      "系統檢查庫存狀態",
+      "系統檢查退貨資格",
+      "系統累積可折抵訂單的點數",
+      "系統結算會員點數",
+      "系統自動取消訂單",
+      "系統處理會員忠誠規則",
+      "系統計算訂單折扣",
+      "系統計算訂單稅金",
+      "系統計算訂單金額",
+      "系統釋放該訂單的預留庫存",
+      "系統需要判定庫存歸屬",
+      "系統需要判定訂單是否逾時",
+      "系統需要判定退貨資格",
+      "系統需要套用會員規則",
+      "系統需要計算最終折扣",
+      "系統需要計算營業稅",
+      "缺少可銷售規格時維持草稿",
+      "自動升降級排程延後到後續版本",
+      "草稿",
+      "行銷人員建立",
+      "行銷人員設定優惠券限制",
+      "訂單",
+      "訂單保留扣減後的庫存結果",
+      "訂單保留既有優惠券",
+      "訂單保留通知已送出的紀錄",
+      "訂單包含可追蹤的物流資訊",
+      "訂單包含商品小計",
+      "訂單同時包含商品金額",
+      "訂單同時符合活動價",
+      "訂單呈現商品小計",
+      "訂單已付款但尚未出貨",
+      "訂單已套用一張優惠券",
+      "訂單已有物流資訊",
+      "訂單成立但尚未付款",
+      "訂單成立後扣減庫存",
+      "訂單未進入可履約狀態",
+      "訂單狀態成為",
+      "訂單狀態為",
+      "訂單狀態變更時通知消費者",
+      "訂單符合目前已知的退貨申請條件",
+      "訂單超過",
+      "訂單金額依",
+      "訂單金額維持未套用該優惠的結果",
+      "設定",
+      "註冊會員",
+      "購物車",
+      "購物車不新增該商品",
+      "購物車保留先前加入的商品與數量",
+      "購物車商品",
+      "退回商品確認後完成退款",
+      "退款",
+      "退貨商品已被商家確認收回",
+      "退貨政策已依釐清決策裁決",
+      "退貨申請",
+      "退貨申請狀態成為",
+      "退貨申請狀態為",
+      "通知",
+      "運費",
+      "運費門檻與稅金規則皆已確定",
+      "配送中",
+      "銀行轉帳",
+      "需要補貨的通知",
+      "願望清單",
+      "顯示可追溯的訂單金額",
+      "點折抵",
+      "點數",
+      "點數折抵最後計算",
+      "點數折抵與運費",
+      "點數異動可被會員與商家追蹤"
+    ]
+  },
+  "dbml": {
+    "file_count": 1,
+    "table_count": 24,
+    "enum_count": 0,
+    "refs_count": 38,
+    "tables": {
+      "Account": {
+        "file": "docs\\ssot\\dbml\\schema.dbml",
+        "columns": [
+          "accountId",
+          "email",
+          "passwordHash",
+          "accountType",
+          "accountStatus",
+          "emailVerifiedAt",
+          "createdAt",
+          "updatedAt"
+        ],
+        "has_pk": true
+      },
+      "Merchant": {
+        "file": "docs\\ssot\\dbml\\schema.dbml",
+        "columns": [
+          "merchantId",
+          "ownerAccountId",
+          "merchantName",
+          "planStatus",
+          "createdAt",
+          "updatedAt"
+        ],
+        "has_pk": true
+      },
+      "ConsumerProfile": {
+        "file": "docs\\ssot\\dbml\\schema.dbml",
+        "columns": [
+          "consumerId",
+          "accountId",
+          "displayName",
+          "phone",
+          "memberLevelId",
+          "createdAt",
+          "updatedAt"
+        ],
+        "has_pk": true
+      },
+      "Address": {
+        "file": "docs\\ssot\\dbml\\schema.dbml",
+        "columns": [
+          "addressId",
+          "consumerId",
+          "recipientName",
+          "phone",
+          "postalCode",
+          "city",
+          "district",
+          "line1",
+          "isDefault"
+        ],
+        "has_pk": true
+      },
+      "Category": {
+        "file": "docs\\ssot\\dbml\\schema.dbml",
+        "columns": [
+          "categoryId",
+          "merchantId",
+          "parentCategoryId",
+          "categoryName",
+          "sortOrder"
+        ],
+        "has_pk": true
+      },
+      "Product": {
+        "file": "docs\\ssot\\dbml\\schema.dbml",
+        "columns": [
+          "productId",
+          "merchantId",
+          "categoryId",
+          "productName",
+          "description",
+          "brand",
+          "productStatus",
+          "createdAt",
+          "updatedAt"
+        ],
+        "has_pk": true
+      },
+      "ProductSku": {
+        "file": "docs\\ssot\\dbml\\schema.dbml",
+        "columns": [
+          "skuId",
+          "productId",
+          "skuCode",
+          "skuName",
+          "salePrice",
+          "originalPrice",
+          "skuStatus"
+        ],
+        "has_pk": true
+      },
+      "InventoryItem": {
+        "file": "docs\\ssot\\dbml\\schema.dbml",
+        "columns": [
+          "inventoryItemId",
+          "skuId",
+          "onHandQty",
+          "availableQty",
+          "lowStockThreshold",
+          "updatedAt"
+        ],
+        "has_pk": true
+      },
+      "InventoryMovement": {
+        "file": "docs\\ssot\\dbml\\schema.dbml",
+        "columns": [
+          "movementId",
+          "inventoryItemId",
+          "movementType",
+          "quantity",
+          "sourceOrderId",
+          "occurredAt"
+        ],
+        "has_pk": true
+      },
+      "Cart": {
+        "file": "docs\\ssot\\dbml\\schema.dbml",
+        "columns": [
+          "cartId",
+          "consumerId",
+          "cartStatus",
+          "updatedAt"
+        ],
+        "has_pk": true
+      },
+      "CartItem": {
+        "file": "docs\\ssot\\dbml\\schema.dbml",
+        "columns": [
+          "cartItemId",
+          "cartId",
+          "skuId",
+          "quantity",
+          "addedAt"
+        ],
+        "has_pk": true
+      },
+      "WishlistItem": {
+        "file": "docs\\ssot\\dbml\\schema.dbml",
+        "columns": [
+          "wishlistItemId",
+          "consumerId",
+          "productId",
+          "addedAt"
+        ],
+        "has_pk": true
+      },
+      "SalesOrder": {
+        "file": "docs\\ssot\\dbml\\schema.dbml",
+        "columns": [
+          "orderId",
+          "merchantId",
+          "consumerId",
+          "orderStatus",
+          "subtotalAmount",
+          "discountAmount",
+          "shippingFee",
+          "taxAmount",
+          "totalAmount",
+          "placedAt",
+          "paidAt"
+        ],
+        "has_pk": true
+      },
+      "OrderItem": {
+        "file": "docs\\ssot\\dbml\\schema.dbml",
+        "columns": [
+          "orderItemId",
+          "orderId",
+          "skuId",
+          "productNameSnapshot",
+          "skuCodeSnapshot",
+          "unitPriceSnapshot",
+          "quantity",
+          "lineAmount"
+        ],
+        "has_pk": true
+      },
+      "Payment": {
+        "file": "docs\\ssot\\dbml\\schema.dbml",
+        "columns": [
+          "paymentId",
+          "orderId",
+          "paymentMethod",
+          "paymentStatus",
+          "amount",
+          "paidAt"
+        ],
+        "has_pk": true
+      },
+      "Shipment": {
+        "file": "docs\\ssot\\dbml\\schema.dbml",
+        "columns": [
+          "shipmentId",
+          "orderId",
+          "trackingNo",
+          "shipmentStatus",
+          "shippedAt",
+          "deliveredAt"
+        ],
+        "has_pk": true
+      },
+      "MemberLevel": {
+        "file": "docs\\ssot\\dbml\\schema.dbml",
+        "columns": [
+          "memberLevelId",
+          "levelName",
+          "levelRank",
+          "discountRate",
+          "activeFlag"
+        ],
+        "has_pk": true
+      },
+      "PointLedger": {
+        "file": "docs\\ssot\\dbml\\schema.dbml",
+        "columns": [
+          "pointLedgerId",
+          "consumerId",
+          "orderId",
+          "pointType",
+          "points",
+          "occurredAt",
+          "expiresAt"
+        ],
+        "has_pk": true
+      },
+      "Promotion": {
+        "file": "docs\\ssot\\dbml\\schema.dbml",
+        "columns": [
+          "promotionId",
+          "merchantId",
+          "promotionName",
+          "promotionType",
+          "startsAt",
+          "endsAt",
+          "promotionStatus"
+        ],
+        "has_pk": true
+      },
+      "Coupon": {
+        "file": "docs\\ssot\\dbml\\schema.dbml",
+        "columns": [
+          "couponId",
+          "merchantId",
+          "couponCode",
+          "discountType",
+          "minimumSpend",
+          "usageLimit",
+          "memberLevelId",
+          "startsAt",
+          "endsAt",
+          "couponStatus"
+        ],
+        "has_pk": true
+      },
+      "CouponRedemption": {
+        "file": "docs\\ssot\\dbml\\schema.dbml",
+        "columns": [
+          "redemptionId",
+          "couponId",
+          "orderId",
+          "consumerId",
+          "redeemedAt"
+        ],
+        "has_pk": true
+      },
+      "ReturnRequest": {
+        "file": "docs\\ssot\\dbml\\schema.dbml",
+        "columns": [
+          "returnRequestId",
+          "orderId",
+          "consumerId",
+          "returnStatus",
+          "reason",
+          "requestedAt",
+          "reviewedAt"
+        ],
+        "has_pk": true
+      },
+      "Refund": {
+        "file": "docs\\ssot\\dbml\\schema.dbml",
+        "columns": [
+          "refundId",
+          "returnRequestId",
+          "orderId",
+          "refundStatus",
+          "refundAmount",
+          "refundedAt"
+        ],
+        "has_pk": true
+      },
+      "Notification": {
+        "file": "docs\\ssot\\dbml\\schema.dbml",
+        "columns": [
+          "notificationId",
+          "accountId",
+          "orderId",
+          "notificationType",
+          "channel",
+          "notificationStatus",
+          "sentAt"
+        ],
+        "has_pk": true
+      }
+    },
+    "enums": [],
+    "refs": [
+      {
+        "file": "docs\\ssot\\dbml\\schema.dbml",
+        "ref": "und"
+      },
+      {
+        "file": "docs\\ssot\\dbml\\schema.dbml",
+        "ref": "Merchant.ownerAccountId > Account.accountId"
+      },
+      {
+        "file": "docs\\ssot\\dbml\\schema.dbml",
+        "ref": "ConsumerProfile.accountId > Account.accountId"
+      },
+      {
+        "file": "docs\\ssot\\dbml\\schema.dbml",
+        "ref": "ConsumerProfile.memberLevelId > MemberLevel.memberLevelId"
+      },
+      {
+        "file": "docs\\ssot\\dbml\\schema.dbml",
+        "ref": "Address.consumerId > ConsumerProfile.consumerId"
+      },
+      {
+        "file": "docs\\ssot\\dbml\\schema.dbml",
+        "ref": "Category.merchantId > Merchant.merchantId"
+      },
+      {
+        "file": "docs\\ssot\\dbml\\schema.dbml",
+        "ref": "Category.parentCategoryId > Category.categoryId"
+      },
+      {
+        "file": "docs\\ssot\\dbml\\schema.dbml",
+        "ref": "Product.merchantId > Merchant.merchantId"
+      },
+      {
+        "file": "docs\\ssot\\dbml\\schema.dbml",
+        "ref": "Product.categoryId > Category.categoryId"
+      },
+      {
+        "file": "docs\\ssot\\dbml\\schema.dbml",
+        "ref": "ProductSku.productId > Product.productId"
+      },
+      {
+        "file": "docs\\ssot\\dbml\\schema.dbml",
+        "ref": "InventoryItem.skuId > ProductSku.skuId"
+      },
+      {
+        "file": "docs\\ssot\\dbml\\schema.dbml",
+        "ref": "InventoryMovement.inventoryItemId > InventoryItem.inventoryItemId"
+      },
+      {
+        "file": "docs\\ssot\\dbml\\schema.dbml",
+        "ref": "InventoryMovement.sourceOrderId > SalesOrder.orderId"
+      },
+      {
+        "file": "docs\\ssot\\dbml\\schema.dbml",
+        "ref": "Cart.consumerId > ConsumerProfile.consumerId"
+      },
+      {
+        "file": "docs\\ssot\\dbml\\schema.dbml",
+        "ref": "CartItem.cartId > Cart.cartId"
+      },
+      {
+        "file": "docs\\ssot\\dbml\\schema.dbml",
+        "ref": "CartItem.skuId > ProductSku.skuId"
+      },
+      {
+        "file": "docs\\ssot\\dbml\\schema.dbml",
+        "ref": "WishlistItem.consumerId > ConsumerProfile.consumerId"
+      },
+      {
+        "file": "docs\\ssot\\dbml\\schema.dbml",
+        "ref": "WishlistItem.productId > Product.productId"
+      },
+      {
+        "file": "docs\\ssot\\dbml\\schema.dbml",
+        "ref": "SalesOrder.merchantId > Merchant.merchantId"
+      },
+      {
+        "file": "docs\\ssot\\dbml\\schema.dbml",
+        "ref": "SalesOrder.consumerId > ConsumerProfile.consumerId"
+      },
+      {
+        "file": "docs\\ssot\\dbml\\schema.dbml",
+        "ref": "OrderItem.orderId > SalesOrder.orderId"
+      },
+      {
+        "file": "docs\\ssot\\dbml\\schema.dbml",
+        "ref": "OrderItem.skuId > ProductSku.skuId"
+      },
+      {
+        "file": "docs\\ssot\\dbml\\schema.dbml",
+        "ref": "Payment.orderId > SalesOrder.orderId"
+      },
+      {
+        "file": "docs\\ssot\\dbml\\schema.dbml",
+        "ref": "Shipment.orderId > SalesOrder.orderId"
+      },
+      {
+        "file": "docs\\ssot\\dbml\\schema.dbml",
+        "ref": "PointLedger.consumerId > ConsumerProfile.consumerId"
+      },
+      {
+        "file": "docs\\ssot\\dbml\\schema.dbml",
+        "ref": "PointLedger.orderId > SalesOrder.orderId"
+      },
+      {
+        "file": "docs\\ssot\\dbml\\schema.dbml",
+        "ref": "Promotion.merchantId > Merchant.merchantId"
+      },
+      {
+        "file": "docs\\ssot\\dbml\\schema.dbml",
+        "ref": "Coupon.merchantId > Merchant.merchantId"
+      },
+      {
+        "file": "docs\\ssot\\dbml\\schema.dbml",
+        "ref": "Coupon.memberLevelId > MemberLevel.memberLevelId"
+      },
+      {
+        "file": "docs\\ssot\\dbml\\schema.dbml",
+        "ref": "CouponRedemption.couponId > Coupon.couponId"
+      },
+      {
+        "file": "docs\\ssot\\dbml\\schema.dbml",
+        "ref": "CouponRedemption.orderId > SalesOrder.orderId"
+      },
+      {
+        "file": "docs\\ssot\\dbml\\schema.dbml",
+        "ref": "CouponRedemption.consumerId > ConsumerProfile.consumerId"
+      },
+      {
+        "file": "docs\\ssot\\dbml\\schema.dbml",
+        "ref": "ReturnRequest.orderId > SalesOrder.orderId"
+      },
+      {
+        "file": "docs\\ssot\\dbml\\schema.dbml",
+        "ref": "ReturnRequest.consumerId > ConsumerProfile.consumerId"
+      },
+      {
+        "file": "docs\\ssot\\dbml\\schema.dbml",
+        "ref": "Refund.returnRequestId > ReturnRequest.returnRequestId"
+      },
+      {
+        "file": "docs\\ssot\\dbml\\schema.dbml",
+        "ref": "Refund.orderId > SalesOrder.orderId"
+      },
+      {
+        "file": "docs\\ssot\\dbml\\schema.dbml",
+        "ref": "Notification.accountId > Account.accountId"
+      },
+      {
+        "file": "docs\\ssot\\dbml\\schema.dbml",
+        "ref": "Notification.orderId > SalesOrder.orderId"
+      }
+    ],
+    "tables_without_pk": [],
+    "terms": [
+      "Account",
+      "Address",
+      "Cart",
+      "CartItem",
+      "Category",
+      "ConsumerProfile",
+      "Coupon",
+      "CouponRedemption",
+      "InventoryItem",
+      "InventoryMovement",
+      "MemberLevel",
+      "Merchant",
+      "Notification",
+      "OrderItem",
+      "Payment",
+      "PointLedger",
+      "Product",
+      "ProductSku",
+      "Promotion",
+      "Refund",
+      "ReturnRequest",
+      "SalesOrder",
+      "Shipment",
+      "WishlistItem",
+      "accountId",
+      "accountStatus",
+      "accountType",
+      "activeFlag",
+      "addedAt",
+      "addressId",
+      "amount",
+      "availableQty",
+      "brand",
+      "cartId",
+      "cartItemId",
+      "cartStatus",
+      "categoryId",
+      "categoryName",
+      "channel",
+      "city",
+      "consumerId",
+      "couponCode",
+      "couponId",
+      "couponStatus",
+      "createdAt",
+      "deliveredAt",
+      "description",
+      "discountAmount",
+      "discountRate",
+      "discountType",
+      "displayName",
+      "district",
+      "email",
+      "emailVerifiedAt",
+      "endsAt",
+      "expiresAt",
+      "inventoryItemId",
+      "isDefault",
+      "levelName",
+      "levelRank",
+      "line1",
+      "lineAmount",
+      "lowStockThreshold",
+      "memberLevelId",
+      "merchantId",
+      "merchantName",
+      "minimumSpend",
+      "movementId",
+      "movementType",
+      "notificationId",
+      "notificationStatus",
+      "notificationType",
+      "occurredAt",
+      "onHandQty",
+      "orderId",
+      "orderItemId",
+      "orderStatus",
+      "originalPrice",
+      "ownerAccountId",
+      "paidAt",
+      "parentCategoryId",
+      "passwordHash",
+      "paymentId",
+      "paymentMethod",
+      "paymentStatus",
+      "phone",
+      "placedAt",
+      "planStatus",
+      "pointLedgerId",
+      "pointType",
+      "points",
+      "postalCode",
+      "productId",
+      "productName",
+      "productNameSnapshot",
+      "productStatus",
+      "promotionId",
+      "promotionName",
+      "promotionStatus",
+      "promotionType",
+      "quantity",
+      "reason",
+      "recipientName",
+      "redeemedAt",
+      "redemptionId",
+      "refundAmount",
+      "refundId",
+      "refundStatus",
+      "refundedAt",
+      "requestedAt",
+      "returnRequestId",
+      "returnStatus",
+      "reviewedAt",
+      "salePrice",
+      "sentAt",
+      "shipmentId",
+      "shipmentStatus",
+      "shippedAt",
+      "shippingFee",
+      "skuCode",
+      "skuCodeSnapshot",
+      "skuId",
+      "skuName",
+      "skuStatus",
+      "sortOrder",
+      "sourceOrderId",
+      "startsAt",
+      "subtotalAmount",
+      "taxAmount",
+      "totalAmount",
+      "trackingNo",
+      "unitPriceSnapshot",
+      "updatedAt",
+      "usageLimit",
+      "wishlistItemId"
+    ]
+  },
+  "glossary": {
+    "exists": true,
+    "mapping_count": 59,
+    "mappings": [
+      {
+        "term": "帳號",
+        "tables": [
+          "Account"
+        ],
+        "columns": "",
+        "aliases": ""
+      },
+      {
+        "term": "商家",
+        "tables": [
+          "Merchant"
+        ],
+        "columns": "",
+        "aliases": ""
+      },
+      {
+        "term": "消費者",
+        "tables": [
+          "ConsumerProfile"
+        ],
+        "columns": "",
+        "aliases": ""
+      },
+      {
+        "term": "地址",
+        "tables": [
+          "Address"
+        ],
+        "columns": "",
+        "aliases": ""
+      },
+      {
+        "term": "分類",
+        "tables": [
+          "Category"
+        ],
+        "columns": "",
+        "aliases": ""
+      },
+      {
+        "term": "商品",
+        "tables": [
+          "Product"
+        ],
+        "columns": "",
+        "aliases": ""
+      },
+      {
+        "term": "SKU",
+        "tables": [
+          "ProductSku"
+        ],
+        "columns": "",
+        "aliases": ""
+      },
+      {
+        "term": "庫存",
+        "tables": [
+          "InventoryItem"
+        ],
+        "columns": "",
+        "aliases": ""
+      },
+      {
+        "term": "庫存異動",
+        "tables": [
+          "InventoryMovement"
+        ],
+        "columns": "",
+        "aliases": ""
+      },
+      {
+        "term": "購物車",
+        "tables": [
+          "Cart"
+        ],
+        "columns": "",
+        "aliases": ""
+      },
+      {
+        "term": "購物車項目",
+        "tables": [
+          "CartItem"
+        ],
+        "columns": "",
+        "aliases": ""
+      },
+      {
+        "term": "願望清單",
+        "tables": [
+          "WishlistItem"
+        ],
+        "columns": "",
+        "aliases": ""
+      },
+      {
+        "term": "訂單",
+        "tables": [
+          "SalesOrder"
+        ],
+        "columns": "",
+        "aliases": ""
+      },
+      {
+        "term": "訂單項目",
+        "tables": [
+          "OrderItem"
+        ],
+        "columns": "",
+        "aliases": ""
+      },
+      {
+        "term": "付款",
+        "tables": [
+          "Payment"
+        ],
+        "columns": "",
+        "aliases": ""
+      },
+      {
+        "term": "物流",
+        "tables": [
+          "Shipment"
+        ],
+        "columns": "",
+        "aliases": ""
+      },
+      {
+        "term": "會員等級",
+        "tables": [
+          "MemberLevel"
+        ],
+        "columns": "",
+        "aliases": ""
+      },
+      {
+        "term": "點數流水",
+        "tables": [
+          "PointLedger"
+        ],
+        "columns": "",
+        "aliases": ""
+      },
+      {
+        "term": "促銷活動",
+        "tables": [
+          "Promotion"
+        ],
+        "columns": "",
+        "aliases": ""
+      },
+      {
+        "term": "優惠券",
+        "tables": [
+          "Coupon"
+        ],
+        "columns": "",
+        "aliases": ""
+      },
+      {
+        "term": "優惠券使用紀錄",
+        "tables": [
+          "CouponRedemption"
+        ],
+        "columns": "",
+        "aliases": ""
+      },
+      {
+        "term": "退貨申請",
+        "tables": [
+          "ReturnRequest"
+        ],
+        "columns": "",
+        "aliases": ""
+      },
+      {
+        "term": "退款",
+        "tables": [
+          "Refund"
+        ],
+        "columns": "",
+        "aliases": ""
+      },
+      {
+        "term": "通知",
+        "tables": [
+          "Notification"
+        ],
+        "columns": "",
+        "aliases": ""
+      },
+      {
+        "term": "帳號",
+        "tables": [
+          "Account"
+        ],
+        "columns": "accountId,email,accountType,accountStatus",
+        "aliases": "使用者帳號"
+      },
+      {
+        "term": "商家",
+        "tables": [
+          "Merchant"
+        ],
+        "columns": "merchantId,merchantName,planStatus",
+        "aliases": "中小零售店老闆, 店主"
+      },
+      {
+        "term": "消費者",
+        "tables": [
+          "ConsumerProfile"
+        ],
+        "columns": "consumerId,accountId,memberLevelId",
+        "aliases": "客戶, 會員"
+      },
+      {
+        "term": "地址",
+        "tables": [
+          "Address"
+        ],
+        "columns": "addressId,recipientName,phone,line1",
+        "aliases": "收件資訊"
+      },
+      {
+        "term": "分類",
+        "tables": [
+          "Category"
+        ],
+        "columns": "categoryId,parentCategoryId,categoryName",
+        "aliases": "商品分類"
+      },
+      {
+        "term": "商品",
+        "tables": [
+          "Product"
+        ],
+        "columns": "productId,productName,productStatus",
+        "aliases": "品項"
+      },
+      {
+        "term": "SKU",
+        "tables": [
+          "ProductSku"
+        ],
+        "columns": "skuId,skuCode,salePrice",
+        "aliases": "規格組合, 銷售單位"
+      },
+      {
+        "term": "庫存",
+        "tables": [
+          "InventoryItem"
+        ],
+        "columns": "inventoryItemId,onHandQty,availableQty",
+        "aliases": "SKU 庫存"
+      },
+      {
+        "term": "庫存異動",
+        "tables": [
+          "InventoryMovement"
+        ],
+        "columns": "movementId,movementType,quantity",
+        "aliases": "庫存流水"
+      },
+      {
+        "term": "購物車",
+        "tables": [
+          "Cart"
+        ],
+        "columns": "cartId,cartStatus",
+        "aliases": ""
+      },
+      {
+        "term": "購物車項目",
+        "tables": [
+          "CartItem"
+        ],
+        "columns": "cartItemId,skuId,quantity",
+        "aliases": ""
+      },
+      {
+        "term": "願望清單",
+        "tables": [
+          "WishlistItem"
+        ],
+        "columns": "wishlistItemId,productId",
+        "aliases": "收藏商品"
+      },
+      {
+        "term": "訂單",
+        "tables": [
+          "SalesOrder"
+        ],
+        "columns": "orderId,orderStatus,totalAmount",
+        "aliases": "購買請求"
+      },
+      {
+        "term": "訂單項目",
+        "tables": [
+          "OrderItem"
+        ],
+        "columns": "orderItemId,skuId,quantity,lineAmount",
+        "aliases": "訂單明細"
+      },
+      {
+        "term": "付款",
+        "tables": [
+          "Payment"
+        ],
+        "columns": "paymentId,paymentMethod,paymentStatus,amount",
+        "aliases": "金流"
+      },
+      {
+        "term": "物流",
+        "tables": [
+          "Shipment"
+        ],
+        "columns": "shipmentId,trackingNo,shipmentStatus",
+        "aliases": "出貨, 配送"
+      },
+      {
+        "term": "會員等級",
+        "tables": [
+          "MemberLevel"
+        ],
+        "columns": "memberLevelId,levelName,discountRate",
+        "aliases": "VIP 等級"
+      },
+      {
+        "term": "點數流水",
+        "tables": [
+          "PointLedger"
+        ],
+        "columns": "pointLedgerId,pointType,points",
+        "aliases": "點數帳本"
+      },
+      {
+        "term": "促銷活動",
+        "tables": [
+          "Promotion"
+        ],
+        "columns": "promotionId,promotionType,promotionStatus",
+        "aliases": "活動價"
+      },
+      {
+        "term": "優惠券",
+        "tables": [
+          "Coupon"
+        ],
+        "columns": "couponId,couponCode,discountType",
+        "aliases": "券"
+      },
+      {
+        "term": "優惠券使用紀錄",
+        "tables": [
+          "CouponRedemption"
+        ],
+        "columns": "redemptionId,couponId,orderId",
+        "aliases": ""
+      },
+      {
+        "term": "退貨申請",
+        "tables": [
+          "ReturnRequest"
+        ],
+        "columns": "returnRequestId,returnStatus,reason",
+        "aliases": "退換貨"
+      },
+      {
+        "term": "退款",
+        "tables": [
+          "Refund"
+        ],
+        "columns": "refundId,refundStatus,refundAmount",
+        "aliases": ""
+      },
+      {
+        "term": "通知",
+        "tables": [
+          "Notification"
+        ],
+        "columns": "notificationId,notificationType,channel",
+        "aliases": "LINE 通知, Email 通知"
+      },
+      {
+        "term": "狀態",
+        "tables": [
+          "status"
+        ],
+        "columns": "",
+        "aliases": ""
+      },
+      {
+        "term": "可販售庫存",
+        "tables": [
+          "availableQty"
+        ],
+        "columns": "",
+        "aliases": ""
+      },
+      {
+        "term": "帳面庫存",
+        "tables": [
+          "onHandQty"
+        ],
+        "columns": "",
+        "aliases": ""
+      },
+      {
+        "term": "商品快照",
+        "tables": [
+          "snapshot"
+        ],
+        "columns": "",
+        "aliases": ""
+      },
+      {
+        "term": "應付總額",
+        "tables": [
+          "totalAmount"
+        ],
+        "columns": "",
+        "aliases": ""
+      },
+      {
+        "term": "稅金",
+        "tables": [
+          "taxAmount"
+        ],
+        "columns": "",
+        "aliases": ""
+      },
+      {
+        "term": "低庫存水位",
+        "tables": [
+          "lowStockThreshold"
+        ],
+        "columns": "",
+        "aliases": ""
+      },
+      {
+        "term": "庫存預留",
+        "tables": [],
+        "columns": "",
+        "aliases": ""
+      },
+      {
+        "term": "折扣疊加",
+        "tables": [],
+        "columns": "",
+        "aliases": ""
+      },
+      {
+        "term": "稅基",
+        "tables": [],
+        "columns": "",
+        "aliases": ""
+      },
+      {
+        "term": "退貨期限",
+        "tables": [],
+        "columns": "",
+        "aliases": ""
+      }
+    ],
+    "term_to_tables": {
+      "帳號": [
+        "Account"
+      ],
+      "商家": [
+        "Merchant"
+      ],
+      "消費者": [
+        "ConsumerProfile"
+      ],
+      "地址": [
+        "Address"
+      ],
+      "分類": [
+        "Category"
+      ],
+      "商品": [
+        "Product"
+      ],
+      "SKU": [
+        "ProductSku"
+      ],
+      "庫存": [
+        "InventoryItem"
+      ],
+      "庫存異動": [
+        "InventoryMovement"
+      ],
+      "購物車": [
+        "Cart"
+      ],
+      "購物車項目": [
+        "CartItem"
+      ],
+      "願望清單": [
+        "WishlistItem"
+      ],
+      "訂單": [
+        "SalesOrder"
+      ],
+      "訂單項目": [
+        "OrderItem"
+      ],
+      "付款": [
+        "Payment"
+      ],
+      "物流": [
+        "Shipment"
+      ],
+      "會員等級": [
+        "MemberLevel"
+      ],
+      "點數流水": [
+        "PointLedger"
+      ],
+      "促銷活動": [
+        "Promotion"
+      ],
+      "優惠券": [
+        "Coupon"
+      ],
+      "優惠券使用紀錄": [
+        "CouponRedemption"
+      ],
+      "退貨申請": [
+        "ReturnRequest"
+      ],
+      "退款": [
+        "Refund"
+      ],
+      "通知": [
+        "Notification"
+      ],
+      "使用者帳號": [
+        "Account"
+      ],
+      "中小零售店老闆": [
+        "Merchant"
+      ],
+      "店主": [
+        "Merchant"
+      ],
+      "客戶": [
+        "ConsumerProfile"
+      ],
+      "會員": [
+        "ConsumerProfile"
+      ],
+      "收件資訊": [
+        "Address"
+      ],
+      "商品分類": [
+        "Category"
+      ],
+      "品項": [
+        "Product"
+      ],
+      "規格組合": [
+        "ProductSku"
+      ],
+      "銷售單位": [
+        "ProductSku"
+      ],
+      "SKU 庫存": [
+        "InventoryItem"
+      ],
+      "庫存流水": [
+        "InventoryMovement"
+      ],
+      "收藏商品": [
+        "WishlistItem"
+      ],
+      "購買請求": [
+        "SalesOrder"
+      ],
+      "訂單明細": [
+        "OrderItem"
+      ],
+      "金流": [
+        "Payment"
+      ],
+      "出貨": [
+        "Shipment"
+      ],
+      "配送": [
+        "Shipment"
+      ],
+      "VIP 等級": [
+        "MemberLevel"
+      ],
+      "點數帳本": [
+        "PointLedger"
+      ],
+      "活動價": [
+        "Promotion"
+      ],
+      "券": [
+        "Coupon"
+      ],
+      "退換貨": [
+        "ReturnRequest"
+      ],
+      "LINE 通知": [
+        "Notification"
+      ],
+      "Email 通知": [
+        "Notification"
+      ],
+      "狀態": [
+        "status"
+      ],
+      "可販售庫存": [
+        "availableQty"
+      ],
+      "帳面庫存": [
+        "onHandQty"
+      ],
+      "商品快照": [
+        "snapshot"
+      ],
+      "應付總額": [
+        "totalAmount"
+      ],
+      "稅金": [
+        "taxAmount"
+      ],
+      "低庫存水位": [
+        "lowStockThreshold"
+      ],
+      "庫存預留": [],
+      "折扣疊加": [],
+      "稅基": [],
+      "退貨期限": []
+    },
+    "table_to_terms": {
+      "Account": [
+        "帳號"
+      ],
+      "Merchant": [
+        "商家"
+      ],
+      "ConsumerProfile": [
+        "消費者"
+      ],
+      "Address": [
+        "地址"
+      ],
+      "Category": [
+        "分類"
+      ],
+      "Product": [
+        "商品"
+      ],
+      "ProductSku": [
+        "SKU"
+      ],
+      "InventoryItem": [
+        "庫存"
+      ],
+      "InventoryMovement": [
+        "庫存異動"
+      ],
+      "Cart": [
+        "購物車"
+      ],
+      "CartItem": [
+        "購物車項目"
+      ],
+      "WishlistItem": [
+        "願望清單"
+      ],
+      "SalesOrder": [
+        "訂單"
+      ],
+      "OrderItem": [
+        "訂單項目"
+      ],
+      "Payment": [
+        "付款"
+      ],
+      "Shipment": [
+        "物流"
+      ],
+      "MemberLevel": [
+        "會員等級"
+      ],
+      "PointLedger": [
+        "點數流水"
+      ],
+      "Promotion": [
+        "促銷活動"
+      ],
+      "Coupon": [
+        "優惠券"
+      ],
+      "CouponRedemption": [
+        "優惠券使用紀錄"
+      ],
+      "ReturnRequest": [
+        "退貨申請"
+      ],
+      "Refund": [
+        "退款"
+      ],
+      "Notification": [
+        "通知"
+      ],
+      "status": [
+        "狀態"
+      ],
+      "availableQty": [
+        "可販售庫存"
+      ],
+      "onHandQty": [
+        "帳面庫存"
+      ],
+      "snapshot": [
+        "商品快照"
+      ],
+      "totalAmount": [
+        "應付總額"
+      ],
+      "taxAmount": [
+        "稅金"
+      ],
+      "lowStockThreshold": [
+        "低庫存水位"
+      ]
+    }
+  },
+  "seeds": {
+    "exists": true,
+    "label": "seeds",
+    "line_count": 183,
+    "table_rows": 69,
+    "sections": [
+      "AccountType",
+      "AccountStatus",
+      "MerchantPlanStatus",
+      "ProductStatus",
+      "SkuStatus",
+      "InventoryMovementType",
+      "CartStatus",
+      "OrderStatus",
+      "PaymentMethod",
+      "PaymentStatus",
+      "ShipmentStatus",
+      "PointType",
+      "PromotionType",
+      "PromotionStatus",
+      "DiscountType",
+      "CouponStatus",
+      "ReturnStatus",
+      "RefundStatus",
+      "NotificationType",
+      "NotificationChannel",
+      "NotificationStatus",
+      "Clarification Value Rules"
+    ]
+  },
+  "constraints": {
+    "exists": true,
+    "label": "constraints",
+    "line_count": 91,
+    "table_rows": 19,
+    "sections": [
+      "Constraint Catalog",
+      "Resolved CiC Constraints (historical)",
+      "Compatibility Decisions",
+      "Clarification Decision Constraints"
+    ]
+  },
+  "cross_spec": {
+    "matched_terms": [
+      "email"
+    ],
+    "unmatched_gherkin_terms": [
+      "001",
+      "001庫存扣減與預留策略",
+      "002",
+      "002折扣疊加與計算順序",
+      "003",
+      "003會員分級與點數生命週期",
+      "004",
+      "004付款逾時取消與退款",
+      "005",
+      "0055",
+      "006",
+      "006退貨期限不可退範圍與退款路徑",
+      "100",
+      "260613",
+      "30",
+      "AUTH",
+      "CATALOG",
+      "CHECKOUT",
+      "CLR",
+      "DEC",
+      "DISC",
+      "Examples",
+      "INV",
+      "MEMBER",
+      "MVP",
+      "ORDER",
+      "Outline",
+      "PROMO",
+      "PayPal",
+      "REPORT",
+      "RETURN",
+      "SCN",
+      "SKU",
+      "batch",
+      "cic",
+      "clarification_decision",
+      "clarify",
+      "decisions",
+      "entities",
+      "gap",
+      "md",
+      "q1",
+      "q2",
+      "q3",
+      "q4",
+      "q5",
+      "q6",
+      "scenario_id",
+      "source",
+      "一筆訂單最多使用一張優惠券",
+      "上架已完成設定的商品",
+      "下架不再販售的商品",
+      "不符合資格的會員不取得該優惠資格",
+      "不能被重複註冊",
+      "付款",
+      "付款完成時正式扣減庫存",
+      "付款方式",
+      "付款逾時與取消規則已依釐清決策裁決",
+      "以必要資訊提交訂單",
+      "使用",
+      "使用上限",
+      "使用支援的付款方式完成付款",
+      "使用點數折抵訂單",
+      "依決策審核退貨期限與退款路徑",
+      "依決策建立庫存預留並於付款完成扣減",
+      "依決策處理付款逾時與出貨前取消",
+      "依決策計算",
+      "依決策計算可疊加折扣",
+      "依消費金額累積點數",
+      "依狀態查看待處理訂單",
+      "促銷活動",
+      "促銷活動具有起訖時間與適用範圍",
+      "促銷類型",
+      "保留購物車內容",
+      "信用卡",
+      "個人化商品或耗材",
+      "個人化或屬於耗材",
+      "優惠",
+      "優惠不符合資格時維持原訂單金額",
+      "優惠券",
+      "優惠券具有唯一代碼",
+      "優惠券與會員折扣互斥",
+      "優惠與運費",
+      "優惠資格",
+      "元得",
+      "具有可販售庫存與補貨門檻",
+      "出貨",
+      "分鐘仍未付款",
+      "分鐘未付款自動取消為準",
+      "分鐘逾時取消與預留釋放為準",
+      "分類",
+      "原價與庫存狀態",
+      "取得可販售商品資訊",
+      "可販售庫存",
+      "可販售庫存減少訂購數量",
+      "可販售庫存維持不變",
+      "售價",
+      "售價與分類",
+      "售價與庫存",
+      "商品"
+    ],
+    "orphan_dbml_tables": [
+      "Account",
+      "Address",
+      "Cart",
+      "CartItem",
+      "Category",
+      "ConsumerProfile",
+      "Coupon",
+      "CouponRedemption",
+      "InventoryItem",
+      "InventoryMovement",
+      "MemberLevel",
+      "Merchant",
+      "Notification",
+      "OrderItem",
+      "Payment",
+      "PointLedger",
+      "Product",
+      "ProductSku",
+      "Promotion",
+      "Refund",
+      "ReturnRequest",
+      "SalesOrder",
+      "Shipment",
+      "WishlistItem"
+    ],
+    "low_confidence_mappings": [],
+    "glossary_mappings": [
+      {
+        "term": "帳號",
+        "tables": [
+          "Account"
+        ],
+        "columns": "",
+        "aliases": ""
+      },
+      {
+        "term": "商家",
+        "tables": [
+          "Merchant"
+        ],
+        "columns": "",
+        "aliases": ""
+      },
+      {
+        "term": "消費者",
+        "tables": [
+          "ConsumerProfile"
+        ],
+        "columns": "",
+        "aliases": ""
+      },
+      {
+        "term": "地址",
+        "tables": [
+          "Address"
+        ],
+        "columns": "",
+        "aliases": ""
+      },
+      {
+        "term": "分類",
+        "tables": [
+          "Category"
+        ],
+        "columns": "",
+        "aliases": ""
+      },
+      {
+        "term": "商品",
+        "tables": [
+          "Product"
+        ],
+        "columns": "",
+        "aliases": ""
+      },
+      {
+        "term": "SKU",
+        "tables": [
+          "ProductSku"
+        ],
+        "columns": "",
+        "aliases": ""
+      },
+      {
+        "term": "庫存",
+        "tables": [
+          "InventoryItem"
+        ],
+        "columns": "",
+        "aliases": ""
+      },
+      {
+        "term": "庫存異動",
+        "tables": [
+          "InventoryMovement"
+        ],
+        "columns": "",
+        "aliases": ""
+      },
+      {
+        "term": "購物車",
+        "tables": [
+          "Cart"
+        ],
+        "columns": "",
+        "aliases": ""
+      },
+      {
+        "term": "購物車項目",
+        "tables": [
+          "CartItem"
+        ],
+        "columns": "",
+        "aliases": ""
+      },
+      {
+        "term": "願望清單",
+        "tables": [
+          "WishlistItem"
+        ],
+        "columns": "",
+        "aliases": ""
+      },
+      {
+        "term": "訂單",
+        "tables": [
+          "SalesOrder"
+        ],
+        "columns": "",
+        "aliases": ""
+      },
+      {
+        "term": "訂單項目",
+        "tables": [
+          "OrderItem"
+        ],
+        "columns": "",
+        "aliases": ""
+      },
+      {
+        "term": "付款",
+        "tables": [
+          "Payment"
+        ],
+        "columns": "",
+        "aliases": ""
+      },
+      {
+        "term": "物流",
+        "tables": [
+          "Shipment"
+        ],
+        "columns": "",
+        "aliases": ""
+      },
+      {
+        "term": "會員等級",
+        "tables": [
+          "MemberLevel"
+        ],
+        "columns": "",
+        "aliases": ""
+      },
+      {
+        "term": "點數流水",
+        "tables": [
+          "PointLedger"
+        ],
+        "columns": "",
+        "aliases": ""
+      },
+      {
+        "term": "促銷活動",
+        "tables": [
+          "Promotion"
+        ],
+        "columns": "",
+        "aliases": ""
+      },
+      {
+        "term": "優惠券",
+        "tables": [
+          "Coupon"
+        ],
+        "columns": "",
+        "aliases": ""
+      },
+      {
+        "term": "優惠券使用紀錄",
+        "tables": [
+          "CouponRedemption"
+        ],
+        "columns": "",
+        "aliases": ""
+      },
+      {
+        "term": "退貨申請",
+        "tables": [
+          "ReturnRequest"
+        ],
+        "columns": "",
+        "aliases": ""
+      },
+      {
+        "term": "退款",
+        "tables": [
+          "Refund"
+        ],
+        "columns": "",
+        "aliases": ""
+      },
+      {
+        "term": "通知",
+        "tables": [
+          "Notification"
+        ],
+        "columns": "",
+        "aliases": ""
+      },
+      {
+        "term": "帳號",
+        "tables": [
+          "Account"
+        ],
+        "columns": "accountId,email,accountType,accountStatus",
+        "aliases": "使用者帳號"
+      },
+      {
+        "term": "商家",
+        "tables": [
+          "Merchant"
+        ],
+        "columns": "merchantId,merchantName,planStatus",
+        "aliases": "中小零售店老闆, 店主"
+      },
+      {
+        "term": "消費者",
+        "tables": [
+          "ConsumerProfile"
+        ],
+        "columns": "consumerId,accountId,memberLevelId",
+        "aliases": "客戶, 會員"
+      },
+      {
+        "term": "地址",
+        "tables": [
+          "Address"
+        ],
+        "columns": "addressId,recipientName,phone,line1",
+        "aliases": "收件資訊"
+      },
+      {
+        "term": "分類",
+        "tables": [
+          "Category"
+        ],
+        "columns": "categoryId,parentCategoryId,categoryName",
+        "aliases": "商品分類"
+      },
+      {
+        "term": "商品",
+        "tables": [
+          "Product"
+        ],
+        "columns": "productId,productName,productStatus",
+        "aliases": "品項"
+      },
+      {
+        "term": "SKU",
+        "tables": [
+          "ProductSku"
+        ],
+        "columns": "skuId,skuCode,salePrice",
+        "aliases": "規格組合, 銷售單位"
+      },
+      {
+        "term": "庫存",
+        "tables": [
+          "InventoryItem"
+        ],
+        "columns": "inventoryItemId,onHandQty,availableQty",
+        "aliases": "SKU 庫存"
+      },
+      {
+        "term": "庫存異動",
+        "tables": [
+          "InventoryMovement"
+        ],
+        "columns": "movementId,movementType,quantity",
+        "aliases": "庫存流水"
+      },
+      {
+        "term": "購物車",
+        "tables": [
+          "Cart"
+        ],
+        "columns": "cartId,cartStatus",
+        "aliases": ""
+      },
+      {
+        "term": "購物車項目",
+        "tables": [
+          "CartItem"
+        ],
+        "columns": "cartItemId,skuId,quantity",
+        "aliases": ""
+      },
+      {
+        "term": "願望清單",
+        "tables": [
+          "WishlistItem"
+        ],
+        "columns": "wishlistItemId,productId",
+        "aliases": "收藏商品"
+      },
+      {
+        "term": "訂單",
+        "tables": [
+          "SalesOrder"
+        ],
+        "columns": "orderId,orderStatus,totalAmount",
+        "aliases": "購買請求"
+      },
+      {
+        "term": "訂單項目",
+        "tables": [
+          "OrderItem"
+        ],
+        "columns": "orderItemId,skuId,quantity,lineAmount",
+        "aliases": "訂單明細"
+      },
+      {
+        "term": "付款",
+        "tables": [
+          "Payment"
+        ],
+        "columns": "paymentId,paymentMethod,paymentStatus,amount",
+        "aliases": "金流"
+      },
+      {
+        "term": "物流",
+        "tables": [
+          "Shipment"
+        ],
+        "columns": "shipmentId,trackingNo,shipmentStatus",
+        "aliases": "出貨, 配送"
+      },
+      {
+        "term": "會員等級",
+        "tables": [
+          "MemberLevel"
+        ],
+        "columns": "memberLevelId,levelName,discountRate",
+        "aliases": "VIP 等級"
+      },
+      {
+        "term": "點數流水",
+        "tables": [
+          "PointLedger"
+        ],
+        "columns": "pointLedgerId,pointType,points",
+        "aliases": "點數帳本"
+      },
+      {
+        "term": "促銷活動",
+        "tables": [
+          "Promotion"
+        ],
+        "columns": "promotionId,promotionType,promotionStatus",
+        "aliases": "活動價"
+      },
+      {
+        "term": "優惠券",
+        "tables": [
+          "Coupon"
+        ],
+        "columns": "couponId,couponCode,discountType",
+        "aliases": "券"
+      },
+      {
+        "term": "優惠券使用紀錄",
+        "tables": [
+          "CouponRedemption"
+        ],
+        "columns": "redemptionId,couponId,orderId",
+        "aliases": ""
+      },
+      {
+        "term": "退貨申請",
+        "tables": [
+          "ReturnRequest"
+        ],
+        "columns": "returnRequestId,returnStatus,reason",
+        "aliases": "退換貨"
+      },
+      {
+        "term": "退款",
+        "tables": [
+          "Refund"
+        ],
+        "columns": "refundId,refundStatus,refundAmount",
+        "aliases": ""
+      },
+      {
+        "term": "通知",
+        "tables": [
+          "Notification"
+        ],
+        "columns": "notificationId,notificationType,channel",
+        "aliases": "LINE 通知, Email 通知"
+      },
+      {
+        "term": "狀態",
+        "tables": [
+          "status"
+        ],
+        "columns": "",
+        "aliases": ""
+      },
+      {
+        "term": "可販售庫存",
+        "tables": [
+          "availableQty"
+        ],
+        "columns": "",
+        "aliases": ""
+      },
+      {
+        "term": "帳面庫存",
+        "tables": [
+          "onHandQty"
+        ],
+        "columns": "",
+        "aliases": ""
+      },
+      {
+        "term": "商品快照",
+        "tables": [
+          "snapshot"
+        ],
+        "columns": "",
+        "aliases": ""
+      },
+      {
+        "term": "應付總額",
+        "tables": [
+          "totalAmount"
+        ],
+        "columns": "",
+        "aliases": ""
+      },
+      {
+        "term": "稅金",
+        "tables": [
+          "taxAmount"
+        ],
+        "columns": "",
+        "aliases": ""
+      },
+      {
+        "term": "低庫存水位",
+        "tables": [
+          "lowStockThreshold"
+        ],
+        "columns": "",
+        "aliases": ""
+      },
+      {
+        "term": "庫存預留",
+        "tables": [],
+        "columns": "",
+        "aliases": ""
+      },
+      {
+        "term": "折扣疊加",
+        "tables": [],
+        "columns": "",
+        "aliases": ""
+      },
+      {
+        "term": "稅基",
+        "tables": [],
+        "columns": "",
+        "aliases": ""
+      },
+      {
+        "term": "退貨期限",
+        "tables": [],
+        "columns": "",
+        "aliases": ""
+      }
+    ],
+    "scenario_table_candidates": [
+      {
+        "file": "docs\\ssot\\habdd\\access-boundary.ha.feature",
+        "scenario": "商家只能管理自己的商店資料",
+        "scenario_id": "SCN-AUTH-002",
+        "entities": [
+          "消費者",
+          "訂單"
+        ],
+        "candidate_tables": [
+          "ConsumerProfile",
+          "SalesOrder"
+        ]
+      },
+      {
+        "file": "docs\\ssot\\habdd\\access-boundary.ha.feature",
+        "scenario": "消費者只能查看自己的訂單",
+        "scenario_id": "SCN-AUTH-003",
+        "entities": [
+          "平台管理員",
+          "商家"
+        ],
+        "candidate_tables": [
+          "Merchant"
+        ]
+      },
+      {
+        "file": "docs\\ssot\\habdd\\access-boundary.ha.feature",
+        "scenario": "平台管理員管理平台層級資料",
+        "scenario_id": "",
+        "entities": [
+          "平台管理員",
+          "商家"
+        ],
+        "candidate_tables": [
+          "Merchant"
+        ]
+      },
+      {
+        "file": "docs\\ssot\\habdd\\checkout-payment.ha.feature",
+        "scenario": "以必要資訊提交訂單",
+        "scenario_id": "SCN-CHECKOUT-002",
+        "entities": [
+          "訂單",
+          "付款"
+        ],
+        "candidate_tables": [
+          "Payment",
+          "SalesOrder"
+        ]
+      },
+      {
+        "file": "docs\\ssot\\habdd\\checkout-payment.ha.feature",
+        "scenario": "使用支援的付款方式完成付款",
+        "scenario_id": "SCN-CHECKOUT-003",
+        "entities": [
+          "訂單",
+          "優惠",
+          "運費",
+          "稅金"
+        ],
+        "candidate_tables": [
+          "SalesOrder"
+        ]
+      },
+      {
+        "file": "docs\\ssot\\habdd\\checkout-payment.ha.feature",
+        "scenario": "顯示可追溯的訂單金額",
+        "scenario_id": "SCN-CHECKOUT-004",
+        "entities": [
+          "訂單",
+          "優惠"
+        ],
+        "candidate_tables": [
+          "SalesOrder"
+        ]
+      },
+      {
+        "file": "docs\\ssot\\habdd\\checkout-payment.ha.feature",
+        "scenario": "優惠不符合資格時維持原訂單金額",
+        "scenario_id": "SCN-CHECKOUT-005",
+        "entities": [
+          "訂單",
+          "稅金"
+        ],
+        "candidate_tables": [
+          "SalesOrder"
+        ]
+      },
+      {
+        "file": "docs\\ssot\\habdd\\checkout-payment.ha.feature",
+        "scenario": "稅基規則已依釐清決策裁決",
+        "scenario_id": "SCN-CHECKOUT-006",
+        "entities": [
+          "訂單",
+          "稅金",
+          "優惠",
+          "運費"
+        ],
+        "candidate_tables": [
+          "SalesOrder"
+        ]
+      },
+      {
+        "file": "docs\\ssot\\habdd\\checkout-payment.ha.feature",
+        "scenario": "依決策計算 5% 營業稅",
+        "scenario_id": "",
+        "entities": [
+          "訂單",
+          "稅金",
+          "優惠",
+          "運費"
+        ],
+        "candidate_tables": [
+          "SalesOrder"
+        ]
+      },
+      {
+        "file": "docs\\ssot\\habdd\\inventory-control.ha.feature",
+        "scenario": "設定 SKU 庫存與補貨水位",
+        "scenario_id": "SCN-INV-002",
+        "entities": [
+          "SKU",
+          "庫存異動",
+          "訂單"
+        ],
+        "candidate_tables": [
+          "InventoryMovement",
+          "ProductSku",
+          "SalesOrder"
+        ]
+      },
+      {
+        "file": "docs\\ssot\\habdd\\inventory-control.ha.feature",
+        "scenario": "訂單成立後扣減庫存",
+        "scenario_id": "SCN-INV-003",
+        "entities": [
+          "SKU",
+          "庫存水位"
+        ],
+        "candidate_tables": [
+          "ProductSku"
+        ]
+      },
+      {
+        "file": "docs\\ssot\\habdd\\inventory-control.ha.feature",
+        "scenario": "庫存低於水位時提醒商家",
+        "scenario_id": "SCN-INV-004",
+        "entities": [
+          "SKU",
+          "訂單"
+        ],
+        "candidate_tables": [
+          "ProductSku",
+          "SalesOrder"
+        ]
+      },
+      {
+        "file": "docs\\ssot\\habdd\\inventory-control.ha.feature",
+        "scenario": "庫存不足時不建立可履約訂單",
+        "scenario_id": "SCN-INV-005",
+        "entities": [
+          "SKU",
+          "訂單"
+        ],
+        "candidate_tables": [
+          "ProductSku",
+          "SalesOrder"
+        ]
+      },
+      {
+        "file": "docs\\ssot\\habdd\\inventory-control.ha.feature",
+        "scenario": "庫存預留規則已依釐清決策裁決",
+        "scenario_id": "SCN-INV-006",
+        "entities": [
+          "SKU",
+          "庫存預留",
+          "訂單"
+        ],
+        "candidate_tables": [
+          "ProductSku",
+          "SalesOrder"
+        ]
+      },
+      {
+        "file": "docs\\ssot\\habdd\\inventory-control.ha.feature",
+        "scenario": "依決策建立庫存預留並於付款完成扣減",
+        "scenario_id": "",
+        "entities": [
+          "SKU",
+          "庫存預留",
+          "訂單"
+        ],
+        "candidate_tables": [
+          "ProductSku",
+          "SalesOrder"
+        ]
+      },
+      {
+        "file": "docs\\ssot\\habdd\\membership-loyalty.ha.feature",
+        "scenario": "使用 Email 註冊會員",
+        "scenario_id": "SCN-MEMBER-002",
+        "entities": [
+          "會員",
+          "點數",
+          "訂單"
+        ],
+        "candidate_tables": [
+          "ConsumerProfile",
+          "SalesOrder"
+        ]
+      },
+      {
+        "file": "docs\\ssot\\habdd\\membership-loyalty.ha.feature",
+        "scenario": "依消費金額累積點數",
+        "scenario_id": "SCN-MEMBER-003",
+        "entities": [
+          "會員",
+          "點數",
+          "訂單"
+        ],
+        "candidate_tables": [
+          "ConsumerProfile",
+          "SalesOrder"
+        ]
+      },
+      {
+        "file": "docs\\ssot\\habdd\\membership-loyalty.ha.feature",
+        "scenario": "使用點數折抵訂單",
+        "scenario_id": "SCN-MEMBER-004",
+        "entities": [
+          "會員",
+          "會員等級",
+          "優惠券"
+        ],
+        "candidate_tables": [
+          "ConsumerProfile",
+          "Coupon",
+          "MemberLevel"
+        ]
+      },
+      {
+        "file": "docs\\ssot\\habdd\\membership-loyalty.ha.feature",
+        "scenario": "會員等級符合專屬優惠資格",
+        "scenario_id": "SCN-MEMBER-005",
+        "entities": [
+          "會員",
+          "會員等級",
+          "點數"
+        ],
+        "candidate_tables": [
+          "ConsumerProfile",
+          "MemberLevel"
+        ]
+      },
+      {
+        "file": "docs\\ssot\\habdd\\membership-loyalty.ha.feature",
+        "scenario": "會員分級與點數生命週期已依釐清決策裁決",
+        "scenario_id": "SCN-MEMBER-006",
+        "entities": [
+          "會員",
+          "會員等級",
+          "點數"
+        ],
+        "candidate_tables": [
+          "ConsumerProfile",
+          "MemberLevel"
+        ]
+      },
+      {
+        "file": "docs\\ssot\\habdd\\membership-loyalty.ha.feature",
+        "scenario": "MVP 啟用點數並手動維護會員分級",
+        "scenario_id": "",
+        "entities": [
+          "會員",
+          "會員等級",
+          "點數"
+        ],
+        "candidate_tables": [
+          "ConsumerProfile",
+          "MemberLevel"
+        ]
+      },
+      {
+        "file": "docs\\ssot\\habdd\\merchant-reporting.ha.feature",
+        "scenario": "查看指定期間的銷售概況",
+        "scenario_id": "SCN-REPORT-002",
+        "entities": [
+          "報表",
+          "商品"
+        ],
+        "candidate_tables": [
+          "Product"
+        ]
+      },
+      {
+        "file": "docs\\ssot\\habdd\\merchant-reporting.ha.feature",
+        "scenario": "查看商品銷售排行",
+        "scenario_id": "SCN-REPORT-003",
+        "entities": [
+          "報表",
+          "商家"
+        ],
+        "candidate_tables": [
+          "Merchant"
+        ]
+      },
+      {
+        "file": "docs\\ssot\\habdd\\merchant-reporting.ha.feature",
+        "scenario": "無銷售資料時呈現空報表",
+        "scenario_id": "",
+        "entities": [
+          "報表",
+          "商家"
+        ],
+        "candidate_tables": [
+          "Merchant"
+        ]
+      },
+      {
+        "file": "docs\\ssot\\habdd\\order-fulfillment.ha.feature",
+        "scenario": "依狀態查看待處理訂單",
+        "scenario_id": "SCN-ORDER-002",
+        "entities": [
+          "訂單",
+          "出貨",
+          "物流"
+        ],
+        "candidate_tables": [
+          "SalesOrder",
+          "Shipment"
+        ]
+      },
+      {
+        "file": "docs\\ssot\\habdd\\order-fulfillment.ha.feature",
+        "scenario": "標記訂單出貨",
+        "scenario_id": "SCN-ORDER-003",
+        "entities": [
+          "訂單",
+          "物流"
+        ],
+        "candidate_tables": [
+          "SalesOrder",
+          "Shipment"
+        ]
+      },
+      {
+        "file": "docs\\ssot\\habdd\\order-fulfillment.ha.feature",
+        "scenario": "消費者追蹤配送進度",
+        "scenario_id": "SCN-ORDER-004",
+        "entities": [
+          "訂單",
+          "通知"
+        ],
+        "candidate_tables": [
+          "Notification",
+          "SalesOrder"
+        ]
+      },
+      {
+        "file": "docs\\ssot\\habdd\\order-fulfillment.ha.feature",
+        "scenario": "訂單狀態變更時通知消費者",
+        "scenario_id": "SCN-ORDER-005",
+        "entities": [
+          "訂單",
+          "退款",
+          "庫存"
+        ],
+        "candidate_tables": [
+          "InventoryItem",
+          "Refund",
+          "SalesOrder"
+        ]
+      },
+      {
+        "file": "docs\\ssot\\habdd\\order-fulfillment.ha.feature",
+        "scenario": "付款逾時與取消規則已依釐清決策裁決",
+        "scenario_id": "SCN-ORDER-006",
+        "entities": [
+          "訂單",
+          "退款",
+          "庫存"
+        ],
+        "candidate_tables": [
+          "InventoryItem",
+          "Refund",
+          "SalesOrder"
+        ]
+      },
+      {
+        "file": "docs\\ssot\\habdd\\order-fulfillment.ha.feature",
+        "scenario": "依決策處理付款逾時與出貨前取消",
+        "scenario_id": "",
+        "entities": [
+          "訂單",
+          "退款",
+          "庫存"
+        ],
+        "candidate_tables": [
+          "InventoryItem",
+          "Refund",
+          "SalesOrder"
+        ]
+      },
+      {
+        "file": "docs\\ssot\\habdd\\product-catalog.ha.feature",
+        "scenario": "建立多規格商品",
+        "scenario_id": "SCN-CATALOG-002",
+        "entities": [
+          "商品",
+          "SKU"
+        ],
+        "candidate_tables": [
+          "Product",
+          "ProductSku"
+        ]
+      },
+      {
+        "file": "docs\\ssot\\habdd\\product-catalog.ha.feature",
+        "scenario": "上架已完成設定的商品",
+        "scenario_id": "SCN-CATALOG-003",
+        "entities": [
+          "商品",
+          "SKU"
+        ],
+        "candidate_tables": [
+          "Product",
+          "ProductSku"
+        ]
+      },
+      {
+        "file": "docs\\ssot\\habdd\\product-catalog.ha.feature",
+        "scenario": "缺少可銷售規格時維持草稿",
+        "scenario_id": "SCN-CATALOG-004",
+        "entities": [
+          "商品"
+        ],
+        "candidate_tables": [
+          "Product"
+        ]
+      },
+      {
+        "file": "docs\\ssot\\habdd\\product-catalog.ha.feature",
+        "scenario": "下架不再販售的商品",
+        "scenario_id": "",
+        "entities": [
+          "商品"
+        ],
+        "candidate_tables": [
+          "Product"
+        ]
+      },
+      {
+        "file": "docs\\ssot\\habdd\\product-discovery.ha.feature",
+        "scenario": "取得可販售商品資訊",
+        "scenario_id": "SCN-DISC-002",
+        "entities": [
+          "商品",
+          "願望清單"
+        ],
+        "candidate_tables": [
+          "Product",
+          "WishlistItem"
+        ]
+      },
+      {
+        "file": "docs\\ssot\\habdd\\product-discovery.ha.feature",
+        "scenario": "收藏尚未立即購買的商品",
+        "scenario_id": "SCN-DISC-003",
+        "entities": [
+          "購物車",
+          "SKU"
+        ],
+        "candidate_tables": [
+          "Cart",
+          "ProductSku"
+        ]
+      },
+      {
+        "file": "docs\\ssot\\habdd\\product-discovery.ha.feature",
+        "scenario": "保留購物車內容",
+        "scenario_id": "SCN-DISC-004",
+        "entities": [
+          "商品",
+          "SKU"
+        ],
+        "candidate_tables": [
+          "Product",
+          "ProductSku"
+        ]
+      },
+      {
+        "file": "docs\\ssot\\habdd\\product-discovery.ha.feature",
+        "scenario": "商品售完時不可加入購物車",
+        "scenario_id": "",
+        "entities": [
+          "商品",
+          "SKU"
+        ],
+        "candidate_tables": [
+          "Product",
+          "ProductSku"
+        ]
+      },
+      {
+        "file": "docs\\ssot\\habdd\\promotion-coupon.ha.feature",
+        "scenario": "建立有檔期的促銷活動",
+        "scenario_id": "SCN-PROMO-002",
+        "entities": [
+          "優惠券",
+          "會員等級"
+        ],
+        "candidate_tables": [
+          "Coupon",
+          "MemberLevel"
+        ]
+      },
+      {
+        "file": "docs\\ssot\\habdd\\promotion-coupon.ha.feature",
+        "scenario": "建立有限制條件的優惠券",
+        "scenario_id": "SCN-PROMO-003",
+        "entities": [
+          "優惠券",
+          "訂單"
+        ],
+        "candidate_tables": [
+          "Coupon",
+          "SalesOrder"
+        ]
+      },
+      {
+        "file": "docs\\ssot\\habdd\\promotion-coupon.ha.feature",
+        "scenario": "一筆訂單最多使用一張優惠券",
+        "scenario_id": "SCN-PROMO-004",
+        "entities": [
+          "促銷活動",
+          "優惠券",
+          "會員折扣",
+          "點數"
+        ],
+        "candidate_tables": [
+          "Coupon",
+          "Promotion"
+        ]
+      },
+      {
+        "file": "docs\\ssot\\habdd\\promotion-coupon.ha.feature",
+        "scenario": "折扣疊加規則已依釐清決策裁決",
+        "scenario_id": "SCN-PROMO-005",
+        "entities": [
+          "促銷活動",
+          "優惠券",
+          "會員折扣",
+          "點數",
+          "訂單"
+        ],
+        "candidate_tables": [
+          "Coupon",
+          "Promotion",
+          "SalesOrder"
+        ]
+      },
+      {
+        "file": "docs\\ssot\\habdd\\promotion-coupon.ha.feature",
+        "scenario": "依決策計算可疊加折扣",
+        "scenario_id": "",
+        "entities": [
+          "促銷活動",
+          "優惠券",
+          "會員折扣",
+          "點數",
+          "訂單"
+        ],
+        "candidate_tables": [
+          "Coupon",
+          "Promotion",
+          "SalesOrder"
+        ]
+      },
+      {
+        "file": "docs\\ssot\\habdd\\return-refund.ha.feature",
+        "scenario": "消費者申請退貨",
+        "scenario_id": "SCN-RETURN-002",
+        "entities": [
+          "退貨申請",
+          "物流",
+          "退款"
+        ],
+        "candidate_tables": [
+          "Refund",
+          "ReturnRequest",
+          "Shipment"
+        ]
+      },
+      {
+        "file": "docs\\ssot\\habdd\\return-refund.ha.feature",
+        "scenario": "商家核准退貨後安排取件",
+        "scenario_id": "SCN-RETURN-003",
+        "entities": [
+          "退貨申請",
+          "退款",
+          "訂單"
+        ],
+        "candidate_tables": [
+          "Refund",
+          "ReturnRequest",
+          "SalesOrder"
+        ]
+      },
+      {
+        "file": "docs\\ssot\\habdd\\return-refund.ha.feature",
+        "scenario": "退回商品確認後完成退款",
+        "scenario_id": "SCN-RETURN-004",
+        "entities": [
+          "退貨申請",
+          "訂單"
+        ],
+        "candidate_tables": [
+          "ReturnRequest",
+          "SalesOrder"
+        ]
+      },
+      {
+        "file": "docs\\ssot\\habdd\\return-refund.ha.feature",
+        "scenario": "退貨政策已依釐清決策裁決",
+        "scenario_id": "SCN-RETURN-005",
+        "entities": [
+          "退貨申請",
+          "訂單",
+          "退款"
+        ],
+        "candidate_tables": [
+          "Refund",
+          "ReturnRequest",
+          "SalesOrder"
+        ]
+      },
+      {
+        "file": "docs\\ssot\\habdd\\return-refund.ha.feature",
+        "scenario": "依決策審核退貨期限與退款路徑",
+        "scenario_id": "",
+        "entities": [
+          "退貨申請",
+          "訂單",
+          "退款"
+        ],
+        "candidate_tables": [
+          "Refund",
+          "ReturnRequest",
+          "SalesOrder"
+        ]
+      }
+    ],
+    "unmapped_entities": [
+      {
+        "file": "docs\\ssot\\habdd\\access-boundary.ha.feature",
+        "scenario": "消費者只能查看自己的訂單",
+        "entity": "平台管理員"
+      },
+      {
+        "file": "docs\\ssot\\habdd\\access-boundary.ha.feature",
+        "scenario": "平台管理員管理平台層級資料",
+        "entity": "平台管理員"
+      },
+      {
+        "file": "docs\\ssot\\habdd\\checkout-payment.ha.feature",
+        "scenario": "使用支援的付款方式完成付款",
+        "entity": "優惠"
+      },
+      {
+        "file": "docs\\ssot\\habdd\\checkout-payment.ha.feature",
+        "scenario": "使用支援的付款方式完成付款",
+        "entity": "運費"
+      },
+      {
+        "file": "docs\\ssot\\habdd\\checkout-payment.ha.feature",
+        "scenario": "使用支援的付款方式完成付款",
+        "entity": "稅金"
+      },
+      {
+        "file": "docs\\ssot\\habdd\\checkout-payment.ha.feature",
+        "scenario": "顯示可追溯的訂單金額",
+        "entity": "優惠"
+      },
+      {
+        "file": "docs\\ssot\\habdd\\checkout-payment.ha.feature",
+        "scenario": "優惠不符合資格時維持原訂單金額",
+        "entity": "稅金"
+      },
+      {
+        "file": "docs\\ssot\\habdd\\checkout-payment.ha.feature",
+        "scenario": "稅基規則已依釐清決策裁決",
+        "entity": "稅金"
+      },
+      {
+        "file": "docs\\ssot\\habdd\\checkout-payment.ha.feature",
+        "scenario": "稅基規則已依釐清決策裁決",
+        "entity": "優惠"
+      },
+      {
+        "file": "docs\\ssot\\habdd\\checkout-payment.ha.feature",
+        "scenario": "稅基規則已依釐清決策裁決",
+        "entity": "運費"
+      },
+      {
+        "file": "docs\\ssot\\habdd\\checkout-payment.ha.feature",
+        "scenario": "依決策計算 5% 營業稅",
+        "entity": "稅金"
+      },
+      {
+        "file": "docs\\ssot\\habdd\\checkout-payment.ha.feature",
+        "scenario": "依決策計算 5% 營業稅",
+        "entity": "優惠"
+      },
+      {
+        "file": "docs\\ssot\\habdd\\checkout-payment.ha.feature",
+        "scenario": "依決策計算 5% 營業稅",
+        "entity": "運費"
+      },
+      {
+        "file": "docs\\ssot\\habdd\\inventory-control.ha.feature",
+        "scenario": "訂單成立後扣減庫存",
+        "entity": "庫存水位"
+      },
+      {
+        "file": "docs\\ssot\\habdd\\inventory-control.ha.feature",
+        "scenario": "庫存預留規則已依釐清決策裁決",
+        "entity": "庫存預留"
+      },
+      {
+        "file": "docs\\ssot\\habdd\\inventory-control.ha.feature",
+        "scenario": "依決策建立庫存預留並於付款完成扣減",
+        "entity": "庫存預留"
+      },
+      {
+        "file": "docs\\ssot\\habdd\\membership-loyalty.ha.feature",
+        "scenario": "使用 Email 註冊會員",
+        "entity": "點數"
+      },
+      {
+        "file": "docs\\ssot\\habdd\\membership-loyalty.ha.feature",
+        "scenario": "依消費金額累積點數",
+        "entity": "點數"
+      },
+      {
+        "file": "docs\\ssot\\habdd\\membership-loyalty.ha.feature",
+        "scenario": "會員等級符合專屬優惠資格",
+        "entity": "點數"
+      },
+      {
+        "file": "docs\\ssot\\habdd\\membership-loyalty.ha.feature",
+        "scenario": "會員分級與點數生命週期已依釐清決策裁決",
+        "entity": "點數"
+      },
+      {
+        "file": "docs\\ssot\\habdd\\membership-loyalty.ha.feature",
+        "scenario": "MVP 啟用點數並手動維護會員分級",
+        "entity": "點數"
+      },
+      {
+        "file": "docs\\ssot\\habdd\\merchant-reporting.ha.feature",
+        "scenario": "查看指定期間的銷售概況",
+        "entity": "報表"
+      },
+      {
+        "file": "docs\\ssot\\habdd\\merchant-reporting.ha.feature",
+        "scenario": "查看商品銷售排行",
+        "entity": "報表"
+      },
+      {
+        "file": "docs\\ssot\\habdd\\merchant-reporting.ha.feature",
+        "scenario": "無銷售資料時呈現空報表",
+        "entity": "報表"
+      },
+      {
+        "file": "docs\\ssot\\habdd\\promotion-coupon.ha.feature",
+        "scenario": "一筆訂單最多使用一張優惠券",
+        "entity": "會員折扣"
+      },
+      {
+        "file": "docs\\ssot\\habdd\\promotion-coupon.ha.feature",
+        "scenario": "一筆訂單最多使用一張優惠券",
+        "entity": "點數"
+      },
+      {
+        "file": "docs\\ssot\\habdd\\promotion-coupon.ha.feature",
+        "scenario": "折扣疊加規則已依釐清決策裁決",
+        "entity": "會員折扣"
+      },
+      {
+        "file": "docs\\ssot\\habdd\\promotion-coupon.ha.feature",
+        "scenario": "折扣疊加規則已依釐清決策裁決",
+        "entity": "點數"
+      },
+      {
+        "file": "docs\\ssot\\habdd\\promotion-coupon.ha.feature",
+        "scenario": "依決策計算可疊加折扣",
+        "entity": "會員折扣"
+      },
+      {
+        "file": "docs\\ssot\\habdd\\promotion-coupon.ha.feature",
+        "scenario": "依決策計算可疊加折扣",
+        "entity": "點數"
+      }
+    ],
+    "orphan_dbml_tables_after_glossary": [
+      "Account",
+      "Address",
+      "CartItem",
+      "Category",
+      "CouponRedemption",
+      "OrderItem",
+      "PointLedger"
+    ],
+    "l2_traceability_coverage": {
+      "l2_row_count": 42,
+      "low_confidence_rows": 9,
+      "scenario_count": 48,
+      "ratio": 0.875
+    }
+  },
+  "traceability_l2": {
+    "exists": true,
+    "l2_rows": [
+      {
+        "scenario_id": "SCN-CATALOG-001",
+        "feature": "product-catalog.ha.feature",
+        "scenario": "建立多規格商品",
+        "entities": "商品, SKU, 分類",
+        "glossary_terms": "商品, SKU, 分類",
+        "read_tables": "",
+        "write_tables": "",
+        "fields": "",
+        "constraints": "",
+        "confidence": "medium",
+        "source": "docs/ssot/habdd/product-catalog.ha.feature"
+      },
+      {
+        "scenario_id": "SCN-CATALOG-002",
+        "feature": "product-catalog.ha.feature",
+        "scenario": "上架已完成設定的商品",
+        "entities": "商品, SKU",
+        "glossary_terms": "商品, SKU",
+        "read_tables": "",
+        "write_tables": "",
+        "fields": "",
+        "constraints": "",
+        "confidence": "medium",
+        "source": "docs/ssot/habdd/product-catalog.ha.feature"
+      },
+      {
+        "scenario_id": "SCN-CATALOG-003",
+        "feature": "product-catalog.ha.feature",
+        "scenario": "缺少可銷售規格時維持草稿",
+        "entities": "商品, SKU",
+        "glossary_terms": "商品, SKU",
+        "read_tables": "",
+        "write_tables": "",
+        "fields": "",
+        "constraints": "",
+        "confidence": "medium",
+        "source": "docs/ssot/habdd/product-catalog.ha.feature"
+      },
+      {
+        "scenario_id": "SCN-CATALOG-004",
+        "feature": "product-catalog.ha.feature",
+        "scenario": "下架不再販售的商品",
+        "entities": "商品",
+        "glossary_terms": "商品",
+        "read_tables": "",
+        "write_tables": "",
+        "fields": "",
+        "constraints": "",
+        "confidence": "medium",
+        "source": "docs/ssot/habdd/product-catalog.ha.feature"
+      },
+      {
+        "scenario_id": "SCN-DISC-001",
+        "feature": "product-discovery.ha.feature",
+        "scenario": "取得可販售商品資訊",
+        "entities": "商品, 分類, SKU",
+        "glossary_terms": "商品, 分類, SKU",
+        "read_tables": "",
+        "write_tables": "",
+        "fields": "",
+        "constraints": "",
+        "confidence": "medium",
+        "source": "docs/ssot/habdd/product-discovery.ha.feature"
+      },
+      {
+        "scenario_id": "SCN-DISC-002",
+        "feature": "product-discovery.ha.feature",
+        "scenario": "收藏尚未立即購買的商品",
+        "entities": "商品, 願望清單",
+        "glossary_terms": "商品, 願望清單",
+        "read_tables": "",
+        "write_tables": "",
+        "fields": "",
+        "constraints": "",
+        "confidence": "low",
+        "source": "docs/ssot/habdd/product-discovery.ha.feature"
+      },
+      {
+        "scenario_id": "SCN-DISC-003",
+        "feature": "product-discovery.ha.feature",
+        "scenario": "保留購物車內容",
+        "entities": "購物車, SKU",
+        "glossary_terms": "購物車, SKU",
+        "read_tables": "",
+        "write_tables": "",
+        "fields": "",
+        "constraints": "",
+        "confidence": "medium",
+        "source": "docs/ssot/habdd/product-discovery.ha.feature"
+      },
+      {
+        "scenario_id": "SCN-DISC-004",
+        "feature": "product-discovery.ha.feature",
+        "scenario": "商品售完時不可加入購物車",
+        "entities": "商品, SKU",
+        "glossary_terms": "商品, SKU",
+        "read_tables": "",
+        "write_tables": "",
+        "fields": "",
+        "constraints": "",
+        "confidence": "medium",
+        "source": "docs/ssot/habdd/product-discovery.ha.feature"
+      },
+      {
+        "scenario_id": "SCN-INV-001",
+        "feature": "inventory-control.ha.feature",
+        "scenario": "設定 SKU 庫存與補貨水位",
+        "entities": "SKU, 庫存水位",
+        "glossary_terms": "SKU, 庫存水位",
+        "read_tables": "",
+        "write_tables": "",
+        "fields": "",
+        "constraints": "",
+        "confidence": "medium",
+        "source": "docs/ssot/habdd/inventory-control.ha.feature"
+      },
+      {
+        "scenario_id": "SCN-INV-002",
+        "feature": "inventory-control.ha.feature",
+        "scenario": "訂單成立後扣減庫存",
+        "entities": "SKU, 庫存異動, 訂單",
+        "glossary_terms": "SKU, 庫存異動, 訂單",
+        "read_tables": "",
+        "write_tables": "",
+        "fields": "",
+        "constraints": "CiC GAP #001",
+        "confidence": "low",
+        "source": "docs/ssot/habdd/inventory-control.ha.feature"
+      },
+      {
+        "scenario_id": "SCN-INV-003",
+        "feature": "inventory-control.ha.feature",
+        "scenario": "庫存低於水位時提醒商家",
+        "entities": "SKU, 庫存水位",
+        "glossary_terms": "SKU, 庫存水位",
+        "read_tables": "",
+        "write_tables": "",
+        "fields": "",
+        "constraints": "",
+        "confidence": "medium",
+        "source": "docs/ssot/habdd/inventory-control.ha.feature"
+      },
+      {
+        "scenario_id": "SCN-INV-004",
+        "feature": "inventory-control.ha.feature",
+        "scenario": "庫存不足時不建立可履約訂單",
+        "entities": "SKU, 訂單",
+        "glossary_terms": "SKU, 訂單",
+        "read_tables": "",
+        "write_tables": "",
+        "fields": "",
+        "constraints": "",
+        "confidence": "medium",
+        "source": "docs/ssot/habdd/inventory-control.ha.feature"
+      },
+      {
+        "scenario_id": "SCN-INV-005",
+        "feature": "inventory-control.ha.feature",
+        "scenario": "庫存預留規則已裁決",
+        "entities": "SKU, 訂單",
+        "glossary_terms": "SKU, 訂單",
+        "read_tables": "",
+        "write_tables": "",
+        "fields": "",
+        "constraints": "DEC-CLR-001",
+        "confidence": "medium",
+        "source": "docs/ssot/habdd/inventory-control.ha.feature"
+      },
+      {
+        "scenario_id": "SCN-CHECKOUT-001",
+        "feature": "checkout-payment.ha.feature",
+        "scenario": "以必要資訊提交訂單",
+        "entities": "購物車, 訂單, 收件資訊",
+        "glossary_terms": "購物車, 訂單, 收件資訊",
+        "read_tables": "",
+        "write_tables": "",
+        "fields": "",
+        "constraints": "",
+        "confidence": "medium",
+        "source": "docs/ssot/habdd/checkout-payment.ha.feature"
+      },
+      {
+        "scenario_id": "SCN-CHECKOUT-002",
+        "feature": "checkout-payment.ha.feature",
+        "scenario": "使用支援的付款方式完成付款",
+        "entities": "訂單, 付款",
+        "glossary_terms": "訂單, 付款",
+        "read_tables": "",
+        "write_tables": "",
+        "fields": "",
+        "constraints": "",
+        "confidence": "medium",
+        "source": "docs/ssot/habdd/checkout-payment.ha.feature"
+      },
+      {
+        "scenario_id": "SCN-CHECKOUT-003",
+        "feature": "checkout-payment.ha.feature",
+        "scenario": "顯示可追溯的訂單金額",
+        "entities": "訂單, 優惠, 運費, 稅金",
+        "glossary_terms": "訂單, 優惠, 運費, 稅金",
+        "read_tables": "",
+        "write_tables": "",
+        "fields": "",
+        "constraints": "CiC GAP #005",
+        "confidence": "low",
+        "source": "docs/ssot/habdd/checkout-payment.ha.feature"
+      },
+      {
+        "scenario_id": "SCN-CHECKOUT-004",
+        "feature": "checkout-payment.ha.feature",
+        "scenario": "優惠不符合資格時維持原訂單金額",
+        "entities": "訂單, 優惠",
+        "glossary_terms": "訂單, 優惠",
+        "read_tables": "",
+        "write_tables": "",
+        "fields": "",
+        "constraints": "",
+        "confidence": "medium",
+        "source": "docs/ssot/habdd/checkout-payment.ha.feature"
+      },
+      {
+        "scenario_id": "SCN-CHECKOUT-005",
+        "feature": "checkout-payment.ha.feature",
+        "scenario": "稅基規則已裁決",
+        "entities": "訂單, 稅金",
+        "glossary_terms": "訂單, 稅金",
+        "read_tables": "",
+        "write_tables": "",
+        "fields": "",
+        "constraints": "DEC-CLR-005",
+        "confidence": "medium",
+        "source": "docs/ssot/habdd/checkout-payment.ha.feature"
+      },
+      {
+        "scenario_id": "SCN-ORDER-001",
+        "feature": "order-fulfillment.ha.feature",
+        "scenario": "依狀態查看待處理訂單",
+        "entities": "訂單, 訂單狀態",
+        "glossary_terms": "訂單, 訂單狀態",
+        "read_tables": "",
+        "write_tables": "",
+        "fields": "",
+        "constraints": "",
+        "confidence": "medium",
+        "source": "docs/ssot/habdd/order-fulfillment.ha.feature"
+      },
+      {
+        "scenario_id": "SCN-ORDER-002",
+        "feature": "order-fulfillment.ha.feature",
+        "scenario": "標記訂單出貨",
+        "entities": "訂單, 出貨, 物流",
+        "glossary_terms": "訂單, 出貨, 物流",
+        "read_tables": "",
+        "write_tables": "",
+        "fields": "",
+        "constraints": "",
+        "confidence": "medium",
+        "source": "docs/ssot/habdd/order-fulfillment.ha.feature"
+      },
+      {
+        "scenario_id": "SCN-ORDER-003",
+        "feature": "order-fulfillment.ha.feature",
+        "scenario": "消費者追蹤配送進度",
+        "entities": "訂單, 物流",
+        "glossary_terms": "訂單, 物流",
+        "read_tables": "",
+        "write_tables": "",
+        "fields": "",
+        "constraints": "",
+        "confidence": "medium",
+        "source": "docs/ssot/habdd/order-fulfillment.ha.feature"
+      },
+      {
+        "scenario_id": "SCN-ORDER-004",
+        "feature": "order-fulfillment.ha.feature",
+        "scenario": "訂單狀態變更時通知消費者",
+        "entities": "訂單, 通知",
+        "glossary_terms": "訂單, 通知",
+        "read_tables": "",
+        "write_tables": "",
+        "fields": "",
+        "constraints": "",
+        "confidence": "medium",
+        "source": "docs/ssot/habdd/order-fulfillment.ha.feature"
+      },
+      {
+        "scenario_id": "SCN-ORDER-005",
+        "feature": "order-fulfillment.ha.feature",
+        "scenario": "付款逾時與取消規則已裁決",
+        "entities": "訂單, 退款, 庫存",
+        "glossary_terms": "訂單, 退款, 庫存",
+        "read_tables": "",
+        "write_tables": "",
+        "fields": "",
+        "constraints": "DEC-CLR-004",
+        "confidence": "medium",
+        "source": "docs/ssot/habdd/order-fulfillment.ha.feature"
+      },
+      {
+        "scenario_id": "SCN-MEMBER-001",
+        "feature": "membership-loyalty.ha.feature",
+        "scenario": "使用 Email 註冊會員",
+        "entities": "會員, Email",
+        "glossary_terms": "會員, Email",
+        "read_tables": "",
+        "write_tables": "",
+        "fields": "",
+        "constraints": "",
+        "confidence": "medium",
+        "source": "docs/ssot/habdd/membership-loyalty.ha.feature"
+      },
+      {
+        "scenario_id": "SCN-MEMBER-002",
+        "feature": "membership-loyalty.ha.feature",
+        "scenario": "依消費金額累積點數",
+        "entities": "會員, 點數, 訂單",
+        "glossary_terms": "會員, 點數, 訂單",
+        "read_tables": "",
+        "write_tables": "",
+        "fields": "",
+        "constraints": "CiC GAP #003",
+        "confidence": "low",
+        "source": "docs/ssot/habdd/membership-loyalty.ha.feature"
+      },
+      {
+        "scenario_id": "SCN-MEMBER-003",
+        "feature": "membership-loyalty.ha.feature",
+        "scenario": "使用點數折抵訂單",
+        "entities": "會員, 點數, 訂單",
+        "glossary_terms": "會員, 點數, 訂單",
+        "read_tables": "",
+        "write_tables": "",
+        "fields": "",
+        "constraints": "CiC GAP #003",
+        "confidence": "low",
+        "source": "docs/ssot/habdd/membership-loyalty.ha.feature"
+      },
+      {
+        "scenario_id": "SCN-MEMBER-004",
+        "feature": "membership-loyalty.ha.feature",
+        "scenario": "會員等級符合專屬優惠資格",
+        "entities": "會員, 會員等級, 優惠券",
+        "glossary_terms": "會員, 會員等級, 優惠券",
+        "read_tables": "",
+        "write_tables": "",
+        "fields": "",
+        "constraints": "CiC GAP #003",
+        "confidence": "low",
+        "source": "docs/ssot/habdd/membership-loyalty.ha.feature"
+      },
+      {
+        "scenario_id": "SCN-MEMBER-005",
+        "feature": "membership-loyalty.ha.feature",
+        "scenario": "會員分級與點數生命週期已裁決",
+        "entities": "會員, 會員等級, 點數",
+        "glossary_terms": "會員, 會員等級, 點數",
+        "read_tables": "",
+        "write_tables": "",
+        "fields": "",
+        "constraints": "DEC-CLR-003",
+        "confidence": "medium",
+        "source": "docs/ssot/habdd/membership-loyalty.ha.feature"
+      },
+      {
+        "scenario_id": "SCN-PROMO-001",
+        "feature": "promotion-coupon.ha.feature",
+        "scenario": "建立有檔期的促銷活動",
+        "entities": "促銷活動, 商品, 分類",
+        "glossary_terms": "促銷活動, 商品, 分類",
+        "read_tables": "",
+        "write_tables": "",
+        "fields": "",
+        "constraints": "",
+        "confidence": "medium",
+        "source": "docs/ssot/habdd/promotion-coupon.ha.feature"
+      },
+      {
+        "scenario_id": "SCN-PROMO-002",
+        "feature": "promotion-coupon.ha.feature",
+        "scenario": "建立有限制條件的優惠券",
+        "entities": "優惠券, 會員等級",
+        "glossary_terms": "優惠券, 會員等級",
+        "read_tables": "",
+        "write_tables": "",
+        "fields": "",
+        "constraints": "",
+        "confidence": "medium",
+        "source": "docs/ssot/habdd/promotion-coupon.ha.feature"
+      },
+      {
+        "scenario_id": "SCN-PROMO-003",
+        "feature": "promotion-coupon.ha.feature",
+        "scenario": "一筆訂單最多使用一張優惠券",
+        "entities": "優惠券, 訂單",
+        "glossary_terms": "優惠券, 訂單",
+        "read_tables": "",
+        "write_tables": "",
+        "fields": "",
+        "constraints": "",
+        "confidence": "high",
+        "source": "docs/ssot/habdd/promotion-coupon.ha.feature"
+      },
+      {
+        "scenario_id": "SCN-PROMO-004",
+        "feature": "promotion-coupon.ha.feature",
+        "scenario": "折扣疊加規則已裁決",
+        "entities": "促銷活動, 優惠券, 會員折扣, 點數",
+        "glossary_terms": "促銷活動, 優惠券, 會員折扣, 點數",
+        "read_tables": "",
+        "write_tables": "",
+        "fields": "",
+        "constraints": "DEC-CLR-002",
+        "confidence": "medium",
+        "source": "docs/ssot/habdd/promotion-coupon.ha.feature"
+      },
+      {
+        "scenario_id": "SCN-RETURN-001",
+        "feature": "return-refund.ha.feature",
+        "scenario": "消費者申請退貨",
+        "entities": "訂單, 退貨申請",
+        "glossary_terms": "訂單, 退貨申請",
+        "read_tables": "",
+        "write_tables": "",
+        "fields": "",
+        "constraints": "CiC GAP #006",
+        "confidence": "low",
+        "source": "docs/ssot/habdd/return-refund.ha.feature"
+      },
+      {
+        "scenario_id": "SCN-RETURN-002",
+        "feature": "return-refund.ha.feature",
+        "scenario": "商家核准退貨後安排取件",
+        "entities": "退貨申請, 物流, 退款",
+        "glossary_terms": "退貨申請, 物流, 退款",
+        "read_tables": "",
+        "write_tables": "",
+        "fields": "",
+        "constraints": "CiC GAP #006",
+        "confidence": "low",
+        "source": "docs/ssot/habdd/return-refund.ha.feature"
+      },
+      {
+        "scenario_id": "SCN-RETURN-003",
+        "feature": "return-refund.ha.feature",
+        "scenario": "退回商品確認後完成退款",
+        "entities": "退貨申請, 退款, 訂單",
+        "glossary_terms": "退貨申請, 退款, 訂單",
+        "read_tables": "",
+        "write_tables": "",
+        "fields": "",
+        "constraints": "CiC GAP #006",
+        "confidence": "low",
+        "source": "docs/ssot/habdd/return-refund.ha.feature"
+      },
+      {
+        "scenario_id": "SCN-RETURN-004",
+        "feature": "return-refund.ha.feature",
+        "scenario": "退貨政策已裁決",
+        "entities": "退貨申請, 訂單",
+        "glossary_terms": "退貨申請, 訂單",
+        "read_tables": "",
+        "write_tables": "",
+        "fields": "",
+        "constraints": "DEC-CLR-006",
+        "confidence": "medium",
+        "source": "docs/ssot/habdd/return-refund.ha.feature"
+      },
+      {
+        "scenario_id": "SCN-REPORT-001",
+        "feature": "merchant-reporting.ha.feature",
+        "scenario": "查看指定期間的銷售概況",
+        "entities": "報表, 訂單, 銷售摘要",
+        "glossary_terms": "報表, 訂單, 銷售摘要",
+        "read_tables": "",
+        "write_tables": "",
+        "fields": "",
+        "constraints": "",
+        "confidence": "medium",
+        "source": "docs/ssot/habdd/merchant-reporting.ha.feature"
+      },
+      {
+        "scenario_id": "SCN-REPORT-002",
+        "feature": "merchant-reporting.ha.feature",
+        "scenario": "查看商品銷售排行",
+        "entities": "報表, 商品",
+        "glossary_terms": "報表, 商品",
+        "read_tables": "",
+        "write_tables": "",
+        "fields": "",
+        "constraints": "",
+        "confidence": "medium",
+        "source": "docs/ssot/habdd/merchant-reporting.ha.feature"
+      },
+      {
+        "scenario_id": "SCN-REPORT-003",
+        "feature": "merchant-reporting.ha.feature",
+        "scenario": "無銷售資料時呈現空報表",
+        "entities": "報表, 商家",
+        "glossary_terms": "報表, 商家",
+        "read_tables": "",
+        "write_tables": "",
+        "fields": "",
+        "constraints": "",
+        "confidence": "medium",
+        "source": "docs/ssot/habdd/merchant-reporting.ha.feature"
+      },
+      {
+        "scenario_id": "SCN-AUTH-001",
+        "feature": "access-boundary.ha.feature",
+        "scenario": "商家只能管理自己的商店資料",
+        "entities": "商家, 商品, 訂單",
+        "glossary_terms": "商家, 商品, 訂單",
+        "read_tables": "",
+        "write_tables": "",
+        "fields": "",
+        "constraints": "",
+        "confidence": "medium",
+        "source": "docs/ssot/habdd/access-boundary.ha.feature"
+      },
+      {
+        "scenario_id": "SCN-AUTH-002",
+        "feature": "access-boundary.ha.feature",
+        "scenario": "消費者只能查看自己的訂單",
+        "entities": "消費者, 訂單",
+        "glossary_terms": "消費者, 訂單",
+        "read_tables": "",
+        "write_tables": "",
+        "fields": "",
+        "constraints": "",
+        "confidence": "medium",
+        "source": "docs/ssot/habdd/access-boundary.ha.feature"
+      },
+      {
+        "scenario_id": "SCN-AUTH-003",
+        "feature": "access-boundary.ha.feature",
+        "scenario": "平台管理員管理平台層級資料",
+        "entities": "平台管理員, 商家",
+        "glossary_terms": "平台管理員, 商家",
+        "read_tables": "",
+        "write_tables": "",
+        "fields": "",
+        "constraints": "",
+        "confidence": "medium",
+        "source": "docs/ssot/habdd/access-boundary.ha.feature"
+      }
+    ],
+    "l2_row_count": 42,
+    "low_confidence_rows": 9
+  },
+  "trace": {
+    "has_traceability_file": true,
+    "line_count": 148,
+    "possible_links": 1
+  }
+}

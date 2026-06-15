@@ -1,0 +1,51 @@
+api: inventory
+schema_version: "3.3"
+entity: InventoryItem
+title: 庫存管理 API
+description: 支援 SKU 庫存調整、低庫存檢視與訂單庫存預留。
+exposes:
+  standard: [list, read, update]
+  list:
+    filters:
+      - {field: skuId, operators: [eq]}
+      - {field: availableQty, operators: [lte, gte]}
+    sorting: {fields: [updatedAt, availableQty], default: updatedAt:desc}
+    pagination: {style: offset, default_size: 20}
+  operations:
+    - {name: adjust_inventory, method: POST, path: "/{id}/adjust"}
+    - {name: reserve_inventory, method: POST, path: "/{id}/reserve"}
+    - {name: release_reservation, method: POST, path: "/{id}/release-reservation"}
+access:
+  authentication: {type: bearer, required: true}
+  endpoints:
+    list:
+      required_roles: [merchant-owner]
+      required_permissions:
+        - {id: inventory_item_crud_merchant}
+    read:
+      required_roles: [merchant-owner]
+      required_permissions:
+        - {id: inventory_item_crud_merchant}
+    update:
+      required_roles: [merchant-owner]
+      required_permissions:
+        - {id: inventory_item_crud_merchant}
+  operations:
+    adjust_inventory:
+      required_roles: [merchant-owner]
+      required_permissions:
+        - {id: inventory_item_crud_merchant}
+    reserve_inventory:
+      required_roles: [smallbiz-platform]
+      required_permissions:
+        - {id: system_inventory_adjust}
+    release_reservation:
+      required_roles: [smallbiz-platform]
+      required_permissions:
+        - {id: system_inventory_adjust}
+source_evidence:
+  - "docs/ssot/habdd/inventory-control.ha.feature#SCN-INV-005"
+  - "docs/ssot/dbml/constraints.md#CON-CLARIFY-001"
+  - "docs/ssot/dbml/schema.dbml#Table:InventoryItem"
+  - "docs/ssot/haarm/smallbiz.haarm.yaml#permission:inventory_item_crud_merchant"
+

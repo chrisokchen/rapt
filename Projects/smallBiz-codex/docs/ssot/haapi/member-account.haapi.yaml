@@ -1,0 +1,39 @@
+api: member-account
+schema_version: "3.3"
+entity: ConsumerProfile
+title: 會員帳戶 API
+description: 支援消費者註冊、驗證後啟用個人資料與維護會員基本資料。
+exposes:
+  standard: [read, create, update]
+  operations:
+    - {name: register_with_email, method: POST, path: "/register-with-email"}
+    - {name: verify_email, method: POST, path: "/{id}/verify-email"}
+access:
+  authentication: {type: bearer, required: true}
+  endpoints:
+    read:
+      required_roles: [consumer]
+      required_permissions:
+        - {id: consumer_profile_read_own}
+    create:
+      required_roles: [consumer]
+      required_permissions:
+        - {id: consumer_profile_update_own}
+    update:
+      required_roles: [consumer]
+      required_permissions:
+        - {id: consumer_profile_update_own}
+  operations:
+    register_with_email:
+      required_roles: [consumer]
+      required_permissions:
+        - {id: consumer_profile_update_own}
+    verify_email:
+      required_roles: [consumer]
+      required_permissions:
+        - {id: consumer_profile_update_own}
+source_evidence:
+  - "docs/ssot/habdd/membership-loyalty.ha.feature#SCN-MEMBER-001"
+  - "docs/ssot/dbml/schema.dbml#Table:ConsumerProfile"
+  - "docs/ssot/haarm/smallbiz.haarm.yaml#permission:consumer_profile_update_own"
+

@@ -1,0 +1,3809 @@
+﻿openapi: 3.0.3
+info:
+  title: SmallBiz 電商管理 API
+  version: 1.0.0
+  description: SmallBiz B2C 電商管理 API 預覽規格，由 haAPI、haARM 與 annotated DBML 產生。
+servers:
+- url: http://localhost:8080/api/v1
+  description: 本機開發
+security:
+- bearerAuth: []
+tags:
+- name: 購物車與結帳 API
+  description: 支援購物車、結帳金額試算與建立訂單。
+- name: 庫存管理 API
+  description: 支援 SKU 庫存調整、低庫存檢視與訂單庫存預留。
+- name: 會員點數 API
+  description: 支援點數查詢、點數累積與點數折抵；會員分級於 MVP 採手動維護。
+- name: 會員帳戶 API
+  description: 支援消費者註冊、驗證後啟用個人資料與維護會員基本資料。
+- name: 商家報表 API
+  description: 支援商家查看銷售、商品與零銷售期間報表。
+- name: 付款與退款 API
+  description: 支援付款狀態更新、退款查詢與金流服務商回寫。
+- name: 平台管理 API
+  description: 支援平台管理員檢視與維護平台帳戶、商家與全站資料邊界。
+- name: 商品目錄 API
+  description: 支援商家商品、SKU 與公開商品瀏覽的意圖規格。
+- name: 促銷與優惠券 API
+  description: 支援商家促銷、優惠券、會員等級資格與折扣疊加規則。
+- name: 退貨退款 API
+  description: 支援消費者退貨申請、商家審核與原路退款流程。
+- name: 訂單 API
+  description: 支援消費者訂單查詢、商家訂單管理、付款逾時取消與出貨前取消退款。
+paths:
+  /cart-checkout/{id}:
+    get:
+      operationId: readCart
+      summary: 支援購物車、結帳金額試算與建立訂單。
+      tags:
+      - 購物車與結帳 API
+      security:
+      - bearerAuth: []
+      x-required-roles:
+      - consumer
+      x-required-permissions:
+      - cart_crud_own
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Cart'
+        '400':
+          description: 請求參數錯誤
+        '401':
+          description: 未授權
+        '403':
+          description: 權限不足
+        '404':
+          description: 資源不存在
+        '500':
+          description: 伺服器錯誤
+    put:
+      operationId: updateCart
+      summary: 支援購物車、結帳金額試算與建立訂單。
+      tags:
+      - 購物車與結帳 API
+      security:
+      - bearerAuth: []
+      x-required-roles:
+      - consumer
+      x-required-permissions:
+      - cart_crud_own
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CartRequest'
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Cart'
+        '400':
+          description: 請求參數錯誤
+        '401':
+          description: 未授權
+        '403':
+          description: 權限不足
+        '404':
+          description: 資源不存在
+        '500':
+          description: 伺服器錯誤
+  /cart-checkout/{id}/items:
+    post:
+      operationId: cartCheckoutAddCartItem
+      summary: cart Checkout Add Cart Item
+      tags:
+      - 購物車與結帳 API
+      security:
+      - bearerAuth: []
+      x-required-roles:
+      - consumer
+      x-required-permissions:
+      - cart_item_crud_own
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CartRequest'
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Cart'
+        '400':
+          description: 請求參數錯誤
+        '401':
+          description: 未授權
+        '403':
+          description: 權限不足
+        '404':
+          description: 資源不存在
+        '500':
+          description: 伺服器錯誤
+  /cart-checkout/{id}/items/{itemId}:
+    delete:
+      operationId: cartCheckoutRemoveCartItem
+      summary: cart Checkout Remove Cart Item
+      tags:
+      - 購物車與結帳 API
+      security:
+      - bearerAuth: []
+      x-required-roles:
+      - consumer
+      x-required-permissions:
+      - cart_item_crud_own
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: itemId
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: 刪除成功
+        '400':
+          description: 請求參數錯誤
+        '401':
+          description: 未授權
+        '403':
+          description: 權限不足
+        '404':
+          description: 資源不存在
+        '500':
+          description: 伺服器錯誤
+  /cart-checkout/{id}/calculate-checkout:
+    post:
+      operationId: cartCheckoutCalculateCheckout
+      summary: cart Checkout Calculate Checkout
+      tags:
+      - 購物車與結帳 API
+      security:
+      - bearerAuth: []
+      x-required-roles:
+      - consumer
+      x-required-permissions:
+      - cart_crud_own
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CartRequest'
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Cart'
+        '400':
+          description: 請求參數錯誤
+        '401':
+          description: 未授權
+        '403':
+          description: 權限不足
+        '404':
+          description: 資源不存在
+        '500':
+          description: 伺服器錯誤
+  /cart-checkout/{id}/create-order:
+    post:
+      operationId: cartCheckoutCreateOrder
+      summary: cart Checkout Create Order
+      tags:
+      - 購物車與結帳 API
+      security:
+      - bearerAuth: []
+      x-required-roles:
+      - consumer
+      x-required-permissions:
+      - sales_order_create_own
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CartRequest'
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Cart'
+        '400':
+          description: 請求參數錯誤
+        '401':
+          description: 未授權
+        '403':
+          description: 權限不足
+        '404':
+          description: 資源不存在
+        '500':
+          description: 伺服器錯誤
+  /inventory:
+    get:
+      operationId: listInventoryitem
+      summary: 支援 SKU 庫存調整、低庫存檢視與訂單庫存預留。
+      tags:
+      - 庫存管理 API
+      security:
+      - bearerAuth: []
+      x-required-roles:
+      - merchant-owner
+      x-required-permissions:
+      - inventory_item_crud_merchant
+      parameters:
+      - name: skuId
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: availableQty
+        in: query
+        required: false
+        schema:
+          type: string
+      - $ref: '#/components/parameters/OffsetParam'
+      - $ref: '#/components/parameters/LimitParam'
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/InventoryItem'
+                  total:
+                    type: integer
+                  offset:
+                    type: integer
+                  limit:
+                    type: integer
+        '400':
+          description: 請求參數錯誤
+        '401':
+          description: 未授權
+        '403':
+          description: 權限不足
+        '404':
+          description: 資源不存在
+        '500':
+          description: 伺服器錯誤
+  /inventory/{id}:
+    get:
+      operationId: readInventoryitem
+      summary: 支援 SKU 庫存調整、低庫存檢視與訂單庫存預留。
+      tags:
+      - 庫存管理 API
+      security:
+      - bearerAuth: []
+      x-required-roles:
+      - merchant-owner
+      x-required-permissions:
+      - inventory_item_crud_merchant
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InventoryItem'
+        '400':
+          description: 請求參數錯誤
+        '401':
+          description: 未授權
+        '403':
+          description: 權限不足
+        '404':
+          description: 資源不存在
+        '500':
+          description: 伺服器錯誤
+    put:
+      operationId: updateInventoryitem
+      summary: 支援 SKU 庫存調整、低庫存檢視與訂單庫存預留。
+      tags:
+      - 庫存管理 API
+      security:
+      - bearerAuth: []
+      x-required-roles:
+      - merchant-owner
+      x-required-permissions:
+      - inventory_item_crud_merchant
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/InventoryItemRequest'
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InventoryItem'
+        '400':
+          description: 請求參數錯誤
+        '401':
+          description: 未授權
+        '403':
+          description: 權限不足
+        '404':
+          description: 資源不存在
+        '500':
+          description: 伺服器錯誤
+  /inventory/{id}/adjust:
+    post:
+      operationId: inventoryAdjustInventory
+      summary: inventory Adjust Inventory
+      tags:
+      - 庫存管理 API
+      security:
+      - bearerAuth: []
+      x-required-roles:
+      - merchant-owner
+      x-required-permissions:
+      - inventory_item_crud_merchant
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/InventoryItemRequest'
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InventoryItem'
+        '400':
+          description: 請求參數錯誤
+        '401':
+          description: 未授權
+        '403':
+          description: 權限不足
+        '404':
+          description: 資源不存在
+        '500':
+          description: 伺服器錯誤
+  /inventory/{id}/reserve:
+    post:
+      operationId: inventoryReserveInventory
+      summary: inventory Reserve Inventory
+      tags:
+      - 庫存管理 API
+      security:
+      - bearerAuth: []
+      x-required-roles:
+      - smallbiz-platform
+      x-required-permissions:
+      - system_inventory_adjust
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/InventoryItemRequest'
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InventoryItem'
+        '400':
+          description: 請求參數錯誤
+        '401':
+          description: 未授權
+        '403':
+          description: 權限不足
+        '404':
+          description: 資源不存在
+        '500':
+          description: 伺服器錯誤
+  /inventory/{id}/release-reservation:
+    post:
+      operationId: inventoryReleaseReservation
+      summary: inventory Release Reservation
+      tags:
+      - 庫存管理 API
+      security:
+      - bearerAuth: []
+      x-required-roles:
+      - smallbiz-platform
+      x-required-permissions:
+      - system_inventory_adjust
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/InventoryItemRequest'
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InventoryItem'
+        '400':
+          description: 請求參數錯誤
+        '401':
+          description: 未授權
+        '403':
+          description: 權限不足
+        '404':
+          description: 資源不存在
+        '500':
+          description: 伺服器錯誤
+  /loyalty:
+    get:
+      operationId: listPointledger
+      summary: 支援點數查詢、點數累積與點數折抵；會員分級於 MVP 採手動維護。
+      tags:
+      - 會員點數 API
+      security:
+      - bearerAuth: []
+      x-required-roles:
+      - consumer
+      x-required-permissions:
+      - point_ledger_read_own
+      parameters:
+      - name: consumerId
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: pointType
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: occurredAt
+        in: query
+        required: false
+        schema:
+          type: string
+      - $ref: '#/components/parameters/OffsetParam'
+      - $ref: '#/components/parameters/LimitParam'
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/PointLedger'
+                  total:
+                    type: integer
+                  offset:
+                    type: integer
+                  limit:
+                    type: integer
+        '400':
+          description: 請求參數錯誤
+        '401':
+          description: 未授權
+        '403':
+          description: 權限不足
+        '404':
+          description: 資源不存在
+        '500':
+          description: 伺服器錯誤
+    post:
+      operationId: createPointledger
+      summary: 支援點數查詢、點數累積與點數折抵；會員分級於 MVP 採手動維護。
+      tags:
+      - 會員點數 API
+      security:
+      - bearerAuth: []
+      x-required-roles:
+      - smallbiz-platform
+      x-required-permissions:
+      - system_order_process
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PointLedgerRequest'
+      responses:
+        '400':
+          description: 請求參數錯誤
+        '401':
+          description: 未授權
+        '403':
+          description: 權限不足
+        '404':
+          description: 資源不存在
+        '500':
+          description: 伺服器錯誤
+        '201':
+          description: 建立成功
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PointLedger'
+  /loyalty/{id}:
+    get:
+      operationId: readPointledger
+      summary: 支援點數查詢、點數累積與點數折抵；會員分級於 MVP 採手動維護。
+      tags:
+      - 會員點數 API
+      security:
+      - bearerAuth: []
+      x-required-roles:
+      - consumer
+      x-required-permissions:
+      - point_ledger_read_own
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PointLedger'
+        '400':
+          description: 請求參數錯誤
+        '401':
+          description: 未授權
+        '403':
+          description: 權限不足
+        '404':
+          description: 資源不存在
+        '500':
+          description: 伺服器錯誤
+  /loyalty/redeem:
+    post:
+      operationId: loyaltyRedeemPoints
+      summary: loyalty Redeem Points
+      tags:
+      - 會員點數 API
+      security:
+      - bearerAuth: []
+      x-required-roles:
+      - consumer
+      x-required-permissions:
+      - point_ledger_read_own
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PointLedgerRequest'
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PointLedger'
+        '400':
+          description: 請求參數錯誤
+        '401':
+          description: 未授權
+        '403':
+          description: 權限不足
+        '404':
+          description: 資源不存在
+        '500':
+          description: 伺服器錯誤
+  /loyalty/member-level/adjust:
+    post:
+      operationId: loyaltyAdjustMemberLevel
+      summary: loyalty Adjust Member Level
+      tags:
+      - 會員點數 API
+      security:
+      - bearerAuth: []
+      x-required-roles:
+      - platform-admin
+      x-required-permissions:
+      - member_level_admin
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PointLedgerRequest'
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PointLedger'
+        '400':
+          description: 請求參數錯誤
+        '401':
+          description: 未授權
+        '403':
+          description: 權限不足
+        '404':
+          description: 資源不存在
+        '500':
+          description: 伺服器錯誤
+  /member-account/{id}:
+    get:
+      operationId: readConsumerprofile
+      summary: 支援消費者註冊、驗證後啟用個人資料與維護會員基本資料。
+      tags:
+      - 會員帳戶 API
+      security:
+      - bearerAuth: []
+      x-required-roles:
+      - consumer
+      x-required-permissions:
+      - consumer_profile_read_own
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConsumerProfile'
+        '400':
+          description: 請求參數錯誤
+        '401':
+          description: 未授權
+        '403':
+          description: 權限不足
+        '404':
+          description: 資源不存在
+        '500':
+          description: 伺服器錯誤
+    put:
+      operationId: updateConsumerprofile
+      summary: 支援消費者註冊、驗證後啟用個人資料與維護會員基本資料。
+      tags:
+      - 會員帳戶 API
+      security:
+      - bearerAuth: []
+      x-required-roles:
+      - consumer
+      x-required-permissions:
+      - consumer_profile_update_own
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ConsumerProfileRequest'
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConsumerProfile'
+        '400':
+          description: 請求參數錯誤
+        '401':
+          description: 未授權
+        '403':
+          description: 權限不足
+        '404':
+          description: 資源不存在
+        '500':
+          description: 伺服器錯誤
+  /member-account:
+    post:
+      operationId: createConsumerprofile
+      summary: 支援消費者註冊、驗證後啟用個人資料與維護會員基本資料。
+      tags:
+      - 會員帳戶 API
+      security:
+      - bearerAuth: []
+      x-required-roles:
+      - consumer
+      x-required-permissions:
+      - consumer_profile_update_own
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ConsumerProfileRequest'
+      responses:
+        '400':
+          description: 請求參數錯誤
+        '401':
+          description: 未授權
+        '403':
+          description: 權限不足
+        '404':
+          description: 資源不存在
+        '500':
+          description: 伺服器錯誤
+        '201':
+          description: 建立成功
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConsumerProfile'
+  /member-account/register-with-email:
+    post:
+      operationId: memberAccountRegisterWithEmail
+      summary: member Account Register With Email
+      tags:
+      - 會員帳戶 API
+      security:
+      - bearerAuth: []
+      x-required-roles:
+      - consumer
+      x-required-permissions:
+      - consumer_profile_update_own
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ConsumerProfileRequest'
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConsumerProfile'
+        '400':
+          description: 請求參數錯誤
+        '401':
+          description: 未授權
+        '403':
+          description: 權限不足
+        '404':
+          description: 資源不存在
+        '500':
+          description: 伺服器錯誤
+  /member-account/{id}/verify-email:
+    post:
+      operationId: memberAccountVerifyEmail
+      summary: member Account Verify Email
+      tags:
+      - 會員帳戶 API
+      security:
+      - bearerAuth: []
+      x-required-roles:
+      - consumer
+      x-required-permissions:
+      - consumer_profile_update_own
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ConsumerProfileRequest'
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConsumerProfile'
+        '400':
+          description: 請求參數錯誤
+        '401':
+          description: 未授權
+        '403':
+          description: 權限不足
+        '404':
+          description: 資源不存在
+        '500':
+          description: 伺服器錯誤
+  /merchant-report:
+    get:
+      operationId: listMerchantReport
+      summary: 支援商家查看銷售、商品與零銷售期間報表。
+      tags:
+      - 商家報表 API
+      security:
+      - bearerAuth: []
+      x-required-roles:
+      - merchant-owner
+      x-required-permissions:
+      - merchant_report_read
+      parameters:
+      - name: merchantId
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: placedAt
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: orderStatus
+        in: query
+        required: false
+        schema:
+          type: string
+      - $ref: '#/components/parameters/OffsetParam'
+      - $ref: '#/components/parameters/LimitParam'
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/SalesOrder'
+                  total:
+                    type: integer
+                  offset:
+                    type: integer
+                  limit:
+                    type: integer
+        '400':
+          description: 請求參數錯誤
+        '401':
+          description: 未授權
+        '403':
+          description: 權限不足
+        '404':
+          description: 資源不存在
+        '500':
+          description: 伺服器錯誤
+  /merchant-report/sales-summary:
+    get:
+      operationId: merchantReportSalesSummary
+      summary: merchant Report Sales Summary
+      tags:
+      - 商家報表 API
+      security:
+      - bearerAuth: []
+      x-required-roles:
+      - merchant-owner
+      x-required-permissions:
+      - merchant_report_read
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SalesOrder'
+        '400':
+          description: 請求參數錯誤
+        '401':
+          description: 未授權
+        '403':
+          description: 權限不足
+        '404':
+          description: 資源不存在
+        '500':
+          description: 伺服器錯誤
+  /merchant-report/product-performance:
+    get:
+      operationId: merchantReportProductPerformance
+      summary: merchant Report Product Performance
+      tags:
+      - 商家報表 API
+      security:
+      - bearerAuth: []
+      x-required-roles:
+      - merchant-owner
+      x-required-permissions:
+      - merchant_report_read
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SalesOrder'
+        '400':
+          description: 請求參數錯誤
+        '401':
+          description: 未授權
+        '403':
+          description: 權限不足
+        '404':
+          description: 資源不存在
+        '500':
+          description: 伺服器錯誤
+  /payment-refund:
+    get:
+      operationId: listPayment
+      summary: 支援付款狀態更新、退款查詢與金流服務商回寫。
+      tags:
+      - 付款與退款 API
+      security:
+      - bearerAuth: []
+      x-required-roles:
+      - consumer
+      - merchant-owner
+      x-required-permissions:
+      - payment_read_own
+      - refund_read_merchant
+      parameters:
+      - name: orderId
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: paymentStatus
+        in: query
+        required: false
+        schema:
+          type: string
+      - $ref: '#/components/parameters/OffsetParam'
+      - $ref: '#/components/parameters/LimitParam'
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Payment'
+                  total:
+                    type: integer
+                  offset:
+                    type: integer
+                  limit:
+                    type: integer
+        '400':
+          description: 請求參數錯誤
+        '401':
+          description: 未授權
+        '403':
+          description: 權限不足
+        '404':
+          description: 資源不存在
+        '500':
+          description: 伺服器錯誤
+  /payment-refund/{id}:
+    get:
+      operationId: readPayment
+      summary: 支援付款狀態更新、退款查詢與金流服務商回寫。
+      tags:
+      - 付款與退款 API
+      security:
+      - bearerAuth: []
+      x-required-roles:
+      - consumer
+      - merchant-owner
+      x-required-permissions:
+      - payment_read_own
+      - refund_read_merchant
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payment'
+        '400':
+          description: 請求參數錯誤
+        '401':
+          description: 未授權
+        '403':
+          description: 權限不足
+        '404':
+          description: 資源不存在
+        '500':
+          description: 伺服器錯誤
+    put:
+      operationId: updatePayment
+      summary: 支援付款狀態更新、退款查詢與金流服務商回寫。
+      tags:
+      - 付款與退款 API
+      security:
+      - bearerAuth: []
+      x-required-roles:
+      - payment-provider
+      x-required-permissions:
+      - payment_provider_update
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PaymentRequest'
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payment'
+        '400':
+          description: 請求參數錯誤
+        '401':
+          description: 未授權
+        '403':
+          description: 權限不足
+        '404':
+          description: 資源不存在
+        '500':
+          description: 伺服器錯誤
+  /payment-refund/{id}/provider-update:
+    post:
+      operationId: paymentRefundProviderPaymentUpdate
+      summary: payment Refund Provider Payment Update
+      tags:
+      - 付款與退款 API
+      security:
+      - bearerAuth: []
+      x-required-roles:
+      - payment-provider
+      x-required-permissions:
+      - payment_provider_update
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PaymentRequest'
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payment'
+        '400':
+          description: 請求參數錯誤
+        '401':
+          description: 未授權
+        '403':
+          description: 權限不足
+        '404':
+          description: 資源不存在
+        '500':
+          description: 伺服器錯誤
+  /payment-refund/{id}/refund-provider-update:
+    post:
+      operationId: paymentRefundProviderRefundUpdate
+      summary: payment Refund Provider Refund Update
+      tags:
+      - 付款與退款 API
+      security:
+      - bearerAuth: []
+      x-required-roles:
+      - payment-provider
+      x-required-permissions:
+      - refund_provider_update
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PaymentRequest'
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payment'
+        '400':
+          description: 請求參數錯誤
+        '401':
+          description: 未授權
+        '403':
+          description: 權限不足
+        '404':
+          description: 資源不存在
+        '500':
+          description: 伺服器錯誤
+  /platform-admin:
+    get:
+      operationId: listAccount
+      summary: 支援平台管理員檢視與維護平台帳戶、商家與全站資料邊界。
+      tags:
+      - 平台管理 API
+      security:
+      - bearerAuth: []
+      x-required-roles:
+      - platform-admin
+      x-required-permissions:
+      - account_admin
+      parameters:
+      - name: accountType
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: accountStatus
+        in: query
+        required: false
+        schema:
+          type: string
+      - $ref: '#/components/parameters/OffsetParam'
+      - $ref: '#/components/parameters/LimitParam'
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Account'
+                  total:
+                    type: integer
+                  offset:
+                    type: integer
+                  limit:
+                    type: integer
+        '400':
+          description: 請求參數錯誤
+        '401':
+          description: 未授權
+        '403':
+          description: 權限不足
+        '404':
+          description: 資源不存在
+        '500':
+          description: 伺服器錯誤
+  /platform-admin/{id}:
+    get:
+      operationId: readAccount
+      summary: 支援平台管理員檢視與維護平台帳戶、商家與全站資料邊界。
+      tags:
+      - 平台管理 API
+      security:
+      - bearerAuth: []
+      x-required-roles:
+      - platform-admin
+      x-required-permissions:
+      - account_admin
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Account'
+        '400':
+          description: 請求參數錯誤
+        '401':
+          description: 未授權
+        '403':
+          description: 權限不足
+        '404':
+          description: 資源不存在
+        '500':
+          description: 伺服器錯誤
+    put:
+      operationId: updateAccount
+      summary: 支援平台管理員檢視與維護平台帳戶、商家與全站資料邊界。
+      tags:
+      - 平台管理 API
+      security:
+      - bearerAuth: []
+      x-required-roles:
+      - platform-admin
+      x-required-permissions:
+      - account_admin
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AccountRequest'
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Account'
+        '400':
+          description: 請求參數錯誤
+        '401':
+          description: 未授權
+        '403':
+          description: 權限不足
+        '404':
+          description: 資源不存在
+        '500':
+          description: 伺服器錯誤
+  /platform-admin/merchant-boundary:
+    get:
+      operationId: platformAdminReviewMerchantBoundary
+      summary: platform Admin Review Merchant Boundary
+      tags:
+      - 平台管理 API
+      security:
+      - bearerAuth: []
+      x-required-roles:
+      - platform-admin
+      x-required-permissions:
+      - merchant_admin
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Account'
+        '400':
+          description: 請求參數錯誤
+        '401':
+          description: 未授權
+        '403':
+          description: 權限不足
+        '404':
+          description: 資源不存在
+        '500':
+          description: 伺服器錯誤
+  /platform-admin/platform-data:
+    get:
+      operationId: platformAdminReadPlatformData
+      summary: platform Admin Read Platform Data
+      tags:
+      - 平台管理 API
+      security:
+      - bearerAuth: []
+      x-required-roles:
+      - platform-admin
+      x-required-permissions:
+      - platform_data_read_all
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Account'
+        '400':
+          description: 請求參數錯誤
+        '401':
+          description: 未授權
+        '403':
+          description: 權限不足
+        '404':
+          description: 資源不存在
+        '500':
+          description: 伺服器錯誤
+  /product-catalog:
+    get:
+      operationId: listProduct
+      summary: 支援商家商品、SKU 與公開商品瀏覽的意圖規格。
+      tags:
+      - 商品目錄 API
+      security:
+      - bearerAuth: []
+      x-required-roles:
+      - public-shopper
+      - merchant-owner
+      x-required-permissions:
+      - product_read_public
+      - product_crud_merchant
+      parameters:
+      - name: merchantId
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: categoryId
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: productStatus
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: productName
+        in: query
+        required: false
+        schema:
+          type: string
+      - $ref: '#/components/parameters/OffsetParam'
+      - $ref: '#/components/parameters/LimitParam'
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Product'
+                  total:
+                    type: integer
+                  offset:
+                    type: integer
+                  limit:
+                    type: integer
+        '400':
+          description: 請求參數錯誤
+        '401':
+          description: 未授權
+        '403':
+          description: 權限不足
+        '404':
+          description: 資源不存在
+        '500':
+          description: 伺服器錯誤
+    post:
+      operationId: createProduct
+      summary: 支援商家商品、SKU 與公開商品瀏覽的意圖規格。
+      tags:
+      - 商品目錄 API
+      security:
+      - bearerAuth: []
+      x-required-roles:
+      - merchant-owner
+      x-required-permissions:
+      - product_crud_merchant
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProductRequest'
+      responses:
+        '400':
+          description: 請求參數錯誤
+        '401':
+          description: 未授權
+        '403':
+          description: 權限不足
+        '404':
+          description: 資源不存在
+        '500':
+          description: 伺服器錯誤
+        '201':
+          description: 建立成功
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Product'
+  /product-catalog/{id}:
+    get:
+      operationId: readProduct
+      summary: 支援商家商品、SKU 與公開商品瀏覽的意圖規格。
+      tags:
+      - 商品目錄 API
+      security:
+      - bearerAuth: []
+      x-required-roles:
+      - public-shopper
+      - merchant-owner
+      x-required-permissions:
+      - product_read_public
+      - product_crud_merchant
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Product'
+        '400':
+          description: 請求參數錯誤
+        '401':
+          description: 未授權
+        '403':
+          description: 權限不足
+        '404':
+          description: 資源不存在
+        '500':
+          description: 伺服器錯誤
+    put:
+      operationId: updateProduct
+      summary: 支援商家商品、SKU 與公開商品瀏覽的意圖規格。
+      tags:
+      - 商品目錄 API
+      security:
+      - bearerAuth: []
+      x-required-roles:
+      - merchant-owner
+      x-required-permissions:
+      - product_crud_merchant
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProductRequest'
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Product'
+        '400':
+          description: 請求參數錯誤
+        '401':
+          description: 未授權
+        '403':
+          description: 權限不足
+        '404':
+          description: 資源不存在
+        '500':
+          description: 伺服器錯誤
+  /product-catalog/{id}/publish:
+    post:
+      operationId: productCatalogPublishProduct
+      summary: product Catalog Publish Product
+      tags:
+      - 商品目錄 API
+      security:
+      - bearerAuth: []
+      x-required-roles:
+      - merchant-owner
+      x-required-permissions:
+      - product_crud_merchant
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProductRequest'
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Product'
+        '400':
+          description: 請求參數錯誤
+        '401':
+          description: 未授權
+        '403':
+          description: 權限不足
+        '404':
+          description: 資源不存在
+        '500':
+          description: 伺服器錯誤
+  /product-catalog/{id}/deactivate:
+    post:
+      operationId: productCatalogDeactivateProduct
+      summary: product Catalog Deactivate Product
+      tags:
+      - 商品目錄 API
+      security:
+      - bearerAuth: []
+      x-required-roles:
+      - merchant-owner
+      x-required-permissions:
+      - product_crud_merchant
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProductRequest'
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Product'
+        '400':
+          description: 請求參數錯誤
+        '401':
+          description: 未授權
+        '403':
+          description: 權限不足
+        '404':
+          description: 資源不存在
+        '500':
+          description: 伺服器錯誤
+  /promotion-coupon:
+    get:
+      operationId: listPromotion
+      summary: 支援商家促銷、優惠券、會員等級資格與折扣疊加規則。
+      tags:
+      - 促銷與優惠券 API
+      security:
+      - bearerAuth: []
+      x-required-roles:
+      - merchant-owner
+      - platform-marketer
+      x-required-permissions:
+      - promotion_crud_merchant
+      - promotion_read_all
+      parameters:
+      - name: merchantId
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: promotionStatus
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: startsAt
+        in: query
+        required: false
+        schema:
+          type: string
+      - $ref: '#/components/parameters/OffsetParam'
+      - $ref: '#/components/parameters/LimitParam'
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Promotion'
+                  total:
+                    type: integer
+                  offset:
+                    type: integer
+                  limit:
+                    type: integer
+        '400':
+          description: 請求參數錯誤
+        '401':
+          description: 未授權
+        '403':
+          description: 權限不足
+        '404':
+          description: 資源不存在
+        '500':
+          description: 伺服器錯誤
+    post:
+      operationId: createPromotion
+      summary: 支援商家促銷、優惠券、會員等級資格與折扣疊加規則。
+      tags:
+      - 促銷與優惠券 API
+      security:
+      - bearerAuth: []
+      x-required-roles:
+      - merchant-owner
+      x-required-permissions:
+      - promotion_crud_merchant
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PromotionRequest'
+      responses:
+        '400':
+          description: 請求參數錯誤
+        '401':
+          description: 未授權
+        '403':
+          description: 權限不足
+        '404':
+          description: 資源不存在
+        '500':
+          description: 伺服器錯誤
+        '201':
+          description: 建立成功
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Promotion'
+  /promotion-coupon/{id}:
+    get:
+      operationId: readPromotion
+      summary: 支援商家促銷、優惠券、會員等級資格與折扣疊加規則。
+      tags:
+      - 促銷與優惠券 API
+      security:
+      - bearerAuth: []
+      x-required-roles:
+      - merchant-owner
+      - platform-marketer
+      x-required-permissions:
+      - promotion_crud_merchant
+      - promotion_read_all
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Promotion'
+        '400':
+          description: 請求參數錯誤
+        '401':
+          description: 未授權
+        '403':
+          description: 權限不足
+        '404':
+          description: 資源不存在
+        '500':
+          description: 伺服器錯誤
+    put:
+      operationId: updatePromotion
+      summary: 支援商家促銷、優惠券、會員等級資格與折扣疊加規則。
+      tags:
+      - 促銷與優惠券 API
+      security:
+      - bearerAuth: []
+      x-required-roles:
+      - merchant-owner
+      - platform-marketer
+      x-required-permissions:
+      - promotion_crud_merchant
+      - promotion_update_all
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PromotionRequest'
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Promotion'
+        '400':
+          description: 請求參數錯誤
+        '401':
+          description: 未授權
+        '403':
+          description: 權限不足
+        '404':
+          description: 資源不存在
+        '500':
+          description: 伺服器錯誤
+  /promotion-coupon/validate-coupon:
+    post:
+      operationId: promotionCouponValidateCoupon
+      summary: promotion Coupon Validate Coupon
+      tags:
+      - 促銷與優惠券 API
+      security:
+      - bearerAuth: []
+      x-required-roles:
+      - consumer
+      x-required-permissions:
+      - sales_order_create_own
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PromotionRequest'
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Promotion'
+        '400':
+          description: 請求參數錯誤
+        '401':
+          description: 未授權
+        '403':
+          description: 權限不足
+        '404':
+          description: 資源不存在
+        '500':
+          description: 伺服器錯誤
+  /promotion-coupon/calculate-discount-stack:
+    post:
+      operationId: promotionCouponCalculateDiscountStack
+      summary: promotion Coupon Calculate Discount Stack
+      tags:
+      - 促銷與優惠券 API
+      security:
+      - bearerAuth: []
+      x-required-roles:
+      - consumer
+      x-required-permissions:
+      - sales_order_create_own
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PromotionRequest'
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Promotion'
+        '400':
+          description: 請求參數錯誤
+        '401':
+          description: 未授權
+        '403':
+          description: 權限不足
+        '404':
+          description: 資源不存在
+        '500':
+          description: 伺服器錯誤
+  /return-refund:
+    get:
+      operationId: listReturnrequest
+      summary: 支援消費者退貨申請、商家審核與原路退款流程。
+      tags:
+      - 退貨退款 API
+      security:
+      - bearerAuth: []
+      x-required-roles:
+      - consumer
+      - merchant-owner
+      x-required-permissions:
+      - return_request_read_own
+      - return_request_read_merchant
+      parameters:
+      - name: consumerId
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: returnStatus
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: requestedAt
+        in: query
+        required: false
+        schema:
+          type: string
+      - $ref: '#/components/parameters/OffsetParam'
+      - $ref: '#/components/parameters/LimitParam'
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/ReturnRequest'
+                  total:
+                    type: integer
+                  offset:
+                    type: integer
+                  limit:
+                    type: integer
+        '400':
+          description: 請求參數錯誤
+        '401':
+          description: 未授權
+        '403':
+          description: 權限不足
+        '404':
+          description: 資源不存在
+        '500':
+          description: 伺服器錯誤
+    post:
+      operationId: createReturnrequest
+      summary: 支援消費者退貨申請、商家審核與原路退款流程。
+      tags:
+      - 退貨退款 API
+      security:
+      - bearerAuth: []
+      x-required-roles:
+      - consumer
+      x-required-permissions:
+      - return_request_create_own
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ReturnRequestRequest'
+      responses:
+        '400':
+          description: 請求參數錯誤
+        '401':
+          description: 未授權
+        '403':
+          description: 權限不足
+        '404':
+          description: 資源不存在
+        '500':
+          description: 伺服器錯誤
+        '201':
+          description: 建立成功
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReturnRequest'
+  /return-refund/{id}:
+    get:
+      operationId: readReturnrequest
+      summary: 支援消費者退貨申請、商家審核與原路退款流程。
+      tags:
+      - 退貨退款 API
+      security:
+      - bearerAuth: []
+      x-required-roles:
+      - consumer
+      - merchant-owner
+      x-required-permissions:
+      - return_request_read_own
+      - return_request_read_merchant
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReturnRequest'
+        '400':
+          description: 請求參數錯誤
+        '401':
+          description: 未授權
+        '403':
+          description: 權限不足
+        '404':
+          description: 資源不存在
+        '500':
+          description: 伺服器錯誤
+    put:
+      operationId: updateReturnrequest
+      summary: 支援消費者退貨申請、商家審核與原路退款流程。
+      tags:
+      - 退貨退款 API
+      security:
+      - bearerAuth: []
+      x-required-roles:
+      - merchant-owner
+      x-required-permissions:
+      - return_request_update_merchant
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ReturnRequestRequest'
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReturnRequest'
+        '400':
+          description: 請求參數錯誤
+        '401':
+          description: 未授權
+        '403':
+          description: 權限不足
+        '404':
+          description: 資源不存在
+        '500':
+          description: 伺服器錯誤
+  /return-refund/{id}/approve:
+    post:
+      operationId: returnRefundApproveReturn
+      summary: return Refund Approve Return
+      tags:
+      - 退貨退款 API
+      security:
+      - bearerAuth: []
+      x-required-roles:
+      - merchant-owner
+      x-required-permissions:
+      - return_request_update_merchant
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ReturnRequestRequest'
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReturnRequest'
+        '400':
+          description: 請求參數錯誤
+        '401':
+          description: 未授權
+        '403':
+          description: 權限不足
+        '404':
+          description: 資源不存在
+        '500':
+          description: 伺服器錯誤
+  /return-refund/{id}/reject:
+    post:
+      operationId: returnRefundRejectReturn
+      summary: return Refund Reject Return
+      tags:
+      - 退貨退款 API
+      security:
+      - bearerAuth: []
+      x-required-roles:
+      - merchant-owner
+      x-required-permissions:
+      - return_request_update_merchant
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ReturnRequestRequest'
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReturnRequest'
+        '400':
+          description: 請求參數錯誤
+        '401':
+          description: 未授權
+        '403':
+          description: 權限不足
+        '404':
+          description: 資源不存在
+        '500':
+          description: 伺服器錯誤
+  /return-refund/{id}/complete-original-refund:
+    post:
+      operationId: returnRefundCompleteOriginalRefund
+      summary: return Refund Complete Original Refund
+      tags:
+      - 退貨退款 API
+      security:
+      - bearerAuth: []
+      x-required-roles:
+      - payment-provider
+      x-required-permissions:
+      - refund_provider_update
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ReturnRequestRequest'
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReturnRequest'
+        '400':
+          description: 請求參數錯誤
+        '401':
+          description: 未授權
+        '403':
+          description: 權限不足
+        '404':
+          description: 資源不存在
+        '500':
+          description: 伺服器錯誤
+  /sales-order:
+    get:
+      operationId: listSalesorder
+      summary: 支援消費者訂單查詢、商家訂單管理、付款逾時取消與出貨前取消退款。
+      tags:
+      - 訂單 API
+      security:
+      - bearerAuth: []
+      x-required-roles:
+      - consumer
+      - merchant-owner
+      x-required-permissions:
+      - sales_order_read_own
+      - sales_order_read_merchant
+      parameters:
+      - name: merchantId
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: consumerId
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: orderStatus
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: placedAt
+        in: query
+        required: false
+        schema:
+          type: string
+      - $ref: '#/components/parameters/OffsetParam'
+      - $ref: '#/components/parameters/LimitParam'
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/SalesOrder'
+                  total:
+                    type: integer
+                  offset:
+                    type: integer
+                  limit:
+                    type: integer
+        '400':
+          description: 請求參數錯誤
+        '401':
+          description: 未授權
+        '403':
+          description: 權限不足
+        '404':
+          description: 資源不存在
+        '500':
+          description: 伺服器錯誤
+    post:
+      operationId: createSalesorder
+      summary: 支援消費者訂單查詢、商家訂單管理、付款逾時取消與出貨前取消退款。
+      tags:
+      - 訂單 API
+      security:
+      - bearerAuth: []
+      x-required-roles:
+      - consumer
+      x-required-permissions:
+      - sales_order_create_own
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SalesOrderRequest'
+      responses:
+        '400':
+          description: 請求參數錯誤
+        '401':
+          description: 未授權
+        '403':
+          description: 權限不足
+        '404':
+          description: 資源不存在
+        '500':
+          description: 伺服器錯誤
+        '201':
+          description: 建立成功
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SalesOrder'
+  /sales-order/{id}:
+    get:
+      operationId: readSalesorder
+      summary: 支援消費者訂單查詢、商家訂單管理、付款逾時取消與出貨前取消退款。
+      tags:
+      - 訂單 API
+      security:
+      - bearerAuth: []
+      x-required-roles:
+      - consumer
+      - merchant-owner
+      x-required-permissions:
+      - sales_order_read_own
+      - sales_order_read_merchant
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SalesOrder'
+        '400':
+          description: 請求參數錯誤
+        '401':
+          description: 未授權
+        '403':
+          description: 權限不足
+        '404':
+          description: 資源不存在
+        '500':
+          description: 伺服器錯誤
+    put:
+      operationId: updateSalesorder
+      summary: 支援消費者訂單查詢、商家訂單管理、付款逾時取消與出貨前取消退款。
+      tags:
+      - 訂單 API
+      security:
+      - bearerAuth: []
+      x-required-roles:
+      - merchant-owner
+      x-required-permissions:
+      - sales_order_update_merchant
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SalesOrderRequest'
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SalesOrder'
+        '400':
+          description: 請求參數錯誤
+        '401':
+          description: 未授權
+        '403':
+          description: 權限不足
+        '404':
+          description: 資源不存在
+        '500':
+          description: 伺服器錯誤
+  /sales-order/{id}/cancel-unpaid:
+    post:
+      operationId: salesOrderCancelUnpaidOrder
+      summary: sales Order Cancel Unpaid Order
+      tags:
+      - 訂單 API
+      security:
+      - bearerAuth: []
+      x-required-roles:
+      - smallbiz-platform
+      x-required-permissions:
+      - system_order_process
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SalesOrderRequest'
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SalesOrder'
+        '400':
+          description: 請求參數錯誤
+        '401':
+          description: 未授權
+        '403':
+          description: 權限不足
+        '404':
+          description: 資源不存在
+        '500':
+          description: 伺服器錯誤
+  /sales-order/{id}/cancel-paid-before-shipment:
+    post:
+      operationId: salesOrderCancelPaidBeforeShipment
+      summary: sales Order Cancel Paid Before Shipment
+      tags:
+      - 訂單 API
+      security:
+      - bearerAuth: []
+      x-required-roles:
+      - consumer
+      x-required-permissions:
+      - sales_order_read_own
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SalesOrderRequest'
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SalesOrder'
+        '400':
+          description: 請求參數錯誤
+        '401':
+          description: 未授權
+        '403':
+          description: 權限不足
+        '404':
+          description: 資源不存在
+        '500':
+          description: 伺服器錯誤
+  /sales-order/{id}/mark-shipped:
+    post:
+      operationId: salesOrderMarkShipped
+      summary: sales Order Mark Shipped
+      tags:
+      - 訂單 API
+      security:
+      - bearerAuth: []
+      x-required-roles:
+      - merchant-owner
+      x-required-permissions:
+      - shipment_crud_merchant
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SalesOrderRequest'
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SalesOrder'
+        '400':
+          description: 請求參數錯誤
+        '401':
+          description: 未授權
+        '403':
+          description: 權限不足
+        '404':
+          description: 資源不存在
+        '500':
+          description: 伺服器錯誤
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: JWT Bearer Token
+  parameters:
+    OffsetParam:
+      name: offset
+      in: query
+      required: false
+      schema:
+        type: integer
+        default: 0
+        minimum: 0
+      description: 分頁起始位置
+    LimitParam:
+      name: limit
+      in: query
+      required: false
+      schema:
+        type: integer
+        default: 20
+        minimum: 1
+        maximum: 100
+      description: 每頁筆數
+  schemas:
+    Account:
+      type: object
+      description: ID001 帳號主檔
+      properties:
+        accountId:
+          type: string
+          maxLength: 60
+          description: 帳號編號
+        email: &id001
+          type: string
+          maxLength: 120
+          x-sensitive: true
+          description: 電子郵件
+        passwordHash: &id002
+          type: string
+          maxLength: 150
+          x-sensitive: true
+          description: 密碼雜湊
+        accountType: &id003
+          type: string
+          maxLength: 1
+          x-ref-code: AccountType
+          description: 帳號類型
+        accountStatus: &id004
+          type: string
+          maxLength: 1
+          x-ref-code: AccountStatus
+          description: 帳號狀態
+        emailVerifiedAt: &id005
+          type: string
+          format: date-time
+          description: 信箱驗證時間
+        createdAt:
+          type: string
+          format: date-time
+          description: 建立時間
+        updatedAt:
+          type: string
+          format: date-time
+          description: 更新時間
+      required:
+      - accountId
+      - email
+      - passwordHash
+      - accountType
+      - accountStatus
+      - createdAt
+      - updatedAt
+    AccountRequest:
+      type: object
+      description: ID001 帳號主檔 請求體
+      properties:
+        email: *id001
+        passwordHash: *id002
+        accountType: *id003
+        accountStatus: *id004
+        emailVerifiedAt: *id005
+      required:
+      - email
+      - passwordHash
+      - accountType
+      - accountStatus
+    Merchant:
+      type: object
+      description: ID002 商家主檔
+      properties:
+        merchantId:
+          type: string
+          maxLength: 60
+          description: 商家編號
+        ownerAccountId: &id006
+          type: string
+          maxLength: 60
+          description: 負責人帳號
+        merchantName: &id007
+          type: string
+          maxLength: 120
+          description: 商家名稱
+        planStatus: &id008
+          type: string
+          maxLength: 1
+          x-ref-code: MerchantPlanStatus
+          description: 月租狀態
+        createdAt:
+          type: string
+          format: date-time
+          description: 建立時間
+        updatedAt:
+          type: string
+          format: date-time
+          description: 更新時間
+      required:
+      - merchantId
+      - ownerAccountId
+      - merchantName
+      - planStatus
+      - createdAt
+      - updatedAt
+    MerchantRequest:
+      type: object
+      description: ID002 商家主檔 請求體
+      properties:
+        ownerAccountId: *id006
+        merchantName: *id007
+        planStatus: *id008
+      required:
+      - ownerAccountId
+      - merchantName
+      - planStatus
+    ConsumerProfile:
+      type: object
+      description: ID003 消費者會員資料
+      properties:
+        consumerId:
+          type: string
+          maxLength: 60
+          description: 消費者編號
+        accountId: &id009
+          type: string
+          maxLength: 60
+          description: 帳號編號
+        displayName: &id010
+          type: string
+          maxLength: 100
+          description: 顯示名稱
+        phone: &id011
+          type: string
+          maxLength: 30
+          x-sensitive: true
+          description: 聯絡電話
+        memberLevelId: &id012
+          type: string
+          maxLength: 60
+          description: 會員等級
+        createdAt:
+          type: string
+          format: date-time
+          description: 建立時間
+        updatedAt:
+          type: string
+          format: date-time
+          description: 更新時間
+      required:
+      - consumerId
+      - accountId
+      - createdAt
+      - updatedAt
+    ConsumerProfileRequest:
+      type: object
+      description: ID003 消費者會員資料 請求體
+      properties:
+        accountId: *id009
+        displayName: *id010
+        phone: *id011
+        memberLevelId: *id012
+      required:
+      - accountId
+    Address:
+      type: object
+      description: ID004 常用收件地址
+      properties:
+        addressId:
+          type: string
+          maxLength: 60
+          description: 地址編號
+        consumerId: &id013
+          type: string
+          maxLength: 60
+          description: 消費者
+        recipientName: &id014
+          type: string
+          maxLength: 100
+          x-sensitive: true
+          description: 收件人
+        phone: &id015
+          type: string
+          maxLength: 30
+          x-sensitive: true
+          description: 收件電話
+        postalCode: &id016
+          type: string
+          maxLength: 10
+          description: 郵遞區號
+        city: &id017
+          type: string
+          maxLength: 50
+          description: 縣市
+        district: &id018
+          type: string
+          maxLength: 50
+          description: 行政區
+        line1: &id019
+          type: string
+          maxLength: 200
+          x-sensitive: true
+          description: 地址
+        isDefault: &id020
+          type: boolean
+          description: 預設地址
+      required:
+      - addressId
+      - consumerId
+      - recipientName
+      - phone
+      - city
+      - district
+      - line1
+      - isDefault
+    AddressRequest:
+      type: object
+      description: ID004 常用收件地址 請求體
+      properties:
+        consumerId: *id013
+        recipientName: *id014
+        phone: *id015
+        postalCode: *id016
+        city: *id017
+        district: *id018
+        line1: *id019
+        isDefault: *id020
+      required:
+      - consumerId
+      - recipientName
+      - phone
+      - city
+      - district
+      - line1
+      - isDefault
+    Category:
+      type: object
+      description: CAT001 商品分類
+      properties:
+        categoryId:
+          type: string
+          maxLength: 60
+          description: 分類編號
+        merchantId: &id021
+          type: string
+          maxLength: 60
+          description: 商家
+        parentCategoryId: &id022
+          type: string
+          maxLength: 60
+          description: 上層分類
+        categoryName: &id023
+          type: string
+          maxLength: 100
+          description: 分類名稱
+        sortOrder: &id024
+          type: integer
+          format: int32
+          description: 排序
+      required:
+      - categoryId
+      - merchantId
+      - categoryName
+      - sortOrder
+    CategoryRequest:
+      type: object
+      description: CAT001 商品分類 請求體
+      properties:
+        merchantId: *id021
+        parentCategoryId: *id022
+        categoryName: *id023
+        sortOrder: *id024
+      required:
+      - merchantId
+      - categoryName
+      - sortOrder
+    Product:
+      type: object
+      description: CAT002 商品主檔
+      properties:
+        productId:
+          type: string
+          maxLength: 60
+          description: 商品編號
+        merchantId: &id025
+          type: string
+          maxLength: 60
+          description: 商家
+        categoryId: &id026
+          type: string
+          maxLength: 60
+          description: 分類
+        productName: &id027
+          type: string
+          maxLength: 150
+          description: 商品名稱
+        description: &id028
+          type: string
+          maxLength: 1000
+          description: 商品描述
+        brand: &id029
+          type: string
+          maxLength: 100
+          description: 品牌
+        productStatus: &id030
+          type: string
+          maxLength: 1
+          x-ref-code: ProductStatus
+          description: 商品狀態
+        createdAt:
+          type: string
+          format: date-time
+          description: 建立時間
+        updatedAt:
+          type: string
+          format: date-time
+          description: 更新時間
+      required:
+      - productId
+      - merchantId
+      - categoryId
+      - productName
+      - productStatus
+      - createdAt
+      - updatedAt
+    ProductRequest:
+      type: object
+      description: CAT002 商品主檔 請求體
+      properties:
+        merchantId: *id025
+        categoryId: *id026
+        productName: *id027
+        description: *id028
+        brand: *id029
+        productStatus: *id030
+      required:
+      - merchantId
+      - categoryId
+      - productName
+      - productStatus
+    ProductSku:
+      type: object
+      description: CAT003 商品銷售單位
+      properties:
+        skuId:
+          type: string
+          maxLength: 60
+          description: SKU 編號
+        productId: &id031
+          type: string
+          maxLength: 60
+          description: 商品
+        skuCode: &id032
+          type: string
+          maxLength: 60
+          description: SKU 代碼
+        skuName: &id033
+          type: string
+          maxLength: 150
+          description: SKU 名稱
+        salePrice: &id034
+          type: string
+          description: 售價
+        originalPrice: &id035
+          type: string
+          description: 原價
+        skuStatus: &id036
+          type: string
+          maxLength: 1
+          x-ref-code: SkuStatus
+          description: SKU 狀態
+      required:
+      - skuId
+      - productId
+      - skuCode
+      - skuName
+      - salePrice
+      - skuStatus
+    ProductSkuRequest:
+      type: object
+      description: CAT003 商品銷售單位 請求體
+      properties:
+        productId: *id031
+        skuCode: *id032
+        skuName: *id033
+        salePrice: *id034
+        originalPrice: *id035
+        skuStatus: *id036
+      required:
+      - productId
+      - skuCode
+      - skuName
+      - salePrice
+      - skuStatus
+    InventoryItem:
+      type: object
+      description: INV001 SKU 庫存
+      properties:
+        inventoryItemId:
+          type: string
+          maxLength: 60
+          description: 庫存項目編號
+        skuId: &id037
+          type: string
+          maxLength: 60
+          description: SKU
+        onHandQty: &id038
+          type: integer
+          format: int32
+          description: 帳面庫存
+        availableQty: &id039
+          type: integer
+          format: int32
+          description: 可販售庫存
+        lowStockThreshold: &id040
+          type: integer
+          format: int32
+          description: 低庫存水位
+        updatedAt:
+          type: string
+          format: date-time
+          description: 更新時間
+      required:
+      - inventoryItemId
+      - skuId
+      - onHandQty
+      - availableQty
+      - lowStockThreshold
+      - updatedAt
+    InventoryItemRequest:
+      type: object
+      description: INV001 SKU 庫存 請求體
+      properties:
+        skuId: *id037
+        onHandQty: *id038
+        availableQty: *id039
+        lowStockThreshold: *id040
+      required:
+      - skuId
+      - onHandQty
+      - availableQty
+      - lowStockThreshold
+    InventoryMovement:
+      type: object
+      description: INV002 庫存異動
+      properties:
+        movementId:
+          type: string
+          maxLength: 60
+          description: 庫存異動編號
+        inventoryItemId: &id041
+          type: string
+          maxLength: 60
+          description: 庫存項目
+        movementType: &id042
+          type: string
+          maxLength: 1
+          x-ref-code: InventoryMovementType
+          description: 異動類型
+        quantity: &id043
+          type: integer
+          format: int32
+          description: 異動數量
+        sourceOrderId: &id044
+          type: string
+          maxLength: 60
+          description: 來源訂單
+        occurredAt: &id045
+          type: string
+          format: date-time
+          description: 發生時間
+      required:
+      - movementId
+      - inventoryItemId
+      - movementType
+      - quantity
+      - occurredAt
+    InventoryMovementRequest:
+      type: object
+      description: INV002 庫存異動 請求體
+      properties:
+        inventoryItemId: *id041
+        movementType: *id042
+        quantity: *id043
+        sourceOrderId: *id044
+        occurredAt: *id045
+      required:
+      - inventoryItemId
+      - movementType
+      - quantity
+      - occurredAt
+    Cart:
+      type: object
+      description: ORD001 購物車
+      properties:
+        cartId:
+          type: string
+          maxLength: 60
+          description: 購物車編號
+        consumerId: &id046
+          type: string
+          maxLength: 60
+          description: 消費者
+        cartStatus: &id047
+          type: string
+          maxLength: 1
+          x-ref-code: CartStatus
+          description: 購物車狀態
+        updatedAt:
+          type: string
+          format: date-time
+          description: 更新時間
+      required:
+      - cartId
+      - consumerId
+      - cartStatus
+      - updatedAt
+    CartRequest:
+      type: object
+      description: ORD001 購物車 請求體
+      properties:
+        consumerId: *id046
+        cartStatus: *id047
+      required:
+      - consumerId
+      - cartStatus
+    CartItem:
+      type: object
+      description: ORD002 購物車項目
+      properties:
+        cartItemId:
+          type: string
+          maxLength: 60
+          description: 購物車項目編號
+        cartId: &id048
+          type: string
+          maxLength: 60
+          description: 購物車
+        skuId: &id049
+          type: string
+          maxLength: 60
+          description: SKU
+        quantity: &id050
+          type: integer
+          format: int32
+          description: 數量
+        addedAt: &id051
+          type: string
+          format: date-time
+          description: 加入時間
+      required:
+      - cartItemId
+      - cartId
+      - skuId
+      - quantity
+      - addedAt
+    CartItemRequest:
+      type: object
+      description: ORD002 購物車項目 請求體
+      properties:
+        cartId: *id048
+        skuId: *id049
+        quantity: *id050
+        addedAt: *id051
+      required:
+      - cartId
+      - skuId
+      - quantity
+      - addedAt
+    WishlistItem:
+      type: object
+      description: CAT004 願望清單項目
+      properties:
+        wishlistItemId:
+          type: string
+          maxLength: 60
+          description: 願望清單項目編號
+        consumerId: &id052
+          type: string
+          maxLength: 60
+          description: 消費者
+        productId: &id053
+          type: string
+          maxLength: 60
+          description: 商品
+        addedAt: &id054
+          type: string
+          format: date-time
+          description: 收藏時間
+      required:
+      - wishlistItemId
+      - consumerId
+      - productId
+      - addedAt
+    WishlistItemRequest:
+      type: object
+      description: CAT004 願望清單項目 請求體
+      properties:
+        consumerId: *id052
+        productId: *id053
+        addedAt: *id054
+      required:
+      - consumerId
+      - productId
+      - addedAt
+    SalesOrder:
+      type: object
+      description: ORD003 訂單主檔
+      properties:
+        orderId:
+          type: string
+          maxLength: 60
+          description: 訂單編號
+        merchantId: &id055
+          type: string
+          maxLength: 60
+          description: 商家
+        consumerId: &id056
+          type: string
+          maxLength: 60
+          description: 消費者
+        orderStatus: &id057
+          type: string
+          maxLength: 1
+          x-ref-code: OrderStatus
+          description: 訂單狀態
+        subtotalAmount: &id058
+          type: string
+          description: 商品小計
+        discountAmount: &id059
+          type: string
+          description: 優惠金額
+        shippingFee: &id060
+          type: string
+          description: 運費
+        taxAmount: &id061
+          type: string
+          description: 稅金
+        totalAmount: &id062
+          type: string
+          description: 應付總額
+        placedAt: &id063
+          type: string
+          format: date-time
+          description: 下單時間
+        paidAt: &id064
+          type: string
+          format: date-time
+          description: 付款時間
+      required:
+      - orderId
+      - merchantId
+      - consumerId
+      - orderStatus
+      - subtotalAmount
+      - discountAmount
+      - shippingFee
+      - taxAmount
+      - totalAmount
+      - placedAt
+    SalesOrderRequest:
+      type: object
+      description: ORD003 訂單主檔 請求體
+      properties:
+        merchantId: *id055
+        consumerId: *id056
+        orderStatus: *id057
+        subtotalAmount: *id058
+        discountAmount: *id059
+        shippingFee: *id060
+        taxAmount: *id061
+        totalAmount: *id062
+        placedAt: *id063
+        paidAt: *id064
+      required:
+      - merchantId
+      - consumerId
+      - orderStatus
+      - subtotalAmount
+      - discountAmount
+      - shippingFee
+      - taxAmount
+      - totalAmount
+      - placedAt
+    OrderItem:
+      type: object
+      description: ORD004 訂單項目
+      properties:
+        orderItemId:
+          type: string
+          maxLength: 60
+          description: 訂單項目編號
+        orderId: &id065
+          type: string
+          maxLength: 60
+          description: 訂單
+        skuId: &id066
+          type: string
+          maxLength: 60
+          description: SKU
+        productNameSnapshot: &id067
+          type: string
+          maxLength: 150
+          description: 商品名稱快照
+        skuCodeSnapshot: &id068
+          type: string
+          maxLength: 60
+          description: SKU 代碼快照
+        unitPriceSnapshot: &id069
+          type: string
+          description: 單價快照
+        quantity: &id070
+          type: integer
+          format: int32
+          description: 數量
+        lineAmount: &id071
+          type: string
+          description: 項目金額
+      required:
+      - orderItemId
+      - orderId
+      - skuId
+      - productNameSnapshot
+      - skuCodeSnapshot
+      - unitPriceSnapshot
+      - quantity
+      - lineAmount
+    OrderItemRequest:
+      type: object
+      description: ORD004 訂單項目 請求體
+      properties:
+        orderId: *id065
+        skuId: *id066
+        productNameSnapshot: *id067
+        skuCodeSnapshot: *id068
+        unitPriceSnapshot: *id069
+        quantity: *id070
+        lineAmount: *id071
+      required:
+      - orderId
+      - skuId
+      - productNameSnapshot
+      - skuCodeSnapshot
+      - unitPriceSnapshot
+      - quantity
+      - lineAmount
+    Payment:
+      type: object
+      description: PAY001 付款紀錄
+      properties:
+        paymentId:
+          type: string
+          maxLength: 60
+          description: 付款編號
+        orderId: &id072
+          type: string
+          maxLength: 60
+          description: 訂單
+        paymentMethod: &id073
+          type: string
+          maxLength: 1
+          x-ref-code: PaymentMethod
+          description: 付款方式
+        paymentStatus: &id074
+          type: string
+          maxLength: 1
+          x-ref-code: PaymentStatus
+          description: 付款狀態
+        amount: &id075
+          type: string
+          description: 付款金額
+        paidAt: &id076
+          type: string
+          format: date-time
+          description: 付款完成時間
+      required:
+      - paymentId
+      - orderId
+      - paymentMethod
+      - paymentStatus
+      - amount
+    PaymentRequest:
+      type: object
+      description: PAY001 付款紀錄 請求體
+      properties:
+        orderId: *id072
+        paymentMethod: *id073
+        paymentStatus: *id074
+        amount: *id075
+        paidAt: *id076
+      required:
+      - orderId
+      - paymentMethod
+      - paymentStatus
+      - amount
+    Shipment:
+      type: object
+      description: LOG001 物流紀錄
+      properties:
+        shipmentId:
+          type: string
+          maxLength: 60
+          description: 物流編號
+        orderId: &id077
+          type: string
+          maxLength: 60
+          description: 訂單
+        trackingNo: &id078
+          type: string
+          maxLength: 80
+          description: 物流單號
+        shipmentStatus: &id079
+          type: string
+          maxLength: 1
+          x-ref-code: ShipmentStatus
+          description: 物流狀態
+        shippedAt: &id080
+          type: string
+          format: date-time
+          description: 出貨時間
+        deliveredAt: &id081
+          type: string
+          format: date-time
+          description: 送達時間
+      required:
+      - shipmentId
+      - orderId
+      - shipmentStatus
+    ShipmentRequest:
+      type: object
+      description: LOG001 物流紀錄 請求體
+      properties:
+        orderId: *id077
+        trackingNo: *id078
+        shipmentStatus: *id079
+        shippedAt: *id080
+        deliveredAt: *id081
+      required:
+      - orderId
+      - shipmentStatus
+    MemberLevel:
+      type: object
+      description: LOY001 會員等級
+      properties:
+        memberLevelId:
+          type: string
+          maxLength: 60
+          description: 會員等級編號
+        levelName: &id082
+          type: string
+          maxLength: 60
+          description: 等級名稱
+        levelRank: &id083
+          type: integer
+          format: int32
+          description: 等級排序
+        discountRate: &id084
+          type: string
+          description: 會員折扣率
+        activeFlag: &id085
+          type: boolean
+          description: 啟用
+      required:
+      - memberLevelId
+      - levelName
+      - levelRank
+      - activeFlag
+    MemberLevelRequest:
+      type: object
+      description: LOY001 會員等級 請求體
+      properties:
+        levelName: *id082
+        levelRank: *id083
+        discountRate: *id084
+        activeFlag: *id085
+      required:
+      - levelName
+      - levelRank
+      - activeFlag
+    PointLedger:
+      type: object
+      description: LOY002 點數流水
+      properties:
+        pointLedgerId:
+          type: string
+          maxLength: 60
+          description: 點數流水編號
+        consumerId: &id086
+          type: string
+          maxLength: 60
+          description: 消費者
+        orderId: &id087
+          type: string
+          maxLength: 60
+          description: 關聯訂單
+        pointType: &id088
+          type: string
+          maxLength: 1
+          x-ref-code: PointType
+          description: 點數類型
+        points: &id089
+          type: integer
+          format: int32
+          description: 點數
+        occurredAt: &id090
+          type: string
+          format: date-time
+          description: 發生時間
+        expiresAt: &id091
+          type: string
+          format: date-time
+          description: 到期時間
+      required:
+      - pointLedgerId
+      - consumerId
+      - pointType
+      - points
+      - occurredAt
+    PointLedgerRequest:
+      type: object
+      description: LOY002 點數流水 請求體
+      properties:
+        consumerId: *id086
+        orderId: *id087
+        pointType: *id088
+        points: *id089
+        occurredAt: *id090
+        expiresAt: *id091
+      required:
+      - consumerId
+      - pointType
+      - points
+      - occurredAt
+    Promotion:
+      type: object
+      description: PRM001 促銷活動
+      properties:
+        promotionId:
+          type: string
+          maxLength: 60
+          description: 促銷活動編號
+        merchantId: &id092
+          type: string
+          maxLength: 60
+          description: 商家
+        promotionName: &id093
+          type: string
+          maxLength: 120
+          description: 活動名稱
+        promotionType: &id094
+          type: string
+          maxLength: 1
+          x-ref-code: PromotionType
+          description: 活動類型
+        startsAt: &id095
+          type: string
+          format: date-time
+          description: 開始時間
+        endsAt: &id096
+          type: string
+          format: date-time
+          description: 結束時間
+        promotionStatus: &id097
+          type: string
+          maxLength: 1
+          x-ref-code: PromotionStatus
+          description: 活動狀態
+      required:
+      - promotionId
+      - merchantId
+      - promotionName
+      - promotionType
+      - startsAt
+      - endsAt
+      - promotionStatus
+    PromotionRequest:
+      type: object
+      description: PRM001 促銷活動 請求體
+      properties:
+        merchantId: *id092
+        promotionName: *id093
+        promotionType: *id094
+        startsAt: *id095
+        endsAt: *id096
+        promotionStatus: *id097
+      required:
+      - merchantId
+      - promotionName
+      - promotionType
+      - startsAt
+      - endsAt
+      - promotionStatus
+    Coupon:
+      type: object
+      description: PRM002 優惠券
+      properties:
+        couponId:
+          type: string
+          maxLength: 60
+          description: 優惠券編號
+        merchantId: &id098
+          type: string
+          maxLength: 60
+          description: 商家
+        couponCode: &id099
+          type: string
+          maxLength: 40
+          description: 優惠券代碼
+        discountType: &id100
+          type: string
+          maxLength: 1
+          x-ref-code: DiscountType
+          description: 折扣類型
+        minimumSpend: &id101
+          type: string
+          description: 最低消費
+        usageLimit: &id102
+          type: integer
+          format: int32
+          description: 使用張數上限
+        memberLevelId: &id103
+          type: string
+          maxLength: 60
+          description: 限定會員等級
+        startsAt: &id104
+          type: string
+          format: date-time
+          description: 開始時間
+        endsAt: &id105
+          type: string
+          format: date-time
+          description: 結束時間
+        couponStatus: &id106
+          type: string
+          maxLength: 1
+          x-ref-code: CouponStatus
+          description: 優惠券狀態
+      required:
+      - couponId
+      - merchantId
+      - couponCode
+      - discountType
+      - minimumSpend
+      - startsAt
+      - endsAt
+      - couponStatus
+    CouponRequest:
+      type: object
+      description: PRM002 優惠券 請求體
+      properties:
+        merchantId: *id098
+        couponCode: *id099
+        discountType: *id100
+        minimumSpend: *id101
+        usageLimit: *id102
+        memberLevelId: *id103
+        startsAt: *id104
+        endsAt: *id105
+        couponStatus: *id106
+      required:
+      - merchantId
+      - couponCode
+      - discountType
+      - minimumSpend
+      - startsAt
+      - endsAt
+      - couponStatus
+    CouponRedemption:
+      type: object
+      description: PRM003 優惠券使用紀錄
+      properties:
+        redemptionId:
+          type: string
+          maxLength: 60
+          description: 優惠券使用編號
+        couponId: &id107
+          type: string
+          maxLength: 60
+          description: 優惠券
+        orderId: &id108
+          type: string
+          maxLength: 60
+          description: 訂單
+        consumerId: &id109
+          type: string
+          maxLength: 60
+          description: 消費者
+        redeemedAt: &id110
+          type: string
+          format: date-time
+          description: 使用時間
+      required:
+      - redemptionId
+      - couponId
+      - orderId
+      - consumerId
+      - redeemedAt
+    CouponRedemptionRequest:
+      type: object
+      description: PRM003 優惠券使用紀錄 請求體
+      properties:
+        couponId: *id107
+        orderId: *id108
+        consumerId: *id109
+        redeemedAt: *id110
+      required:
+      - couponId
+      - orderId
+      - consumerId
+      - redeemedAt
+    ReturnRequest:
+      type: object
+      description: RET001 退貨申請
+      properties:
+        returnRequestId:
+          type: string
+          maxLength: 60
+          description: 退貨申請編號
+        orderId: &id111
+          type: string
+          maxLength: 60
+          description: 訂單
+        consumerId: &id112
+          type: string
+          maxLength: 60
+          description: 消費者
+        returnStatus: &id113
+          type: string
+          maxLength: 1
+          x-ref-code: ReturnStatus
+          description: 退貨狀態
+        reason: &id114
+          type: string
+          maxLength: 500
+          description: 退貨原因
+        requestedAt: &id115
+          type: string
+          format: date-time
+          description: 申請時間
+        reviewedAt: &id116
+          type: string
+          format: date-time
+          description: 審核時間
+      required:
+      - returnRequestId
+      - orderId
+      - consumerId
+      - returnStatus
+      - requestedAt
+    ReturnRequestRequest:
+      type: object
+      description: RET001 退貨申請 請求體
+      properties:
+        orderId: *id111
+        consumerId: *id112
+        returnStatus: *id113
+        reason: *id114
+        requestedAt: *id115
+        reviewedAt: *id116
+      required:
+      - orderId
+      - consumerId
+      - returnStatus
+      - requestedAt
+    Refund:
+      type: object
+      description: RET002 退款紀錄
+      properties:
+        refundId:
+          type: string
+          maxLength: 60
+          description: 退款編號
+        returnRequestId: &id117
+          type: string
+          maxLength: 60
+          description: 退貨申請
+        orderId: &id118
+          type: string
+          maxLength: 60
+          description: 訂單
+        refundStatus: &id119
+          type: string
+          maxLength: 1
+          x-ref-code: RefundStatus
+          description: 退款狀態
+        refundAmount: &id120
+          type: string
+          description: 退款金額
+        refundedAt: &id121
+          type: string
+          format: date-time
+          description: 退款完成時間
+      required:
+      - refundId
+      - returnRequestId
+      - orderId
+      - refundStatus
+      - refundAmount
+    RefundRequest:
+      type: object
+      description: RET002 退款紀錄 請求體
+      properties:
+        returnRequestId: *id117
+        orderId: *id118
+        refundStatus: *id119
+        refundAmount: *id120
+        refundedAt: *id121
+      required:
+      - returnRequestId
+      - orderId
+      - refundStatus
+      - refundAmount
+    Notification:
+      type: object
+      description: NTF001 通知紀錄
+      properties:
+        notificationId:
+          type: string
+          maxLength: 60
+          description: 通知編號
+        accountId: &id122
+          type: string
+          maxLength: 60
+          description: 接收帳號
+        orderId: &id123
+          type: string
+          maxLength: 60
+          description: 關聯訂單
+        notificationType: &id124
+          type: string
+          maxLength: 1
+          x-ref-code: NotificationType
+          description: 通知類型
+        channel: &id125
+          type: string
+          maxLength: 1
+          x-ref-code: NotificationChannel
+          description: 通知通道
+        notificationStatus: &id126
+          type: string
+          maxLength: 1
+          x-ref-code: NotificationStatus
+          description: 通知狀態
+        sentAt: &id127
+          type: string
+          format: date-time
+          description: 送出時間
+      required:
+      - notificationId
+      - accountId
+      - notificationType
+      - channel
+      - notificationStatus
+    NotificationRequest:
+      type: object
+      description: NTF001 通知紀錄 請求體
+      properties:
+        accountId: *id122
+        orderId: *id123
+        notificationType: *id124
+        channel: *id125
+        notificationStatus: *id126
+        sentAt: *id127
+      required:
+      - accountId
+      - notificationType
+      - channel
+      - notificationStatus

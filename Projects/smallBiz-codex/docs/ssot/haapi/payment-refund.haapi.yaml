@@ -1,0 +1,48 @@
+api: payment-refund
+schema_version: "3.3"
+entity: Payment
+title: 付款與退款 API
+description: 支援付款狀態更新、退款查詢與金流服務商回寫。
+exposes:
+  standard: [list, read, update]
+  list:
+    filters:
+      - {field: orderId, operators: [eq]}
+      - {field: paymentStatus, operators: [eq]}
+    sorting: {fields: [paidAt], default: paidAt:desc}
+    pagination: {style: offset, default_size: 20}
+  operations:
+    - {name: provider_payment_update, method: POST, path: "/{id}/provider-update"}
+    - {name: provider_refund_update, method: POST, path: "/{id}/refund-provider-update"}
+access:
+  authentication: {type: bearer, required: true}
+  endpoints:
+    list:
+      required_roles: [consumer, merchant-owner]
+      required_permissions:
+        - {id: payment_read_own}
+        - {id: refund_read_merchant}
+    read:
+      required_roles: [consumer, merchant-owner]
+      required_permissions:
+        - {id: payment_read_own}
+        - {id: refund_read_merchant}
+    update:
+      required_roles: [payment-provider]
+      required_permissions:
+        - {id: payment_provider_update}
+  operations:
+    provider_payment_update:
+      required_roles: [payment-provider]
+      required_permissions:
+        - {id: payment_provider_update}
+    provider_refund_update:
+      required_roles: [payment-provider]
+      required_permissions:
+        - {id: refund_provider_update}
+source_evidence:
+  - "docs/ssot/habdd/checkout-payment.ha.feature"
+  - "docs/ssot/habdd/return-refund.ha.feature"
+  - "docs/ssot/dbml/schema.dbml#Table:Payment"
+  - "docs/ssot/haarm/smallbiz.haarm.yaml#permission:payment_provider_update"
+

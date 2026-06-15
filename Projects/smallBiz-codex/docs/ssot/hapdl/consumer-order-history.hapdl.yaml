@@ -1,0 +1,34 @@
+page: consumer-order-history
+schema_version: "3.3"
+type: list
+entity: SalesOrder
+api: sales-order
+title: 我的訂單
+view:
+  filters:
+    - {field: consumerId, label: 消費者, type: eq}
+    - {field: orderStatus, label: 訂單狀態, type: eq, ref_code: OrderStatus}
+    - {field: placedAt, label: 下單時間, type: range}
+  columns:
+    - {field: orderId, label: 訂單編號, link: true}
+    - {field: orderStatus, label: 狀態, format: badge, ref_code: OrderStatus}
+    - {field: totalAmount, label: 金額, format: currency}
+    - {field: paidAt, label: 付款時間, format: date}
+    - {field: placedAt, label: 下單時間, format: date, sortable: true}
+  actions:
+    standard: [read]
+    custom: [cancel_paid_before_shipment]
+    placement:
+      row: [read, cancel_paid_before_shipment]
+security:
+  permission_refs:
+    view:
+      - {id: sales_order_read_own}
+    update:
+      - {id: sales_order_read_own}
+  datasource_scope: own
+source_evidence:
+  - "docs/ssot/haapi/sales-order.haapi.yaml"
+  - "docs/ssot/habdd/order-fulfillment.ha.feature"
+  - "docs/ssot/dbml/constraints.md#CON-CLARIFY-004"
+

@@ -1,0 +1,17 @@
+project:
+  name: RAscoreTest
+  description: Minimal RAscore fixture
+  language: zh-hant
+  mode: greenfield
+paths:
+  docs_dir: docs/
+  business_discovery_dir: docs/01-discovery/
+  data_model_dir: docs/02-data-model/
+  access_control_dir: docs/03-access-control/
+  high_gherkin_dir: docs/04-features/
+  backend_intent_dir: docs/05-backend-intent/
+  frontend_intent_dir: docs/06-frontend-intent/
+  clarify_dir: .clarify/
+  reports_dir: .raptor/reports/
+  traceability_file: .raptor/traceability.md
+

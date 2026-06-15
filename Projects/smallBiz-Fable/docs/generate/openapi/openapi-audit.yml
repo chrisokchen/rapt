@@ -1,0 +1,42 @@
+audit:
+  id: PREVIEW-20260613-001
+  skill: rapt-openapi
+  generated_at: "2026-06-13T15:24:00+08:00"
+  source_artifacts:
+    - docs/ssot/haapi/ （22 個 *.haapi.yaml）
+    - docs/ssot/dbml/schema.dbml
+    - docs/ssot/haarm/smallBiz.haarm.yaml
+  output_artifact: docs/generate/openapi/openapi.yaml
+  status: ok
+  metrics:
+    haapi_modules: 22
+    dbml_tables: 28
+    haarm_roles: 5
+    haarm_permissions: 74
+    openapi_paths: 56
+    openapi_operations: 83
+    openapi_schemas: 56
+  assumptions:
+    - 使用 haAPI schema_version 3.3 預設 mapping；path 由 exposes + 路徑推導規約確定性產生（base = api，不複數化）。
+    - server url 為預設 http://localhost:8080/api/v1（預覽用，非部署設定）。
+    - bearerAuth 全域套用（haAPI access.authentication type=bearer）。
+  findings:
+    - id: PREVIEW-FIND-001
+      route: NOTE_ONLY
+      can_fix: false
+      artifact: docs/ssot/haapi/merchant-report.haapi.yaml
+      location: exposes.operations.sales_summary / product_ranking
+      summary: 報表 API 以 entity:Order 綁定（讀模型），OpenAPI response schema 採用 Order；實際回傳為聚合結果（營業額/客單價/排行），非 Order 列。預覽僅供結構參考。
+    - id: PREVIEW-FIND-002
+      route: NOTE_ONLY
+      can_fix: false
+      artifact: docs/ssot/haapi/（多個模組）
+      location: exposes.operations.*
+      summary: haAPI 未提供 response example / DTO 細節，OpenAPI 對自訂 operation 使用 generic response（200 + entity schema）。屬意圖層抽象，codegen 階段再細化。
+    - id: PREVIEW-FIND-003
+      route: NOTE_ONLY
+      can_fix: false
+      artifact: docs/ssot/haapi/category.haapi.yaml；brand.haapi.yaml；campaign.haapi.yaml
+      location: access.endpoints.list / read（role-only）
+      summary: 部分讀取/列表端點僅以 required_roles 授權（haARM 未定義對應 read/list permission），OpenAPI security 僅標 role。屬刻意設計（公開或粗粒度讀取），非缺陷。
+  downstream_note: 上述 findings 皆 NOTE_ONLY，不影響 SSoT；若 codegen 需要精確 DTO/response，於 generate 階段補充，不回寫意圖層 SSoT。

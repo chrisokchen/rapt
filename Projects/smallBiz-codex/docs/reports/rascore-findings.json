@@ -1,0 +1,76 @@
+﻿{
+    "findings":  [
+                     {
+                         "severity":  "medium",
+                         "category":  "traceability-gap",
+                         "artifact":  ".raptor/traceability.md",
+                         "location":  "L2 Scenario Data Mapping",
+                         "issue":  "9 個 scenario 的 L2 mapping 仍為 low confidence，業務詞與資料詞對應尚未完全穩定。",
+                         "recommendation":  "補強這 9 個 row 的 read_tables、write_tables、fields 或 constraints，並將 confidence 提升為 medium/high。",
+                         "owner_skill":  "rapt-reconcile",
+                         "recommended_action_type":  "traceability_mapping",
+                         "criterion":  "B5",
+                         "id":  "RA-B5-001"
+                     },
+                     {
+                         "severity":  "medium",
+                         "category":  "cross-spec-gap",
+                         "artifact":  ".raptor/traceability.md",
+                         "location":  "L2 Scenario Data Mapping",
+                         "issue":  "許多舊有 scenario 的 read_tables、write_tables、fields 仍空白，從 scenario 到 DBML 的欄位級可驗證性不足。",
+                         "recommendation":  "針對舊有 medium/low confidence rows 補入具體 tables 與 fields，讓情境可直接驅動資料層驗收。",
+                         "owner_skill":  "rapt-reconcile",
+                         "recommended_action_type":  "traceability_mapping",
+                         "criterion":  "D2",
+                         "id":  "RA-D2-001"
+                     },
+                     {
+                         "severity":  "low",
+                         "category":  "scope-creep",
+                         "artifact":  "docs/ssot/habdd",
+                         "location":  "membership-loyalty / return-refund / merchant-reporting",
+                         "issue":  "部分能力已接近完整產品範圍，尚未在 RAscore 階段重新確認 MVP 優先級。",
+                         "recommendation":  "在進入實作規劃前標註 MVP/next phase，避免將低優先能力納入首版交付。",
+                         "owner_skill":  "manual-review",
+                         "recommended_action_type":  "manual_review",
+                         "criterion":  "A3",
+                         "id":  "RA-A3-001"
+                     },
+                     {
+                         "severity":  "low",
+                         "category":  "dbml-quality",
+                         "artifact":  "docs/ssot/dbml/schema.dbml",
+                         "location":  "SalesOrder / InventoryItem / PointLedger",
+                         "issue":  "部分複合規則尚以 constraints 補充，欄位級計算來源與稽核欄位仍可更明確。",
+                         "recommendation":  "若後續要直接 codegen，補充金額計算、庫存預留釋放與點數折抵的稽核欄位或 rule metadata。",
+                         "owner_skill":  "rapt-modeling",
+                         "recommended_action_type":  "modeling_revision",
+                         "criterion":  "C4",
+                         "id":  "RA-C4-001"
+                     },
+                     {
+                         "severity":  "low",
+                         "category":  "process-gap",
+                         "artifact":  "docs/reports/rascore-precheck.json",
+                         "location":  "gherkin.scenario_count",
+                         "issue":  "RAscore precheck 與 verify 的 scenario count 口徑不同，可能造成報告解讀混淆。",
+                         "recommendation":  "後續調整 precheck parser，使其沿用 verify 的 scenario metadata 口徑。",
+                         "owner_skill":  "manual-review",
+                         "recommended_action_type":  "process_revision",
+                         "criterion":  "E3",
+                         "id":  "RA-E3-001"
+                     },
+                     {
+                         "severity":  "low",
+                         "category":  "process-gap",
+                         "artifact":  ".agents/skills/rapt-RAscore/scripts/rascore_render.py",
+                         "location":  "render_report",
+                         "issue":  "RAscore render 模板的部分固定文字與目前 reports_dir 不一致，且終端顯示有編碼雜訊。",
+                         "recommendation":  "修正 skill 模板與 render script 的文字，確保報告內容與 docs/reports 路徑一致。",
+                         "owner_skill":  "manual-review",
+                         "recommended_action_type":  "process_revision",
+                         "criterion":  "G1",
+                         "id":  "RA-G1-001"
+                     }
+                 ]
+}

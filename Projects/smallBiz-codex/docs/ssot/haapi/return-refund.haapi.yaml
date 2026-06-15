@@ -1,0 +1,58 @@
+api: return-refund
+schema_version: "3.3"
+entity: ReturnRequest
+title: 退貨退款 API
+description: 支援消費者退貨申請、商家審核與原路退款流程。
+exposes:
+  standard: [list, read, create, update]
+  list:
+    filters:
+      - {field: consumerId, operators: [eq]}
+      - {field: returnStatus, operators: [eq]}
+      - {field: requestedAt, operators: [gte, lte]}
+    sorting: {fields: [requestedAt, reviewedAt], default: requestedAt:desc}
+    pagination: {style: offset, default_size: 20}
+  operations:
+    - {name: approve_return, method: POST, path: "/{id}/approve"}
+    - {name: reject_return, method: POST, path: "/{id}/reject"}
+    - {name: complete_original_refund, method: POST, path: "/{id}/complete-original-refund"}
+access:
+  authentication: {type: bearer, required: true}
+  endpoints:
+    list:
+      required_roles: [consumer, merchant-owner]
+      required_permissions:
+        - {id: return_request_read_own}
+        - {id: return_request_read_merchant}
+    read:
+      required_roles: [consumer, merchant-owner]
+      required_permissions:
+        - {id: return_request_read_own}
+        - {id: return_request_read_merchant}
+    create:
+      required_roles: [consumer]
+      required_permissions:
+        - {id: return_request_create_own}
+    update:
+      required_roles: [merchant-owner]
+      required_permissions:
+        - {id: return_request_update_merchant}
+  operations:
+    approve_return:
+      required_roles: [merchant-owner]
+      required_permissions:
+        - {id: return_request_update_merchant}
+    reject_return:
+      required_roles: [merchant-owner]
+      required_permissions:
+        - {id: return_request_update_merchant}
+    complete_original_refund:
+      required_roles: [payment-provider]
+      required_permissions:
+        - {id: refund_provider_update}
+source_evidence:
+  - "docs/ssot/habdd/return-refund.ha.feature"
+  - "docs/ssot/dbml/constraints.md#CON-CLARIFY-006"
+  - "docs/ssot/dbml/schema.dbml#Table:ReturnRequest"
+  - "docs/ssot/haarm/smallbiz.haarm.yaml#permission:return_request_update_merchant"
+

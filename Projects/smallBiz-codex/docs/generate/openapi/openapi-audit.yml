@@ -1,0 +1,43 @@
+audit:
+  id: PREVIEW-20260613-001
+  skill: rapt-openapi
+  generated_at: "2026-06-13T10:31:48+08:00"
+  source_artifacts:
+    - docs/ssot/haapi/cart-checkout.haapi.yaml
+    - docs/ssot/haapi/inventory.haapi.yaml
+    - docs/ssot/haapi/loyalty.haapi.yaml
+    - docs/ssot/haapi/member-account.haapi.yaml
+    - docs/ssot/haapi/merchant-report.haapi.yaml
+    - docs/ssot/haapi/payment-refund.haapi.yaml
+    - docs/ssot/haapi/platform-admin.haapi.yaml
+    - docs/ssot/haapi/product-catalog.haapi.yaml
+    - docs/ssot/haapi/promotion-coupon.haapi.yaml
+    - docs/ssot/haapi/return-refund.haapi.yaml
+    - docs/ssot/haapi/sales-order.haapi.yaml
+    - docs/ssot/haarm/smallbiz.haarm.yaml
+    - docs/ssot/dbml/schema.dbml
+  output_artifact: docs/generate/openapi/openapi.yaml
+  status: ok
+  summary:
+    openapi_version: "3.0.3"
+    paths: 47
+    operations: 61
+    schemas: 48
+    duplicate_operation_ids_after_fix: 0
+  assumptions:
+    - OpenAPI is a preview artifact generated from haAPI, haARM, and annotated DBML; it is not an SSoT artifact.
+    - Project title and description were supplied explicitly to avoid terminal mojibake from arguments.yml display.
+    - The generated /merchant-report operationId was normalized from listSalesorder to listMerchantReport to keep operationId unique.
+  findings:
+    - id: PREVIEW-FIND-001
+      route: NOTE_ONLY
+      can_fix: true
+      artifact: docs/generate/openapi/openapi.yaml
+      location: paths./merchant-report.get.operationId
+      summary: "Converter produced duplicate operationId listSalesorder for /merchant-report and /sales-order; generated output was patched to listMerchantReport."
+    - id: PREVIEW-FIND-002
+      route: NOTE_ONLY
+      can_fix: true
+      artifact: .agents/skills/rapt-openapi/scripts/haapi2openapi.py
+      location: built-in response descriptions and summaries
+      summary: "Some converter built-in Chinese labels render as mojibake in preview text; OpenAPI YAML remains parseable and structurally valid."

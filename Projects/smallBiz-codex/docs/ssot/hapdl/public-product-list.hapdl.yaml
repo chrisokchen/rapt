@@ -1,0 +1,31 @@
+page: public-product-list
+schema_version: "3.3"
+type: list
+entity: Product
+api: product-catalog
+title: 商品瀏覽
+view:
+  filters:
+    - {field: categoryId, label: 商品分類, type: eq}
+    - {field: productName, label: 商品名稱, type: contains}
+    - {field: productStatus, label: 商品狀態, type: eq, ref_code: ProductStatus}
+  columns:
+    - {field: productId, label: 商品編號, link: true}
+    - {field: productName, label: 商品名稱}
+    - {field: brand, label: 品牌}
+    - {field: productStatus, label: 狀態, format: badge, ref_code: ProductStatus}
+    - {field: updatedAt, label: 更新時間, format: date, sortable: true}
+  actions:
+    standard: [read]
+    placement:
+      row: [read]
+security:
+  permission_refs:
+    view:
+      - {id: product_read_public}
+  datasource_scope: all
+source_evidence:
+  - "docs/ssot/haapi/product-catalog.haapi.yaml"
+  - "docs/ssot/habdd/product-discovery.ha.feature"
+  - "docs/ssot/haarm/smallbiz.haarm.yaml#permission:product_read_public"
+

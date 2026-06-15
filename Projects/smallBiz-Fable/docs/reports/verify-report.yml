@@ -1,0 +1,137 @@
+report:
+  id: VERIFY-20260613-001
+  project: smallBiz
+  generated_at: "2026-06-13T00:00:00+08:00"
+  status: PARTIAL
+  schema_version: 2
+
+summary:
+  completeness: PASS
+  consistency: PASS
+  traceability: PARTIAL
+  coverage: PASS
+  error_count: 0
+  warning_count: 0
+  note_count: 6
+
+metrics:
+  ssot_files:
+    dbml: 1
+    haarm: 1
+    habdd_features: 15
+    haapi: 12
+    hapdl: 20
+  dsl_lint:
+    levels: [1, 2, 3, 4]
+    errors: 0
+    warnings: 0
+  coverage:
+    must_have: {total: 17, covered: 17, pct: "100%"}
+    should_have: {total: 1, covered: 0, pct: "0%"}
+    nice_to_have: {total: 1, covered: 0, pct: "0%"}
+    feature_to_haapi: {total: 15, covered: 14, pct: "93%"}
+  traceability:
+    l1: PASS
+    l2: PARTIAL
+    l3: PARTIAL
+    l3_rows: 31
+
+findings:
+  - id: FIND-20260613-001
+    severity: low
+    category: trace_gap
+    route: NOTE_ONLY
+    can_fix: true
+    owner_skill: rapt-intent
+    artifact: docs/ssot/habdd/merchant-reporting.ha.feature
+    location: F-015
+    summary: merchant-reporting（F-015）無對應 haAPI；merchant_report 為讀模型 view，本輪未產 haAPI。
+    evidence:
+      - docs/ssot/haarm/smallBiz.haarm.yaml#resource:merchant_report
+    suggested_action: 後續迭代補 merchant-report haAPI（read-only 聚合），或於 generate 階段以讀模型產出。
+
+  - id: FIND-20260613-002
+    severity: info
+    category: trace_gap
+    route: NOTE_ONLY
+    can_fix: true
+    owner_skill: rapt-intent
+    artifact: docs/ssot/habdd/product-browsing.ha.feature
+    location: F-002 scenarios
+    summary: product-browsing 3 個讀取型 scenario 無獨立 operation；對應 product.list / product.read。
+    evidence:
+      - docs/ssot/haapi/product.haapi.yaml#exposes.list
+    suggested_action: 視為已由 product list/read 端點承接，無需獨立 operation；保留紀錄。
+
+  - id: FIND-20260613-003
+    severity: low
+    category: trace_gap
+    route: NOTE_ONLY
+    can_fix: true
+    owner_skill: rapt-behavior
+    artifact: docs/ssot/habdd/story-index.md
+    location: US-018
+    summary: should-have US-018 會員升降級無獨立 feature；GAP #010 已決（CON-MBR-003），等級限定券由 SCN-COUPON-006 承接。
+    evidence:
+      - docs/ssot/dbml/constraints.md#CON-MBR-003
+    suggested_action: 下一輪 rapt-behavior 補會員等級升降級 feature（門檻待平台提案後可量化 Then）。
+
+  - id: FIND-20260613-004
+    severity: low
+    category: trace_gap
+    route: NOTE_ONLY
+    can_fix: true
+    owner_skill: rapt-behavior
+    artifact: docs/ssot/habdd/
+    location: US-019
+    summary: 願望清單入 MVP（GAP #002），Wishlist 實體 + haAPI + haPDL 已建，但 wishlist.ha.feature 未撰寫。
+    evidence:
+      - docs/ssot/haapi/wishlist.haapi.yaml
+      - docs/ssot/hapdl/wishlist-list.hapdl.yaml
+    suggested_action: 下一輪 rapt-behavior 補 wishlist.ha.feature 以完成 L1 行為覆蓋。
+
+  - id: FIND-20260613-005
+    severity: info
+    category: trace_gap
+    route: NOTE_ONLY
+    can_fix: true
+    owner_skill: rapt-intent
+    artifact: docs/ssot/haapi/
+    location: secondary entities
+    summary: 次要/管理實體（Store, Category, Brand, PlatformUser, AuditLog, MerchantOperator, NotificationLog, ProductVariant）本輪未產獨立 haAPI。
+    evidence:
+      - docs/ssot/dbml/schema.dbml
+    suggested_action: 依後續需求補齊；多數為 aggregate 子資源或管理型，可隨主實體 operations 或後續迭代補。
+
+  - id: FIND-20260613-006
+    severity: low
+    category: naming_drift
+    route: NOTE_ONLY
+    can_fix: true
+    owner_skill: rapt-behavior
+    artifact: docs/ssot/habdd/
+    location: inline "# CiC" comments
+    summary: 8 個 .feature 內聯 "# CiC" advisory 註解仍標「未決」，但對應 CiC 已於 Phase 3 解決（權威狀態在 constraints/seeds/story-index/discovery）。
+    evidence:
+      - docs/ssot/habdd/checkout-order.ha.feature#L15
+      - docs/ssot/habdd/returns.ha.feature#L12
+    suggested_action: 下一輪 rapt-behavior 重渲染時清理或標 RESOLVED；不影響 scenario 行為。
+
+phase_gate:
+  can_continue: true
+  blockers: []
+  next:
+    NEED_TO_FIX: []
+    NEED_TO_CLARIFY: []
+    NOTE_ONLY:
+      - FIND-20260613-001
+      - FIND-20260613-002
+      - FIND-20260613-003
+      - FIND-20260613-004
+      - FIND-20260613-005
+      - FIND-20260613-006
+
+rascore_readiness:
+  glossary_dbml_mapping: PASS
+  ref_code_seed_coverage: PASS
+  constraint_coverage: PASS

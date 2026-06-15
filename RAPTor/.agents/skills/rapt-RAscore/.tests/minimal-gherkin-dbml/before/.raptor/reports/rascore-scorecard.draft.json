@@ -1,0 +1,30 @@
+{
+  "project": "RAscoreTest",
+  "rascore_version": "0.1",
+  "criteria": {
+    "A1": {"score": 2, "confidence": "medium", "reason": "REQ-2 尚未被 scenario 覆蓋。", "evidence": [], "findings": []},
+    "A2": {"score": 2, "confidence": "medium", "reason": "有少量 scope loss。", "evidence": [], "findings": []},
+    "A3": {"score": 2, "confidence": "medium", "reason": "AuditLog 來源不明但影響有限。", "evidence": [], "findings": []},
+    "B1": {"score": 1, "confidence": "high", "reason": "第二個 scenario 含點擊按鈕。", "evidence": [], "findings": [{"severity": "high", "category": "gherkin-quality", "artifact": "docs/04-features/order.feature", "location": "Scenario: 客戶按下取消按鈕", "issue": "Gherkin 洩漏 UI 操作細節。", "recommendation": "改寫為業務事件。", "owner_skill": "rapt-behavior"}]},
+    "B2": {"score": 2, "confidence": "medium", "reason": "大致原子。", "evidence": [], "findings": []},
+    "B3": {"score": 3, "confidence": "high", "reason": "GWT 完整。", "evidence": [], "findings": []},
+    "B4": {"score": 1, "confidence": "medium", "reason": "缺已付款不可取消情境。", "evidence": [], "findings": []},
+    "B5": {"score": 2, "confidence": "medium", "reason": "詞彙大致一致。", "evidence": [], "findings": []},
+    "C1": {"score": 2, "confidence": "medium", "reason": "核心 Order 存在。", "evidence": [], "findings": []},
+    "C2": {"score": 1, "confidence": "medium", "reason": "缺 customer ref。", "evidence": [], "findings": []},
+    "C3": {"score": 2, "confidence": "medium", "reason": "status enum 存在。", "evidence": [], "findings": []},
+    "C4": {"score": 2, "confidence": "medium", "reason": "命名可讀。", "evidence": [], "findings": []},
+    "D1": {"score": 2, "confidence": "medium", "reason": "訂單與 Order 可對齊。", "evidence": [], "findings": []},
+    "D2": {"score": 0, "confidence": "high", "reason": "UI 成功訊息與資料模型無支撐。", "evidence": [], "findings": [{"severity": "critical", "category": "cross-spec-gap", "artifact": "docs/04-features/order.feature", "location": "Scenario: 客戶按下取消按鈕", "issue": "Scenario 結果無 DBML 支撐。", "recommendation": "移除 UI 結果或補足領域狀態。", "owner_skill": "rapt-reconcile"}]},
+    "D3": {"score": 1, "confidence": "high", "reason": "AuditLog 未被 scenario 觸及。", "evidence": [], "findings": []},
+    "D4": {"score": 2, "confidence": "medium", "reason": "cancelled 狀態可對齊。", "evidence": [], "findings": []},
+    "E1": {"score": 2, "confidence": "medium", "reason": "REQ-1 可追，REQ-2 不完整。", "evidence": [], "findings": []},
+    "E2": {"score": 1, "confidence": "medium", "reason": "AuditLog 無來源。", "evidence": [], "findings": []},
+    "E3": {"score": 1, "confidence": "low", "reason": "缺決策記錄。", "evidence": [], "findings": []},
+    "F1": {"score": 2, "confidence": "medium", "reason": "部分 Then 可驗證。", "evidence": [], "findings": []},
+    "F2": {"score": 1, "confidence": "medium", "reason": "不足以推導完整 DSL。", "evidence": [], "findings": []},
+    "G1": {"score": 1, "confidence": "low", "reason": "單一評審，無一致性資料。", "evidence": [], "findings": []},
+    "G2": {"score": 2, "confidence": "medium", "reason": "有固定 artifact。", "evidence": [], "findings": []}
+  }
+}
+

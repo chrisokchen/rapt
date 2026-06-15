@@ -1,0 +1,37 @@
+page: merchant-product-management
+schema_version: "3.3"
+type: list
+entity: Product
+api: product-catalog
+title: 商家商品管理
+view:
+  filters:
+    - {field: merchantId, label: 商家, type: eq}
+    - {field: categoryId, label: 分類, type: eq}
+    - {field: productStatus, label: 狀態, type: eq, ref_code: ProductStatus}
+  columns:
+    - {field: productId, label: 商品編號, link: true}
+    - {field: productName, label: 商品名稱}
+    - {field: categoryId, label: 分類}
+    - {field: productStatus, label: 狀態, format: badge, ref_code: ProductStatus}
+    - {field: updatedAt, label: 更新時間, format: date, sortable: true}
+  actions:
+    standard: [create, update]
+    custom: [publish_product, deactivate_product]
+    placement:
+      header: [create]
+      row: [update, publish_product, deactivate_product]
+security:
+  permission_refs:
+    view:
+      - {id: product_crud_merchant}
+    create:
+      - {id: product_crud_merchant}
+    update:
+      - {id: product_crud_merchant}
+  datasource_scope: department
+source_evidence:
+  - "docs/ssot/haapi/product-catalog.haapi.yaml"
+  - "docs/ssot/habdd/product-catalog.ha.feature"
+  - "docs/ssot/haarm/smallbiz.haarm.yaml#permission:product_crud_merchant"
+

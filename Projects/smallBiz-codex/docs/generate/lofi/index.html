@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>SmallBiz ???? Lo-Fi Wireframe</title>
+  <style>
+:root{--bg:#f5f7fa;--surface:#fff;--text:#202936;--muted:#697386;--line:#d9e0ea;--primary:#2764c5;--soft:#edf3ff;--warn:#9a6b00;--ok:#147d4f}*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font-family:"Noto Sans TC","Segoe UI",Arial,sans-serif}.app{display:grid;grid-template-columns:240px 1fr;min-height:100vh}.side{background:#12213a;color:#e6edf7;padding:18px 0;position:sticky;top:0;height:100vh;overflow:auto}.brand{padding:0 20px 16px;border-bottom:1px solid rgba(255,255,255,.1)}.brand h1{font-size:18px;margin:0}.brand span{font-size:12px;color:#9fb0ca}.side a{display:block;color:#cad6e8;text-decoration:none;padding:10px 20px;font-size:13px}.side a:hover{background:rgba(255,255,255,.08);color:#fff}.main{min-width:0}.top{height:58px;background:#fff;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:0 24px}.top h1{font-size:17px;margin:0}.top input{border:1px solid var(--line);border-radius:6px;padding:8px 10px;width:240px}.content{padding:24px}.page-card{background:var(--surface);border:1px solid var(--line);border-radius:8px;margin-bottom:20px;box-shadow:0 1px 3px rgba(16,24,40,.06);overflow:hidden}.page-header{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;padding:16px 18px;border-bottom:1px solid var(--line)}.title-row{display:flex;align-items:center;gap:10px}.title-row h2{font-size:17px;margin:0}.badge{font-size:11px;text-transform:uppercase;background:var(--soft);color:var(--primary);padding:3px 8px;border-radius:12px}.meta{margin-top:5px;color:var(--muted);font-size:12px}.header-actions,.form-actions{display:flex;gap:8px;flex-wrap:wrap}button{border:1px solid var(--line);background:#fff;border-radius:6px;padding:7px 12px;color:var(--text)}button:first-child,.form-actions button:last-child{background:var(--primary);border-color:var(--primary);color:#fff}.small{font-size:12px;padding:4px 8px;background:#fff!important;color:var(--text)!important}.toolbar{display:flex;gap:12px;flex-wrap:wrap;padding:14px 18px;background:#fbfcfe;border-bottom:1px solid var(--line)}label{font-size:12px;color:var(--muted)}label input,.field input{display:block;margin-top:4px;border:1px solid var(--line);border-radius:6px;padding:8px 10px;min-width:150px;background:#fff}.table-wrap{overflow:auto}table{width:100%;border-collapse:collapse;font-size:13px}th,td{padding:11px 14px;border-bottom:1px solid var(--line);text-align:left;white-space:nowrap}th{background:#fbfcfe;color:var(--muted);font-weight:600}.actions{text-align:right}.mono{font-family:"JetBrains Mono",Consolas,monospace;color:var(--primary)}.pager{display:flex;justify-content:space-between;padding:12px 18px;color:var(--muted);font-size:12px}.form-grid{display:grid;grid-template-columns:repeat(2,minmax(260px,1fr));gap:16px;padding:18px}.field span{display:block;color:var(--text);font-weight:600}.field input{width:100%}.req{color:#c2410c}.form-actions{justify-content:flex-end;padding:14px 18px;background:#fbfcfe;border-top:1px solid var(--line)}.kpi-grid{display:grid;grid-template-columns:repeat(5,minmax(120px,1fr));gap:14px;padding:18px}.kpi{border:1px solid var(--line);border-radius:8px;padding:14px}.kpi strong{display:block;font-size:22px}.kpi span{color:var(--muted);font-size:12px}.compact{padding:0 18px 18px}.status{background:#e8f7ef;color:var(--ok);padding:2px 8px;border-radius:10px}.wizard-steps{display:grid;grid-template-columns:repeat(4,minmax(140px,1fr));gap:14px;padding:18px}.step{border:1px solid var(--line);border-radius:8px;padding:14px;background:#fbfcfe}.step span{display:inline-grid;place-items:center;width:26px;height:26px;background:var(--primary);color:#fff;border-radius:50%;margin-bottom:10px}.step strong{display:block}.step p,.hint{color:var(--muted);font-size:12px}.wizard-panel{margin:0 18px 18px;padding:18px;border:1px dashed var(--line);border-radius:8px;background:#fff}@media(max-width:900px){.app{display:block}.side{position:static;height:auto}.side nav{display:flex;overflow:auto}.side a{white-space:nowrap}.form-grid,.kpi-grid,.wizard-steps{grid-template-columns:1fr}.top{height:auto;align-items:flex-start;flex-direction:column;padding:14px 18px}.content{padding:16px}}
+</style>
+</head>
+<body>
+<div class="app">
+  <aside class="side"><div class="brand"><h1>SmallBiz ????</h1><span>Lo-Fi Wireframe Preview</span></div><nav><a href="#consumer-cart-checkout">購物車結帳</a><a href="#consumer-order-history">我的訂單</a><a href="#inventory-dashboard">庫存控管</a><a href="#member-registration">會員註冊</a><a href="#merchant-order-list">商家訂單管理</a><a href="#merchant-product-management">商家商品管理</a><a href="#merchant-report-dashboard">商家營運報表</a><a href="#platform-admin-access">平台權限邊界</a><a href="#promotion-coupon-management">促銷與優惠券管理</a><a href="#public-product-list">商品瀏覽</a><a href="#return-refund-workbench">退貨退款處理</a></nav></aside>
+  <main class="main"><header class="top"><div><h1>??????</h1><span class="hint">Generated from haPDL + DBML + haARM</span></div><input disabled placeholder="???????"></header><div class="content"><section class="page-card wizard" id="consumer-cart-checkout">
+  <div class="page-header">
+    <div>
+      <div class="title-row"><h2>購物車結帳</h2><span class="badge">wizard</span></div>
+      <div class="meta">entity: <code>Cart</code> ? api: <code>cart-checkout</code></div>
+    </div>
+    <div class="header-actions"></div>
+  </div>
+  <div class="wizard-steps"><div class="step"><span>1</span><strong>確認購物車</strong><p>??????????</p></div><div class="step"><span>2</span><strong>確認金額</strong><p>??????????</p></div><div class="step"><span>3</span><strong>選擇付款</strong><p>??????????</p></div><div class="step"><span>4</span><strong>建立訂單</strong><p>??????????</p></div></div><div class="wizard-panel"><h3>??????</h3><p>??? haPDL wizard ???????????????????????????</p></div><div class="form-actions"><button>????</button><button>????</button></div>
+</section><section class="page-card " id="consumer-order-history">
+  <div class="page-header">
+    <div>
+      <div class="title-row"><h2>我的訂單</h2><span class="badge">list</span></div>
+      <div class="meta">entity: <code>SalesOrder</code> ? api: <code>sales-order</code></div>
+    </div>
+    <div class="header-actions"></div>
+  </div>
+  <div class="toolbar"><label>消費者<input disabled placeholder="??"></label><label>訂單狀態<input disabled placeholder="??"></label><label>下單時間<input disabled placeholder="??"></label></div>
+  <div class="table-wrap"><table><thead><tr><th>訂單編號</th><th>訂單狀態</th><th>應付總額</th><th>付款時間</th><th>下單時間</th><th>??</th></tr></thead><tbody><tr><td class="mono">ORD-001</td><td>???</td><td>NT$ 1,200</td><td>2026-06-13</td><td>2026-06-13</td><td class="actions"><button class="small">??</button><button class="small">??</button></td></tr><tr><td class="mono">ORD-002</td><td>???</td><td>NT$ 2,400</td><td>2026-06-13</td><td>2026-06-13</td><td class="actions"><button class="small">??</button><button class="small">??</button></td></tr><tr><td class="mono">ORD-003</td><td>???</td><td>NT$ 3,600</td><td>2026-06-13</td><td>2026-06-13</td><td class="actions"><button class="small">??</button><button class="small">??</button></td></tr><tr><td class="mono">ORD-004</td><td>???</td><td>NT$ 4,800</td><td>2026-06-13</td><td>2026-06-13</td><td class="actions"><button class="small">??</button><button class="small">??</button></td></tr><tr><td class="mono">ORD-005</td><td>???</td><td>NT$ 6,000</td><td>2026-06-13</td><td>2026-06-13</td><td class="actions"><button class="small">??</button><button class="small">??</button></td></tr></tbody></table></div>
+  <div class="pager"><span>1-5 / 42</span><span><button>???</button><button>???</button></span></div>
+</section><section class="page-card dashboard" id="inventory-dashboard">
+  <div class="page-header">
+    <div>
+      <div class="title-row"><h2>庫存控管</h2><span class="badge">dashboard</span></div>
+      <div class="meta">entity: <code>InventoryItem</code> ? api: <code>inventory</code></div>
+    </div>
+    <div class="header-actions"></div>
+  </div>
+  <div class="kpi-grid"><div class="kpi"><strong>INV-001</strong><span>庫存項目編號</span></div><div class="kpi"><strong>SKU-002</strong><span>SKU</span></div><div class="kpi"><strong>30</strong><span>帳面庫存</span></div><div class="kpi"><strong>40</strong><span>可販售庫存</span></div><div class="kpi"><strong>低庫存水位 5</strong><span>低庫存水位</span></div></div><div class="table-wrap compact"><table><tbody><tr><td>庫存項目編號</td><td>INV-001</td><td><span class="status">??</span></td></tr><tr><td>SKU</td><td>SKU-002</td><td><span class="status">??</span></td></tr><tr><td>帳面庫存</td><td>30</td><td><span class="status">??</span></td></tr><tr><td>可販售庫存</td><td>40</td><td><span class="status">??</span></td></tr></tbody></table></div>
+</section><section class="page-card " id="member-registration">
+  <div class="page-header">
+    <div>
+      <div class="title-row"><h2>會員註冊</h2><span class="badge">form</span></div>
+      <div class="meta">entity: <code>ConsumerProfile</code> ? api: <code>member-account</code></div>
+    </div>
+    <div class="header-actions"></div>
+  </div>
+  <div class="form-grid"><label class="field"><span>帳號編號 <span class="req">*</span></span><input type="text" disabled placeholder="帳號編號"></label><label class="field"><span>顯示名稱 </span><input type="text" disabled placeholder="顯示名稱"></label><label class="field"><span>聯絡電話 </span><input type="password" disabled placeholder="聯絡電話"></label></div><div class="form-actions"><button>??</button></div>
+</section><section class="page-card " id="merchant-order-list">
+  <div class="page-header">
+    <div>
+      <div class="title-row"><h2>商家訂單管理</h2><span class="badge">list</span></div>
+      <div class="meta">entity: <code>SalesOrder</code> ? api: <code>sales-order</code></div>
+    </div>
+    <div class="header-actions"></div>
+  </div>
+  <div class="toolbar"><label>商家<input disabled placeholder="??"></label><label>訂單狀態<input disabled placeholder="??"></label><label>下單時間<input disabled placeholder="??"></label></div>
+  <div class="table-wrap"><table><thead><tr><th>訂單編號</th><th>消費者</th><th>訂單狀態</th><th>應付總額</th><th>下單時間</th><th>??</th></tr></thead><tbody><tr><td class="mono">ORD-001</td><td class="mono">CON-001</td><td>???</td><td>NT$ 1,200</td><td>2026-06-13</td><td class="actions"><button class="small">??</button><button class="small">??</button></td></tr><tr><td class="mono">ORD-002</td><td class="mono">CON-002</td><td>???</td><td>NT$ 2,400</td><td>2026-06-13</td><td class="actions"><button class="small">??</button><button class="small">??</button></td></tr><tr><td class="mono">ORD-003</td><td class="mono">CON-003</td><td>???</td><td>NT$ 3,600</td><td>2026-06-13</td><td class="actions"><button class="small">??</button><button class="small">??</button></td></tr><tr><td class="mono">ORD-004</td><td class="mono">CON-004</td><td>???</td><td>NT$ 4,800</td><td>2026-06-13</td><td class="actions"><button class="small">??</button><button class="small">??</button></td></tr><tr><td class="mono">ORD-005</td><td class="mono">CON-005</td><td>???</td><td>NT$ 6,000</td><td>2026-06-13</td><td class="actions"><button class="small">??</button><button class="small">??</button></td></tr></tbody></table></div>
+  <div class="pager"><span>1-5 / 42</span><span><button>???</button><button>???</button></span></div>
+</section><section class="page-card " id="merchant-product-management">
+  <div class="page-header">
+    <div>
+      <div class="title-row"><h2>商家商品管理</h2><span class="badge">list</span></div>
+      <div class="meta">entity: <code>Product</code> ? api: <code>product-catalog</code></div>
+    </div>
+    <div class="header-actions"></div>
+  </div>
+  <div class="toolbar"><label>商家<input disabled placeholder="??"></label><label>分類<input disabled placeholder="??"></label><label>商品狀態<input disabled placeholder="??"></label></div>
+  <div class="table-wrap"><table><thead><tr><th>商品編號</th><th>商品名稱</th><th>分類</th><th>商品狀態</th><th>更新時間</th><th>??</th></tr></thead><tbody><tr><td class="mono">PRO-001</td><td>商品名稱 1</td><td class="mono">CAT-001</td><td>???</td><td>2026-06-13</td><td class="actions"><button class="small">??</button><button class="small">??</button></td></tr><tr><td class="mono">PRO-002</td><td>商品名稱 2</td><td class="mono">CAT-002</td><td>???</td><td>2026-06-13</td><td class="actions"><button class="small">??</button><button class="small">??</button></td></tr><tr><td class="mono">PRO-003</td><td>商品名稱 3</td><td class="mono">CAT-003</td><td>???</td><td>2026-06-13</td><td class="actions"><button class="small">??</button><button class="small">??</button></td></tr><tr><td class="mono">PRO-004</td><td>商品名稱 4</td><td class="mono">CAT-004</td><td>???</td><td>2026-06-13</td><td class="actions"><button class="small">??</button><button class="small">??</button></td></tr><tr><td class="mono">PRO-005</td><td>商品名稱 5</td><td class="mono">CAT-005</td><td>???</td><td>2026-06-13</td><td class="actions"><button class="small">??</button><button class="small">??</button></td></tr></tbody></table></div>
+  <div class="pager"><span>1-5 / 42</span><span><button>???</button><button>???</button></span></div>
+</section><section class="page-card dashboard" id="merchant-report-dashboard">
+  <div class="page-header">
+    <div>
+      <div class="title-row"><h2>商家營運報表</h2><span class="badge">dashboard</span></div>
+      <div class="meta">entity: <code>SalesOrder</code> ? api: <code>merchant-report</code></div>
+    </div>
+    <div class="header-actions"></div>
+  </div>
+  <div class="kpi-grid"><div class="kpi"><strong>ORD-001</strong><span>訂單編號</span></div><div class="kpi"><strong>MER-002</strong><span>商家</span></div><div class="kpi"><strong>CON-003</strong><span>消費者</span></div><div class="kpi"><strong>???</strong><span>訂單狀態</span></div><div class="kpi"><strong>NT$ 6,000</strong><span>商品小計</span></div></div><div class="table-wrap compact"><table><tbody><tr><td>訂單編號</td><td>ORD-001</td><td><span class="status">??</span></td></tr><tr><td>商家</td><td>MER-002</td><td><span class="status">??</span></td></tr><tr><td>消費者</td><td>CON-003</td><td><span class="status">??</span></td></tr><tr><td>訂單狀態</td><td>???</td><td><span class="status">??</span></td></tr></tbody></table></div>
+</section><section class="page-card dashboard" id="platform-admin-access">
+  <div class="page-header">
+    <div>
+      <div class="title-row"><h2>平台權限邊界</h2><span class="badge">dashboard</span></div>
+      <div class="meta">entity: <code>Account</code> ? api: <code>platform-admin</code></div>
+    </div>
+    <div class="header-actions"></div>
+  </div>
+  <div class="kpi-grid"><div class="kpi"><strong>ACC-001</strong><span>帳號編號</span></div><div class="kpi"><strong>電子郵件 2</strong><span>電子郵件</span></div><div class="kpi"><strong>密碼雜湊 3</strong><span>密碼雜湊</span></div><div class="kpi"><strong>???</strong><span>帳號類型</span></div><div class="kpi"><strong>???</strong><span>帳號狀態</span></div></div><div class="table-wrap compact"><table><tbody><tr><td>帳號編號</td><td>ACC-001</td><td><span class="status">??</span></td></tr><tr><td>電子郵件</td><td>電子郵件 2</td><td><span class="status">??</span></td></tr><tr><td>密碼雜湊</td><td>密碼雜湊 3</td><td><span class="status">??</span></td></tr><tr><td>帳號類型</td><td>???</td><td><span class="status">??</span></td></tr></tbody></table></div>
+</section><section class="page-card " id="promotion-coupon-management">
+  <div class="page-header">
+    <div>
+      <div class="title-row"><h2>促銷與優惠券管理</h2><span class="badge">list</span></div>
+      <div class="meta">entity: <code>Promotion</code> ? api: <code>promotion-coupon</code></div>
+    </div>
+    <div class="header-actions"></div>
+  </div>
+  <div class="toolbar"><label>商家<input disabled placeholder="??"></label><label>活動狀態<input disabled placeholder="??"></label><label>開始時間<input disabled placeholder="??"></label></div>
+  <div class="table-wrap"><table><thead><tr><th>促銷活動編號</th><th>活動名稱</th><th>活動類型</th><th>活動狀態</th><th>開始時間</th><th>結束時間</th><th>??</th></tr></thead><tbody><tr><td class="mono">PRO-001</td><td>活動名稱 1</td><td>???</td><td>???</td><td>2026-06-13</td><td>2026-06-13</td><td class="actions"><button class="small">??</button><button class="small">??</button></td></tr><tr><td class="mono">PRO-002</td><td>活動名稱 2</td><td>???</td><td>???</td><td>2026-06-13</td><td>2026-06-13</td><td class="actions"><button class="small">??</button><button class="small">??</button></td></tr><tr><td class="mono">PRO-003</td><td>活動名稱 3</td><td>???</td><td>???</td><td>2026-06-13</td><td>2026-06-13</td><td class="actions"><button class="small">??</button><button class="small">??</button></td></tr><tr><td class="mono">PRO-004</td><td>活動名稱 4</td><td>???</td><td>???</td><td>2026-06-13</td><td>2026-06-13</td><td class="actions"><button class="small">??</button><button class="small">??</button></td></tr><tr><td class="mono">PRO-005</td><td>活動名稱 5</td><td>???</td><td>???</td><td>2026-06-13</td><td>2026-06-13</td><td class="actions"><button class="small">??</button><button class="small">??</button></td></tr></tbody></table></div>
+  <div class="pager"><span>1-5 / 42</span><span><button>???</button><button>???</button></span></div>
+</section><section class="page-card " id="public-product-list">
+  <div class="page-header">
+    <div>
+      <div class="title-row"><h2>商品瀏覽</h2><span class="badge">list</span></div>
+      <div class="meta">entity: <code>Product</code> ? api: <code>product-catalog</code></div>
+    </div>
+    <div class="header-actions"></div>
+  </div>
+  <div class="toolbar"><label>分類<input disabled placeholder="??"></label><label>商品名稱<input disabled placeholder="??"></label><label>商品狀態<input disabled placeholder="??"></label></div>
+  <div class="table-wrap"><table><thead><tr><th>商品編號</th><th>商品名稱</th><th>品牌</th><th>商品狀態</th><th>更新時間</th><th>??</th></tr></thead><tbody><tr><td class="mono">PRO-001</td><td>商品名稱 1</td><td>品牌 1</td><td>???</td><td>2026-06-13</td><td class="actions"><button class="small">??</button><button class="small">??</button></td></tr><tr><td class="mono">PRO-002</td><td>商品名稱 2</td><td>品牌 2</td><td>???</td><td>2026-06-13</td><td class="actions"><button class="small">??</button><button class="small">??</button></td></tr><tr><td class="mono">PRO-003</td><td>商品名稱 3</td><td>品牌 3</td><td>???</td><td>2026-06-13</td><td class="actions"><button class="small">??</button><button class="small">??</button></td></tr><tr><td class="mono">PRO-004</td><td>商品名稱 4</td><td>品牌 4</td><td>???</td><td>2026-06-13</td><td class="actions"><button class="small">??</button><button class="small">??</button></td></tr><tr><td class="mono">PRO-005</td><td>商品名稱 5</td><td>品牌 5</td><td>???</td><td>2026-06-13</td><td class="actions"><button class="small">??</button><button class="small">??</button></td></tr></tbody></table></div>
+  <div class="pager"><span>1-5 / 42</span><span><button>???</button><button>???</button></span></div>
+</section><section class="page-card " id="return-refund-workbench">
+  <div class="page-header">
+    <div>
+      <div class="title-row"><h2>退貨退款處理</h2><span class="badge">list</span></div>
+      <div class="meta">entity: <code>ReturnRequest</code> ? api: <code>return-refund</code></div>
+    </div>
+    <div class="header-actions"></div>
+  </div>
+  <div class="toolbar"><label>退貨狀態<input disabled placeholder="??"></label><label>申請時間<input disabled placeholder="??"></label><label>消費者<input disabled placeholder="??"></label></div>
+  <div class="table-wrap"><table><thead><tr><th>退貨申請編號</th><th>訂單</th><th>消費者</th><th>退貨狀態</th><th>申請時間</th><th>審核時間</th><th>??</th></tr></thead><tbody><tr><td class="mono">RET-001</td><td class="mono">ORD-001</td><td class="mono">CON-001</td><td>???</td><td>2026-06-13</td><td>2026-06-13</td><td class="actions"><button class="small">??</button><button class="small">??</button></td></tr><tr><td class="mono">RET-002</td><td class="mono">ORD-002</td><td class="mono">CON-002</td><td>???</td><td>2026-06-13</td><td>2026-06-13</td><td class="actions"><button class="small">??</button><button class="small">??</button></td></tr><tr><td class="mono">RET-003</td><td class="mono">ORD-003</td><td class="mono">CON-003</td><td>???</td><td>2026-06-13</td><td>2026-06-13</td><td class="actions"><button class="small">??</button><button class="small">??</button></td></tr><tr><td class="mono">RET-004</td><td class="mono">ORD-004</td><td class="mono">CON-004</td><td>???</td><td>2026-06-13</td><td>2026-06-13</td><td class="actions"><button class="small">??</button><button class="small">??</button></td></tr><tr><td class="mono">RET-005</td><td class="mono">ORD-005</td><td class="mono">CON-005</td><td>???</td><td>2026-06-13</td><td>2026-06-13</td><td class="actions"><button class="small">??</button><button class="small">??</button></td></tr></tbody></table></div>
+  <div class="pager"><span>1-5 / 42</span><span><button>???</button><button>???</button></span></div>
+</section></div></main>
+</div>
+</body>
+</html>

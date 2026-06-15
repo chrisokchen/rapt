@@ -1,0 +1,635 @@
+# ============================================================
+# UI 頁面規格模板 (Page Specification DSL)
+# ============================================================
+# 說明: 此模板使用 WA-RAPTor 的頁面描述語言 (PageDL)
+# 參考: ../PageDL/README.md, ../DSL_webPages/QUICK-REFERENCE.md
+#
+# 填寫指南:
+# 1. 根據頁面類型選擇適當的 page.type
+# 2. 定義清楚的資料來源 (datasource)
+# 3. 設定權限控制 (auth)
+# 4. 根據頁面類型填寫對應的區塊 (form/list/detail)
+# 5. 定義使用者動作 (actions)
+# 6. 設定驗證規則 (validation)
+# ============================================================
+
+page:
+  # ----------------------------------------------------------
+  # 基本資訊
+  # ----------------------------------------------------------
+  id: page-name                    # 頁面唯一識別碼 (kebab-case)
+  name: 頁面名稱                    # 顯示名稱 (中文或英文)
+  type: form                        # 頁面類型: form | list | detail | grid | dashboard | custom
+
+  description: |                    # 頁面用途描述 (選填)
+    [描述此頁面的用途、使用情境與目標使用者]
+
+  # ----------------------------------------------------------
+  # 資料來源配置
+  # ----------------------------------------------------------
+  datasource:
+    entity: EntityName              # 主要實體名稱 (PascalCase)
+
+    # 查詢配置 (用於 list/detail 頁面)
+    query:
+      endpoint: /api/endpoint       # API 端點
+      method: GET                   # HTTP 方法: GET | POST | PUT | DELETE | PATCH
+
+      # 查詢參數
+      params:
+        - name: id                  # 參數名稱
+          type: string              # 型別: string | number | boolean | array | object
+          source: route             # 來源: route | query | store | user-input
+          required: true            # 是否必填
+          default: null             # 預設值 (選填)
+
+        - name: page
+          type: number
+          source: query
+          default: 1
+
+        - name: pageSize
+          type: number
+          source: query
+          default: 20
+
+    # 提交配置 (用於 form 頁面)
+    submit:
+      endpoint: /api/endpoint       # 提交端點
+      method: POST                  # HTTP 方法
+
+    # 額外資料依賴 (選填)
+    dependencies:
+      - source: api                 # 來源類型: api | store
+        name: relatedData           # 資料名稱
+        endpoint: /api/related      # API 端點
+        required: false             # 是否必須載入成功
+        cacheTime: 300              # 快取時間 (秒,選填)
+
+  # ----------------------------------------------------------
+  # 權限控制
+  # 注意: roles 和 permissions 的值必須對應 haARM 中的定義
+  # - roles 對應 haARM role.id
+  # - permissions 對應 haARM permission.id
+  # 參見: phase2-access-control.haarm.yaml
+  # ----------------------------------------------------------
+  auth:
+    required: true                  # 是否需要登入
+    roles:                          # 引用 haARM role.id
+      - admin
+      - manager
+    permissions:                    # 引用 haARM permission.id（選填）
+      - user_read
+      - user_write
+
+  # ----------------------------------------------------------
+  # 表單頁面配置 (type: form)
+  # ----------------------------------------------------------
+  form:
+    # 表單佈局
+    layout: vertical                # vertical | horizontal | steps | tabs
+
+    # 分步驟表單 (當 layout: steps)
+    steps:
+      - id: step-1
+        label: 基本資訊
+        fields: [field1, field2]    # 此步驟包含的欄位
+
+      - id: step-2
+        label: 詳細資訊
+        fields: [field3, field4]
+
+    # 欄位定義
+    fields:
+      # ------ 文字輸入 ------
+      - name: username              # 欄位名稱 (camelCase)
+        label: 使用者名稱           # 顯示標籤
+        type: text                  # 欄位類型
+        required: true              # 是否必填
+        placeholder: 請輸入使用者名稱  # 提示文字
+        hint: 至少 3 個字元         # 輔助說明
+        defaultValue: ''            # 預設值
+        disabled: false             # 是否停用
+        readonly: false             # 是否唯讀
+        maxLength: 50               # 最大長度
+
+      # ------ Email 輸入 ------
+      - name: email
+        label: Email
+        type: email
+        required: true
+        placeholder: user@example.com
+
+      # ------ 密碼輸入 ------
+      - name: password
+        label: 密碼
+        type: password
+        required: true
+        showStrengthIndicator: true # 顯示密碼強度指示器
+
+      # ------ 數字輸入 ------
+      - name: age
+        label: 年齡
+        type: number
+        min: 18                     # 最小值
+        max: 100                    # 最大值
+        step: 1                     # 步進值
+
+      # ------ 日期選擇 ------
+      - name: birthdate
+        label: 生日
+        type: date
+        format: YYYY-MM-DD          # 日期格式
+        minDate: 1900-01-01         # 最小日期
+        maxDate: today              # 最大日期 (可使用 today, tomorrow 等)
+
+      # ------ 時間選擇 ------
+      - name: appointmentTime
+        label: 預約時間
+        type: datetime
+        format: YYYY-MM-DD HH:mm
+
+      # ------ 下拉選單 ------
+      - name: category
+        label: 分類
+        type: select
+        required: true
+        options:                    # 靜態選項
+          - label: 分類 A
+            value: category-a
+          - label: 分類 B
+            value: category-b
+        # 或使用動態選項
+        # options:
+        #   source: categories      # 從 dependencies 取得
+        #   labelField: name        # 顯示欄位
+        #   valueField: id          # 值欄位
+
+      # ------ 單選按鈕 ------
+      - name: gender
+        label: 性別
+        type: radio
+        required: true
+        options:
+          - label: 男性
+            value: male
+          - label: 女性
+            value: female
+          - label: 其他
+            value: other
+
+      # ------ 多選框 ------
+      - name: interests
+        label: 興趣
+        type: checkbox
+        options:
+          - label: 運動
+            value: sports
+          - label: 閱讀
+            value: reading
+          - label: 音樂
+            value: music
+
+      # ------ 文字區域 ------
+      - name: description
+        label: 描述
+        type: textarea
+        rows: 5                     # 行數
+        maxLength: 500
+
+      # ------ 檔案上傳 ------
+      - name: avatar
+        label: 頭像
+        type: file
+        accept: image/*             # 接受的檔案類型
+        maxSize: 5                  # 最大檔案大小 (MB)
+        uploadUrl: /api/upload      # 上傳端點
+
+      # ------ 切換開關 ------
+      - name: isActive
+        label: 啟用
+        type: switch
+        defaultValue: true
+
+      # ------ 標籤輸入 ------
+      - name: tags
+        label: 標籤
+        type: tags
+        maxTags: 5
+
+      # ------ 富文字編輯器 ------
+      - name: content
+        label: 內容
+        type: richtext
+        toolbar:
+          - bold
+          - italic
+          - link
+          - image
+
+      # ------ 條件顯示欄位 ------
+      - name: otherCategory
+        label: 其他分類
+        type: text
+        visible:
+          field: category           # 依據哪個欄位
+          condition: equals         # 條件: equals | notEquals | in | notIn
+          value: other              # 值
+
+  # ----------------------------------------------------------
+  # 列表頁面配置 (type: list)
+  # ----------------------------------------------------------
+  list:
+    # 欄位定義
+    columns:
+      - field: id                   # 資料欄位名稱
+        label: ID                   # 顯示標籤
+        type: text                  # 顯示類型
+        width: 80                   # 欄位寬度 (px)
+        sortable: false             # 是否可排序
+
+      - field: name
+        label: 名稱
+        type: text
+        searchable: true            # 是否可搜尋
+        sortable: true
+
+      - field: email
+        label: Email
+        type: email
+
+      - field: status
+        label: 狀態
+        type: badge                 # 顯示為徽章
+        render: |                   # 自訂渲染邏輯
+          (value) => {
+            if (value === 'active') return { text: '啟用', color: 'green' }
+            if (value === 'inactive') return { text: '停用', color: 'red' }
+            return { text: '未知', color: 'gray' }
+          }
+
+      - field: createdAt
+        label: 建立時間
+        type: datetime
+        format: YYYY-MM-DD HH:mm
+        sortable: true
+
+      - field: avatar
+        label: 頭像
+        type: image
+        width: 60
+
+      - field: price
+        label: 價格
+        type: currency              # 貨幣格式
+        currency: TWD               # 貨幣代碼
+
+      - field: actions
+        label: 操作
+        type: action-group          # 操作按鈕組
+        actions:
+          - id: edit
+            label: 編輯
+            type: link
+            target: /edit/${row.id}
+            icon: edit
+
+          - id: delete
+            label: 刪除
+            type: button
+            style: danger
+            confirm: 確定要刪除嗎?
+            effects:
+              - type: api-call
+                target: DELETE /api/entity/${row.id}
+                onSuccess:
+                  - type: refresh-list
+
+    # 篩選器
+    filters:
+      - field: status
+        label: 狀態
+        type: select
+        options:
+          - label: 全部
+            value: ''
+          - label: 啟用
+            value: active
+          - label: 停用
+            value: inactive
+
+      - field: search
+        label: 搜尋
+        type: search
+        placeholder: 搜尋名稱或 Email
+
+      - field: dateRange
+        label: 日期範圍
+        type: date-range
+
+    # 批次操作
+    batchActions:
+      - id: delete-selected
+        label: 刪除選中項目
+        type: button
+        style: danger
+        confirm: 確定要刪除選中的項目嗎?
+        effects:
+          - type: api-call
+            target: DELETE /api/entity/batch
+            payload:
+              ids: ${selectedIds}
+
+    # 分頁設定
+    pagination:
+      pageSize: 20                  # 每頁筆數
+      showSizeChanger: true         # 顯示每頁筆數選擇器
+      pageSizeOptions:              # 可選的每頁筆數
+        - 10
+        - 20
+        - 50
+        - 100
+
+  # ----------------------------------------------------------
+  # 詳情頁面配置 (type: detail)
+  # ----------------------------------------------------------
+  detail:
+    sections:
+      - id: basic-info
+        title: 基本資訊
+        type: info-grid             # info-grid | key-value | custom
+        fields:
+          - field: name
+            label: 名稱
+            type: text
+
+          - field: email
+            label: Email
+            type: email
+
+          - field: status
+            label: 狀態
+            type: badge
+
+      - id: statistics
+        title: 統計資訊
+        type: stats-cards
+        cards:
+          - label: 總訂單數
+            value: ${data.totalOrders}
+            icon: shopping-cart
+
+          - label: 總金額
+            value: ${data.totalAmount}
+            type: currency
+
+  # ----------------------------------------------------------
+  # 使用者動作
+  # ----------------------------------------------------------
+  actions:
+    # 主要動作
+    primary:
+      - id: submit
+        label: 提交
+        type: submit                # submit | button | link
+        style: primary              # primary | default | danger | ghost
+        size: large                 # large | default | small
+        icon: check                 # 圖示名稱 (選填)
+        loading: false              # 是否顯示載入狀態
+
+        # 條件顯示 (選填)
+        conditions:
+          - expr: form.isValid      # 表達式
+          - field: status
+            operator: equals
+            value: draft
+
+        # 效果鏈
+        effects:
+          - type: validate          # 驗證表單
+            target: all-fields
+            onSuccess:
+              - type: api-call      # API 呼叫
+                target: POST /api/entity
+                payload:
+                  name: ${form.name}
+                  email: ${form.email}
+                debounce: 500       # 防抖延遲 (ms)
+                onSuccess:
+                  - type: show-modal
+                    target: success-message
+                    props:
+                      message: 提交成功
+                  - type: navigate
+                    target: /list
+                  - type: update-store
+                    target: entityList
+                    action: refresh
+                onError:
+                  - type: show-modal
+                    target: error-message
+                    props:
+                      message: ${error.message}
+            onError:
+              - type: show-modal
+                target: validation-errors
+
+    # 次要動作
+    secondary:
+      - id: cancel
+        label: 取消
+        type: link
+        target: /list
+
+      - id: save-draft
+        label: 儲存草稿
+        type: button
+        style: default
+        effects:
+          - type: api-call
+            target: POST /api/entity/draft
+            payload: ${form}
+
+  # ----------------------------------------------------------
+  # 驗證規則
+  # ----------------------------------------------------------
+  validation:
+    # 欄位驗證
+    - field: username
+      rule: required
+      message: 請輸入使用者名稱
+
+    - field: username
+      rule: pattern
+      value: ^[a-zA-Z0-9_]{3,20}$
+      message: 使用者名稱必須為 3-20 個字元,僅限英數字與底線
+
+    - field: email
+      rule: required
+      message: 請輸入 Email
+
+    - field: email
+      rule: pattern
+      value: ^[^\s@]+@[^\s@]+\.[^\s@]+$
+      message: 請輸入有效的 Email 格式
+
+    - field: age
+      rule: range
+      min: 18
+      max: 100
+      message: 年齡必須在 18 到 100 之間
+
+    - field: password
+      rule: pattern
+      value: ^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$
+      message: 密碼至少 8 個字元,須包含字母與數字
+
+    # 唯一性驗證
+    - field: username
+      rule: unique
+      endpoint: /api/check-username
+      message: 此使用者名稱已被使用
+
+    # 自訂驗證
+    - rule: custom
+      expr: form.password === form.confirmPassword
+      message: 兩次輸入的密碼不一致
+
+    - rule: custom
+      expr: form.startDate < form.endDate
+      message: 結束日期必須晚於開始日期
+
+  # ----------------------------------------------------------
+  # 佈局配置
+  # ----------------------------------------------------------
+  layout:
+    type: grid                      # grid | flex | tabs | steps
+
+    # Grid 佈局
+    columns: 2                      # 欄位數
+    gap: 16                         # 間距 (px)
+
+    # 響應式設定
+    responsive:
+      - breakpoint: mobile          # mobile | tablet | desktop
+        columns: 1
+      - breakpoint: tablet
+        columns: 2
+      - breakpoint: desktop
+        columns: 3
+
+    # 區塊分組
+    sections:
+      - id: section-1
+        title: 基本資訊
+        fields:                     # 此區塊包含的欄位
+          - username
+          - email
+
+      - id: section-2
+        title: 詳細資訊
+        fields:
+          - age
+          - gender
+
+  # ----------------------------------------------------------
+  # 生命週期 Hooks
+  # ----------------------------------------------------------
+  hooks:
+    # 頁面載入前
+    beforeMount:
+      - type: check-permission
+        permission: read:entity
+      - type: load-dependencies
+
+    # 頁面載入後
+    afterMount:
+      - type: track-event
+        event: page_viewed
+        properties:
+          page: ${page.id}
+
+    # 表單提交前
+    beforeSubmit:
+      - type: confirm
+        message: 確定要提交嗎?
+      - type: validate
+        target: all-fields
+
+    # 表單提交後
+    afterSubmit:
+      - type: track-event
+        event: form_submitted
+      - type: clear-form
+
+    # 頁面卸載前
+    beforeUnmount:
+      - type: save-draft
+        condition: ${form.isDirty}
+
+  # ----------------------------------------------------------
+  # 狀態機 (進階功能,選填)
+  # ----------------------------------------------------------
+  stateMachine:
+    initial: draft                  # 初始狀態
+    states:
+      draft:
+        on:
+          SUBMIT: pending
+      pending:
+        on:
+          APPROVE: approved
+          REJECT: rejected
+      approved:
+        on:
+          ARCHIVE: archived
+      rejected:
+        on:
+          RESUBMIT: pending
+
+    # 狀態轉換時的動作
+    transitions:
+      - from: draft
+        to: pending
+        trigger: submit-button
+        guard:
+          - expr: form.isValid
+        effects:
+          - type: api-call
+            target: POST /api/entity/submit
+
+  # ----------------------------------------------------------
+  # 快取策略 (選填)
+  # ----------------------------------------------------------
+  cache:
+    enabled: true
+    strategy: stale-while-revalidate # cache-first | network-first | stale-while-revalidate
+    ttl: 300                        # 快取有效時間 (秒)
+    invalidateOn:                   # 何時失效
+      - event: entity-updated
+      - event: entity-deleted
+
+  # ----------------------------------------------------------
+  # 錯誤處理 (選填)
+  # ----------------------------------------------------------
+  errorHandling:
+    fallback: error-page            # 錯誤時顯示的頁面
+    retry:
+      enabled: true
+      maxAttempts: 3
+      backoff: exponential          # linear | exponential
+
+# ============================================================
+# 填寫檢查清單
+# ============================================================
+# - [ ] page.id 是唯一的
+# - [ ] page.type 正確選擇
+# - [ ] datasource.entity 與後端一致
+# - [ ] datasource.query.endpoint 正確
+# - [ ] auth 權限設定符合需求
+# - [ ] 所有必填欄位都有 required: true
+# - [ ] 驗證規則完整
+# - [ ] actions 定義清楚
+# - [ ] 錯誤處理完善
+# - [ ] 響應式佈局設定
+# ============================================================
