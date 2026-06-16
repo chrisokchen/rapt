@@ -1,0 +1,70 @@
+api: play-session
+schema_version: "3.3"
+entity: PlaySession
+title: 練習 Session API
+description: 學生練習牌例；出牌 / 提示 / 推理標記為 session 上的業務操作（ActionTrace / HintEvent / ReasoningTag）
+
+exposes:
+  standard: [list, read, create]
+  list:
+    filters:
+      - {field: studentId, operators: [eq]}
+      - {field: dealId, operators: [eq]}
+      - {field: status, operators: [eq]}
+    sorting: {fields: [startedAt], default: startedAt:desc}
+    pagination: {style: offset, default_size: 20}
+  operations:
+    - name: play_card
+      method: POST
+      path: /{id}/play-card
+    - name: request_hint
+      method: POST
+      path: /{id}/request-hint
+    - name: tag_reasoning
+      method: POST
+      path: /{id}/tag-reasoning
+    - name: diagnose
+      method: POST
+      path: /{id}/diagnose
+
+access:
+  authentication: {type: bearer, required: true}
+  endpoints:
+    list:
+      required_roles: [student, coach]
+      required_permissions:
+        - id: play_session_read_own
+        - id: play_session_read_team
+    read:
+      required_roles: [student, coach]
+      required_permissions:
+        - id: play_session_read_own
+        - id: play_session_read_team
+    create:
+      required_roles: [student]
+      required_permissions:
+        - id: play_session_create
+  operations:
+    play_card:
+      required_roles: [student]
+      required_permissions:
+        - id: action_trace_create
+    request_hint:
+      required_roles: [student]
+      required_permissions:
+        - id: hint_event_create
+    tag_reasoning:
+      required_roles: [student]
+      required_permissions:
+        - id: reasoning_tag_create
+    diagnose:
+      required_roles: [diagnosis-engine]
+      required_permissions:
+        - id: diagnosis_create
+
+source_evidence:
+  - "docs/ssot/habdd/deal-practice.ha.feature#Scenario:出牌被記錄為認知軌跡"
+  - "docs/ssot/habdd/graduated-hint.ha.feature#Scenario:請求第一級方向性提示"
+  - "docs/ssot/habdd/reasoning-capture.ha.feature#Scenario:長考時觸發推理標記蒐集"
+  - "docs/ssot/dbml/schema.dbml#Table:PlaySession"
+  - "docs/ssot/haarm/bridge-cognitive-tutor.haarm.yaml#roles"

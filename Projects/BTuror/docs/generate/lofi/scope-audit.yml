@@ -1,0 +1,44 @@
+audit:
+  id: PREVIEW-20260616-003
+  skill: rapt-lofi
+  generated_at: "2026-06-16T00:00:00+08:00"
+  source_artifacts:
+    - docs/ssot/hapdl/*.hapdl.yaml
+    - docs/ssot/dbml/schema.dbml
+    - docs/ssot/haarm/bridge-cognitive-tutor.haarm.yaml
+  output_artifact: docs/generate/lofi/index.html
+  status: ok
+  generated_summary:
+    pages: 13
+    entities: 23
+    roles: 11
+    file_size_kb: 47.2
+    widgets: {input: 35, select: 43, textarea: 8}
+  assumptions:
+    - "依 arguments.yml v2 路徑解析（frontend_intent_dir=docs/ssot/hapdl 等）。"
+    - "13 頁全部渲染：list（filter+table+pagination）、form（label-value + select + textarea）、dashboard、detail。"
+    - "欄位 label、ref_code select、auth.roles 角色皆自 SSoT 讀取；form.fields 正確渲染（與 rapt-design-brief 的 script outlier 不同）。"
+    - "wireframe 使用佔位 placeholder 資料，非真實資料；僅供版面/資訊架構審視。"
+    - "generated.status 仍為 deferred；本次為使用者明確 on-demand preview，未改動任何 SSoT。"
+  findings:
+    - id: PREVIEW-FIND-001
+      route: NOTE_ONLY
+      can_fix: false
+      severity: low
+      category: preview_fidelity
+      artifact: docs/generate/lofi/index.html
+      location: 全頁
+      summary: "Lo-Fi wireframe 使用佔位資料與灰階線框，僅呈現資訊架構與互動骨架，不含真實資料、視覺風格或業務邏輯。"
+      suggested_action: "Hi-Fi 視覺請改用 rapt-design-brief 產出的 design-brief.md 餵給 Claude Design；本檔定位為版面審查。"
+    - id: PREVIEW-FIND-002
+      route: NOTE_ONLY
+      can_fix: false
+      severity: low
+      category: preview_fidelity
+      artifact: docs/generate/lofi/index.html
+      location: 含敏感欄位之頁面
+      summary: "sensitive 遮罩機制存在，但本次 13 個 haPDL 頁未納入 UserAccount 的 email/passwordHash 欄位，故遮罩未被實際觸發。"
+      suggested_action: "若日後新增使用者帳號維護頁，sensitive 欄位將自動套用遮罩；目前無動作。"
+  ssot_integrity:
+    ssot_modified: false
+    note: "Preview skill 僅寫 docs/generate/lofi/**；未觸碰 docs/ssot/**。SSoT（verify PASS / RAscore A）不受影響。findings 皆為預覽保真度層級。"

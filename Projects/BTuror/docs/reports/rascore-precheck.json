@@ -1,0 +1,3413 @@
+{
+  "inputs": {
+    "features": "docs\\ssot\\habdd",
+    "dbml": "docs\\ssot\\dbml",
+    "glossary": "docs\\ssot\\dbml\\glossary.md",
+    "seeds": "docs\\ssot\\dbml\\seeds.md",
+    "constraints": "docs\\ssot\\dbml\\constraints.md",
+    "trace": ".raptor/traceability.md"
+  },
+  "missing_inputs": {
+    "features": false,
+    "dbml": false,
+    "glossary": false,
+    "seeds": false,
+    "constraints": false,
+    "trace": false
+  },
+  "gherkin": {
+    "feature_count": 9,
+    "scenario_count": 38,
+    "scenarios": [
+      {
+        "file": "docs\\ssot\\habdd\\coach-dashboard.ha.feature",
+        "name": "檢視學生認知分析",
+        "step_count": 3
+      },
+      {
+        "file": "docs\\ssot\\habdd\\coach-dashboard.ha.feature",
+        "name": "回溯診斷的證據日誌",
+        "step_count": 3
+      },
+      {
+        "file": "docs\\ssot\\habdd\\coach-dashboard.ha.feature",
+        "name": "標記 AI 與教練診斷分歧",
+        "step_count": 3
+      },
+      {
+        "file": "docs\\ssot\\habdd\\coach-dashboard.ha.feature",
+        "name": "派發針對性訓練",
+        "step_count": 4
+      },
+      {
+        "file": "docs\\ssot\\habdd\\coach-dashboard.ha.feature",
+        "name": "依學生與技能篩選認知分析",
+        "step_count": 3
+      },
+      {
+        "file": "docs\\ssot\\habdd\\deal-authoring.ha.feature",
+        "name": "成功匯入並標注 curated 牌例",
+        "step_count": 4
+      },
+      {
+        "file": "docs\\ssot\\habdd\\deal-authoring.ha.feature",
+        "name": "拒絕缺漏關鍵欄位的標注",
+        "step_count": 4
+      },
+      {
+        "file": "docs\\ssot\\habdd\\deal-authoring.ha.feature",
+        "name": "發布版本化的本體與規則集",
+        "step_count": 4
+      },
+      {
+        "file": "docs\\ssot\\habdd\\deal-practice.ha.feature",
+        "name": "成功開始一副橋引管理練習",
+        "step_count": 4
+      },
+      {
+        "file": "docs\\ssot\\habdd\\deal-practice.ha.feature",
+        "name": "出牌被記錄為認知軌跡",
+        "step_count": 4
+      },
+      {
+        "file": "docs\\ssot\\habdd\\deal-practice.ha.feature",
+        "name": "悔牌與重新決策被記錄",
+        "step_count": 3
+      },
+      {
+        "file": "docs\\ssot\\habdd\\deal-practice.ha.feature",
+        "name": "拒絕非法出牌",
+        "step_count": 4
+      },
+      {
+        "file": "docs\\ssot\\habdd\\deal-practice.ha.feature",
+        "name": "青少年以淺層認知層級練習",
+        "step_count": 4
+      },
+      {
+        "file": "docs\\ssot\\habdd\\diagnosis-coaching.ha.feature",
+        "name": "產生基於證據的診斷",
+        "step_count": 4
+      },
+      {
+        "file": "docs\\ssot\\habdd\\diagnosis-coaching.ha.feature",
+        "name": "寫入可審計證據日誌",
+        "step_count": 3
+      },
+      {
+        "file": "docs\\ssot\\habdd\\diagnosis-coaching.ha.feature",
+        "name": "安全的替代路線不判為錯誤",
+        "step_count": 4
+      },
+      {
+        "file": "docs\\ssot\\habdd\\diagnosis-coaching.ha.feature",
+        "name": "低信心診斷不過度宣稱",
+        "step_count": 4
+      },
+      {
+        "file": "docs\\ssot\\habdd\\diagnosis-coaching.ha.feature",
+        "name": "依玩家層級調整教學語氣",
+        "step_count": 4
+      },
+      {
+        "file": "docs\\ssot\\habdd\\diagnosis-coaching.ha.feature",
+        "name": "提供下一步訓練建議",
+        "step_count": 3
+      },
+      {
+        "file": "docs\\ssot\\habdd\\graduated-hint.ha.feature",
+        "name": "請求第一級方向性提示",
+        "step_count": 4
+      },
+      {
+        "file": "docs\\ssot\\habdd\\graduated-hint.ha.feature",
+        "name": "提示逐級升級",
+        "step_count": 4
+      },
+      {
+        "file": "docs\\ssot\\habdd\\graduated-hint.ha.feature",
+        "name": "提示依賴度成為認知訊號",
+        "step_count": 3
+      },
+      {
+        "file": "docs\\ssot\\habdd\\graduated-hint.ha.feature",
+        "name": "無提示自行完成決策",
+        "step_count": 3
+      },
+      {
+        "file": "docs\\ssot\\habdd\\mastery-tracking.ha.feature",
+        "name": "診斷後更新多維精熟度",
+        "step_count": 3
+      },
+      {
+        "file": "docs\\ssot\\habdd\\mastery-tracking.ha.feature",
+        "name": "呈現部分精熟狀態",
+        "step_count": 3
+      },
+      {
+        "file": "docs\\ssot\\habdd\\mastery-tracking.ha.feature",
+        "name": "以變形局面驗證遷移",
+        "step_count": 3
+      },
+      {
+        "file": "docs\\ssot\\habdd\\mastery-tracking.ha.feature",
+        "name": "隔期重測更新保留度",
+        "step_count": 3
+      },
+      {
+        "file": "docs\\ssot\\habdd\\mastery-tracking.ha.feature",
+        "name": "檢視錯誤模式時間軸",
+        "step_count": 3
+      },
+      {
+        "file": "docs\\ssot\\habdd\\parent-view.ha.feature",
+        "name": "檢視監護學習者的認知進展",
+        "step_count": 3
+      },
+      {
+        "file": "docs\\ssot\\habdd\\parent-view.ha.feature",
+        "name": "不得檢視非監護學習者的資料",
+        "step_count": 3
+      },
+      {
+        "file": "docs\\ssot\\habdd\\reasoning-capture.ha.feature",
+        "name": "長考時觸發推理標記蒐集",
+        "step_count": 3
+      },
+      {
+        "file": "docs\\ssot\\habdd\\reasoning-capture.ha.feature",
+        "name": "關鍵錯誤後觸發推理標記蒐集",
+        "step_count": 3
+      },
+      {
+        "file": "docs\\ssot\\habdd\\reasoning-capture.ha.feature",
+        "name": "玩家略過推理標記以維持心流",
+        "step_count": 3
+      },
+      {
+        "file": "docs\\ssot\\habdd\\replay-governance.ha.feature",
+        "name": "除錯重播確認診斷依據",
+        "step_count": 3
+      },
+      {
+        "file": "docs\\ssot\\habdd\\replay-governance.ha.feature",
+        "name": "研究重播比較不同規則版本",
+        "step_count": 3
+      },
+      {
+        "file": "docs\\ssot\\habdd\\replay-governance.ha.feature",
+        "name": "學生歷程重播重算精熟曲線",
+        "step_count": 3
+      },
+      {
+        "file": "docs\\ssot\\habdd\\replay-governance.ha.feature",
+        "name": "本體變更需具治理權限者核可",
+        "step_count": 4
+      },
+      {
+        "file": "docs\\ssot\\habdd\\replay-governance.ha.feature",
+        "name": "核可後套用本體演化提案",
+        "step_count": 3
+      }
+    ],
+    "scenarios_without_given": [],
+    "scenarios_without_when": [],
+    "scenarios_without_then": [],
+    "ui_detail_terms": [],
+    "long_scenarios": [],
+    "entity_hints": [
+      {
+        "file": "docs\\ssot\\habdd\\coach-dashboard.ha.feature",
+        "scenario": "檢視學生認知分析",
+        "scenario_id": "SCN-F006-002",
+        "entities": [
+          "證據日誌",
+          "診斷"
+        ]
+      },
+      {
+        "file": "docs\\ssot\\habdd\\coach-dashboard.ha.feature",
+        "scenario": "回溯診斷的證據日誌",
+        "scenario_id": "SCN-F006-003",
+        "entities": [
+          "診斷"
+        ]
+      },
+      {
+        "file": "docs\\ssot\\habdd\\coach-dashboard.ha.feature",
+        "scenario": "標記 AI 與教練診斷分歧",
+        "scenario_id": "SCN-F006-004",
+        "entities": [
+          "指派",
+          "練習"
+        ]
+      },
+      {
+        "file": "docs\\ssot\\habdd\\coach-dashboard.ha.feature",
+        "scenario": "派發針對性訓練",
+        "scenario_id": "SCN-F006-005",
+        "entities": [
+          "精熟度"
+        ]
+      },
+      {
+        "file": "docs\\ssot\\habdd\\coach-dashboard.ha.feature",
+        "scenario": "依學生與技能篩選認知分析",
+        "scenario_id": "",
+        "entities": [
+          "精熟度"
+        ]
+      },
+      {
+        "file": "docs\\ssot\\habdd\\deal-authoring.ha.feature",
+        "scenario": "成功匯入並標注 curated 牌例",
+        "scenario_id": "SCN-F007-002",
+        "entities": [
+          "牌例"
+        ]
+      },
+      {
+        "file": "docs\\ssot\\habdd\\deal-authoring.ha.feature",
+        "scenario": "拒絕缺漏關鍵欄位的標注",
+        "scenario_id": "SCN-F007-003",
+        "entities": [
+          "本體",
+          "規則集"
+        ]
+      },
+      {
+        "file": "docs\\ssot\\habdd\\deal-authoring.ha.feature",
+        "scenario": "發布版本化的本體與規則集",
+        "scenario_id": "",
+        "entities": [
+          "本體",
+          "規則集"
+        ]
+      },
+      {
+        "file": "docs\\ssot\\habdd\\deal-practice.ha.feature",
+        "scenario": "成功開始一副橋引管理練習",
+        "scenario_id": "SCN-F001-002",
+        "entities": [
+          "出牌紀錄",
+          "練習"
+        ]
+      },
+      {
+        "file": "docs\\ssot\\habdd\\deal-practice.ha.feature",
+        "scenario": "出牌被記錄為認知軌跡",
+        "scenario_id": "SCN-F001-003",
+        "entities": [
+          "出牌紀錄"
+        ]
+      },
+      {
+        "file": "docs\\ssot\\habdd\\deal-practice.ha.feature",
+        "scenario": "悔牌與重新決策被記錄",
+        "scenario_id": "SCN-F001-004",
+        "entities": [
+          "出牌紀錄"
+        ]
+      },
+      {
+        "file": "docs\\ssot\\habdd\\deal-practice.ha.feature",
+        "scenario": "拒絕非法出牌",
+        "scenario_id": "SCN-F001-005",
+        "entities": [
+          "練習"
+        ]
+      },
+      {
+        "file": "docs\\ssot\\habdd\\deal-practice.ha.feature",
+        "scenario": "青少年以淺層認知層級練習",
+        "scenario_id": "",
+        "entities": [
+          "練習"
+        ]
+      },
+      {
+        "file": "docs\\ssot\\habdd\\diagnosis-coaching.ha.feature",
+        "scenario": "產生基於證據的診斷",
+        "scenario_id": "SCN-F004-002",
+        "entities": [
+          "證據日誌",
+          "診斷"
+        ]
+      },
+      {
+        "file": "docs\\ssot\\habdd\\diagnosis-coaching.ha.feature",
+        "scenario": "寫入可審計證據日誌",
+        "scenario_id": "SCN-F004-003",
+        "entities": [
+          "診斷"
+        ]
+      },
+      {
+        "file": "docs\\ssot\\habdd\\diagnosis-coaching.ha.feature",
+        "scenario": "安全的替代路線不判為錯誤",
+        "scenario_id": "SCN-F004-004",
+        "entities": [
+          "診斷"
+        ]
+      },
+      {
+        "file": "docs\\ssot\\habdd\\graduated-hint.ha.feature",
+        "scenario": "請求第一級方向性提示",
+        "scenario_id": "SCN-F002-002",
+        "entities": [
+          "提示紀錄"
+        ]
+      },
+      {
+        "file": "docs\\ssot\\habdd\\graduated-hint.ha.feature",
+        "scenario": "提示逐級升級",
+        "scenario_id": "SCN-F002-003",
+        "entities": [
+          "提示紀錄"
+        ]
+      },
+      {
+        "file": "docs\\ssot\\habdd\\graduated-hint.ha.feature",
+        "scenario": "提示依賴度成為認知訊號",
+        "scenario_id": "SCN-F002-004",
+        "entities": [
+          "提示紀錄"
+        ]
+      },
+      {
+        "file": "docs\\ssot\\habdd\\mastery-tracking.ha.feature",
+        "scenario": "診斷後更新多維精熟度",
+        "scenario_id": "SCN-F005-002",
+        "entities": [
+          "精熟度"
+        ]
+      },
+      {
+        "file": "docs\\ssot\\habdd\\mastery-tracking.ha.feature",
+        "scenario": "呈現部分精熟狀態",
+        "scenario_id": "SCN-F005-003",
+        "entities": [
+          "精熟度",
+          "練習"
+        ]
+      },
+      {
+        "file": "docs\\ssot\\habdd\\mastery-tracking.ha.feature",
+        "scenario": "以變形局面驗證遷移",
+        "scenario_id": "SCN-F005-004",
+        "entities": [
+          "精熟度"
+        ]
+      },
+      {
+        "file": "docs\\ssot\\habdd\\mastery-tracking.ha.feature",
+        "scenario": "隔期重測更新保留度",
+        "scenario_id": "SCN-F005-005",
+        "entities": [
+          "精熟度"
+        ]
+      },
+      {
+        "file": "docs\\ssot\\habdd\\parent-view.ha.feature",
+        "scenario": "檢視監護學習者的認知進展",
+        "scenario_id": "SCN-F009-002",
+        "entities": [
+          "精熟度",
+          "監護關係"
+        ]
+      },
+      {
+        "file": "docs\\ssot\\habdd\\parent-view.ha.feature",
+        "scenario": "不得檢視非監護學習者的資料",
+        "scenario_id": "",
+        "entities": [
+          "精熟度",
+          "監護關係"
+        ]
+      },
+      {
+        "file": "docs\\ssot\\habdd\\reasoning-capture.ha.feature",
+        "scenario": "長考時觸發推理標記蒐集",
+        "scenario_id": "SCN-F003-002",
+        "entities": [
+          "推理標記"
+        ]
+      },
+      {
+        "file": "docs\\ssot\\habdd\\reasoning-capture.ha.feature",
+        "scenario": "關鍵錯誤後觸發推理標記蒐集",
+        "scenario_id": "SCN-F003-003",
+        "entities": [
+          "推理標記"
+        ]
+      },
+      {
+        "file": "docs\\ssot\\habdd\\replay-governance.ha.feature",
+        "scenario": "除錯重播確認診斷依據",
+        "scenario_id": "SCN-F008-002",
+        "entities": [
+          "重播",
+          "規則集"
+        ]
+      },
+      {
+        "file": "docs\\ssot\\habdd\\replay-governance.ha.feature",
+        "scenario": "研究重播比較不同規則版本",
+        "scenario_id": "SCN-F008-003",
+        "entities": [
+          "重播",
+          "精熟度"
+        ]
+      },
+      {
+        "file": "docs\\ssot\\habdd\\replay-governance.ha.feature",
+        "scenario": "學生歷程重播重算精熟曲線",
+        "scenario_id": "SCN-F008-004",
+        "entities": [
+          "本體",
+          "本體演化提案"
+        ]
+      },
+      {
+        "file": "docs\\ssot\\habdd\\replay-governance.ha.feature",
+        "scenario": "本體變更需具治理權限者核可",
+        "scenario_id": "SCN-F008-005",
+        "entities": [
+          "本體演化提案",
+          "本體"
+        ]
+      },
+      {
+        "file": "docs\\ssot\\habdd\\replay-governance.ha.feature",
+        "scenario": "核可後套用本體演化提案",
+        "scenario_id": "",
+        "entities": [
+          "本體演化提案",
+          "本體"
+        ]
+      }
+    ],
+    "entity_hint_coverage": {
+      "with_entities": 32,
+      "total_scenarios": 38,
+      "ratio": 0.8421
+    },
+    "terms": [
+      "002",
+      "003",
+      "004",
+      "005",
+      "006",
+      "01",
+      "260616",
+      "AI",
+      "CLR",
+      "Entry",
+      "F001",
+      "F002",
+      "F003",
+      "F004",
+      "F005",
+      "F006",
+      "F007",
+      "F008",
+      "F009",
+      "Management",
+      "MiniBridge",
+      "Q6",
+      "SCN",
+      "curated",
+      "entities",
+      "ontology",
+      "scenario_id",
+      "source",
+      "一則本體演化提案已附證據並通過重播評估",
+      "一副已標注的",
+      "一副待標注的",
+      "不具治理權限者嘗試套用該提案",
+      "不得檢視非監護學習者的資料",
+      "以變形局面驗證遷移",
+      "低信心診斷不過度宣稱",
+      "供確認規則為何如此判定",
+      "依學生與技能篩選認知分析",
+      "依玩家層級調整教學語氣",
+      "保留四個面向的精熟度",
+      "信心值與支持證據的診斷",
+      "具治理權限者核可該提案",
+      "出牌紀錄",
+      "出牌被記錄為認知軌跡",
+      "可接受路線與常見錯誤的標注",
+      "同一批學習軌跡已封存",
+      "含證據",
+      "呈現部分精熟狀態",
+      "回溯診斷的證據日誌",
+      "執行",
+      "執行面向偏低的部分精熟狀態",
+      "學生歷程重播重算精熟曲線",
+      "學習者開始一副以淺層",
+      "安全的替代路線不判為錯誤",
+      "家長嘗試檢視該學習者的認知進展",
+      "家長檢視該學習者的認知進展",
+      "寫入可審計證據日誌",
+      "思考時間與悔牌次數",
+      "悔牌與重新決策被記錄",
+      "成功匯入並標注",
+      "成功開始一副橋引管理練習",
+      "我監護的學習者已累積練習與精熟紀錄",
+      "所需技能",
+      "拒絕缺漏關鍵欄位的標注",
+      "拒絕非法出牌",
+      "指派",
+      "推理標記",
+      "提供下一步訓練建議",
+      "提示依賴度成為認知訊號",
+      "提示紀錄",
+      "提示與推理標記",
+      "提示逐級升級",
+      "教學內容的診斷結論維持一致",
+      "教練以特定學生與特定認知技能篩選分析",
+      "教練在分析中發現學生卡在某認知缺口",
+      "教練對某次",
+      "教練指派對應該缺口的牌例給該學生",
+      "教練標記其與",
+      "教練檢視了某次診斷的證據日誌",
+      "教練檢視該次診斷的證據日誌",
+      "教練看到系統判定該認知失敗的完整證據與規則依據",
+      "教練看到誤解趨勢",
+      "教練負責的學生已累積多筆診斷",
+      "教練開啟該學生的認知分析",
+      "既有牌例標注標明其依據的版本",
+      "本體",
+      "本體已改版",
+      "本體演化提案",
+      "本體變更需具治理權限者核可",
+      "某副練習的事件流已封存",
+      "某學生已有多副練習的診斷紀錄",
+      "某學習者與該家長不存在監護關係",
+      "核可後套用本體演化提案",
+      "標注的牌例",
+      "標注者以原始版本重播該練習",
+      "標注者以另一個規則集版本重播該批軌跡",
+      "標注者以新版本重播某學生的學習歷程",
+      "標注者完成該牌例的局面標注",
+      "標注者已完成一組本體與診斷規則的修訂",
+      "標注者提交的局面標注缺少關鍵時刻或所需技能",
+      "標注者發布該修訂",
+      "標記",
+      "檢視學生認知分析",
+      "檢視監護學習者的認知進展",
+      "檢視錯誤模式時間軸",
+      "派發針對性訓練",
+      "無提示自行完成決策",
+      "牌例",
+      "牌例可供練習",
+      "玩家再次請求提示",
+      "玩家嘗試打出一張不合規則的牌",
+      "玩家在本墩已升級提示至完整教學層級",
+      "玩家在某個決策點感到不確定",
+      "玩家在某個決策點未請求任何提示",
+      "玩家在相同認知結構但不同表面牌型的局面再次練習",
+      "玩家完成該墩決策",
+      "玩家已取得第一級提示但仍無法決定",
+      "玩家已在原始局面達成正解",
+      "玩家已暫定一張出牌",
+      "玩家已累積多副練習的診斷",
+      "玩家從合法牌中選出一張牌",
+      "玩家從推理標籤中選擇其考量",
+      "玩家收回該決策並改選另一張牌",
+      "玩家於一段時間後重測同一技能",
+      "玩家曾在某技能達到穩定表現",
+      "玩家標記其當下的推理考量",
+      "玩家檢視其錯誤模式時間軸",
+      "玩家檢視某技能的精熟度",
+      "玩家正在進行一副練習且輪到其決策",
+      "玩家略過推理標記以維持心流",
+      "玩家略過此次標記",
+      "玩家的程度層級已知",
+      "玩家看到該牌局的起始局面",
+      "玩家能辨識危險手但在複雜局面執行不穩",
+      "玩家請求提示",
+      "玩家選擇了一條非最佳但安全的合法路線",
+      "玩家開始該牌例的練習",
+      "產生基於證據的診斷",
+      "當時的合法牌",
+      "發布版本化的本體與規則集",
+      "監護關係",
+      "研究重播比較不同規則版本",
+      "精熟度",
+      "精熟演化",
+      "系統不中斷練習並繼續下一個決策",
+      "系統不套用該提案",
+      "系統不接受該標注",
+      "系統不接受該次出牌",
+      "系統不提供該學習者的資料",
+      "系統以新版本套用該本體變更",
+      "系統以新版本號記錄該本體與規則集",
+      "系統以機率方式更新辨識",
+      "系統以較低信心值呈現該假設",
+      "系統以適齡的認知層級載入該牌局",
+      "系統依其表現更新保留面向的精熟度",
+      "系統依其表現更新遷移面向的精熟度",
+      "系統依該層級調整用語密度與語氣",
+      "系統依遙測共現提出一則本體演化提案",
+      "系統偵測到玩家在某決策點出現長考",
+      "系統僅呈現符合該篩選條件的誤解趨勢與精熟資料",
+      "系統僅追蹤基礎打牌認知訊號",
+      "系統儲存含關鍵時刻",
+      "系統呈現同類認知錯誤隨時間的變化",
+      "系統呈現該學習者各認知面向的精熟度與成長趨勢",
+      "系統在玩家出牌後偵測到關鍵錯誤",
+      "系統在觸發點邀請玩家標記推理",
+      "系統執行認知診斷",
+      "系統完成賽後教學",
+      "系統寫入可回溯的證據日誌",
+      "系統封存該次診斷",
+      "系統將其標記為風格差異而非錯誤",
+      "系統將本次達成正解所需的最高提示層級記錄為認知訊號",
+      "系統將此次計畫變更記錄為認知軌跡的一部分",
+      "系統對某次失敗的成因證據不足",
+      "系統已產生一筆新的診斷",
+      "系統已產生一筆診斷",
+      "系統建立一筆新的練習",
+      "系統建議對應該缺口的下一步訓練",
+      "系統指出缺漏的關鍵欄位",
+      "系統提供下一個更高層級的提示",
+      "系統提供第一級的方向性提示",
+      "系統提示玩家僅能從合法牌中選擇",
+      "系統更新學生模型",
+      "系統檢核該標注",
+      "系統產出兩版本下的診斷差異供比較",
+      "系統產生一筆含假設",
+      "系統產生診斷",
+      "系統產生賽後教學說明",
+      "系統要求由具治理權限者核可後方可生效",
+      "系統記錄提示已升級",
+      "系統記錄此分歧供後續本體檢討",
+      "系統記錄該推理標記作為診斷輔助訊號",
+      "系統記錄該推理標記與所屬墩次",
+      "系統記錄該次出牌",
+      "系統記錄該次提示的層級",
+      "系統記錄該決策為零提示完成",
+      "系統評估該次決策",
+      "系統重新計算該學生的精熟度軌跡",
+      "系統重現當時的診斷與其證據",
+      "系統顯示辨識面向高",
+      "練習",
+      "與教練診斷分歧",
+      "規則與學生模型變化量",
+      "規則集",
+      "診斷",
+      "診斷引用其依據的規則",
+      "診斷後更新多維精熟度",
+      "診斷意見不一致",
+      "診斷指出特定的認知缺口",
+      "診斷有疑慮",
+      "該副練習已收集到出牌軌跡",
+      "該墩決策完成",
+      "該墩進入下一個決策點",
+      "該學生收到該指派",
+      "該指派與目標認知缺口關聯記錄",
+      "該牌例成為可供練習與診斷的牌例",
+      "請求第一級方向性提示",
+      "證據日誌",
+      "賽後教學以試探語氣陳述而非斷定成因",
+      "賽後教學說明其與最佳路線的取捨",
+      "遷移",
+      "遷移失敗與提示依賴度",
+      "重播",
+      "長考時觸發推理標記蒐集",
+      "關鍵錯誤後觸發推理標記蒐集",
+      "除錯重播確認診斷依據",
+      "隔期重測更新保留度",
+      "青少年以淺層認知層級練習",
+      "青少年學習者已登入且選擇"
+    ]
+  },
+  "dbml": {
+    "file_count": 1,
+    "table_count": 23,
+    "enum_count": 0,
+    "refs_count": 37,
+    "tables": {
+      "UserAccount": {
+        "file": "docs\\ssot\\dbml\\schema.dbml",
+        "columns": [
+          "userId",
+          "displayName",
+          "userType",
+          "email",
+          "passwordHash",
+          "enabled",
+          "createdAt"
+        ],
+        "has_pk": true
+      },
+      "StudentProfile": {
+        "file": "docs\\ssot\\dbml\\schema.dbml",
+        "columns": [
+          "studentId",
+          "cognitiveLevel",
+          "enrolledAt"
+        ],
+        "has_pk": true
+      },
+      "CoachStudentLink": {
+        "file": "docs\\ssot\\dbml\\schema.dbml",
+        "columns": [
+          "linkId",
+          "coachId",
+          "studentId",
+          "linkedAt"
+        ],
+        "has_pk": true
+      },
+      "GuardianStudentLink": {
+        "file": "docs\\ssot\\dbml\\schema.dbml",
+        "columns": [
+          "linkId",
+          "guardianId",
+          "studentId",
+          "linkedAt"
+        ],
+        "has_pk": true
+      },
+      "CuratedDeal": {
+        "file": "docs\\ssot\\dbml\\schema.dbml",
+        "columns": [
+          "dealId",
+          "title",
+          "handsPbn",
+          "contract",
+          "declarer",
+          "scoringContext",
+          "authorId",
+          "createdAt"
+        ],
+        "has_pk": true
+      },
+      "SituationAnnotation": {
+        "file": "docs\\ssot\\dbml\\schema.dbml",
+        "columns": [
+          "annotationId",
+          "dealId",
+          "situationType",
+          "ontologyVersion",
+          "dslBody",
+          "isComplete",
+          "updatedAt"
+        ],
+        "has_pk": true
+      },
+      "OntologyVersion": {
+        "file": "docs\\ssot\\dbml\\schema.dbml",
+        "columns": [
+          "ontologyVersion",
+          "title",
+          "status",
+          "publishedAt",
+          "publishedBy"
+        ],
+        "has_pk": true
+      },
+      "CognitiveSkill": {
+        "file": "docs\\ssot\\dbml\\schema.dbml",
+        "columns": [
+          "skillId",
+          "ontologyVersion",
+          "skillCode",
+          "skillName",
+          "cognitiveLevel",
+          "parentSkillId"
+        ],
+        "has_pk": true
+      },
+      "RuleSet": {
+        "file": "docs\\ssot\\dbml\\schema.dbml",
+        "columns": [
+          "ruleSetVersion",
+          "title",
+          "status",
+          "publishedAt"
+        ],
+        "has_pk": true
+      },
+      "DiagnosisRule": {
+        "file": "docs\\ssot\\dbml\\schema.dbml",
+        "columns": [
+          "ruleId",
+          "ruleSetVersion",
+          "targetSkillId",
+          "mistakeCategory",
+          "conditionExpr",
+          "description"
+        ],
+        "has_pk": true
+      },
+      "OntologyProposal": {
+        "file": "docs\\ssot\\dbml\\schema.dbml",
+        "columns": [
+          "proposalId",
+          "baseVersion",
+          "status",
+          "rationale",
+          "proposedAt",
+          "reviewedBy",
+          "reviewedAt"
+        ],
+        "has_pk": true
+      },
+      "PlaySession": {
+        "file": "docs\\ssot\\dbml\\schema.dbml",
+        "columns": [
+          "sessionId",
+          "studentId",
+          "dealId",
+          "status",
+          "startedAt",
+          "completedAt"
+        ],
+        "has_pk": true
+      },
+      "ActionTrace": {
+        "file": "docs\\ssot\\dbml\\schema.dbml",
+        "columns": [
+          "actionId",
+          "sessionId",
+          "trickNo",
+          "seat",
+          "selectedCard",
+          "legalCards",
+          "thinkTimeMs",
+          "undoCount",
+          "recordedAt"
+        ],
+        "has_pk": true
+      },
+      "HintEvent": {
+        "file": "docs\\ssot\\dbml\\schema.dbml",
+        "columns": [
+          "hintId",
+          "sessionId",
+          "trickNo",
+          "hintLevel",
+          "requestedAt"
+        ],
+        "has_pk": true
+      },
+      "ReasoningTag": {
+        "file": "docs\\ssot\\dbml\\schema.dbml",
+        "columns": [
+          "reasoningId",
+          "sessionId",
+          "trickNo",
+          "tagCode",
+          "triggerType",
+          "taggedAt"
+        ],
+        "has_pk": true
+      },
+      "Diagnosis": {
+        "file": "docs\\ssot\\dbml\\schema.dbml",
+        "columns": [
+          "diagnosisId",
+          "sessionId",
+          "targetSkillId",
+          "ruleSetVersion",
+          "hypothesis",
+          "confidence",
+          "mistakeCategory",
+          "severity",
+          "cognitiveOrigin",
+          "recoverability",
+          "isStylistic",
+          "diagnosedAt"
+        ],
+        "has_pk": true
+      },
+      "DiagnosisEvidence": {
+        "file": "docs\\ssot\\dbml\\schema.dbml",
+        "columns": [
+          "evidenceId",
+          "diagnosisId",
+          "ruleId",
+          "evidenceText",
+          "sourceActionId",
+          "masteryDelta"
+        ],
+        "has_pk": true
+      },
+      "CoachingFeedback": {
+        "file": "docs\\ssot\\dbml\\schema.dbml",
+        "columns": [
+          "feedbackId",
+          "diagnosisId",
+          "explanationText",
+          "suggestedSkillId",
+          "generatedAt"
+        ],
+        "has_pk": true
+      },
+      "CoachReview": {
+        "file": "docs\\ssot\\dbml\\schema.dbml",
+        "columns": [
+          "reviewId",
+          "diagnosisId",
+          "coachId",
+          "agreement",
+          "comment",
+          "reviewedAt"
+        ],
+        "has_pk": true
+      },
+      "StudentSkillState": {
+        "file": "docs\\ssot\\dbml\\schema.dbml",
+        "columns": [
+          "stateId",
+          "studentId",
+          "skillId",
+          "recognitionMastery",
+          "executionMastery",
+          "transferMastery",
+          "retentionMastery",
+          "confidence",
+          "trend",
+          "updatedAt"
+        ],
+        "has_pk": true
+      },
+      "Assignment": {
+        "file": "docs\\ssot\\dbml\\schema.dbml",
+        "columns": [
+          "assignmentId",
+          "coachId",
+          "studentId",
+          "dealId",
+          "targetSkillId",
+          "status",
+          "assignedAt"
+        ],
+        "has_pk": true
+      },
+      "LearningEvent": {
+        "file": "docs\\ssot\\dbml\\schema.dbml",
+        "columns": [
+          "eventId",
+          "sessionId",
+          "studentId",
+          "eventType",
+          "sequenceNo",
+          "payload",
+          "ontologyVersion",
+          "ruleSetVersion",
+          "occurredAt"
+        ],
+        "has_pk": true
+      },
+      "ReplayRun": {
+        "file": "docs\\ssot\\dbml\\schema.dbml",
+        "columns": [
+          "replayId",
+          "scope",
+          "scopeRefId",
+          "replayType",
+          "ontologyVersion",
+          "ruleSetVersion",
+          "triggeredBy",
+          "ranAt"
+        ],
+        "has_pk": true
+      }
+    },
+    "enums": [],
+    "refs": [
+      {
+        "file": "docs\\ssot\\dbml\\schema.dbml",
+        "ref": "StudentProfile.studentId > UserAccount.userId"
+      },
+      {
+        "file": "docs\\ssot\\dbml\\schema.dbml",
+        "ref": "CoachStudentLink.coachId > UserAccount.userId"
+      },
+      {
+        "file": "docs\\ssot\\dbml\\schema.dbml",
+        "ref": "CoachStudentLink.studentId > StudentProfile.studentId"
+      },
+      {
+        "file": "docs\\ssot\\dbml\\schema.dbml",
+        "ref": "GuardianStudentLink.guardianId > UserAccount.userId"
+      },
+      {
+        "file": "docs\\ssot\\dbml\\schema.dbml",
+        "ref": "GuardianStudentLink.studentId > StudentProfile.studentId"
+      },
+      {
+        "file": "docs\\ssot\\dbml\\schema.dbml",
+        "ref": "CuratedDeal.authorId > UserAccount.userId"
+      },
+      {
+        "file": "docs\\ssot\\dbml\\schema.dbml",
+        "ref": "SituationAnnotation.dealId > CuratedDeal.dealId"
+      },
+      {
+        "file": "docs\\ssot\\dbml\\schema.dbml",
+        "ref": "SituationAnnotation.ontologyVersion > OntologyVersion.ontologyVersion"
+      },
+      {
+        "file": "docs\\ssot\\dbml\\schema.dbml",
+        "ref": "CognitiveSkill.ontologyVersion > OntologyVersion.ontologyVersion"
+      },
+      {
+        "file": "docs\\ssot\\dbml\\schema.dbml",
+        "ref": "CognitiveSkill.parentSkillId > CognitiveSkill.skillId"
+      },
+      {
+        "file": "docs\\ssot\\dbml\\schema.dbml",
+        "ref": "DiagnosisRule.ruleSetVersion > RuleSet.ruleSetVersion"
+      },
+      {
+        "file": "docs\\ssot\\dbml\\schema.dbml",
+        "ref": "DiagnosisRule.targetSkillId > CognitiveSkill.skillId"
+      },
+      {
+        "file": "docs\\ssot\\dbml\\schema.dbml",
+        "ref": "OntologyProposal.baseVersion > OntologyVersion.ontologyVersion"
+      },
+      {
+        "file": "docs\\ssot\\dbml\\schema.dbml",
+        "ref": "OntologyProposal.reviewedBy > UserAccount.userId"
+      },
+      {
+        "file": "docs\\ssot\\dbml\\schema.dbml",
+        "ref": "PlaySession.studentId > StudentProfile.studentId"
+      },
+      {
+        "file": "docs\\ssot\\dbml\\schema.dbml",
+        "ref": "PlaySession.dealId > CuratedDeal.dealId"
+      },
+      {
+        "file": "docs\\ssot\\dbml\\schema.dbml",
+        "ref": "ActionTrace.sessionId > PlaySession.sessionId"
+      },
+      {
+        "file": "docs\\ssot\\dbml\\schema.dbml",
+        "ref": "HintEvent.sessionId > PlaySession.sessionId"
+      },
+      {
+        "file": "docs\\ssot\\dbml\\schema.dbml",
+        "ref": "ReasoningTag.sessionId > PlaySession.sessionId"
+      },
+      {
+        "file": "docs\\ssot\\dbml\\schema.dbml",
+        "ref": "Diagnosis.sessionId > PlaySession.sessionId"
+      },
+      {
+        "file": "docs\\ssot\\dbml\\schema.dbml",
+        "ref": "Diagnosis.targetSkillId > CognitiveSkill.skillId"
+      },
+      {
+        "file": "docs\\ssot\\dbml\\schema.dbml",
+        "ref": "Diagnosis.ruleSetVersion > RuleSet.ruleSetVersion"
+      },
+      {
+        "file": "docs\\ssot\\dbml\\schema.dbml",
+        "ref": "DiagnosisEvidence.diagnosisId > Diagnosis.diagnosisId"
+      },
+      {
+        "file": "docs\\ssot\\dbml\\schema.dbml",
+        "ref": "DiagnosisEvidence.ruleId > DiagnosisRule.ruleId"
+      },
+      {
+        "file": "docs\\ssot\\dbml\\schema.dbml",
+        "ref": "DiagnosisEvidence.sourceActionId > ActionTrace.actionId"
+      },
+      {
+        "file": "docs\\ssot\\dbml\\schema.dbml",
+        "ref": "CoachingFeedback.diagnosisId > Diagnosis.diagnosisId"
+      },
+      {
+        "file": "docs\\ssot\\dbml\\schema.dbml",
+        "ref": "CoachingFeedback.suggestedSkillId > CognitiveSkill.skillId"
+      },
+      {
+        "file": "docs\\ssot\\dbml\\schema.dbml",
+        "ref": "CoachReview.diagnosisId > Diagnosis.diagnosisId"
+      },
+      {
+        "file": "docs\\ssot\\dbml\\schema.dbml",
+        "ref": "CoachReview.coachId > UserAccount.userId"
+      },
+      {
+        "file": "docs\\ssot\\dbml\\schema.dbml",
+        "ref": "StudentSkillState.studentId > StudentProfile.studentId"
+      },
+      {
+        "file": "docs\\ssot\\dbml\\schema.dbml",
+        "ref": "StudentSkillState.skillId > CognitiveSkill.skillId"
+      },
+      {
+        "file": "docs\\ssot\\dbml\\schema.dbml",
+        "ref": "Assignment.coachId > UserAccount.userId"
+      },
+      {
+        "file": "docs\\ssot\\dbml\\schema.dbml",
+        "ref": "Assignment.studentId > StudentProfile.studentId"
+      },
+      {
+        "file": "docs\\ssot\\dbml\\schema.dbml",
+        "ref": "Assignment.dealId > CuratedDeal.dealId"
+      },
+      {
+        "file": "docs\\ssot\\dbml\\schema.dbml",
+        "ref": "Assignment.targetSkillId > CognitiveSkill.skillId"
+      },
+      {
+        "file": "docs\\ssot\\dbml\\schema.dbml",
+        "ref": "LearningEvent.sessionId > PlaySession.sessionId"
+      },
+      {
+        "file": "docs\\ssot\\dbml\\schema.dbml",
+        "ref": "LearningEvent.studentId > StudentProfile.studentId"
+      }
+    ],
+    "tables_without_pk": [],
+    "terms": [
+      "ActionTrace",
+      "Assignment",
+      "CoachReview",
+      "CoachStudentLink",
+      "CoachingFeedback",
+      "CognitiveSkill",
+      "CuratedDeal",
+      "Diagnosis",
+      "DiagnosisEvidence",
+      "DiagnosisRule",
+      "GuardianStudentLink",
+      "HintEvent",
+      "LearningEvent",
+      "OntologyProposal",
+      "OntologyVersion",
+      "PlaySession",
+      "ReasoningTag",
+      "ReplayRun",
+      "RuleSet",
+      "SituationAnnotation",
+      "StudentProfile",
+      "StudentSkillState",
+      "UserAccount",
+      "actionId",
+      "agreement",
+      "annotationId",
+      "assignedAt",
+      "assignmentId",
+      "authorId",
+      "baseVersion",
+      "coachId",
+      "cognitiveLevel",
+      "cognitiveOrigin",
+      "comment",
+      "completedAt",
+      "conditionExpr",
+      "confidence",
+      "contract",
+      "createdAt",
+      "dealId",
+      "declarer",
+      "description",
+      "diagnosedAt",
+      "diagnosisId",
+      "displayName",
+      "dslBody",
+      "email",
+      "enabled",
+      "enrolledAt",
+      "eventId",
+      "eventType",
+      "evidenceId",
+      "evidenceText",
+      "executionMastery",
+      "explanationText",
+      "feedbackId",
+      "generatedAt",
+      "guardianId",
+      "handsPbn",
+      "hintId",
+      "hintLevel",
+      "hypothesis",
+      "isComplete",
+      "isStylistic",
+      "legalCards",
+      "linkId",
+      "linkedAt",
+      "masteryDelta",
+      "mistakeCategory",
+      "occurredAt",
+      "ontologyVersion",
+      "parentSkillId",
+      "passwordHash",
+      "payload",
+      "proposalId",
+      "proposedAt",
+      "publishedAt",
+      "publishedBy",
+      "ranAt",
+      "rationale",
+      "reasoningId",
+      "recognitionMastery",
+      "recordedAt",
+      "recoverability",
+      "replayId",
+      "replayType",
+      "requestedAt",
+      "retentionMastery",
+      "reviewId",
+      "reviewedAt",
+      "reviewedBy",
+      "ruleId",
+      "ruleSetVersion",
+      "scope",
+      "scopeRefId",
+      "scoringContext",
+      "seat",
+      "selectedCard",
+      "sequenceNo",
+      "sessionId",
+      "severity",
+      "situationType",
+      "skillCode",
+      "skillId",
+      "skillName",
+      "sourceActionId",
+      "startedAt",
+      "stateId",
+      "status",
+      "studentId",
+      "suggestedSkillId",
+      "tagCode",
+      "taggedAt",
+      "targetSkillId",
+      "thinkTimeMs",
+      "title",
+      "transferMastery",
+      "trend",
+      "trickNo",
+      "triggerType",
+      "triggeredBy",
+      "undoCount",
+      "updatedAt",
+      "userId",
+      "userType"
+    ]
+  },
+  "glossary": {
+    "exists": true,
+    "mapping_count": 50,
+    "mappings": [
+      {
+        "term": "使用者帳號",
+        "tables": [
+          "UserAccount"
+        ],
+        "columns": "",
+        "aliases": ""
+      },
+      {
+        "term": "學生檔案",
+        "tables": [
+          "StudentProfile"
+        ],
+        "columns": "",
+        "aliases": ""
+      },
+      {
+        "term": "教練學生關係",
+        "tables": [
+          "CoachStudentLink"
+        ],
+        "columns": "",
+        "aliases": ""
+      },
+      {
+        "term": "監護關係",
+        "tables": [
+          "GuardianStudentLink"
+        ],
+        "columns": "",
+        "aliases": ""
+      },
+      {
+        "term": "牌例",
+        "tables": [
+          "CuratedDeal"
+        ],
+        "columns": "",
+        "aliases": ""
+      },
+      {
+        "term": "局面標注",
+        "tables": [
+          "SituationAnnotation"
+        ],
+        "columns": "",
+        "aliases": ""
+      },
+      {
+        "term": "本體版本",
+        "tables": [
+          "OntologyVersion"
+        ],
+        "columns": "",
+        "aliases": ""
+      },
+      {
+        "term": "認知技能",
+        "tables": [
+          "CognitiveSkill"
+        ],
+        "columns": "",
+        "aliases": ""
+      },
+      {
+        "term": "規則集",
+        "tables": [
+          "RuleSet"
+        ],
+        "columns": "",
+        "aliases": ""
+      },
+      {
+        "term": "診斷規則",
+        "tables": [
+          "DiagnosisRule"
+        ],
+        "columns": "",
+        "aliases": ""
+      },
+      {
+        "term": "本體演化提案",
+        "tables": [
+          "OntologyProposal"
+        ],
+        "columns": "",
+        "aliases": ""
+      },
+      {
+        "term": "練習",
+        "tables": [
+          "PlaySession"
+        ],
+        "columns": "",
+        "aliases": ""
+      },
+      {
+        "term": "出牌紀錄",
+        "tables": [
+          "ActionTrace"
+        ],
+        "columns": "",
+        "aliases": ""
+      },
+      {
+        "term": "提示紀錄",
+        "tables": [
+          "HintEvent"
+        ],
+        "columns": "",
+        "aliases": ""
+      },
+      {
+        "term": "推理標記",
+        "tables": [
+          "ReasoningTag"
+        ],
+        "columns": "",
+        "aliases": ""
+      },
+      {
+        "term": "診斷",
+        "tables": [
+          "Diagnosis"
+        ],
+        "columns": "",
+        "aliases": ""
+      },
+      {
+        "term": "診斷證據",
+        "tables": [
+          "DiagnosisEvidence"
+        ],
+        "columns": "",
+        "aliases": ""
+      },
+      {
+        "term": "賽後教學",
+        "tables": [
+          "CoachingFeedback"
+        ],
+        "columns": "",
+        "aliases": ""
+      },
+      {
+        "term": "教練覆核",
+        "tables": [
+          "CoachReview"
+        ],
+        "columns": "",
+        "aliases": ""
+      },
+      {
+        "term": "認知精熟度",
+        "tables": [
+          "StudentSkillState"
+        ],
+        "columns": "",
+        "aliases": ""
+      },
+      {
+        "term": "訓練指派",
+        "tables": [
+          "Assignment"
+        ],
+        "columns": "",
+        "aliases": ""
+      },
+      {
+        "term": "學習事件",
+        "tables": [
+          "LearningEvent"
+        ],
+        "columns": "",
+        "aliases": ""
+      },
+      {
+        "term": "重播",
+        "tables": [
+          "ReplayRun"
+        ],
+        "columns": "",
+        "aliases": ""
+      },
+      {
+        "term": "練習",
+        "tables": [
+          "PlaySession"
+        ],
+        "columns": "sessionId,studentId,dealId,status",
+        "aliases": ""
+      },
+      {
+        "term": "牌例",
+        "tables": [
+          "CuratedDeal"
+        ],
+        "columns": "dealId,title,declarer",
+        "aliases": "牌局"
+      },
+      {
+        "term": "局面標注",
+        "tables": [
+          "SituationAnnotation"
+        ],
+        "columns": "annotationId,situationType,dslBody",
+        "aliases": "Situation DSL"
+      },
+      {
+        "term": "出牌紀錄",
+        "tables": [
+          "ActionTrace"
+        ],
+        "columns": "actionId,selectedCard,legalCards",
+        "aliases": "認知軌跡"
+      },
+      {
+        "term": "提示紀錄",
+        "tables": [
+          "HintEvent"
+        ],
+        "columns": "hintId,hintLevel",
+        "aliases": ""
+      },
+      {
+        "term": "推理標記",
+        "tables": [
+          "ReasoningTag"
+        ],
+        "columns": "reasoningId,tagCode",
+        "aliases": ""
+      },
+      {
+        "term": "診斷",
+        "tables": [
+          "Diagnosis"
+        ],
+        "columns": "diagnosisId,hypothesis,confidence",
+        "aliases": ""
+      },
+      {
+        "term": "證據日誌",
+        "tables": [
+          "DiagnosisEvidence"
+        ],
+        "columns": "evidenceId,evidenceText,ruleId",
+        "aliases": "診斷證據"
+      },
+      {
+        "term": "教學說明",
+        "tables": [
+          "CoachingFeedback"
+        ],
+        "columns": "feedbackId,explanationText",
+        "aliases": "賽後教學"
+      },
+      {
+        "term": "訓練建議",
+        "tables": [
+          "CoachingFeedback"
+        ],
+        "columns": "suggestedSkillId",
+        "aliases": ""
+      },
+      {
+        "term": "精熟度",
+        "tables": [
+          "StudentSkillState"
+        ],
+        "columns": "recognitionMastery,executionMastery,transferMastery,retentionMastery",
+        "aliases": ""
+      },
+      {
+        "term": "遷移",
+        "tables": [
+          "StudentSkillState"
+        ],
+        "columns": "transferMastery",
+        "aliases": ""
+      },
+      {
+        "term": "保留",
+        "tables": [
+          "StudentSkillState"
+        ],
+        "columns": "retentionMastery",
+        "aliases": ""
+      },
+      {
+        "term": "錯誤模式",
+        "tables": [
+          "Diagnosis"
+        ],
+        "columns": "mistakeCategory,cognitiveOrigin",
+        "aliases": ""
+      },
+      {
+        "term": "指派",
+        "tables": [
+          "Assignment"
+        ],
+        "columns": "assignmentId,targetSkillId",
+        "aliases": ""
+      },
+      {
+        "term": "本體",
+        "tables": [
+          "OntologyVersion"
+        ],
+        "columns": "ontologyVersion,status",
+        "aliases": ""
+      },
+      {
+        "term": "規則集",
+        "tables": [
+          "RuleSet"
+        ],
+        "columns": "ruleSetVersion,status",
+        "aliases": ""
+      },
+      {
+        "term": "本體演化提案",
+        "tables": [
+          "OntologyProposal"
+        ],
+        "columns": "proposalId,status",
+        "aliases": ""
+      },
+      {
+        "term": "重播",
+        "tables": [
+          "ReplayRun"
+        ],
+        "columns": "replayId,replayType,scope",
+        "aliases": ""
+      },
+      {
+        "term": "診斷分歧",
+        "tables": [
+          "CoachReview"
+        ],
+        "columns": "reviewId,agreement",
+        "aliases": ""
+      },
+      {
+        "term": "局面標注完整性",
+        "tables": [
+          "SituationAnnotation"
+        ],
+        "columns": "isComplete",
+        "aliases": ""
+      },
+      {
+        "term": "可接受路線",
+        "tables": [
+          "SituationAnnotation"
+        ],
+        "columns": "dslBody",
+        "aliases": ""
+      },
+      {
+        "term": "認知層級",
+        "tables": [
+          "cognitiveLevel"
+        ],
+        "columns": "",
+        "aliases": ""
+      },
+      {
+        "term": "提示層級",
+        "tables": [
+          "hintLevel"
+        ],
+        "columns": "",
+        "aliases": ""
+      },
+      {
+        "term": "認知成因",
+        "tables": [
+          "cognitiveOrigin"
+        ],
+        "columns": "",
+        "aliases": ""
+      },
+      {
+        "term": "信心值",
+        "tables": [
+          "confidence"
+        ],
+        "columns": "",
+        "aliases": ""
+      },
+      {
+        "term": "風格差異",
+        "tables": [
+          "isStylistic"
+        ],
+        "columns": "",
+        "aliases": ""
+      }
+    ],
+    "term_to_tables": {
+      "使用者帳號": [
+        "UserAccount"
+      ],
+      "學生檔案": [
+        "StudentProfile"
+      ],
+      "教練學生關係": [
+        "CoachStudentLink"
+      ],
+      "監護關係": [
+        "GuardianStudentLink"
+      ],
+      "牌例": [
+        "CuratedDeal"
+      ],
+      "局面標注": [
+        "SituationAnnotation"
+      ],
+      "本體版本": [
+        "OntologyVersion"
+      ],
+      "認知技能": [
+        "CognitiveSkill"
+      ],
+      "規則集": [
+        "RuleSet"
+      ],
+      "診斷規則": [
+        "DiagnosisRule"
+      ],
+      "本體演化提案": [
+        "OntologyProposal"
+      ],
+      "練習": [
+        "PlaySession"
+      ],
+      "出牌紀錄": [
+        "ActionTrace"
+      ],
+      "提示紀錄": [
+        "HintEvent"
+      ],
+      "推理標記": [
+        "ReasoningTag"
+      ],
+      "診斷": [
+        "Diagnosis"
+      ],
+      "診斷證據": [
+        "DiagnosisEvidence"
+      ],
+      "賽後教學": [
+        "CoachingFeedback"
+      ],
+      "教練覆核": [
+        "CoachReview"
+      ],
+      "認知精熟度": [
+        "StudentSkillState"
+      ],
+      "訓練指派": [
+        "Assignment"
+      ],
+      "學習事件": [
+        "LearningEvent"
+      ],
+      "重播": [
+        "ReplayRun"
+      ],
+      "牌局": [
+        "CuratedDeal"
+      ],
+      "Situation DSL": [
+        "SituationAnnotation"
+      ],
+      "認知軌跡": [
+        "ActionTrace"
+      ],
+      "證據日誌": [
+        "DiagnosisEvidence"
+      ],
+      "教學說明": [
+        "CoachingFeedback"
+      ],
+      "訓練建議": [
+        "CoachingFeedback"
+      ],
+      "精熟度": [
+        "StudentSkillState"
+      ],
+      "遷移": [
+        "StudentSkillState"
+      ],
+      "保留": [
+        "StudentSkillState"
+      ],
+      "錯誤模式": [
+        "Diagnosis"
+      ],
+      "指派": [
+        "Assignment"
+      ],
+      "本體": [
+        "OntologyVersion"
+      ],
+      "診斷分歧": [
+        "CoachReview"
+      ],
+      "局面標注完整性": [
+        "SituationAnnotation"
+      ],
+      "可接受路線": [
+        "SituationAnnotation"
+      ],
+      "認知層級": [
+        "cognitiveLevel"
+      ],
+      "提示層級": [
+        "hintLevel"
+      ],
+      "認知成因": [
+        "cognitiveOrigin"
+      ],
+      "信心值": [
+        "confidence"
+      ],
+      "風格差異": [
+        "isStylistic"
+      ]
+    },
+    "table_to_terms": {
+      "UserAccount": [
+        "使用者帳號"
+      ],
+      "StudentProfile": [
+        "學生檔案"
+      ],
+      "CoachStudentLink": [
+        "教練學生關係"
+      ],
+      "GuardianStudentLink": [
+        "監護關係"
+      ],
+      "CuratedDeal": [
+        "牌例"
+      ],
+      "SituationAnnotation": [
+        "局面標注",
+        "局面標注完整性",
+        "可接受路線"
+      ],
+      "OntologyVersion": [
+        "本體版本",
+        "本體"
+      ],
+      "CognitiveSkill": [
+        "認知技能"
+      ],
+      "RuleSet": [
+        "規則集"
+      ],
+      "DiagnosisRule": [
+        "診斷規則"
+      ],
+      "OntologyProposal": [
+        "本體演化提案"
+      ],
+      "PlaySession": [
+        "練習"
+      ],
+      "ActionTrace": [
+        "出牌紀錄"
+      ],
+      "HintEvent": [
+        "提示紀錄"
+      ],
+      "ReasoningTag": [
+        "推理標記"
+      ],
+      "Diagnosis": [
+        "診斷",
+        "錯誤模式"
+      ],
+      "DiagnosisEvidence": [
+        "診斷證據",
+        "證據日誌"
+      ],
+      "CoachingFeedback": [
+        "賽後教學",
+        "教學說明",
+        "訓練建議"
+      ],
+      "CoachReview": [
+        "教練覆核",
+        "診斷分歧"
+      ],
+      "StudentSkillState": [
+        "認知精熟度",
+        "精熟度",
+        "遷移",
+        "保留"
+      ],
+      "Assignment": [
+        "訓練指派",
+        "指派"
+      ],
+      "LearningEvent": [
+        "學習事件"
+      ],
+      "ReplayRun": [
+        "重播"
+      ],
+      "cognitiveLevel": [
+        "認知層級"
+      ],
+      "hintLevel": [
+        "提示層級"
+      ],
+      "cognitiveOrigin": [
+        "認知成因"
+      ],
+      "confidence": [
+        "信心值"
+      ],
+      "isStylistic": [
+        "風格差異"
+      ]
+    }
+  },
+  "seeds": {
+    "exists": true,
+    "label": "seeds",
+    "line_count": 190,
+    "table_rows": 73,
+    "sections": [
+      "UserType",
+      "CognitiveLevel",
+      "Seat",
+      "ScoringContext",
+      "SituationType",
+      "PublishStatus",
+      "SessionStatus",
+      "HintLevel",
+      "ReasoningTag",
+      "ReasoningTrigger",
+      "MistakeCategory",
+      "MistakeSeverity",
+      "CognitiveOrigin",
+      "Recoverability",
+      "MasteryTrend",
+      "ReviewAgreement",
+      "ProposalStatus",
+      "AssignmentStatus",
+      "LearningEventType",
+      "ReplayScope",
+      "ReplayType"
+    ]
+  },
+  "constraints": {
+    "exists": true,
+    "label": "constraints",
+    "line_count": 39,
+    "table_rows": 20,
+    "sections": [
+      "Compatibility Decisions"
+    ]
+  },
+  "cross_spec": {
+    "matched_terms": [],
+    "unmatched_gherkin_terms": [
+      "002",
+      "003",
+      "004",
+      "005",
+      "006",
+      "01",
+      "260616",
+      "AI",
+      "CLR",
+      "Entry",
+      "F001",
+      "F002",
+      "F003",
+      "F004",
+      "F005",
+      "F006",
+      "F007",
+      "F008",
+      "F009",
+      "Management",
+      "MiniBridge",
+      "Q6",
+      "SCN",
+      "curated",
+      "entities",
+      "ontology",
+      "scenario_id",
+      "source",
+      "一則本體演化提案已附證據並通過重播評估",
+      "一副已標注的",
+      "一副待標注的",
+      "不具治理權限者嘗試套用該提案",
+      "不得檢視非監護學習者的資料",
+      "以變形局面驗證遷移",
+      "低信心診斷不過度宣稱",
+      "供確認規則為何如此判定",
+      "依學生與技能篩選認知分析",
+      "依玩家層級調整教學語氣",
+      "保留四個面向的精熟度",
+      "信心值與支持證據的診斷",
+      "具治理權限者核可該提案",
+      "出牌紀錄",
+      "出牌被記錄為認知軌跡",
+      "可接受路線與常見錯誤的標注",
+      "同一批學習軌跡已封存",
+      "含證據",
+      "呈現部分精熟狀態",
+      "回溯診斷的證據日誌",
+      "執行",
+      "執行面向偏低的部分精熟狀態",
+      "學生歷程重播重算精熟曲線",
+      "學習者開始一副以淺層",
+      "安全的替代路線不判為錯誤",
+      "家長嘗試檢視該學習者的認知進展",
+      "家長檢視該學習者的認知進展",
+      "寫入可審計證據日誌",
+      "思考時間與悔牌次數",
+      "悔牌與重新決策被記錄",
+      "成功匯入並標注",
+      "成功開始一副橋引管理練習",
+      "我監護的學習者已累積練習與精熟紀錄",
+      "所需技能",
+      "拒絕缺漏關鍵欄位的標注",
+      "拒絕非法出牌",
+      "指派",
+      "推理標記",
+      "提供下一步訓練建議",
+      "提示依賴度成為認知訊號",
+      "提示紀錄",
+      "提示與推理標記",
+      "提示逐級升級",
+      "教學內容的診斷結論維持一致",
+      "教練以特定學生與特定認知技能篩選分析",
+      "教練在分析中發現學生卡在某認知缺口",
+      "教練對某次",
+      "教練指派對應該缺口的牌例給該學生",
+      "教練標記其與",
+      "教練檢視了某次診斷的證據日誌",
+      "教練檢視該次診斷的證據日誌",
+      "教練看到系統判定該認知失敗的完整證據與規則依據",
+      "教練看到誤解趨勢",
+      "教練負責的學生已累積多筆診斷",
+      "教練開啟該學生的認知分析",
+      "既有牌例標注標明其依據的版本",
+      "本體",
+      "本體已改版",
+      "本體演化提案",
+      "本體變更需具治理權限者核可",
+      "某副練習的事件流已封存",
+      "某學生已有多副練習的診斷紀錄",
+      "某學習者與該家長不存在監護關係",
+      "核可後套用本體演化提案",
+      "標注的牌例",
+      "標注者以原始版本重播該練習",
+      "標注者以另一個規則集版本重播該批軌跡",
+      "標注者以新版本重播某學生的學習歷程",
+      "標注者完成該牌例的局面標注",
+      "標注者已完成一組本體與診斷規則的修訂",
+      "標注者提交的局面標注缺少關鍵時刻或所需技能",
+      "標注者發布該修訂"
+    ],
+    "orphan_dbml_tables": [
+      "ActionTrace",
+      "Assignment",
+      "CoachReview",
+      "CoachStudentLink",
+      "CoachingFeedback",
+      "CognitiveSkill",
+      "CuratedDeal",
+      "Diagnosis",
+      "DiagnosisEvidence",
+      "DiagnosisRule",
+      "GuardianStudentLink",
+      "HintEvent",
+      "LearningEvent",
+      "OntologyProposal",
+      "OntologyVersion",
+      "PlaySession",
+      "ReasoningTag",
+      "ReplayRun",
+      "RuleSet",
+      "SituationAnnotation",
+      "StudentProfile",
+      "StudentSkillState",
+      "UserAccount"
+    ],
+    "low_confidence_mappings": [],
+    "glossary_mappings": [
+      {
+        "term": "使用者帳號",
+        "tables": [
+          "UserAccount"
+        ],
+        "columns": "",
+        "aliases": ""
+      },
+      {
+        "term": "學生檔案",
+        "tables": [
+          "StudentProfile"
+        ],
+        "columns": "",
+        "aliases": ""
+      },
+      {
+        "term": "教練學生關係",
+        "tables": [
+          "CoachStudentLink"
+        ],
+        "columns": "",
+        "aliases": ""
+      },
+      {
+        "term": "監護關係",
+        "tables": [
+          "GuardianStudentLink"
+        ],
+        "columns": "",
+        "aliases": ""
+      },
+      {
+        "term": "牌例",
+        "tables": [
+          "CuratedDeal"
+        ],
+        "columns": "",
+        "aliases": ""
+      },
+      {
+        "term": "局面標注",
+        "tables": [
+          "SituationAnnotation"
+        ],
+        "columns": "",
+        "aliases": ""
+      },
+      {
+        "term": "本體版本",
+        "tables": [
+          "OntologyVersion"
+        ],
+        "columns": "",
+        "aliases": ""
+      },
+      {
+        "term": "認知技能",
+        "tables": [
+          "CognitiveSkill"
+        ],
+        "columns": "",
+        "aliases": ""
+      },
+      {
+        "term": "規則集",
+        "tables": [
+          "RuleSet"
+        ],
+        "columns": "",
+        "aliases": ""
+      },
+      {
+        "term": "診斷規則",
+        "tables": [
+          "DiagnosisRule"
+        ],
+        "columns": "",
+        "aliases": ""
+      },
+      {
+        "term": "本體演化提案",
+        "tables": [
+          "OntologyProposal"
+        ],
+        "columns": "",
+        "aliases": ""
+      },
+      {
+        "term": "練習",
+        "tables": [
+          "PlaySession"
+        ],
+        "columns": "",
+        "aliases": ""
+      },
+      {
+        "term": "出牌紀錄",
+        "tables": [
+          "ActionTrace"
+        ],
+        "columns": "",
+        "aliases": ""
+      },
+      {
+        "term": "提示紀錄",
+        "tables": [
+          "HintEvent"
+        ],
+        "columns": "",
+        "aliases": ""
+      },
+      {
+        "term": "推理標記",
+        "tables": [
+          "ReasoningTag"
+        ],
+        "columns": "",
+        "aliases": ""
+      },
+      {
+        "term": "診斷",
+        "tables": [
+          "Diagnosis"
+        ],
+        "columns": "",
+        "aliases": ""
+      },
+      {
+        "term": "診斷證據",
+        "tables": [
+          "DiagnosisEvidence"
+        ],
+        "columns": "",
+        "aliases": ""
+      },
+      {
+        "term": "賽後教學",
+        "tables": [
+          "CoachingFeedback"
+        ],
+        "columns": "",
+        "aliases": ""
+      },
+      {
+        "term": "教練覆核",
+        "tables": [
+          "CoachReview"
+        ],
+        "columns": "",
+        "aliases": ""
+      },
+      {
+        "term": "認知精熟度",
+        "tables": [
+          "StudentSkillState"
+        ],
+        "columns": "",
+        "aliases": ""
+      },
+      {
+        "term": "訓練指派",
+        "tables": [
+          "Assignment"
+        ],
+        "columns": "",
+        "aliases": ""
+      },
+      {
+        "term": "學習事件",
+        "tables": [
+          "LearningEvent"
+        ],
+        "columns": "",
+        "aliases": ""
+      },
+      {
+        "term": "重播",
+        "tables": [
+          "ReplayRun"
+        ],
+        "columns": "",
+        "aliases": ""
+      },
+      {
+        "term": "練習",
+        "tables": [
+          "PlaySession"
+        ],
+        "columns": "sessionId,studentId,dealId,status",
+        "aliases": ""
+      },
+      {
+        "term": "牌例",
+        "tables": [
+          "CuratedDeal"
+        ],
+        "columns": "dealId,title,declarer",
+        "aliases": "牌局"
+      },
+      {
+        "term": "局面標注",
+        "tables": [
+          "SituationAnnotation"
+        ],
+        "columns": "annotationId,situationType,dslBody",
+        "aliases": "Situation DSL"
+      },
+      {
+        "term": "出牌紀錄",
+        "tables": [
+          "ActionTrace"
+        ],
+        "columns": "actionId,selectedCard,legalCards",
+        "aliases": "認知軌跡"
+      },
+      {
+        "term": "提示紀錄",
+        "tables": [
+          "HintEvent"
+        ],
+        "columns": "hintId,hintLevel",
+        "aliases": ""
+      },
+      {
+        "term": "推理標記",
+        "tables": [
+          "ReasoningTag"
+        ],
+        "columns": "reasoningId,tagCode",
+        "aliases": ""
+      },
+      {
+        "term": "診斷",
+        "tables": [
+          "Diagnosis"
+        ],
+        "columns": "diagnosisId,hypothesis,confidence",
+        "aliases": ""
+      },
+      {
+        "term": "證據日誌",
+        "tables": [
+          "DiagnosisEvidence"
+        ],
+        "columns": "evidenceId,evidenceText,ruleId",
+        "aliases": "診斷證據"
+      },
+      {
+        "term": "教學說明",
+        "tables": [
+          "CoachingFeedback"
+        ],
+        "columns": "feedbackId,explanationText",
+        "aliases": "賽後教學"
+      },
+      {
+        "term": "訓練建議",
+        "tables": [
+          "CoachingFeedback"
+        ],
+        "columns": "suggestedSkillId",
+        "aliases": ""
+      },
+      {
+        "term": "精熟度",
+        "tables": [
+          "StudentSkillState"
+        ],
+        "columns": "recognitionMastery,executionMastery,transferMastery,retentionMastery",
+        "aliases": ""
+      },
+      {
+        "term": "遷移",
+        "tables": [
+          "StudentSkillState"
+        ],
+        "columns": "transferMastery",
+        "aliases": ""
+      },
+      {
+        "term": "保留",
+        "tables": [
+          "StudentSkillState"
+        ],
+        "columns": "retentionMastery",
+        "aliases": ""
+      },
+      {
+        "term": "錯誤模式",
+        "tables": [
+          "Diagnosis"
+        ],
+        "columns": "mistakeCategory,cognitiveOrigin",
+        "aliases": ""
+      },
+      {
+        "term": "指派",
+        "tables": [
+          "Assignment"
+        ],
+        "columns": "assignmentId,targetSkillId",
+        "aliases": ""
+      },
+      {
+        "term": "本體",
+        "tables": [
+          "OntologyVersion"
+        ],
+        "columns": "ontologyVersion,status",
+        "aliases": ""
+      },
+      {
+        "term": "規則集",
+        "tables": [
+          "RuleSet"
+        ],
+        "columns": "ruleSetVersion,status",
+        "aliases": ""
+      },
+      {
+        "term": "本體演化提案",
+        "tables": [
+          "OntologyProposal"
+        ],
+        "columns": "proposalId,status",
+        "aliases": ""
+      },
+      {
+        "term": "重播",
+        "tables": [
+          "ReplayRun"
+        ],
+        "columns": "replayId,replayType,scope",
+        "aliases": ""
+      },
+      {
+        "term": "診斷分歧",
+        "tables": [
+          "CoachReview"
+        ],
+        "columns": "reviewId,agreement",
+        "aliases": ""
+      },
+      {
+        "term": "局面標注完整性",
+        "tables": [
+          "SituationAnnotation"
+        ],
+        "columns": "isComplete",
+        "aliases": ""
+      },
+      {
+        "term": "可接受路線",
+        "tables": [
+          "SituationAnnotation"
+        ],
+        "columns": "dslBody",
+        "aliases": ""
+      },
+      {
+        "term": "認知層級",
+        "tables": [
+          "cognitiveLevel"
+        ],
+        "columns": "",
+        "aliases": ""
+      },
+      {
+        "term": "提示層級",
+        "tables": [
+          "hintLevel"
+        ],
+        "columns": "",
+        "aliases": ""
+      },
+      {
+        "term": "認知成因",
+        "tables": [
+          "cognitiveOrigin"
+        ],
+        "columns": "",
+        "aliases": ""
+      },
+      {
+        "term": "信心值",
+        "tables": [
+          "confidence"
+        ],
+        "columns": "",
+        "aliases": ""
+      },
+      {
+        "term": "風格差異",
+        "tables": [
+          "isStylistic"
+        ],
+        "columns": "",
+        "aliases": ""
+      }
+    ],
+    "scenario_table_candidates": [
+      {
+        "file": "docs\\ssot\\habdd\\coach-dashboard.ha.feature",
+        "scenario": "檢視學生認知分析",
+        "scenario_id": "SCN-F006-002",
+        "entities": [
+          "證據日誌",
+          "診斷"
+        ],
+        "candidate_tables": [
+          "Diagnosis",
+          "DiagnosisEvidence"
+        ]
+      },
+      {
+        "file": "docs\\ssot\\habdd\\coach-dashboard.ha.feature",
+        "scenario": "回溯診斷的證據日誌",
+        "scenario_id": "SCN-F006-003",
+        "entities": [
+          "診斷"
+        ],
+        "candidate_tables": [
+          "Diagnosis"
+        ]
+      },
+      {
+        "file": "docs\\ssot\\habdd\\coach-dashboard.ha.feature",
+        "scenario": "標記 AI 與教練診斷分歧",
+        "scenario_id": "SCN-F006-004",
+        "entities": [
+          "指派",
+          "練習"
+        ],
+        "candidate_tables": [
+          "Assignment",
+          "PlaySession"
+        ]
+      },
+      {
+        "file": "docs\\ssot\\habdd\\coach-dashboard.ha.feature",
+        "scenario": "派發針對性訓練",
+        "scenario_id": "SCN-F006-005",
+        "entities": [
+          "精熟度"
+        ],
+        "candidate_tables": [
+          "StudentSkillState"
+        ]
+      },
+      {
+        "file": "docs\\ssot\\habdd\\coach-dashboard.ha.feature",
+        "scenario": "依學生與技能篩選認知分析",
+        "scenario_id": "",
+        "entities": [
+          "精熟度"
+        ],
+        "candidate_tables": [
+          "StudentSkillState"
+        ]
+      },
+      {
+        "file": "docs\\ssot\\habdd\\deal-authoring.ha.feature",
+        "scenario": "成功匯入並標注 curated 牌例",
+        "scenario_id": "SCN-F007-002",
+        "entities": [
+          "牌例"
+        ],
+        "candidate_tables": [
+          "CuratedDeal"
+        ]
+      },
+      {
+        "file": "docs\\ssot\\habdd\\deal-authoring.ha.feature",
+        "scenario": "拒絕缺漏關鍵欄位的標注",
+        "scenario_id": "SCN-F007-003",
+        "entities": [
+          "本體",
+          "規則集"
+        ],
+        "candidate_tables": [
+          "OntologyVersion",
+          "RuleSet"
+        ]
+      },
+      {
+        "file": "docs\\ssot\\habdd\\deal-authoring.ha.feature",
+        "scenario": "發布版本化的本體與規則集",
+        "scenario_id": "",
+        "entities": [
+          "本體",
+          "規則集"
+        ],
+        "candidate_tables": [
+          "OntologyVersion",
+          "RuleSet"
+        ]
+      },
+      {
+        "file": "docs\\ssot\\habdd\\deal-practice.ha.feature",
+        "scenario": "成功開始一副橋引管理練習",
+        "scenario_id": "SCN-F001-002",
+        "entities": [
+          "出牌紀錄",
+          "練習"
+        ],
+        "candidate_tables": [
+          "ActionTrace",
+          "PlaySession"
+        ]
+      },
+      {
+        "file": "docs\\ssot\\habdd\\deal-practice.ha.feature",
+        "scenario": "出牌被記錄為認知軌跡",
+        "scenario_id": "SCN-F001-003",
+        "entities": [
+          "出牌紀錄"
+        ],
+        "candidate_tables": [
+          "ActionTrace"
+        ]
+      },
+      {
+        "file": "docs\\ssot\\habdd\\deal-practice.ha.feature",
+        "scenario": "悔牌與重新決策被記錄",
+        "scenario_id": "SCN-F001-004",
+        "entities": [
+          "出牌紀錄"
+        ],
+        "candidate_tables": [
+          "ActionTrace"
+        ]
+      },
+      {
+        "file": "docs\\ssot\\habdd\\deal-practice.ha.feature",
+        "scenario": "拒絕非法出牌",
+        "scenario_id": "SCN-F001-005",
+        "entities": [
+          "練習"
+        ],
+        "candidate_tables": [
+          "PlaySession"
+        ]
+      },
+      {
+        "file": "docs\\ssot\\habdd\\deal-practice.ha.feature",
+        "scenario": "青少年以淺層認知層級練習",
+        "scenario_id": "",
+        "entities": [
+          "練習"
+        ],
+        "candidate_tables": [
+          "PlaySession"
+        ]
+      },
+      {
+        "file": "docs\\ssot\\habdd\\diagnosis-coaching.ha.feature",
+        "scenario": "產生基於證據的診斷",
+        "scenario_id": "SCN-F004-002",
+        "entities": [
+          "證據日誌",
+          "診斷"
+        ],
+        "candidate_tables": [
+          "Diagnosis",
+          "DiagnosisEvidence"
+        ]
+      },
+      {
+        "file": "docs\\ssot\\habdd\\diagnosis-coaching.ha.feature",
+        "scenario": "寫入可審計證據日誌",
+        "scenario_id": "SCN-F004-003",
+        "entities": [
+          "診斷"
+        ],
+        "candidate_tables": [
+          "Diagnosis"
+        ]
+      },
+      {
+        "file": "docs\\ssot\\habdd\\diagnosis-coaching.ha.feature",
+        "scenario": "安全的替代路線不判為錯誤",
+        "scenario_id": "SCN-F004-004",
+        "entities": [
+          "診斷"
+        ],
+        "candidate_tables": [
+          "Diagnosis"
+        ]
+      },
+      {
+        "file": "docs\\ssot\\habdd\\graduated-hint.ha.feature",
+        "scenario": "請求第一級方向性提示",
+        "scenario_id": "SCN-F002-002",
+        "entities": [
+          "提示紀錄"
+        ],
+        "candidate_tables": [
+          "HintEvent"
+        ]
+      },
+      {
+        "file": "docs\\ssot\\habdd\\graduated-hint.ha.feature",
+        "scenario": "提示逐級升級",
+        "scenario_id": "SCN-F002-003",
+        "entities": [
+          "提示紀錄"
+        ],
+        "candidate_tables": [
+          "HintEvent"
+        ]
+      },
+      {
+        "file": "docs\\ssot\\habdd\\graduated-hint.ha.feature",
+        "scenario": "提示依賴度成為認知訊號",
+        "scenario_id": "SCN-F002-004",
+        "entities": [
+          "提示紀錄"
+        ],
+        "candidate_tables": [
+          "HintEvent"
+        ]
+      },
+      {
+        "file": "docs\\ssot\\habdd\\mastery-tracking.ha.feature",
+        "scenario": "診斷後更新多維精熟度",
+        "scenario_id": "SCN-F005-002",
+        "entities": [
+          "精熟度"
+        ],
+        "candidate_tables": [
+          "StudentSkillState"
+        ]
+      },
+      {
+        "file": "docs\\ssot\\habdd\\mastery-tracking.ha.feature",
+        "scenario": "呈現部分精熟狀態",
+        "scenario_id": "SCN-F005-003",
+        "entities": [
+          "精熟度",
+          "練習"
+        ],
+        "candidate_tables": [
+          "PlaySession",
+          "StudentSkillState"
+        ]
+      },
+      {
+        "file": "docs\\ssot\\habdd\\mastery-tracking.ha.feature",
+        "scenario": "以變形局面驗證遷移",
+        "scenario_id": "SCN-F005-004",
+        "entities": [
+          "精熟度"
+        ],
+        "candidate_tables": [
+          "StudentSkillState"
+        ]
+      },
+      {
+        "file": "docs\\ssot\\habdd\\mastery-tracking.ha.feature",
+        "scenario": "隔期重測更新保留度",
+        "scenario_id": "SCN-F005-005",
+        "entities": [
+          "精熟度"
+        ],
+        "candidate_tables": [
+          "StudentSkillState"
+        ]
+      },
+      {
+        "file": "docs\\ssot\\habdd\\parent-view.ha.feature",
+        "scenario": "檢視監護學習者的認知進展",
+        "scenario_id": "SCN-F009-002",
+        "entities": [
+          "精熟度",
+          "監護關係"
+        ],
+        "candidate_tables": [
+          "GuardianStudentLink",
+          "StudentSkillState"
+        ]
+      },
+      {
+        "file": "docs\\ssot\\habdd\\parent-view.ha.feature",
+        "scenario": "不得檢視非監護學習者的資料",
+        "scenario_id": "",
+        "entities": [
+          "精熟度",
+          "監護關係"
+        ],
+        "candidate_tables": [
+          "GuardianStudentLink",
+          "StudentSkillState"
+        ]
+      },
+      {
+        "file": "docs\\ssot\\habdd\\reasoning-capture.ha.feature",
+        "scenario": "長考時觸發推理標記蒐集",
+        "scenario_id": "SCN-F003-002",
+        "entities": [
+          "推理標記"
+        ],
+        "candidate_tables": [
+          "ReasoningTag"
+        ]
+      },
+      {
+        "file": "docs\\ssot\\habdd\\reasoning-capture.ha.feature",
+        "scenario": "關鍵錯誤後觸發推理標記蒐集",
+        "scenario_id": "SCN-F003-003",
+        "entities": [
+          "推理標記"
+        ],
+        "candidate_tables": [
+          "ReasoningTag"
+        ]
+      },
+      {
+        "file": "docs\\ssot\\habdd\\replay-governance.ha.feature",
+        "scenario": "除錯重播確認診斷依據",
+        "scenario_id": "SCN-F008-002",
+        "entities": [
+          "重播",
+          "規則集"
+        ],
+        "candidate_tables": [
+          "ReplayRun",
+          "RuleSet"
+        ]
+      },
+      {
+        "file": "docs\\ssot\\habdd\\replay-governance.ha.feature",
+        "scenario": "研究重播比較不同規則版本",
+        "scenario_id": "SCN-F008-003",
+        "entities": [
+          "重播",
+          "精熟度"
+        ],
+        "candidate_tables": [
+          "ReplayRun",
+          "StudentSkillState"
+        ]
+      },
+      {
+        "file": "docs\\ssot\\habdd\\replay-governance.ha.feature",
+        "scenario": "學生歷程重播重算精熟曲線",
+        "scenario_id": "SCN-F008-004",
+        "entities": [
+          "本體",
+          "本體演化提案"
+        ],
+        "candidate_tables": [
+          "OntologyProposal",
+          "OntologyVersion"
+        ]
+      },
+      {
+        "file": "docs\\ssot\\habdd\\replay-governance.ha.feature",
+        "scenario": "本體變更需具治理權限者核可",
+        "scenario_id": "SCN-F008-005",
+        "entities": [
+          "本體演化提案",
+          "本體"
+        ],
+        "candidate_tables": [
+          "OntologyProposal",
+          "OntologyVersion"
+        ]
+      },
+      {
+        "file": "docs\\ssot\\habdd\\replay-governance.ha.feature",
+        "scenario": "核可後套用本體演化提案",
+        "scenario_id": "",
+        "entities": [
+          "本體演化提案",
+          "本體"
+        ],
+        "candidate_tables": [
+          "OntologyProposal",
+          "OntologyVersion"
+        ]
+      }
+    ],
+    "unmapped_entities": [],
+    "orphan_dbml_tables_after_glossary": [
+      "CoachReview",
+      "CoachStudentLink",
+      "CoachingFeedback",
+      "CognitiveSkill",
+      "DiagnosisRule",
+      "LearningEvent",
+      "SituationAnnotation",
+      "StudentProfile",
+      "UserAccount"
+    ],
+    "l2_traceability_coverage": {
+      "l2_row_count": 38,
+      "low_confidence_rows": 25,
+      "scenario_count": 38,
+      "ratio": 1.0
+    }
+  },
+  "traceability_l2": {
+    "exists": true,
+    "l2_rows": [
+      {
+        "scenario_id": "SCN-F001-001",
+        "feature": "deal-practice.ha.feature",
+        "scenario": "成功開始一副橋引管理練習",
+        "entities": "練習, 牌例",
+        "glossary_terms": "練習, 牌例",
+        "read_tables": "CuratedDeal",
+        "write_tables": "PlaySession",
+        "fields": "",
+        "constraints": "CON-SESS-001",
+        "confidence": "medium",
+        "source": "docs/ssot/haapi/play-session.haapi.yaml"
+      },
+      {
+        "scenario_id": "SCN-F001-002",
+        "feature": "deal-practice.ha.feature",
+        "scenario": "出牌被記錄為認知軌跡",
+        "entities": "出牌紀錄, 練習",
+        "glossary_terms": "出牌紀錄",
+        "read_tables": "PlaySession",
+        "write_tables": "ActionTrace",
+        "fields": "ActionTrace.selectedCard,legalCards",
+        "constraints": "CON-PLAY-001",
+        "confidence": "medium",
+        "source": "docs/ssot/haapi/play-session.haapi.yaml"
+      },
+      {
+        "scenario_id": "SCN-F001-003",
+        "feature": "deal-practice.ha.feature",
+        "scenario": "悔牌與重新決策被記錄",
+        "entities": "出牌紀錄",
+        "glossary_terms": "出牌紀錄",
+        "read_tables": "",
+        "write_tables": "",
+        "fields": "",
+        "constraints": "",
+        "confidence": "low",
+        "source": "docs/ssot/habdd/deal-practice.ha.feature"
+      },
+      {
+        "scenario_id": "SCN-F001-004",
+        "feature": "deal-practice.ha.feature",
+        "scenario": "拒絕非法出牌",
+        "entities": "出牌紀錄",
+        "glossary_terms": "出牌紀錄",
+        "read_tables": "",
+        "write_tables": "",
+        "fields": "",
+        "constraints": "",
+        "confidence": "low",
+        "source": "docs/ssot/habdd/deal-practice.ha.feature"
+      },
+      {
+        "scenario_id": "SCN-F001-005",
+        "feature": "deal-practice.ha.feature",
+        "scenario": "青少年以淺層認知層級練習",
+        "entities": "練習",
+        "glossary_terms": "練習",
+        "read_tables": "",
+        "write_tables": "",
+        "fields": "",
+        "constraints": "",
+        "confidence": "low",
+        "source": "docs/ssot/habdd/deal-practice.ha.feature"
+      },
+      {
+        "scenario_id": "SCN-F002-001",
+        "feature": "graduated-hint.ha.feature",
+        "scenario": "請求第一級方向性提示",
+        "entities": "提示紀錄, 練習",
+        "glossary_terms": "提示紀錄",
+        "read_tables": "",
+        "write_tables": "",
+        "fields": "",
+        "constraints": "",
+        "confidence": "low",
+        "source": "docs/ssot/habdd/graduated-hint.ha.feature"
+      },
+      {
+        "scenario_id": "SCN-F002-002",
+        "feature": "graduated-hint.ha.feature",
+        "scenario": "提示逐級升級",
+        "entities": "提示紀錄",
+        "glossary_terms": "提示紀錄",
+        "read_tables": "",
+        "write_tables": "",
+        "fields": "",
+        "constraints": "",
+        "confidence": "low",
+        "source": "docs/ssot/habdd/graduated-hint.ha.feature"
+      },
+      {
+        "scenario_id": "SCN-F002-003",
+        "feature": "graduated-hint.ha.feature",
+        "scenario": "提示依賴度成為認知訊號",
+        "entities": "提示紀錄",
+        "glossary_terms": "提示紀錄",
+        "read_tables": "",
+        "write_tables": "",
+        "fields": "",
+        "constraints": "",
+        "confidence": "low",
+        "source": "docs/ssot/habdd/graduated-hint.ha.feature"
+      },
+      {
+        "scenario_id": "SCN-F002-004",
+        "feature": "graduated-hint.ha.feature",
+        "scenario": "無提示自行完成決策",
+        "entities": "提示紀錄",
+        "glossary_terms": "提示紀錄",
+        "read_tables": "",
+        "write_tables": "",
+        "fields": "",
+        "constraints": "",
+        "confidence": "low",
+        "source": "docs/ssot/habdd/graduated-hint.ha.feature"
+      },
+      {
+        "scenario_id": "SCN-F003-001",
+        "feature": "reasoning-capture.ha.feature",
+        "scenario": "長考時觸發推理標記蒐集",
+        "entities": "推理標記",
+        "glossary_terms": "推理標記",
+        "read_tables": "",
+        "write_tables": "",
+        "fields": "",
+        "constraints": "",
+        "confidence": "low",
+        "source": "docs/ssot/habdd/reasoning-capture.ha.feature"
+      },
+      {
+        "scenario_id": "SCN-F003-002",
+        "feature": "reasoning-capture.ha.feature",
+        "scenario": "關鍵錯誤後觸發推理標記蒐集",
+        "entities": "推理標記",
+        "glossary_terms": "推理標記",
+        "read_tables": "",
+        "write_tables": "",
+        "fields": "",
+        "constraints": "",
+        "confidence": "low",
+        "source": "docs/ssot/habdd/reasoning-capture.ha.feature"
+      },
+      {
+        "scenario_id": "SCN-F003-003",
+        "feature": "reasoning-capture.ha.feature",
+        "scenario": "玩家略過推理標記以維持心流",
+        "entities": "推理標記",
+        "glossary_terms": "推理標記",
+        "read_tables": "",
+        "write_tables": "",
+        "fields": "",
+        "constraints": "",
+        "confidence": "low",
+        "source": "docs/ssot/habdd/reasoning-capture.ha.feature"
+      },
+      {
+        "scenario_id": "SCN-F004-001",
+        "feature": "diagnosis-coaching.ha.feature",
+        "scenario": "產生基於證據的診斷",
+        "entities": "診斷, 證據日誌",
+        "glossary_terms": "診斷, 證據日誌",
+        "read_tables": "PlaySession,ActionTrace",
+        "write_tables": "Diagnosis",
+        "fields": "Diagnosis.hypothesis,confidence",
+        "constraints": "CON-DIAG-001",
+        "confidence": "medium",
+        "source": "docs/ssot/haapi/diagnosis.haapi.yaml"
+      },
+      {
+        "scenario_id": "SCN-F004-002",
+        "feature": "diagnosis-coaching.ha.feature",
+        "scenario": "寫入可審計證據日誌",
+        "entities": "證據日誌, 診斷",
+        "glossary_terms": "證據日誌",
+        "read_tables": "Diagnosis",
+        "write_tables": "DiagnosisEvidence",
+        "fields": "DiagnosisEvidence.ruleId,masteryDelta",
+        "constraints": "CON-DIAG-001",
+        "confidence": "medium",
+        "source": "docs/ssot/haapi/diagnosis.haapi.yaml"
+      },
+      {
+        "scenario_id": "SCN-F004-003",
+        "feature": "diagnosis-coaching.ha.feature",
+        "scenario": "安全的替代路線不判為錯誤",
+        "entities": "診斷",
+        "glossary_terms": "診斷, 可接受路線",
+        "read_tables": "",
+        "write_tables": "",
+        "fields": "",
+        "constraints": "",
+        "confidence": "low",
+        "source": "docs/ssot/habdd/diagnosis-coaching.ha.feature"
+      },
+      {
+        "scenario_id": "SCN-F004-004",
+        "feature": "diagnosis-coaching.ha.feature",
+        "scenario": "低信心診斷不過度宣稱",
+        "entities": "診斷",
+        "glossary_terms": "診斷",
+        "read_tables": "",
+        "write_tables": "",
+        "fields": "",
+        "constraints": "",
+        "confidence": "low",
+        "source": "docs/ssot/habdd/diagnosis-coaching.ha.feature"
+      },
+      {
+        "scenario_id": "SCN-F004-005",
+        "feature": "diagnosis-coaching.ha.feature",
+        "scenario": "依玩家層級調整教學語氣",
+        "entities": "教學說明",
+        "glossary_terms": "教學說明",
+        "read_tables": "",
+        "write_tables": "",
+        "fields": "",
+        "constraints": "",
+        "confidence": "low",
+        "source": "docs/ssot/habdd/diagnosis-coaching.ha.feature"
+      },
+      {
+        "scenario_id": "SCN-F004-006",
+        "feature": "diagnosis-coaching.ha.feature",
+        "scenario": "提供下一步訓練建議",
+        "entities": "訓練建議",
+        "glossary_terms": "訓練建議",
+        "read_tables": "",
+        "write_tables": "",
+        "fields": "",
+        "constraints": "",
+        "confidence": "low",
+        "source": "docs/ssot/habdd/diagnosis-coaching.ha.feature"
+      },
+      {
+        "scenario_id": "SCN-F005-001",
+        "feature": "mastery-tracking.ha.feature",
+        "scenario": "診斷後更新多維精熟度",
+        "entities": "精熟度, 診斷",
+        "glossary_terms": "精熟度",
+        "read_tables": "Diagnosis",
+        "write_tables": "StudentSkillState",
+        "fields": "StudentSkillState.recognitionMastery,executionMastery,transferMastery,retentionMastery",
+        "constraints": "CON-MASTERY-001,CON-MASTERY-002",
+        "confidence": "medium",
+        "source": "docs/ssot/haapi/student-skill-state.haapi.yaml"
+      },
+      {
+        "scenario_id": "SCN-F005-002",
+        "feature": "mastery-tracking.ha.feature",
+        "scenario": "呈現部分精熟狀態",
+        "entities": "精熟度",
+        "glossary_terms": "精熟度",
+        "read_tables": "StudentSkillState",
+        "write_tables": "",
+        "fields": "StudentSkillState.recognitionMastery,executionMastery",
+        "constraints": "CON-MASTERY-001",
+        "confidence": "medium",
+        "source": "docs/ssot/haapi/student-skill-state.haapi.yaml"
+      },
+      {
+        "scenario_id": "SCN-F005-003",
+        "feature": "mastery-tracking.ha.feature",
+        "scenario": "以變形局面驗證遷移",
+        "entities": "精熟度, 練習",
+        "glossary_terms": "精熟度, 遷移",
+        "read_tables": "",
+        "write_tables": "",
+        "fields": "",
+        "constraints": "",
+        "confidence": "low",
+        "source": "docs/ssot/habdd/mastery-tracking.ha.feature"
+      },
+      {
+        "scenario_id": "SCN-F005-004",
+        "feature": "mastery-tracking.ha.feature",
+        "scenario": "隔期重測更新保留度",
+        "entities": "精熟度",
+        "glossary_terms": "精熟度, 保留",
+        "read_tables": "",
+        "write_tables": "",
+        "fields": "",
+        "constraints": "",
+        "confidence": "low",
+        "source": "docs/ssot/habdd/mastery-tracking.ha.feature"
+      },
+      {
+        "scenario_id": "SCN-F005-005",
+        "feature": "mastery-tracking.ha.feature",
+        "scenario": "檢視錯誤模式時間軸",
+        "entities": "精熟度",
+        "glossary_terms": "錯誤模式",
+        "read_tables": "",
+        "write_tables": "",
+        "fields": "",
+        "constraints": "",
+        "confidence": "low",
+        "source": "docs/ssot/habdd/mastery-tracking.ha.feature"
+      },
+      {
+        "scenario_id": "SCN-F006-001",
+        "feature": "coach-dashboard.ha.feature",
+        "scenario": "檢視學生認知分析",
+        "entities": "精熟度, 診斷",
+        "glossary_terms": "精熟度, 診斷",
+        "read_tables": "StudentSkillState,Diagnosis",
+        "write_tables": "",
+        "fields": "",
+        "constraints": "",
+        "confidence": "medium",
+        "source": "docs/ssot/haapi/student-skill-state.haapi.yaml"
+      },
+      {
+        "scenario_id": "SCN-F006-002",
+        "feature": "coach-dashboard.ha.feature",
+        "scenario": "回溯診斷的證據日誌",
+        "entities": "證據日誌, 診斷",
+        "glossary_terms": "證據日誌",
+        "read_tables": "Diagnosis,DiagnosisEvidence",
+        "write_tables": "",
+        "fields": "",
+        "constraints": "CON-DIAG-001",
+        "confidence": "medium",
+        "source": "docs/ssot/haapi/diagnosis.haapi.yaml"
+      },
+      {
+        "scenario_id": "SCN-F006-003",
+        "feature": "coach-dashboard.ha.feature",
+        "scenario": "標記 AI 與教練診斷分歧",
+        "entities": "診斷",
+        "glossary_terms": "診斷分歧",
+        "read_tables": "",
+        "write_tables": "",
+        "fields": "",
+        "constraints": "",
+        "confidence": "low",
+        "source": "docs/ssot/habdd/coach-dashboard.ha.feature"
+      },
+      {
+        "scenario_id": "SCN-F006-004",
+        "feature": "coach-dashboard.ha.feature",
+        "scenario": "派發針對性訓練",
+        "entities": "指派, 練習",
+        "glossary_terms": "指派",
+        "read_tables": "CoachStudentLink",
+        "write_tables": "Assignment",
+        "fields": "",
+        "constraints": "CON-ASSIGN-001",
+        "confidence": "medium",
+        "source": "docs/ssot/habdd/coach-dashboard.ha.feature"
+      },
+      {
+        "scenario_id": "SCN-F006-005",
+        "feature": "coach-dashboard.ha.feature",
+        "scenario": "依學生與技能篩選認知分析",
+        "entities": "精熟度",
+        "glossary_terms": "精熟度",
+        "read_tables": "StudentSkillState,CognitiveSkill",
+        "write_tables": "",
+        "fields": "",
+        "constraints": "",
+        "confidence": "medium",
+        "source": "CLR-260616-01#Q6"
+      },
+      {
+        "scenario_id": "SCN-F007-001",
+        "feature": "deal-authoring.ha.feature",
+        "scenario": "成功匯入並標注 curated 牌例",
+        "entities": "牌例",
+        "glossary_terms": "牌例, 局面標注",
+        "read_tables": "CuratedDeal",
+        "write_tables": "SituationAnnotation",
+        "fields": "SituationAnnotation.dslBody,isComplete",
+        "constraints": "CON-ANNO-001",
+        "confidence": "medium",
+        "source": "docs/ssot/haapi/situation-annotation.haapi.yaml"
+      },
+      {
+        "scenario_id": "SCN-F007-002",
+        "feature": "deal-authoring.ha.feature",
+        "scenario": "拒絕缺漏關鍵欄位的標注",
+        "entities": "牌例",
+        "glossary_terms": "局面標注",
+        "read_tables": "",
+        "write_tables": "",
+        "fields": "",
+        "constraints": "",
+        "confidence": "low",
+        "source": "docs/ssot/habdd/deal-authoring.ha.feature"
+      },
+      {
+        "scenario_id": "SCN-F007-003",
+        "feature": "deal-authoring.ha.feature",
+        "scenario": "發布版本化的本體與規則集",
+        "entities": "本體, 規則集",
+        "glossary_terms": "本體, 規則集",
+        "read_tables": "",
+        "write_tables": "",
+        "fields": "",
+        "constraints": "",
+        "confidence": "low",
+        "source": "docs/ssot/habdd/deal-authoring.ha.feature"
+      },
+      {
+        "scenario_id": "SCN-F008-001",
+        "feature": "replay-governance.ha.feature",
+        "scenario": "除錯重播確認診斷依據",
+        "entities": "重播, 證據日誌",
+        "glossary_terms": "重播",
+        "read_tables": "",
+        "write_tables": "",
+        "fields": "",
+        "constraints": "",
+        "confidence": "low",
+        "source": "docs/ssot/habdd/replay-governance.ha.feature"
+      },
+      {
+        "scenario_id": "SCN-F008-002",
+        "feature": "replay-governance.ha.feature",
+        "scenario": "研究重播比較不同規則版本",
+        "entities": "重播, 規則集",
+        "glossary_terms": "重播, 規則集",
+        "read_tables": "",
+        "write_tables": "",
+        "fields": "",
+        "constraints": "",
+        "confidence": "low",
+        "source": "docs/ssot/habdd/replay-governance.ha.feature"
+      },
+      {
+        "scenario_id": "SCN-F008-003",
+        "feature": "replay-governance.ha.feature",
+        "scenario": "學生歷程重播重算精熟曲線",
+        "entities": "重播, 精熟度",
+        "glossary_terms": "重播, 精熟度",
+        "read_tables": "",
+        "write_tables": "",
+        "fields": "",
+        "constraints": "",
+        "confidence": "low",
+        "source": "docs/ssot/habdd/replay-governance.ha.feature"
+      },
+      {
+        "scenario_id": "SCN-F008-004",
+        "feature": "replay-governance.ha.feature",
+        "scenario": "本體變更需具治理權限者核可",
+        "entities": "本體, 本體演化提案",
+        "glossary_terms": "本體演化提案",
+        "read_tables": "",
+        "write_tables": "",
+        "fields": "",
+        "constraints": "",
+        "confidence": "low",
+        "source": "docs/ssot/habdd/replay-governance.ha.feature"
+      },
+      {
+        "scenario_id": "SCN-F008-005",
+        "feature": "replay-governance.ha.feature",
+        "scenario": "核可後套用本體演化提案",
+        "entities": "本體演化提案, 本體",
+        "glossary_terms": "本體演化提案",
+        "read_tables": "",
+        "write_tables": "",
+        "fields": "",
+        "constraints": "",
+        "confidence": "low",
+        "source": "docs/ssot/habdd/replay-governance.ha.feature"
+      },
+      {
+        "scenario_id": "SCN-F009-001",
+        "feature": "parent-view.ha.feature",
+        "scenario": "檢視監護學習者的認知進展",
+        "entities": "精熟度, 監護關係",
+        "glossary_terms": "精熟度, 監護關係",
+        "read_tables": "StudentSkillState,GuardianStudentLink",
+        "write_tables": "",
+        "fields": "",
+        "constraints": "CON-GUARD-001",
+        "confidence": "medium",
+        "source": "CLR-260616-01#Q8"
+      },
+      {
+        "scenario_id": "SCN-F009-002",
+        "feature": "parent-view.ha.feature",
+        "scenario": "不得檢視非監護學習者的資料",
+        "entities": "精熟度, 監護關係",
+        "glossary_terms": "監護關係",
+        "read_tables": "GuardianStudentLink",
+        "write_tables": "",
+        "fields": "",
+        "constraints": "CON-GUARD-001",
+        "confidence": "medium",
+        "source": "CLR-260616-01#Q8"
+      }
+    ],
+    "l2_row_count": 38,
+    "low_confidence_rows": 25
+  },
+  "trace": {
+    "has_traceability_file": true,
+    "line_count": 146,
+    "possible_links": 1
+  }
+}

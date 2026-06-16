@@ -1,0 +1,409 @@
+project: "Bridge Cognitive Tutor"
+rascore_version: "0.1"
+generated_at: "2026-06-16T03:00:56.519945+00:00"
+advisory_only: true
+score:
+  total: 95.13
+  raw_grade: "A"
+  grade: "A"
+  veto:
+    triggered: false
+    rules:
+      []
+dimensions:
+  A:
+    name: "需求覆蓋與保真度"
+    weight: 0.2
+    average: 3.0
+    weighted_score: 20.0
+    criteria:
+      - "A1"
+      - "A2"
+      - "A3"
+  B:
+    name: "Gherkin 行為規格品質"
+    weight: 0.18
+    average: 2.8
+    weighted_score: 16.8
+    criteria:
+      - "B1"
+      - "B2"
+      - "B3"
+      - "B4"
+      - "B5"
+  C:
+    name: "DBML 領域模型品質"
+    weight: 0.14
+    average: 3.0
+    weighted_score: 14.0
+    criteria:
+      - "C1"
+      - "C2"
+      - "C3"
+      - "C4"
+  D:
+    name: "Gherkin ↔ DBML 跨規格一致性"
+    weight: 0.24
+    average: 2.75
+    weighted_score: 22.0
+    criteria:
+      - "D1"
+      - "D2"
+      - "D3"
+      - "D4"
+  E:
+    name: "追溯性與決策記錄"
+    weight: 0.14
+    average: 3.0
+    weighted_score: 14.0
+    criteria:
+      - "E1"
+      - "E2"
+      - "E3"
+  F:
+    name: "可驗證與生成準備度"
+    weight: 0.07
+    average: 2.5
+    weighted_score: 5.83
+    criteria:
+      - "F1"
+      - "F2"
+  G:
+    name: "流程穩定性"
+    weight: 0.03
+    average: 2.5
+    weighted_score: 2.5
+    criteria:
+      - "G1"
+      - "G2"
+criteria:
+  A1:
+    score: 3
+    confidence: "high"
+    review_mode: "llm-assisted"
+    reason: "PRD/grill 的 MVP 能力（Entry Management 練習、action trace、graduated hints、reasoning tags、evidence-based diagnosis、多維 mastery、post-mortem、coach dashboard、replay、ontology governance）皆覆蓋於 9 feature/38 scenario 與 23-table DBML；out-of-scope（bidding/defense/multiplayer）明確排除。"
+    evidence:
+      -
+        artifact: "docs/ssot/habdd"
+        location: "9 features / 38 scenarios"
+        note: "precheck gherkin.scenario_count=38"
+      -
+        artifact: "docs/discovery/04-vision-kpi-scope.md"
+        location: "scope"
+        note: "in/out/deferred 明列"
+    findings:
+      []
+  A2:
+    score: 3
+    confidence: "high"
+    review_mode: "llm-assisted"
+    reason: "scope loss 皆登錄於 Deferred Register（adaptive sequencing、Situation Family Generator、gamification、KPI 量化）並標 deferred 狀態；無未記錄流失。"
+    evidence:
+      -
+        artifact: ".raptor/traceability.md"
+        location: "Deferred Register"
+        note: "5 deferred items"
+    findings:
+      []
+  A3:
+    score: 3
+    confidence: "high"
+    review_mode: "llm-assisted"
+    reason: "新增內容皆可回溯：GuardianStudentLink/parent-school 來自 CLR-260616-01#Q8、service actors 來自 ASM-004，均有 Decision Traceability。"
+    evidence:
+      -
+        artifact: ".raptor/traceability.md"
+        location: "Decision Traceability"
+        note: "9 decisions"
+    findings:
+      []
+  B1:
+    score: 3
+    confidence: "high"
+    review_mode: "llm-assisted"
+    reason: "precheck ui_detail_terms=[]，無 click/button/URL/API 洩漏；全業務語言。"
+    evidence:
+      -
+        artifact: "rascore-precheck.json"
+        location: "gherkin.ui_detail_terms"
+        note: "[]"
+    findings:
+      []
+  B2:
+    score: 3
+    confidence: "high"
+    review_mode: "llm-assisted"
+    reason: "precheck long_scenarios=[]；每個 Scenario 聚焦單一 When 業務動作。"
+    evidence:
+      -
+        artifact: "rascore-precheck.json"
+        location: "gherkin.long_scenarios"
+        note: "[]"
+    findings:
+      []
+  B3:
+    score: 3
+    confidence: "high"
+    review_mode: "llm-assisted"
+    reason: "precheck scenarios_without_given/when/then 皆為 []；G/W/T 結構完整。"
+    evidence:
+      -
+        artifact: "rascore-precheck.json"
+        location: "gherkin.scenarios_without_*"
+        note: "all []"
+    findings:
+      []
+  B4:
+    score: 2
+    confidence: "high"
+    review_mode: "llm-assisted"
+    reason: "關鍵負向/邊界/權限/狀態 scenario 齊備（拒絕非法出牌、拒絕缺漏標注、不具權限核可、不得檢視非監護）；惟部分 create 流程（play-session、assignment、hint）未個別展開負向 scenario。"
+    evidence:
+      -
+        artifact: "docs/ssot/habdd/deal-practice.ha.feature"
+        location: "SCN-F001-004 拒絕非法出牌"
+        note: "負向"
+    findings:
+      -
+        severity: "low"
+        category: "gherkin-quality"
+        issue: "部分資料變更 feature（play-session/assignment/graduated-hint）缺個別負向/失敗 scenario。"
+        recommendation: "視需要補拒絕/失敗 scenario 或於 story-index matrix 標不適用。"
+        owner_skill: "rapt-behavior"
+  B5:
+    score: 3
+    confidence: "high"
+    review_mode: "llm-assisted"
+    reason: "glossary 50 mappings、precheck unmapped_entities=[]；Gherkin 業務術語與 glossary/DBML 一致。"
+    evidence:
+      -
+        artifact: "rascore-precheck.json"
+        location: "cross_spec.unmapped_entities"
+        note: "[]"
+    findings:
+      []
+  C1:
+    score: 3
+    confidence: "high"
+    review_mode: "llm-assisted"
+    reason: "23 tables 涵蓋 identity/authoring/play-telemetry/diagnosis/student-model/replay-governance 全領域概念，含 event sourcing（LearningEvent）與治理（OntologyProposal）。"
+    evidence:
+      -
+        artifact: "rascore-precheck.json"
+        location: "dbml.table_count"
+        note: "23"
+    findings:
+      []
+  C2:
+    score: 3
+    confidence: "high"
+    review_mode: "llm-assisted"
+    reason: "precheck tables_without_pk=[]，37 refs；PK/FK 與 1:N/M:N（link tables）正確反映業務。"
+    evidence:
+      -
+        artifact: "rascore-precheck.json"
+        location: "dbml.refs_count / tables_without_pk"
+        note: "37 refs / 0 missing pk"
+    findings:
+      []
+  C3:
+    score: 3
+    confidence: "high"
+    review_mode: "llm-assisted"
+    reason: "所有狀態/列舉欄位用 ref_code，21 個 seeds section 完整支撐值域；19 constraints 涵蓋狀態轉換/權限/append-only/range。（DBML enum_count=0 為 RAPTor ref_code 慣例，非缺失。）"
+    evidence:
+      -
+        artifact: "rascore-precheck.json"
+        location: "seeds.sections"
+        note: "21 sections"
+      -
+        artifact: "docs/ssot/dbml/constraints.md"
+        location: "Domain Constraints"
+        note: "19 constraints"
+    findings:
+      []
+  C4:
+    score: 3
+    confidence: "high"
+    review_mode: "llm-assisted"
+    reason: "PascalCase table / camelCase column 忠實反映 ubiquitous language；child table 分離達 3NF；反正規化 JSON 欄位有 compatibility decision 與補償規則。"
+    evidence:
+      -
+        artifact: "docs/ssot/dbml/constraints.md"
+        location: "Compatibility Decisions"
+        note: "4 decisions"
+    findings:
+      []
+  D1:
+    score: 3
+    confidence: "high"
+    review_mode: "llm-assisted"
+    reason: "glossary-aware mapping：precheck unmapped_entities=[]，所有 Gherkin # entities 經 canonical mapping 對到 DBML table（naive matched_terms=[] 為繁中↔英文機械比對限制，已由 glossary 解決）。"
+    evidence:
+      -
+        artifact: "rascore-precheck.json"
+        location: "cross_spec.unmapped_entities"
+        note: "[]"
+    findings:
+      []
+  D2:
+    score: 3
+    confidence: "high"
+    review_mode: "llm-assisted"
+    reason: "每個 scenario 的概念/狀態/結果皆有 DBML 支撐（scenario_table_candidates 全數解析）；dsl-lint L4 XREF 0 error。"
+    evidence:
+      -
+        artifact: "docs/reports/verify-report.yml"
+        location: "consistency_lint"
+        note: "0 findings"
+    findings:
+      []
+  D3:
+    score: 2
+    confidence: "high"
+    review_mode: "llm-assisted"
+    reason: "多數 entity 被行為觸及；orphan_dbml_tables_after_glossary 列出 9 個未直接出現在 scenario # entities 的 table，惟多為 identity/infra（UserAccount/StudentProfile/CoachStudentLink）或經 L3 intent 承接（SituationAnnotation/CoachReview/CoachingFeedback/CognitiveSkill/DiagnosisRule/LearningEvent），皆有保留理由。"
+    evidence:
+      -
+        artifact: "rascore-precheck.json"
+        location: "cross_spec.orphan_dbml_tables_after_glossary"
+        note: "9 tables"
+    findings:
+      -
+        severity: "low"
+        category: "cross-spec-gap"
+        issue: "9 個 DBML table 未直接出現在任何 scenario # entities（identity/infra 或僅由 L3 intent 承接）。"
+        recommendation: "於 traceability 標註保留理由，或在相關 scenario 補 # entities 以顯式關聯。"
+        owner_skill: "rapt-reconcile"
+  D4:
+    score: 3
+    confidence: "high"
+    review_mode: "llm-assisted"
+    reason: "Gherkin 的狀態轉換（session 完成、hint 升級、proposal 核可）與 DBML seeds/constraints 對齊（CON-SESS-001/CON-HINT-001/CON-GOV-001）。"
+    evidence:
+      -
+        artifact: "docs/ssot/dbml/constraints.md"
+        location: "state-transition constraints"
+        note: "對齊"
+    findings:
+      []
+  E1:
+    score: 3
+    confidence: "high"
+    review_mode: "llm-assisted"
+    reason: "L1 Requirement Coverage 涵蓋全部 15 story；可由需求 → feature → scenario → intent 前向追溯。"
+    evidence:
+      -
+        artifact: ".raptor/traceability.md"
+        location: "L1 Requirement Coverage"
+        note: "15 stories"
+    findings:
+      []
+  E2:
+    score: 3
+    confidence: "high"
+    review_mode: "llm-assisted"
+    reason: "每個 feature 有 # source 指向 discovery；L2/L3 source_evidence 可由產出回溯需求/決策。"
+    evidence:
+      -
+        artifact: "docs/ssot/habdd"
+        location: "# source headers"
+        note: "全部具備"
+    findings:
+      []
+  E3:
+    score: 3
+    confidence: "high"
+    review_mode: "llm-assisted"
+    reason: "決策/假設/缺口結構化記錄：Decision Traceability（9）、Deferred Register、CiC 生命週期（OPEN→RESOLVED）、clarify decision log、reconcile session 與 impact-matrix。"
+    evidence:
+      -
+        artifact: ".raptor/traceability.md"
+        location: "Decision Traceability + Deferred Register"
+        note: "完整"
+    findings:
+      []
+  F1:
+    score: 2
+    confidence: "high"
+    review_mode: "llm-assisted"
+    reason: "多數 Then 為可觀察、可斷言結果（建立紀錄、狀態變更、寫入證據日誌）；惟少數以語氣/質性描述（如『以試探語氣陳述』『調整用語密度與語氣』）較難機械斷言。"
+    evidence:
+      -
+        artifact: "docs/ssot/habdd/diagnosis-coaching.ha.feature"
+        location: "SCN-F004-004/005"
+        note: "質性 Then"
+    findings:
+      -
+        severity: "low"
+        category: "gherkin-quality"
+        issue: "少數 Then 以教學語氣/語用描述，缺可機械斷言的觀察點。"
+        recommendation: "為質性教學 scenario 補可觀察代理指標（如 hint level 對應、用語層級標記）。"
+        owner_skill: "rapt-behavior"
+  F2:
+    score: 3
+    confidence: "high"
+    review_mode: "llm-assisted"
+    reason: "已成功推導 10 haAPI + 13 haPDL + haARM，且 rapt-verify 整體 PASS、dsl-lint 0 findings，足以作為 codegen 輸入。"
+    evidence:
+      -
+        artifact: "docs/reports/verify-report.md"
+        location: "Phase Gate"
+        note: "PASS"
+    findings:
+      []
+  G1:
+    score: 2
+    confidence: "medium"
+    review_mode: "llm-assisted"
+    reason: "評分以 deterministic precheck + lint + 結構化 rubric 為據，主要缺口判斷穩定；惟為單次 LLM-assisted 評審，跨評審一致性未實測。"
+    evidence:
+      -
+        artifact: "rascore-precheck.json"
+        location: "deterministic evidence"
+        note: "客觀計數支撐"
+    findings:
+      []
+  G2:
+    score: 3
+    confidence: "high"
+    review_mode: "llm-assisted"
+    reason: "完整 RAPTor pipeline 每 phase 有固定輸入/輸出與留痕（session.md、各 phase report、reconcile snapshot、impact-matrix），流程可重現。"
+    evidence:
+      -
+        artifact: ".raptor/session.md"
+        location: "Phase Status + logs"
+        note: "完整"
+    findings:
+      []
+findings:
+  -
+    severity: "low"
+    category: "gherkin-quality"
+    issue: "部分資料變更 feature（play-session/assignment/graduated-hint）缺個別負向/失敗 scenario。"
+    recommendation: "視需要補拒絕/失敗 scenario 或於 story-index matrix 標不適用。"
+    owner_skill: "rapt-behavior"
+    criterion: "B4"
+    artifact: ""
+    location: ""
+    id: "RA-B4-001"
+  -
+    severity: "low"
+    category: "cross-spec-gap"
+    issue: "9 個 DBML table 未直接出現在任何 scenario # entities（identity/infra 或僅由 L3 intent 承接）。"
+    recommendation: "於 traceability 標註保留理由，或在相關 scenario 補 # entities 以顯式關聯。"
+    owner_skill: "rapt-reconcile"
+    criterion: "D3"
+    artifact: ""
+    location: ""
+    id: "RA-D3-001"
+  -
+    severity: "low"
+    category: "gherkin-quality"
+    issue: "少數 Then 以教學語氣/語用描述，缺可機械斷言的觀察點。"
+    recommendation: "為質性教學 scenario 補可觀察代理指標（如 hint level 對應、用語層級標記）。"
+    owner_skill: "rapt-behavior"
+    criterion: "F1"
+    artifact: ""
+    location: ""
+    id: "RA-F1-001"

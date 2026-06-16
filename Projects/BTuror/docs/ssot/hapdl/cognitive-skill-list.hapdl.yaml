@@ -1,0 +1,35 @@
+page: cognitive-skill-list
+schema_version: "3.3"
+type: list
+entity: CognitiveSkill
+api: cognitive-skill
+title: 認知技能清單
+
+view:
+  filters:
+    - {field: ontologyVersion, label: 本體版本, type: eq}
+    - {field: cognitiveLevel, label: 認知層級, type: eq, ref_code: CognitiveLevel}
+  columns:
+    - {field: skillCode, label: 技能代碼, link: true, sortable: true}
+    - {field: skillName, label: 技能名稱}
+    - {field: cognitiveLevel, label: 認知層級, format: badge, ref_code: CognitiveLevel}
+    - {field: ontologyVersion, label: 本體版本}
+  actions:
+    standard: [create]
+    placement:
+      header: [create]
+
+auth:
+  roles: [annotator]
+security:
+  permission_refs:
+    view:
+      - {id: cognitive_skill_read}
+    create:
+      - {id: cognitive_skill_create}
+  datasource_scope: all
+
+source_evidence:
+  - "docs/ssot/haapi/cognitive-skill.haapi.yaml"
+  - "docs/ssot/habdd/mastery-tracking.ha.feature#Scenario:診斷後更新多維精熟度"
+  - "docs/ssot/haarm/bridge-cognitive-tutor.haarm.yaml#permission:cognitive_skill_read"

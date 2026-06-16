@@ -1,0 +1,29 @@
+page: student-mastery-detail
+schema_version: "3.3"
+type: detail
+entity: StudentSkillState
+api: student-skill-state
+title: 我的認知精熟度
+
+view:
+  fields:
+    - {field: skillId, label: 技能}
+    - {field: recognitionMastery, label: 辨識精熟度}
+    - {field: executionMastery, label: 執行精熟度}
+    - {field: transferMastery, label: 遷移精熟度}
+    - {field: retentionMastery, label: 保留精熟度}
+    - {field: confidence, label: 估計信心}
+    - {field: trend, label: 趨勢, ref_code: MasteryTrend}
+
+auth:
+  roles: [student]
+security:
+  permission_refs:
+    view:
+      - {id: student_skill_state_read_own}
+  datasource_scope: own
+
+source_evidence:
+  - "docs/ssot/haapi/student-skill-state.haapi.yaml"
+  - "docs/ssot/habdd/mastery-tracking.ha.feature#Scenario:呈現部分精熟狀態"
+  - "docs/ssot/haarm/bridge-cognitive-tutor.haarm.yaml#permission:student_skill_state_read_own"

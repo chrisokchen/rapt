@@ -1,0 +1,31 @@
+page: curated-deal-form
+schema_version: "3.3"
+type: form
+entity: CuratedDeal
+api: curated-deal
+title: 建立 / 編輯牌例
+
+form:
+  mode: create
+  fields:
+    - {field: title, label: 牌例標題, type: text, required: true}
+    - {field: handsPbn, label: 四家牌（PBN）, type: textarea, required: true}
+    - {field: contract, label: 合約, type: text, required: true}
+    - {field: declarer, label: 莊家方位, type: select, ref_code: Seat, required: true}
+    - {field: scoringContext, label: 計分制, type: select, ref_code: ScoringContext, required: true}
+  actions:
+    submit: create
+    cancel: curated-deal-list
+
+auth:
+  roles: [annotator]
+security:
+  permission_refs:
+    submit:
+      - {id: curated_deal_create}
+  datasource_scope: all
+
+source_evidence:
+  - "docs/ssot/haapi/curated-deal.haapi.yaml"
+  - "docs/ssot/habdd/deal-authoring.ha.feature#Scenario:成功匯入並標注 curated 牌例"
+  - "docs/ssot/haarm/bridge-cognitive-tutor.haarm.yaml#permission:curated_deal_create"

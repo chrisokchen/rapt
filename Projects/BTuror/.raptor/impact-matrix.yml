@@ -1,0 +1,12 @@
+# RAPTor Impact Matrix — Bridge Cognitive Tutor
+# 記錄決策 / 澄清 / 修復對下游 artifact 的影響傳播
+
+- id: IMPACT-20260616-001
+  source_type: reconcile_fix
+  source_ref: .raptor/reconcile/sessions/RECON-20260616-001.yml
+  target_artifact: docs/ssot/haarm/bridge-cognitive-tutor.haarm.yaml
+  impact_type: update
+  decision_id: FIND-20260616-001
+  status: applied
+  owner_skill: rapt-reconcile
+  notes: "backfill permission situation_annotation_read（annotator role）以滿足 haAPI situation-annotation 的 list/read 端點引用；post-fix dsl-lint 0 findings。下游 haAPI 引用已一致，無需再生成。"

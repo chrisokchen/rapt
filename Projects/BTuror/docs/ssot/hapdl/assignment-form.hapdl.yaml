@@ -1,0 +1,29 @@
+page: assignment-form
+schema_version: "3.3"
+type: form
+entity: Assignment
+api: assignment
+title: 派發訓練
+
+form:
+  mode: create
+  fields:
+    - {field: studentId, label: 學生, type: select, required: true}
+    - {field: dealId, label: 指派牌例, type: select, required: true}
+    - {field: targetSkillId, label: 目標認知缺口技能, type: select}
+  actions:
+    submit: create
+    cancel: assignment-list
+
+auth:
+  roles: [coach]
+security:
+  permission_refs:
+    submit:
+      - {id: assignment_create}
+  datasource_scope: team
+
+source_evidence:
+  - "docs/ssot/haapi/assignment.haapi.yaml"
+  - "docs/ssot/habdd/coach-dashboard.ha.feature#Scenario:派發針對性訓練"
+  - "docs/ssot/haarm/bridge-cognitive-tutor.haarm.yaml#permission:assignment_create"

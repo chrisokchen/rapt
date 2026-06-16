@@ -1,0 +1,48 @@
+session:
+  id: RECON-20260616-001
+  started_at: "2026-06-16T00:00:00+08:00"
+  source_reports:
+    - docs/reports/verify-report.yml
+  status: completed
+
+findings:
+  NEED_TO_FIX:
+    - FIND-20260616-001
+  NEED_TO_CLARIFY: []
+  NOTE_ONLY:
+    - FIND-20260616-002
+    - FIND-20260616-003
+
+changes:
+  - finding_id: FIND-20260616-001
+    artifact: docs/ssot/haarm/bridge-cognitive-tutor.haarm.yaml
+    action: update
+    snapshot: .raptor/reconcile/archive/RECON-20260616-001/docs/ssot/haarm/bridge-cognitive-tutor.haarm.yaml
+    summary: "backfill permission situation_annotation_read（resource: situation_annotation, action: read, scope: all）並掛入 annotator role。basis：鏡像既有 situation_annotation_create/update；dsl-cross-reference backfill mode。"
+  - finding_id: FIND-20260616-001
+    artifact: docs/ssot/haapi/situation-annotation.haapi.yaml
+    action: update
+    snapshot: .raptor/reconcile/archive/RECON-20260616-001/docs/ssot/haapi/situation-annotation.haapi.yaml
+    summary: "CiC-BDY-INT-001 標記 RESOLVED。"
+  - finding_id: FIND-20260616-002
+    artifact: .raptor/traceability.md
+    action: update
+    snapshot: .raptor/reconcile/archive/RECON-20260616-001/.raptor/traceability.md
+    summary: "L3 補列 4 個 telemetry 子 scenario（SCN-F002-003/004, SCN-F003-002/003）→ play-session operations。basis：operation 已存在。"
+  - finding_id: FIND-20260616-003
+    artifact: .raptor/traceability.md
+    action: update
+    snapshot: .raptor/reconcile/archive/RECON-20260616-001/.raptor/traceability.md
+    summary: "L2 讀取型 scenario（SCN-F005-002, F006-001, F006-002）精確化 read_tables，confidence low→medium。basis：haAPI entity + glossary canonical mapping。"
+
+verification:
+  post_fix_lint: "dsl-lint.py --levels all → [] (0 findings, exit 0)"
+
+impact_matrix_updates:
+  - id: IMPACT-20260616-001
+    status: applied
+
+clarify_payloads: []
+
+note:
+  snapshot_note: "FIND-001 同時改 situation-annotation.haapi.yaml（CiC 狀態），其 snapshot 一併歸檔於 archive。"

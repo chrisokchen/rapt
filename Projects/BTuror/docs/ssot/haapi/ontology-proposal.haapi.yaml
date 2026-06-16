@@ -1,0 +1,51 @@
+api: ontology-proposal
+schema_version: "3.3"
+entity: OntologyProposal
+title: 本體演化提案 API
+description: pattern-miner 提出本體演化提案；治理者核可 / 駁回（CON-GOV-001，AI suggests human governs）
+
+exposes:
+  standard: [list, read, create]
+  list:
+    filters:
+      - {field: baseVersion, operators: [eq]}
+      - {field: status, operators: [eq]}
+    sorting: {fields: [proposedAt], default: proposedAt:desc}
+    pagination: {style: offset, default_size: 20}
+  operations:
+    - name: approve
+      method: POST
+      path: /{id}/approve
+    - name: reject
+      method: POST
+      path: /{id}/reject
+
+access:
+  authentication: {type: bearer, required: true}
+  endpoints:
+    list:
+      required_roles: [governance]
+      required_permissions:
+        - id: ontology_proposal_read
+    read:
+      required_roles: [governance]
+      required_permissions:
+        - id: ontology_proposal_read
+    create:
+      required_roles: [pattern-miner]
+      required_permissions:
+        - id: ontology_proposal_create
+  operations:
+    approve:
+      required_roles: [governance]
+      required_permissions:
+        - id: ontology_proposal_review
+    reject:
+      required_roles: [governance]
+      required_permissions:
+        - id: ontology_proposal_review
+
+source_evidence:
+  - "docs/ssot/habdd/replay-governance.ha.feature#Scenario:本體變更需具治理權限者核可"
+  - "docs/ssot/dbml/schema.dbml#Table:OntologyProposal"
+  - "docs/ssot/haarm/bridge-cognitive-tutor.haarm.yaml#roles"

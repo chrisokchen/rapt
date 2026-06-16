@@ -1,0 +1,2860 @@
+openapi: 3.0.3
+info:
+  title: Bridge Cognitive Tutor API
+  version: 1.0.0
+  description: AI 驅動、可診斷、可解釋的橋牌認知學習系統；MVP 聚焦 Entry Management Tutor（橋引管理教練）。
+servers:
+- url: http://localhost:8080/api/v1
+  description: 本機開發
+security:
+- bearerAuth: []
+tags:
+- name: 訓練指派 API
+  description: 教練派發針對性訓練；學生讀取自己的指派（CON-ASSIGN-001 限指導關係）
+- name: 賽後教學 API
+  description: 讀取賽後教學說明與下一步訓練建議（LLM 產生，只 narration）
+- name: 認知技能 API
+  description: 認知本體技能節點的讀取（已登入者）與維護（標注者）；構成 skill graph
+- name: 牌例管理 API
+  description: curated Entry Management 牌例的 CRUD（標注者管理、已登入者可讀取練習目錄）
+- name: 認知診斷 API
+  description: 讀取基於證據的診斷（含 DiagnosisEvidence）；教練可覆核並標記分歧（CoachReview）
+- name: 本體演化提案 API
+  description: pattern-miner 提出本體演化提案；治理者核可 / 駁回（CON-GOV-001，AI suggests human governs）
+- name: 練習 Session API
+  description: 學生練習牌例；出牌 / 提示 / 推理標記為 session 上的業務操作（ActionTrace / HintEvent / ReasoningTag）
+- name: 可重現重播 API
+  description: 在指定 ontology / rule 版本下重播學習軌跡（Debug / Research / Student-History）
+- name: 局面標注 API
+  description: 牌例的 Situation DSL 標注建立 / 更新（標注者）；完整性檢核見 CON-ANNO-001
+- name: 認知精熟度 API
+  description: 讀取學生多維 partial mastery（學生本人 / 教練 / 家長 / 研究者，依範圍）；CDM 估計見 CON-MASTERY-002
+paths:
+  /assignment:
+    get:
+      operationId: listAssignment
+      summary: 教練派發針對性訓練；學生讀取自己的指派（CON-ASSIGN-001 限指導關係）
+      tags:
+      - 訓練指派 API
+      security:
+      - bearerAuth: []
+      x-required-roles:
+      - student
+      - coach
+      x-required-permissions:
+      - assignment_read_own
+      - assignment_read_team
+      parameters:
+      - name: studentId
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: coachId
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: targetSkillId
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: status
+        in: query
+        required: false
+        schema:
+          type: string
+      - $ref: '#/components/parameters/OffsetParam'
+      - $ref: '#/components/parameters/LimitParam'
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Assignment'
+                  total:
+                    type: integer
+                  offset:
+                    type: integer
+                  limit:
+                    type: integer
+        '400':
+          description: 請求參數錯誤
+        '401':
+          description: 未授權
+        '403':
+          description: 權限不足
+        '404':
+          description: 資源不存在
+        '500':
+          description: 伺服器錯誤
+    post:
+      operationId: createAssignment
+      summary: 教練派發針對性訓練；學生讀取自己的指派（CON-ASSIGN-001 限指導關係）
+      tags:
+      - 訓練指派 API
+      security:
+      - bearerAuth: []
+      x-required-roles:
+      - coach
+      x-required-permissions:
+      - assignment_create
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AssignmentRequest'
+      responses:
+        '400':
+          description: 請求參數錯誤
+        '401':
+          description: 未授權
+        '403':
+          description: 權限不足
+        '404':
+          description: 資源不存在
+        '500':
+          description: 伺服器錯誤
+        '201':
+          description: 建立成功
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Assignment'
+  /assignment/{id}:
+    get:
+      operationId: readAssignment
+      summary: 教練派發針對性訓練；學生讀取自己的指派（CON-ASSIGN-001 限指導關係）
+      tags:
+      - 訓練指派 API
+      security:
+      - bearerAuth: []
+      x-required-roles:
+      - student
+      - coach
+      x-required-permissions:
+      - assignment_read_own
+      - assignment_read_team
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Assignment'
+        '400':
+          description: 請求參數錯誤
+        '401':
+          description: 未授權
+        '403':
+          description: 權限不足
+        '404':
+          description: 資源不存在
+        '500':
+          description: 伺服器錯誤
+  /coaching-feedback:
+    get:
+      operationId: listCoachingfeedback
+      summary: 讀取賽後教學說明與下一步訓練建議（LLM 產生，只 narration）
+      tags:
+      - 賽後教學 API
+      security:
+      - bearerAuth: []
+      x-required-roles:
+      - student
+      - coach
+      x-required-permissions:
+      - coaching_feedback_read_own
+      - coaching_feedback_read_team
+      parameters:
+      - name: diagnosisId
+        in: query
+        required: false
+        schema:
+          type: string
+      - $ref: '#/components/parameters/OffsetParam'
+      - $ref: '#/components/parameters/LimitParam'
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/CoachingFeedback'
+                  total:
+                    type: integer
+                  offset:
+                    type: integer
+                  limit:
+                    type: integer
+        '400':
+          description: 請求參數錯誤
+        '401':
+          description: 未授權
+        '403':
+          description: 權限不足
+        '404':
+          description: 資源不存在
+        '500':
+          description: 伺服器錯誤
+  /coaching-feedback/{id}:
+    get:
+      operationId: readCoachingfeedback
+      summary: 讀取賽後教學說明與下一步訓練建議（LLM 產生，只 narration）
+      tags:
+      - 賽後教學 API
+      security:
+      - bearerAuth: []
+      x-required-roles:
+      - student
+      - coach
+      x-required-permissions:
+      - coaching_feedback_read_own
+      - coaching_feedback_read_team
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CoachingFeedback'
+        '400':
+          description: 請求參數錯誤
+        '401':
+          description: 未授權
+        '403':
+          description: 權限不足
+        '404':
+          description: 資源不存在
+        '500':
+          description: 伺服器錯誤
+  /cognitive-skill:
+    get:
+      operationId: listCognitiveskill
+      summary: 認知本體技能節點的讀取（已登入者）與維護（標注者）；構成 skill graph
+      tags:
+      - 認知技能 API
+      security:
+      - bearerAuth: []
+      x-required-roles:
+      - authenticated
+      x-required-permissions:
+      - cognitive_skill_read
+      parameters:
+      - name: ontologyVersion
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: cognitiveLevel
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: parentSkillId
+        in: query
+        required: false
+        schema:
+          type: string
+      - $ref: '#/components/parameters/OffsetParam'
+      - $ref: '#/components/parameters/LimitParam'
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/CognitiveSkill'
+                  total:
+                    type: integer
+                  offset:
+                    type: integer
+                  limit:
+                    type: integer
+        '400':
+          description: 請求參數錯誤
+        '401':
+          description: 未授權
+        '403':
+          description: 權限不足
+        '404':
+          description: 資源不存在
+        '500':
+          description: 伺服器錯誤
+    post:
+      operationId: createCognitiveskill
+      summary: 認知本體技能節點的讀取（已登入者）與維護（標注者）；構成 skill graph
+      tags:
+      - 認知技能 API
+      security:
+      - bearerAuth: []
+      x-required-roles:
+      - annotator
+      x-required-permissions:
+      - cognitive_skill_create
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CognitiveSkillRequest'
+      responses:
+        '400':
+          description: 請求參數錯誤
+        '401':
+          description: 未授權
+        '403':
+          description: 權限不足
+        '404':
+          description: 資源不存在
+        '500':
+          description: 伺服器錯誤
+        '201':
+          description: 建立成功
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CognitiveSkill'
+  /cognitive-skill/{id}:
+    get:
+      operationId: readCognitiveskill
+      summary: 認知本體技能節點的讀取（已登入者）與維護（標注者）；構成 skill graph
+      tags:
+      - 認知技能 API
+      security:
+      - bearerAuth: []
+      x-required-roles:
+      - authenticated
+      x-required-permissions:
+      - cognitive_skill_read
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CognitiveSkill'
+        '400':
+          description: 請求參數錯誤
+        '401':
+          description: 未授權
+        '403':
+          description: 權限不足
+        '404':
+          description: 資源不存在
+        '500':
+          description: 伺服器錯誤
+    put:
+      operationId: updateCognitiveskill
+      summary: 認知本體技能節點的讀取（已登入者）與維護（標注者）；構成 skill graph
+      tags:
+      - 認知技能 API
+      security:
+      - bearerAuth: []
+      x-required-roles:
+      - annotator
+      x-required-permissions:
+      - cognitive_skill_update
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CognitiveSkillRequest'
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CognitiveSkill'
+        '400':
+          description: 請求參數錯誤
+        '401':
+          description: 未授權
+        '403':
+          description: 權限不足
+        '404':
+          description: 資源不存在
+        '500':
+          description: 伺服器錯誤
+  /curated-deal:
+    get:
+      operationId: listCurateddeal
+      summary: curated Entry Management 牌例的 CRUD（標注者管理、已登入者可讀取練習目錄）
+      tags:
+      - 牌例管理 API
+      security:
+      - bearerAuth: []
+      x-required-roles:
+      - authenticated
+      x-required-permissions:
+      - curated_deal_read
+      parameters:
+      - name: situationType
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: declarer
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: scoringContext
+        in: query
+        required: false
+        schema:
+          type: string
+      - $ref: '#/components/parameters/OffsetParam'
+      - $ref: '#/components/parameters/LimitParam'
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/CuratedDeal'
+                  total:
+                    type: integer
+                  offset:
+                    type: integer
+                  limit:
+                    type: integer
+        '400':
+          description: 請求參數錯誤
+        '401':
+          description: 未授權
+        '403':
+          description: 權限不足
+        '404':
+          description: 資源不存在
+        '500':
+          description: 伺服器錯誤
+    post:
+      operationId: createCurateddeal
+      summary: curated Entry Management 牌例的 CRUD（標注者管理、已登入者可讀取練習目錄）
+      tags:
+      - 牌例管理 API
+      security:
+      - bearerAuth: []
+      x-required-roles:
+      - annotator
+      x-required-permissions:
+      - curated_deal_create
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CuratedDealRequest'
+      responses:
+        '400':
+          description: 請求參數錯誤
+        '401':
+          description: 未授權
+        '403':
+          description: 權限不足
+        '404':
+          description: 資源不存在
+        '500':
+          description: 伺服器錯誤
+        '201':
+          description: 建立成功
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CuratedDeal'
+  /curated-deal/{id}:
+    get:
+      operationId: readCurateddeal
+      summary: curated Entry Management 牌例的 CRUD（標注者管理、已登入者可讀取練習目錄）
+      tags:
+      - 牌例管理 API
+      security:
+      - bearerAuth: []
+      x-required-roles:
+      - authenticated
+      x-required-permissions:
+      - curated_deal_read
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CuratedDeal'
+        '400':
+          description: 請求參數錯誤
+        '401':
+          description: 未授權
+        '403':
+          description: 權限不足
+        '404':
+          description: 資源不存在
+        '500':
+          description: 伺服器錯誤
+    put:
+      operationId: updateCurateddeal
+      summary: curated Entry Management 牌例的 CRUD（標注者管理、已登入者可讀取練習目錄）
+      tags:
+      - 牌例管理 API
+      security:
+      - bearerAuth: []
+      x-required-roles:
+      - annotator
+      x-required-permissions:
+      - curated_deal_update
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CuratedDealRequest'
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CuratedDeal'
+        '400':
+          description: 請求參數錯誤
+        '401':
+          description: 未授權
+        '403':
+          description: 權限不足
+        '404':
+          description: 資源不存在
+        '500':
+          description: 伺服器錯誤
+  /diagnosis:
+    get:
+      operationId: listDiagnosis
+      summary: 讀取基於證據的診斷（含 DiagnosisEvidence）；教練可覆核並標記分歧（CoachReview）
+      tags:
+      - 認知診斷 API
+      security:
+      - bearerAuth: []
+      x-required-roles:
+      - student
+      - coach
+      - researcher
+      x-required-permissions:
+      - diagnosis_read_own
+      - diagnosis_read_team
+      - diagnosis_read_all
+      parameters:
+      - name: sessionId
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: targetSkillId
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: mistakeCategory
+        in: query
+        required: false
+        schema:
+          type: string
+      - $ref: '#/components/parameters/OffsetParam'
+      - $ref: '#/components/parameters/LimitParam'
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Diagnosis'
+                  total:
+                    type: integer
+                  offset:
+                    type: integer
+                  limit:
+                    type: integer
+        '400':
+          description: 請求參數錯誤
+        '401':
+          description: 未授權
+        '403':
+          description: 權限不足
+        '404':
+          description: 資源不存在
+        '500':
+          description: 伺服器錯誤
+  /diagnosis/{id}:
+    get:
+      operationId: readDiagnosis
+      summary: 讀取基於證據的診斷（含 DiagnosisEvidence）；教練可覆核並標記分歧（CoachReview）
+      tags:
+      - 認知診斷 API
+      security:
+      - bearerAuth: []
+      x-required-roles:
+      - student
+      - coach
+      - researcher
+      x-required-permissions:
+      - diagnosis_read_own
+      - diagnosis_read_team
+      - diagnosis_read_all
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Diagnosis'
+        '400':
+          description: 請求參數錯誤
+        '401':
+          description: 未授權
+        '403':
+          description: 權限不足
+        '404':
+          description: 資源不存在
+        '500':
+          description: 伺服器錯誤
+  /diagnosis/{id}/review:
+    post:
+      operationId: diagnosisReview
+      summary: diagnosis Review
+      tags:
+      - 認知診斷 API
+      security:
+      - bearerAuth: []
+      x-required-roles:
+      - coach
+      x-required-permissions:
+      - coach_review_create
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DiagnosisRequest'
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Diagnosis'
+        '400':
+          description: 請求參數錯誤
+        '401':
+          description: 未授權
+        '403':
+          description: 權限不足
+        '404':
+          description: 資源不存在
+        '500':
+          description: 伺服器錯誤
+  /ontology-proposal:
+    get:
+      operationId: listOntologyproposal
+      summary: pattern-miner 提出本體演化提案；治理者核可 / 駁回（CON-GOV-001，AI suggests human governs）
+      tags:
+      - 本體演化提案 API
+      security:
+      - bearerAuth: []
+      x-required-roles:
+      - governance
+      x-required-permissions:
+      - ontology_proposal_read
+      parameters:
+      - name: baseVersion
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: status
+        in: query
+        required: false
+        schema:
+          type: string
+      - $ref: '#/components/parameters/OffsetParam'
+      - $ref: '#/components/parameters/LimitParam'
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/OntologyProposal'
+                  total:
+                    type: integer
+                  offset:
+                    type: integer
+                  limit:
+                    type: integer
+        '400':
+          description: 請求參數錯誤
+        '401':
+          description: 未授權
+        '403':
+          description: 權限不足
+        '404':
+          description: 資源不存在
+        '500':
+          description: 伺服器錯誤
+    post:
+      operationId: createOntologyproposal
+      summary: pattern-miner 提出本體演化提案；治理者核可 / 駁回（CON-GOV-001，AI suggests human governs）
+      tags:
+      - 本體演化提案 API
+      security:
+      - bearerAuth: []
+      x-required-roles:
+      - pattern-miner
+      x-required-permissions:
+      - ontology_proposal_create
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OntologyProposalRequest'
+      responses:
+        '400':
+          description: 請求參數錯誤
+        '401':
+          description: 未授權
+        '403':
+          description: 權限不足
+        '404':
+          description: 資源不存在
+        '500':
+          description: 伺服器錯誤
+        '201':
+          description: 建立成功
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OntologyProposal'
+  /ontology-proposal/{id}:
+    get:
+      operationId: readOntologyproposal
+      summary: pattern-miner 提出本體演化提案；治理者核可 / 駁回（CON-GOV-001，AI suggests human governs）
+      tags:
+      - 本體演化提案 API
+      security:
+      - bearerAuth: []
+      x-required-roles:
+      - governance
+      x-required-permissions:
+      - ontology_proposal_read
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OntologyProposal'
+        '400':
+          description: 請求參數錯誤
+        '401':
+          description: 未授權
+        '403':
+          description: 權限不足
+        '404':
+          description: 資源不存在
+        '500':
+          description: 伺服器錯誤
+  /ontology-proposal/{id}/approve:
+    post:
+      operationId: ontologyProposalApprove
+      summary: ontology Proposal Approve
+      tags:
+      - 本體演化提案 API
+      security:
+      - bearerAuth: []
+      x-required-roles:
+      - governance
+      x-required-permissions:
+      - ontology_proposal_review
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OntologyProposalRequest'
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OntologyProposal'
+        '400':
+          description: 請求參數錯誤
+        '401':
+          description: 未授權
+        '403':
+          description: 權限不足
+        '404':
+          description: 資源不存在
+        '500':
+          description: 伺服器錯誤
+  /ontology-proposal/{id}/reject:
+    post:
+      operationId: ontologyProposalReject
+      summary: ontology Proposal Reject
+      tags:
+      - 本體演化提案 API
+      security:
+      - bearerAuth: []
+      x-required-roles:
+      - governance
+      x-required-permissions:
+      - ontology_proposal_review
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OntologyProposalRequest'
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OntologyProposal'
+        '400':
+          description: 請求參數錯誤
+        '401':
+          description: 未授權
+        '403':
+          description: 權限不足
+        '404':
+          description: 資源不存在
+        '500':
+          description: 伺服器錯誤
+  /play-session:
+    get:
+      operationId: listPlaysession
+      summary: 學生練習牌例；出牌 / 提示 / 推理標記為 session 上的業務操作（ActionTrace / HintEvent / ReasoningTag）
+      tags:
+      - 練習 Session API
+      security:
+      - bearerAuth: []
+      x-required-roles:
+      - student
+      - coach
+      x-required-permissions:
+      - play_session_read_own
+      - play_session_read_team
+      parameters:
+      - name: studentId
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: dealId
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: status
+        in: query
+        required: false
+        schema:
+          type: string
+      - $ref: '#/components/parameters/OffsetParam'
+      - $ref: '#/components/parameters/LimitParam'
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/PlaySession'
+                  total:
+                    type: integer
+                  offset:
+                    type: integer
+                  limit:
+                    type: integer
+        '400':
+          description: 請求參數錯誤
+        '401':
+          description: 未授權
+        '403':
+          description: 權限不足
+        '404':
+          description: 資源不存在
+        '500':
+          description: 伺服器錯誤
+    post:
+      operationId: createPlaysession
+      summary: 學生練習牌例；出牌 / 提示 / 推理標記為 session 上的業務操作（ActionTrace / HintEvent / ReasoningTag）
+      tags:
+      - 練習 Session API
+      security:
+      - bearerAuth: []
+      x-required-roles:
+      - student
+      x-required-permissions:
+      - play_session_create
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PlaySessionRequest'
+      responses:
+        '400':
+          description: 請求參數錯誤
+        '401':
+          description: 未授權
+        '403':
+          description: 權限不足
+        '404':
+          description: 資源不存在
+        '500':
+          description: 伺服器錯誤
+        '201':
+          description: 建立成功
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PlaySession'
+  /play-session/{id}:
+    get:
+      operationId: readPlaysession
+      summary: 學生練習牌例；出牌 / 提示 / 推理標記為 session 上的業務操作（ActionTrace / HintEvent / ReasoningTag）
+      tags:
+      - 練習 Session API
+      security:
+      - bearerAuth: []
+      x-required-roles:
+      - student
+      - coach
+      x-required-permissions:
+      - play_session_read_own
+      - play_session_read_team
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PlaySession'
+        '400':
+          description: 請求參數錯誤
+        '401':
+          description: 未授權
+        '403':
+          description: 權限不足
+        '404':
+          description: 資源不存在
+        '500':
+          description: 伺服器錯誤
+  /play-session/{id}/play-card:
+    post:
+      operationId: playSessionPlayCard
+      summary: play Session Play Card
+      tags:
+      - 練習 Session API
+      security:
+      - bearerAuth: []
+      x-required-roles:
+      - student
+      x-required-permissions:
+      - action_trace_create
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PlaySessionRequest'
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PlaySession'
+        '400':
+          description: 請求參數錯誤
+        '401':
+          description: 未授權
+        '403':
+          description: 權限不足
+        '404':
+          description: 資源不存在
+        '500':
+          description: 伺服器錯誤
+  /play-session/{id}/request-hint:
+    post:
+      operationId: playSessionRequestHint
+      summary: play Session Request Hint
+      tags:
+      - 練習 Session API
+      security:
+      - bearerAuth: []
+      x-required-roles:
+      - student
+      x-required-permissions:
+      - hint_event_create
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PlaySessionRequest'
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PlaySession'
+        '400':
+          description: 請求參數錯誤
+        '401':
+          description: 未授權
+        '403':
+          description: 權限不足
+        '404':
+          description: 資源不存在
+        '500':
+          description: 伺服器錯誤
+  /play-session/{id}/tag-reasoning:
+    post:
+      operationId: playSessionTagReasoning
+      summary: play Session Tag Reasoning
+      tags:
+      - 練習 Session API
+      security:
+      - bearerAuth: []
+      x-required-roles:
+      - student
+      x-required-permissions:
+      - reasoning_tag_create
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PlaySessionRequest'
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PlaySession'
+        '400':
+          description: 請求參數錯誤
+        '401':
+          description: 未授權
+        '403':
+          description: 權限不足
+        '404':
+          description: 資源不存在
+        '500':
+          description: 伺服器錯誤
+  /play-session/{id}/diagnose:
+    post:
+      operationId: playSessionDiagnose
+      summary: play Session Diagnose
+      tags:
+      - 練習 Session API
+      security:
+      - bearerAuth: []
+      x-required-roles:
+      - diagnosis-engine
+      x-required-permissions:
+      - diagnosis_create
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PlaySessionRequest'
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PlaySession'
+        '400':
+          description: 請求參數錯誤
+        '401':
+          description: 未授權
+        '403':
+          description: 權限不足
+        '404':
+          description: 資源不存在
+        '500':
+          description: 伺服器錯誤
+  /replay-run:
+    get:
+      operationId: listReplayrun
+      summary: 在指定 ontology / rule 版本下重播學習軌跡（Debug / Research / Student-History）
+      tags:
+      - 可重現重播 API
+      security:
+      - bearerAuth: []
+      x-required-roles:
+      - annotator
+      - governance
+      - researcher
+      x-required-permissions:
+      - replay_run_read
+      parameters:
+      - name: scope
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: replayType
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: scopeRefId
+        in: query
+        required: false
+        schema:
+          type: string
+      - $ref: '#/components/parameters/OffsetParam'
+      - $ref: '#/components/parameters/LimitParam'
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/ReplayRun'
+                  total:
+                    type: integer
+                  offset:
+                    type: integer
+                  limit:
+                    type: integer
+        '400':
+          description: 請求參數錯誤
+        '401':
+          description: 未授權
+        '403':
+          description: 權限不足
+        '404':
+          description: 資源不存在
+        '500':
+          description: 伺服器錯誤
+    post:
+      operationId: createReplayrun
+      summary: 在指定 ontology / rule 版本下重播學習軌跡（Debug / Research / Student-History）
+      tags:
+      - 可重現重播 API
+      security:
+      - bearerAuth: []
+      x-required-roles:
+      - annotator
+      - governance
+      - researcher
+      x-required-permissions:
+      - replay_run_create
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ReplayRunRequest'
+      responses:
+        '400':
+          description: 請求參數錯誤
+        '401':
+          description: 未授權
+        '403':
+          description: 權限不足
+        '404':
+          description: 資源不存在
+        '500':
+          description: 伺服器錯誤
+        '201':
+          description: 建立成功
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReplayRun'
+  /replay-run/{id}:
+    get:
+      operationId: readReplayrun
+      summary: 在指定 ontology / rule 版本下重播學習軌跡（Debug / Research / Student-History）
+      tags:
+      - 可重現重播 API
+      security:
+      - bearerAuth: []
+      x-required-roles:
+      - annotator
+      - governance
+      - researcher
+      x-required-permissions:
+      - replay_run_read
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReplayRun'
+        '400':
+          description: 請求參數錯誤
+        '401':
+          description: 未授權
+        '403':
+          description: 權限不足
+        '404':
+          description: 資源不存在
+        '500':
+          description: 伺服器錯誤
+  /situation-annotation:
+    get:
+      operationId: listSituationannotation
+      summary: 牌例的 Situation DSL 標注建立 / 更新（標注者）；完整性檢核見 CON-ANNO-001
+      tags:
+      - 局面標注 API
+      security:
+      - bearerAuth: []
+      x-required-roles:
+      - annotator
+      x-required-permissions:
+      - situation_annotation_read
+      parameters:
+      - name: dealId
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: situationType
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: isComplete
+        in: query
+        required: false
+        schema:
+          type: string
+      - $ref: '#/components/parameters/OffsetParam'
+      - $ref: '#/components/parameters/LimitParam'
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/SituationAnnotation'
+                  total:
+                    type: integer
+                  offset:
+                    type: integer
+                  limit:
+                    type: integer
+        '400':
+          description: 請求參數錯誤
+        '401':
+          description: 未授權
+        '403':
+          description: 權限不足
+        '404':
+          description: 資源不存在
+        '500':
+          description: 伺服器錯誤
+    post:
+      operationId: createSituationannotation
+      summary: 牌例的 Situation DSL 標注建立 / 更新（標注者）；完整性檢核見 CON-ANNO-001
+      tags:
+      - 局面標注 API
+      security:
+      - bearerAuth: []
+      x-required-roles:
+      - annotator
+      x-required-permissions:
+      - situation_annotation_create
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SituationAnnotationRequest'
+      responses:
+        '400':
+          description: 請求參數錯誤
+        '401':
+          description: 未授權
+        '403':
+          description: 權限不足
+        '404':
+          description: 資源不存在
+        '500':
+          description: 伺服器錯誤
+        '201':
+          description: 建立成功
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SituationAnnotation'
+  /situation-annotation/{id}:
+    get:
+      operationId: readSituationannotation
+      summary: 牌例的 Situation DSL 標注建立 / 更新（標注者）；完整性檢核見 CON-ANNO-001
+      tags:
+      - 局面標注 API
+      security:
+      - bearerAuth: []
+      x-required-roles:
+      - annotator
+      x-required-permissions:
+      - situation_annotation_read
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SituationAnnotation'
+        '400':
+          description: 請求參數錯誤
+        '401':
+          description: 未授權
+        '403':
+          description: 權限不足
+        '404':
+          description: 資源不存在
+        '500':
+          description: 伺服器錯誤
+    put:
+      operationId: updateSituationannotation
+      summary: 牌例的 Situation DSL 標注建立 / 更新（標注者）；完整性檢核見 CON-ANNO-001
+      tags:
+      - 局面標注 API
+      security:
+      - bearerAuth: []
+      x-required-roles:
+      - annotator
+      x-required-permissions:
+      - situation_annotation_update
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SituationAnnotationRequest'
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SituationAnnotation'
+        '400':
+          description: 請求參數錯誤
+        '401':
+          description: 未授權
+        '403':
+          description: 權限不足
+        '404':
+          description: 資源不存在
+        '500':
+          description: 伺服器錯誤
+  /student-skill-state:
+    get:
+      operationId: listStudentskillstate
+      summary: 讀取學生多維 partial mastery（學生本人 / 教練 / 家長 / 研究者，依範圍）；CDM 估計見 CON-MASTERY-002
+      tags:
+      - 認知精熟度 API
+      security:
+      - bearerAuth: []
+      x-required-roles:
+      - student
+      - coach
+      - parent-school
+      - researcher
+      x-required-permissions:
+      - student_skill_state_read_own
+      - student_skill_state_read_team
+      - student_skill_state_read_ward
+      - student_skill_state_read_all
+      parameters:
+      - name: studentId
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: skillId
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: trend
+        in: query
+        required: false
+        schema:
+          type: string
+      - $ref: '#/components/parameters/OffsetParam'
+      - $ref: '#/components/parameters/LimitParam'
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/StudentSkillState'
+                  total:
+                    type: integer
+                  offset:
+                    type: integer
+                  limit:
+                    type: integer
+        '400':
+          description: 請求參數錯誤
+        '401':
+          description: 未授權
+        '403':
+          description: 權限不足
+        '404':
+          description: 資源不存在
+        '500':
+          description: 伺服器錯誤
+  /student-skill-state/{id}:
+    get:
+      operationId: readStudentskillstate
+      summary: 讀取學生多維 partial mastery（學生本人 / 教練 / 家長 / 研究者，依範圍）；CDM 估計見 CON-MASTERY-002
+      tags:
+      - 認知精熟度 API
+      security:
+      - bearerAuth: []
+      x-required-roles:
+      - student
+      - coach
+      - parent-school
+      - researcher
+      x-required-permissions:
+      - student_skill_state_read_own
+      - student_skill_state_read_team
+      - student_skill_state_read_ward
+      - student_skill_state_read_all
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StudentSkillState'
+        '400':
+          description: 請求參數錯誤
+        '401':
+          description: 未授權
+        '403':
+          description: 權限不足
+        '404':
+          description: 資源不存在
+        '500':
+          description: 伺服器錯誤
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: JWT Bearer Token
+  parameters:
+    OffsetParam:
+      name: offset
+      in: query
+      required: false
+      schema:
+        type: integer
+        default: 0
+        minimum: 0
+      description: 分頁起始位置
+    LimitParam:
+      name: limit
+      in: query
+      required: false
+      schema:
+        type: integer
+        default: 20
+        minimum: 1
+        maximum: 100
+      description: 每頁筆數
+  schemas:
+    UserAccount:
+      type: object
+      description: USR001 使用者帳號主檔（學生 / 教練 / 標注者 / 研究者）
+      properties:
+        userId:
+          type: string
+          maxLength: 60
+          description: 使用者帳號
+        displayName: &id001
+          type: string
+          maxLength: 100
+          description: 顯示名稱
+        userType: &id002
+          type: string
+          maxLength: 1
+          x-ref-code: UserType
+          description: 使用者類型
+        email: &id003
+          type: string
+          maxLength: 150
+          x-sensitive: true
+          description: 電子郵件
+        passwordHash: &id004
+          type: string
+          maxLength: 150
+          x-sensitive: true
+          description: 密碼雜湊
+        enabled: &id005
+          type: boolean
+          description: 是否啟用
+        createdAt:
+          type: string
+          format: date-time
+          description: 建立時間
+      required:
+      - userId
+      - displayName
+      - userType
+      - email
+      - passwordHash
+      - enabled
+      - createdAt
+    UserAccountRequest:
+      type: object
+      description: USR001 使用者帳號主檔（學生 / 教練 / 標注者 / 研究者） 請求體
+      properties:
+        displayName: *id001
+        userType: *id002
+        email: *id003
+        passwordHash: *id004
+        enabled: *id005
+      required:
+      - displayName
+      - userType
+      - email
+      - passwordHash
+      - enabled
+    StudentProfile:
+      type: object
+      description: STU001 學生認知檔案（涵蓋中級卡關玩家與青少年學習者）
+      properties:
+        studentId:
+          type: string
+          maxLength: 60
+          description: 學生帳號
+        cognitiveLevel: &id006
+          type: string
+          maxLength: 1
+          x-ref-code: CognitiveLevel
+          description: 認知層級
+        enrolledAt: &id007
+          type: string
+          format: date-time
+          description: 建檔時間
+      required:
+      - studentId
+      - cognitiveLevel
+      - enrolledAt
+    StudentProfileRequest:
+      type: object
+      description: STU001 學生認知檔案（涵蓋中級卡關玩家與青少年學習者） 請求體
+      properties:
+        cognitiveLevel: *id006
+        enrolledAt: *id007
+      required:
+      - cognitiveLevel
+      - enrolledAt
+    CoachStudentLink:
+      type: object
+      description: CSL001 教練與學生的指導關係
+      properties:
+        linkId:
+          type: string
+          maxLength: 60
+          description: 關係編號
+        coachId: &id008
+          type: string
+          maxLength: 60
+          description: 教練
+        studentId: &id009
+          type: string
+          maxLength: 60
+          description: 學生
+        linkedAt: &id010
+          type: string
+          format: date-time
+          description: 建立時間
+      required:
+      - linkId
+      - coachId
+      - studentId
+      - linkedAt
+    CoachStudentLinkRequest:
+      type: object
+      description: CSL001 教練與學生的指導關係 請求體
+      properties:
+        coachId: *id008
+        studentId: *id009
+        linkedAt: *id010
+      required:
+      - coachId
+      - studentId
+      - linkedAt
+    GuardianStudentLink:
+      type: object
+      description: GSL001 家長 / 學校與學習者的監護關係（CLR-260616-01#Q8）
+      properties:
+        linkId:
+          type: string
+          maxLength: 60
+          description: 關係編號
+        guardianId: &id011
+          type: string
+          maxLength: 60
+          description: 家長 / 監護人
+        studentId: &id012
+          type: string
+          maxLength: 60
+          description: 學生
+        linkedAt: &id013
+          type: string
+          format: date-time
+          description: 建立時間
+      required:
+      - linkId
+      - guardianId
+      - studentId
+      - linkedAt
+    GuardianStudentLinkRequest:
+      type: object
+      description: GSL001 家長 / 學校與學習者的監護關係（CLR-260616-01#Q8） 請求體
+      properties:
+        guardianId: *id011
+        studentId: *id012
+        linkedAt: *id013
+      required:
+      - guardianId
+      - studentId
+      - linkedAt
+    CuratedDeal:
+      type: object
+      description: DEAL001 人工 curated 的橋引管理牌例
+      properties:
+        dealId:
+          type: string
+          maxLength: 60
+          description: 牌例編號
+        title: &id014
+          type: string
+          maxLength: 100
+          description: 牌例標題
+        handsPbn: &id015
+          type: string
+          description: 四家牌（PBN）
+        contract: &id016
+          type: string
+          maxLength: 20
+          description: 合約
+        declarer: &id017
+          type: string
+          maxLength: 1
+          x-ref-code: Seat
+          description: 莊家方位
+        scoringContext: &id018
+          type: string
+          maxLength: 1
+          x-ref-code: ScoringContext
+          description: 計分制
+        authorId: &id019
+          type: string
+          maxLength: 60
+          description: 建立標注者
+        createdAt:
+          type: string
+          format: date-time
+          description: 建立時間
+      required:
+      - dealId
+      - title
+      - handsPbn
+      - contract
+      - declarer
+      - scoringContext
+      - authorId
+      - createdAt
+    CuratedDealRequest:
+      type: object
+      description: DEAL001 人工 curated 的橋引管理牌例 請求體
+      properties:
+        title: *id014
+        handsPbn: *id015
+        contract: *id016
+        declarer: *id017
+        scoringContext: *id018
+        authorId: *id019
+      required:
+      - title
+      - handsPbn
+      - contract
+      - declarer
+      - scoringContext
+      - authorId
+    SituationAnnotation:
+      type: object
+      description: ANNO001 牌例的 Situation DSL 標注（critical_moments / skills / acceptable_lines / common_mistakes）
+      properties:
+        annotationId:
+          type: string
+          maxLength: 60
+          description: 標注編號
+        dealId: &id020
+          type: string
+          maxLength: 60
+          description: 牌例
+        situationType: &id021
+          type: string
+          maxLength: 2
+          x-ref-code: SituationType
+          description: 局面類型
+        ontologyVersion: &id022
+          type: string
+          maxLength: 20
+          description: 依據本體版本
+        dslBody: &id023
+          type: string
+          description: Situation DSL 內文
+        isComplete: &id024
+          type: boolean
+          description: 是否標注完整
+        updatedAt:
+          type: string
+          format: date-time
+          description: 更新時間
+      required:
+      - annotationId
+      - dealId
+      - situationType
+      - ontologyVersion
+      - dslBody
+      - isComplete
+      - updatedAt
+    SituationAnnotationRequest:
+      type: object
+      description: ANNO001 牌例的 Situation DSL 標注（critical_moments / skills / acceptable_lines / common_mistakes） 請求體
+      properties:
+        dealId: *id020
+        situationType: *id021
+        ontologyVersion: *id022
+        dslBody: *id023
+        isComplete: *id024
+      required:
+      - dealId
+      - situationType
+      - ontologyVersion
+      - dslBody
+      - isComplete
+    OntologyVersion:
+      type: object
+      description: ONT001 版本化的認知本體（versioned，可重播比較）
+      properties:
+        ontologyVersion:
+          type: string
+          maxLength: 20
+          description: 本體版本
+        title: &id025
+          type: string
+          maxLength: 100
+          description: 版本標題
+        status: &id026
+          type: string
+          maxLength: 1
+          x-ref-code: PublishStatus
+          description: 版本狀態
+        publishedAt: &id027
+          type: string
+          format: date-time
+          description: 發布時間
+        publishedBy: &id028
+          type: string
+          maxLength: 60
+          description: 發布者
+      required:
+      - ontologyVersion
+      - title
+      - status
+    OntologyVersionRequest:
+      type: object
+      description: ONT001 版本化的認知本體（versioned，可重播比較） 請求體
+      properties:
+        title: *id025
+        status: *id026
+        publishedAt: *id027
+        publishedBy: *id028
+      required:
+      - title
+      - status
+    CognitiveSkill:
+      type: object
+      description: SKILL001 認知技能（橋引辨識 / 保留 / 排序 / unblock 等），構成 skill graph
+      properties:
+        skillId:
+          type: string
+          maxLength: 60
+          description: 技能編號
+        ontologyVersion: &id029
+          type: string
+          maxLength: 20
+          description: 所屬本體版本
+        skillCode: &id030
+          type: string
+          maxLength: 60
+          description: 技能代碼
+        skillName: &id031
+          type: string
+          maxLength: 100
+          description: 技能名稱
+        cognitiveLevel: &id032
+          type: string
+          maxLength: 1
+          x-ref-code: CognitiveLevel
+          description: 認知層級
+        parentSkillId: &id033
+          type: string
+          maxLength: 60
+          description: 上層技能
+      required:
+      - skillId
+      - ontologyVersion
+      - skillCode
+      - skillName
+      - cognitiveLevel
+    CognitiveSkillRequest:
+      type: object
+      description: SKILL001 認知技能（橋引辨識 / 保留 / 排序 / unblock 等），構成 skill graph 請求體
+      properties:
+        ontologyVersion: *id029
+        skillCode: *id030
+        skillName: *id031
+        cognitiveLevel: *id032
+        parentSkillId: *id033
+      required:
+      - ontologyVersion
+      - skillCode
+      - skillName
+      - cognitiveLevel
+    RuleSet:
+      type: object
+      description: RULESET001 版本化的診斷規則集
+      properties:
+        ruleSetVersion:
+          type: string
+          maxLength: 20
+          description: 規則集版本
+        title: &id034
+          type: string
+          maxLength: 100
+          description: 規則集標題
+        status: &id035
+          type: string
+          maxLength: 1
+          x-ref-code: PublishStatus
+          description: 版本狀態
+        publishedAt: &id036
+          type: string
+          format: date-time
+          description: 發布時間
+      required:
+      - ruleSetVersion
+      - title
+      - status
+    RuleSetRequest:
+      type: object
+      description: RULESET001 版本化的診斷規則集 請求體
+      properties:
+        title: *id034
+        status: *id035
+        publishedAt: *id036
+      required:
+      - title
+      - status
+    DiagnosisRule:
+      type: object
+      description: RULE001 診斷規則（evidence mapping / rule conditions / mistake taxonomy）
+      properties:
+        ruleId:
+          type: string
+          maxLength: 60
+          description: 規則編號
+        ruleSetVersion: &id037
+          type: string
+          maxLength: 20
+          description: 所屬規則集版本
+        targetSkillId: &id038
+          type: string
+          maxLength: 60
+          description: 對應技能
+        mistakeCategory: &id039
+          type: string
+          maxLength: 2
+          x-ref-code: MistakeCategory
+          description: 錯誤分類
+        conditionExpr: &id040
+          type: string
+          description: 判定條件
+        description: &id041
+          type: string
+          maxLength: 500
+          description: 規則說明
+      required:
+      - ruleId
+      - ruleSetVersion
+      - targetSkillId
+      - mistakeCategory
+      - conditionExpr
+      - description
+    DiagnosisRuleRequest:
+      type: object
+      description: RULE001 診斷規則（evidence mapping / rule conditions / mistake taxonomy） 請求體
+      properties:
+        ruleSetVersion: *id037
+        targetSkillId: *id038
+        mistakeCategory: *id039
+        conditionExpr: *id040
+        description: *id041
+      required:
+      - ruleSetVersion
+      - targetSkillId
+      - mistakeCategory
+      - conditionExpr
+      - description
+    OntologyProposal:
+      type: object
+      description: PROP001 本體演化提案（AI suggests, human governs）
+      properties:
+        proposalId:
+          type: string
+          maxLength: 60
+          description: 提案編號
+        baseVersion: &id042
+          type: string
+          maxLength: 20
+          description: 基準本體版本
+        status: &id043
+          type: string
+          maxLength: 1
+          x-ref-code: ProposalStatus
+          description: 提案狀態
+        rationale: &id044
+          type: string
+          description: 提案理由（含共現證據）
+        proposedAt: &id045
+          type: string
+          format: date-time
+          description: 提出時間
+        reviewedBy: &id046
+          type: string
+          maxLength: 60
+          description: 核可者
+        reviewedAt: &id047
+          type: string
+          format: date-time
+          description: 核可時間
+      required:
+      - proposalId
+      - baseVersion
+      - status
+      - rationale
+      - proposedAt
+    OntologyProposalRequest:
+      type: object
+      description: PROP001 本體演化提案（AI suggests, human governs） 請求體
+      properties:
+        baseVersion: *id042
+        status: *id043
+        rationale: *id044
+        proposedAt: *id045
+        reviewedBy: *id046
+        reviewedAt: *id047
+      required:
+      - baseVersion
+      - status
+      - rationale
+      - proposedAt
+    PlaySession:
+      type: object
+      description: SESS001 一副牌例的練習 session（event sourcing 的聚合根）
+      properties:
+        sessionId:
+          type: string
+          maxLength: 60
+          description: 練習編號
+        studentId: &id048
+          type: string
+          maxLength: 60
+          description: 學生
+        dealId: &id049
+          type: string
+          maxLength: 60
+          description: 牌例
+        status: &id050
+          type: string
+          maxLength: 1
+          x-ref-code: SessionStatus
+          description: 練習狀態
+        startedAt:
+          type: string
+          format: date-time
+          description: 開始時間
+        completedAt:
+          type: string
+          format: date-time
+          description: 完成時間
+      required:
+      - sessionId
+      - studentId
+      - dealId
+      - status
+      - startedAt
+    PlaySessionRequest:
+      type: object
+      description: SESS001 一副牌例的練習 session（event sourcing 的聚合根） 請求體
+      properties:
+        studentId: *id048
+        dealId: *id049
+        status: *id050
+      required:
+      - studentId
+      - dealId
+      - status
+    ActionTrace:
+      type: object
+      description: ACT001 逐墩出牌認知軌跡（selected_card / legal_cards / think_time / undo）
+      properties:
+        actionId:
+          type: string
+          maxLength: 60
+          description: 出牌編號
+        sessionId: &id051
+          type: string
+          maxLength: 60
+          description: 練習
+        trickNo: &id052
+          type: integer
+          format: int32
+          description: 墩次
+        seat: &id053
+          type: string
+          maxLength: 1
+          x-ref-code: Seat
+          description: 出牌方位
+        selectedCard: &id054
+          type: string
+          maxLength: 4
+          description: 所選牌
+        legalCards: &id055
+          type: string
+          description: 當時合法牌（JSON）
+        thinkTimeMs: &id056
+          type: integer
+          format: int32
+          description: 思考時間（毫秒）
+        undoCount: &id057
+          type: integer
+          format: int32
+          description: 悔牌次數
+        recordedAt: &id058
+          type: string
+          format: date-time
+          description: 記錄時間
+      required:
+      - actionId
+      - sessionId
+      - trickNo
+      - seat
+      - selectedCard
+      - legalCards
+      - thinkTimeMs
+      - undoCount
+      - recordedAt
+    ActionTraceRequest:
+      type: object
+      description: ACT001 逐墩出牌認知軌跡（selected_card / legal_cards / think_time / undo） 請求體
+      properties:
+        sessionId: *id051
+        trickNo: *id052
+        seat: *id053
+        selectedCard: *id054
+        legalCards: *id055
+        thinkTimeMs: *id056
+        undoCount: *id057
+        recordedAt: *id058
+      required:
+      - sessionId
+      - trickNo
+      - seat
+      - selectedCard
+      - legalCards
+      - thinkTimeMs
+      - undoCount
+      - recordedAt
+    HintEvent:
+      type: object
+      description: HINT001 漸進式提示事件（hint escalation 本身即認知訊號）
+      properties:
+        hintId:
+          type: string
+          maxLength: 60
+          description: 提示編號
+        sessionId: &id059
+          type: string
+          maxLength: 60
+          description: 練習
+        trickNo: &id060
+          type: integer
+          format: int32
+          description: 墩次
+        hintLevel: &id061
+          type: string
+          maxLength: 1
+          x-ref-code: HintLevel
+          description: 提示層級
+        requestedAt: &id062
+          type: string
+          format: date-time
+          description: 請求時間
+      required:
+      - hintId
+      - sessionId
+      - trickNo
+      - hintLevel
+      - requestedAt
+    HintEventRequest:
+      type: object
+      description: HINT001 漸進式提示事件（hint escalation 本身即認知訊號） 請求體
+      properties:
+        sessionId: *id059
+        trickNo: *id060
+        hintLevel: *id061
+        requestedAt: *id062
+      required:
+      - sessionId
+      - trickNo
+      - hintLevel
+      - requestedAt
+    ReasoningTag:
+      type: object
+      description: REASON001 觸發式推理標記（長考 / 關鍵錯誤 / 高階提示時蒐集）
+      properties:
+        reasoningId:
+          type: string
+          maxLength: 60
+          description: 推理標記編號
+        sessionId: &id063
+          type: string
+          maxLength: 60
+          description: 練習
+        trickNo: &id064
+          type: integer
+          format: int32
+          description: 墩次
+        tagCode: &id065
+          type: string
+          maxLength: 2
+          x-ref-code: ReasoningTag
+          description: 推理標籤
+        triggerType: &id066
+          type: string
+          maxLength: 1
+          x-ref-code: ReasoningTrigger
+          description: 觸發類型
+        taggedAt: &id067
+          type: string
+          format: date-time
+          description: 標記時間
+      required:
+      - reasoningId
+      - sessionId
+      - trickNo
+      - tagCode
+      - triggerType
+      - taggedAt
+    ReasoningTagRequest:
+      type: object
+      description: REASON001 觸發式推理標記（長考 / 關鍵錯誤 / 高階提示時蒐集） 請求體
+      properties:
+        sessionId: *id063
+        trickNo: *id064
+        tagCode: *id065
+        triggerType: *id066
+        taggedAt: *id067
+      required:
+      - sessionId
+      - trickNo
+      - tagCode
+      - triggerType
+      - taggedAt
+    Diagnosis:
+      type: object
+      description: DIAG001 認知診斷假設（rule + probabilistic 產生，非 binary 正解）
+      properties:
+        diagnosisId:
+          type: string
+          maxLength: 60
+          description: 診斷編號
+        sessionId: &id068
+          type: string
+          maxLength: 60
+          description: 練習
+        targetSkillId: &id069
+          type: string
+          maxLength: 60
+          description: 對應技能
+        ruleSetVersion: &id070
+          type: string
+          maxLength: 20
+          description: 依據規則集版本
+        hypothesis: &id071
+          type: string
+          maxLength: 200
+          description: 診斷假設
+        confidence: &id072
+          type: string
+          description: 信心值
+        mistakeCategory: &id073
+          type: string
+          maxLength: 2
+          x-ref-code: MistakeCategory
+          description: 錯誤分類
+        severity: &id074
+          type: string
+          maxLength: 1
+          x-ref-code: MistakeSeverity
+          description: 嚴重度
+        cognitiveOrigin: &id075
+          type: string
+          maxLength: 1
+          x-ref-code: CognitiveOrigin
+          description: 認知成因
+        recoverability: &id076
+          type: string
+          maxLength: 1
+          x-ref-code: Recoverability
+          description: 可回復性
+        isStylistic: &id077
+          type: boolean
+          description: 是否為風格差異
+        diagnosedAt: &id078
+          type: string
+          format: date-time
+          description: 診斷時間
+      required:
+      - diagnosisId
+      - sessionId
+      - targetSkillId
+      - ruleSetVersion
+      - hypothesis
+      - confidence
+      - isStylistic
+      - diagnosedAt
+    DiagnosisRequest:
+      type: object
+      description: DIAG001 認知診斷假設（rule + probabilistic 產生，非 binary 正解） 請求體
+      properties:
+        sessionId: *id068
+        targetSkillId: *id069
+        ruleSetVersion: *id070
+        hypothesis: *id071
+        confidence: *id072
+        mistakeCategory: *id073
+        severity: *id074
+        cognitiveOrigin: *id075
+        recoverability: *id076
+        isStylistic: *id077
+        diagnosedAt: *id078
+      required:
+      - sessionId
+      - targetSkillId
+      - ruleSetVersion
+      - hypothesis
+      - confidence
+      - isStylistic
+      - diagnosedAt
+    DiagnosisEvidence:
+      type: object
+      description: EVID001 可審計證據日誌明細（支撐每筆 diagnosis 的回溯依據）
+      properties:
+        evidenceId:
+          type: string
+          maxLength: 60
+          description: 證據編號
+        diagnosisId: &id079
+          type: string
+          maxLength: 60
+          description: 診斷
+        ruleId: &id080
+          type: string
+          maxLength: 60
+          description: 引用規則
+        evidenceText: &id081
+          type: string
+          maxLength: 500
+          description: 證據描述
+        sourceActionId: &id082
+          type: string
+          maxLength: 60
+          description: 來源出牌
+        masteryDelta: &id083
+          type: string
+          description: 學生模型變化量
+      required:
+      - evidenceId
+      - diagnosisId
+      - evidenceText
+    DiagnosisEvidenceRequest:
+      type: object
+      description: EVID001 可審計證據日誌明細（支撐每筆 diagnosis 的回溯依據） 請求體
+      properties:
+        diagnosisId: *id079
+        ruleId: *id080
+        evidenceText: *id081
+        sourceActionId: *id082
+        masteryDelta: *id083
+      required:
+      - diagnosisId
+      - evidenceText
+    CoachingFeedback:
+      type: object
+      description: FEEDBACK001 賽後教學（LLM 依層級調整語氣，只 narration 不判案）
+      properties:
+        feedbackId:
+          type: string
+          maxLength: 60
+          description: 教學編號
+        diagnosisId: &id084
+          type: string
+          maxLength: 60
+          description: 診斷
+        explanationText: &id085
+          type: string
+          description: 賽後教學說明
+        suggestedSkillId: &id086
+          type: string
+          maxLength: 60
+          description: 建議訓練技能
+        generatedAt: &id087
+          type: string
+          format: date-time
+          description: 產生時間
+      required:
+      - feedbackId
+      - diagnosisId
+      - explanationText
+      - generatedAt
+    CoachingFeedbackRequest:
+      type: object
+      description: FEEDBACK001 賽後教學（LLM 依層級調整語氣，只 narration 不判案） 請求體
+      properties:
+        diagnosisId: *id084
+        explanationText: *id085
+        suggestedSkillId: *id086
+        generatedAt: *id087
+      required:
+      - diagnosisId
+      - explanationText
+      - generatedAt
+    CoachReview:
+      type: object
+      description: REVIEW001 教練對 AI 診斷的覆核與分歧標記（高價值 dataset）
+      properties:
+        reviewId:
+          type: string
+          maxLength: 60
+          description: 覆核編號
+        diagnosisId: &id088
+          type: string
+          maxLength: 60
+          description: 診斷
+        coachId: &id089
+          type: string
+          maxLength: 60
+          description: 教練
+        agreement: &id090
+          type: string
+          maxLength: 1
+          x-ref-code: ReviewAgreement
+          description: 是否同意
+        comment: &id091
+          type: string
+          maxLength: 500
+          description: 覆核意見
+        reviewedAt: &id092
+          type: string
+          format: date-time
+          description: 覆核時間
+      required:
+      - reviewId
+      - diagnosisId
+      - coachId
+      - agreement
+      - reviewedAt
+    CoachReviewRequest:
+      type: object
+      description: REVIEW001 教練對 AI 診斷的覆核與分歧標記（高價值 dataset） 請求體
+      properties:
+        diagnosisId: *id088
+        coachId: *id089
+        agreement: *id090
+        comment: *id091
+        reviewedAt: *id092
+      required:
+      - diagnosisId
+      - coachId
+      - agreement
+      - reviewedAt
+    StudentSkillState:
+      type: object
+      description: SKILLSTATE001 多維 partial mastery（辨識 / 執行 / 遷移 / 保留，probabilistic）
+      properties:
+        stateId:
+          type: string
+          maxLength: 60
+          description: 狀態編號
+        studentId: &id093
+          type: string
+          maxLength: 60
+          description: 學生
+        skillId: &id094
+          type: string
+          maxLength: 60
+          description: 技能
+        recognitionMastery: &id095
+          type: string
+          description: 辨識精熟度
+        executionMastery: &id096
+          type: string
+          description: 執行精熟度
+        transferMastery: &id097
+          type: string
+          description: 遷移精熟度
+        retentionMastery: &id098
+          type: string
+          description: 保留精熟度
+        confidence: &id099
+          type: string
+          description: 估計信心
+        trend: &id100
+          type: string
+          maxLength: 1
+          x-ref-code: MasteryTrend
+          description: 趨勢
+        updatedAt:
+          type: string
+          format: date-time
+          description: 更新時間
+      required:
+      - stateId
+      - studentId
+      - skillId
+      - recognitionMastery
+      - executionMastery
+      - transferMastery
+      - retentionMastery
+      - confidence
+      - trend
+      - updatedAt
+    StudentSkillStateRequest:
+      type: object
+      description: SKILLSTATE001 多維 partial mastery（辨識 / 執行 / 遷移 / 保留，probabilistic） 請求體
+      properties:
+        studentId: *id093
+        skillId: *id094
+        recognitionMastery: *id095
+        executionMastery: *id096
+        transferMastery: *id097
+        retentionMastery: *id098
+        confidence: *id099
+        trend: *id100
+      required:
+      - studentId
+      - skillId
+      - recognitionMastery
+      - executionMastery
+      - transferMastery
+      - retentionMastery
+      - confidence
+      - trend
+    Assignment:
+      type: object
+      description: ASSIGN001 教練派發的針對性訓練
+      properties:
+        assignmentId:
+          type: string
+          maxLength: 60
+          description: 指派編號
+        coachId: &id101
+          type: string
+          maxLength: 60
+          description: 指派教練
+        studentId: &id102
+          type: string
+          maxLength: 60
+          description: 學生
+        dealId: &id103
+          type: string
+          maxLength: 60
+          description: 指派牌例
+        targetSkillId: &id104
+          type: string
+          maxLength: 60
+          description: 目標認知缺口技能
+        status: &id105
+          type: string
+          maxLength: 1
+          x-ref-code: AssignmentStatus
+          description: 指派狀態
+        assignedAt:
+          type: string
+          format: date-time
+          description: 指派時間
+      required:
+      - assignmentId
+      - coachId
+      - studentId
+      - dealId
+      - status
+      - assignedAt
+    AssignmentRequest:
+      type: object
+      description: ASSIGN001 教練派發的針對性訓練 請求體
+      properties:
+        coachId: *id101
+        studentId: *id102
+        dealId: *id103
+        targetSkillId: *id104
+        status: *id105
+      required:
+      - coachId
+      - studentId
+      - dealId
+      - status
+    LearningEvent:
+      type: object
+      description: EVENT001 event-sourced 學習事件流（append-only，state = replay(events)）
+      properties:
+        eventId:
+          type: string
+          maxLength: 60
+          description: 事件編號
+        sessionId: &id106
+          type: string
+          maxLength: 60
+          description: 練習
+        studentId: &id107
+          type: string
+          maxLength: 60
+          description: 學生
+        eventType: &id108
+          type: string
+          maxLength: 1
+          x-ref-code: LearningEventType
+          description: 事件類型
+        sequenceNo: &id109
+          type: integer
+          format: int32
+          description: 序號
+        payload: &id110
+          type: string
+          description: 事件內容（JSON）
+        ontologyVersion: &id111
+          type: string
+          maxLength: 20
+          description: 當時本體版本
+        ruleSetVersion: &id112
+          type: string
+          maxLength: 20
+          description: 當時規則集版本
+        occurredAt: &id113
+          type: string
+          format: date-time
+          description: 發生時間
+      required:
+      - eventId
+      - sessionId
+      - studentId
+      - eventType
+      - sequenceNo
+      - payload
+      - ontologyVersion
+      - ruleSetVersion
+      - occurredAt
+    LearningEventRequest:
+      type: object
+      description: EVENT001 event-sourced 學習事件流（append-only，state = replay(events)） 請求體
+      properties:
+        sessionId: *id106
+        studentId: *id107
+        eventType: *id108
+        sequenceNo: *id109
+        payload: *id110
+        ontologyVersion: *id111
+        ruleSetVersion: *id112
+        occurredAt: *id113
+      required:
+      - sessionId
+      - studentId
+      - eventType
+      - sequenceNo
+      - payload
+      - ontologyVersion
+      - ruleSetVersion
+      - occurredAt
+    ReplayRun:
+      type: object
+      description: REPLAY001 可重現重播（Debug / Research / Student-History，指定 ontology+rule 版本）
+      properties:
+        replayId:
+          type: string
+          maxLength: 60
+          description: 重播編號
+        scope: &id114
+          type: string
+          maxLength: 1
+          x-ref-code: ReplayScope
+          description: 重播範圍
+        scopeRefId: &id115
+          type: string
+          maxLength: 60
+          description: 重播對象（session / student）
+        replayType: &id116
+          type: string
+          maxLength: 1
+          x-ref-code: ReplayType
+          description: 重播用途
+        ontologyVersion: &id117
+          type: string
+          maxLength: 20
+          description: 套用本體版本
+        ruleSetVersion: &id118
+          type: string
+          maxLength: 20
+          description: 套用規則集版本
+        triggeredBy: &id119
+          type: string
+          maxLength: 60
+          description: 執行者
+        ranAt: &id120
+          type: string
+          format: date-time
+          description: 執行時間
+      required:
+      - replayId
+      - scope
+      - scopeRefId
+      - replayType
+      - ontologyVersion
+      - ruleSetVersion
+      - triggeredBy
+      - ranAt
+    ReplayRunRequest:
+      type: object
+      description: REPLAY001 可重現重播（Debug / Research / Student-History，指定 ontology+rule 版本） 請求體
+      properties:
+        scope: *id114
+        scopeRefId: *id115
+        replayType: *id116
+        ontologyVersion: *id117
+        ruleSetVersion: *id118
+        triggeredBy: *id119
+        ranAt: *id120
+      required:
+      - scope
+      - scopeRefId
+      - replayType
+      - ontologyVersion
+      - ruleSetVersion
+      - triggeredBy
+      - ranAt

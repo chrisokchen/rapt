@@ -1,0 +1,71 @@
+report:
+  id: VERIFY-20260616-002
+  project: Bridge Cognitive Tutor
+  generated_at: "2026-06-16T00:00:00+08:00"
+  status: PASS
+  schema_version: 2
+  supersedes: VERIFY-20260616-001
+
+summary:
+  completeness: PASS
+  consistency: PASS
+  traceability: PASS
+  coverage: PASS
+  error_count: 0
+  warning_count: 1
+
+findings:
+  - id: FIND-20260616-101
+    severity: info
+    category: evidence_weak
+    route: NOTE_ONLY
+    can_fix: true
+    owner_skill: rapt-intent
+    artifact: .raptor/traceability.md
+    location: L2 Scenario Data Mapping
+    summary: "部分純讀取型 Scenario 的 L2 read_tables 仍以 entities 標示（confidence low）；核心讀寫型已精確化至 medium。"
+    evidence:
+      - .raptor/traceability.md#L2
+    suggested_action: "可選：後續依 haAPI entity + glossary 持續精確化剩餘 low-confidence read row；不阻擋任何 phase。"
+
+consistency_lint:
+  tool: dsl-lint.py
+  levels: all
+  result: "[] (0 findings, exit 0)"
+  errors: []
+  structural_errors: 0
+  legacy_fields: 0
+
+traceability:
+  l1_requirement_coverage: PASS
+  l2_scenario_data_mapping:
+    status: PASS
+    total_scenarios: 38
+    mapped: 38
+    low_confidence: 18
+  l3_intent_mapping:
+    status: PASS
+    total_scenarios: 38
+    traced: 38
+    untraced: []
+
+coverage:
+  must_have: {total: 7, covered: 7, pct: "100%"}
+  should_have: {total: 7, covered: 7, pct: "100%"}
+  nice_to_have: {total: 1, covered: 1, pct: "100%"}
+  overall: "100%"
+  uncovered_must_have: []
+
+rascore_readiness:
+  glossary_dbml_mapping: PASS
+  ref_code_seed_coverage: PASS
+  constraint_coverage: PASS
+
+phase_gate:
+  can_continue: true
+  blockers: []
+  next:
+    NEED_TO_FIX: []
+    NEED_TO_CLARIFY: []
+    NOTE_ONLY:
+      - FIND-20260616-101

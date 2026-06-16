@@ -1,0 +1,36 @@
+api: replay-run
+schema_version: "3.3"
+entity: ReplayRun
+title: 可重現重播 API
+description: 在指定 ontology / rule 版本下重播學習軌跡（Debug / Research / Student-History）
+
+exposes:
+  standard: [list, read, create]
+  list:
+    filters:
+      - {field: scope, operators: [eq]}
+      - {field: replayType, operators: [eq]}
+      - {field: scopeRefId, operators: [eq]}
+    sorting: {fields: [ranAt], default: ranAt:desc}
+    pagination: {style: offset, default_size: 20}
+
+access:
+  authentication: {type: bearer, required: true}
+  endpoints:
+    list:
+      required_roles: [annotator, governance, researcher]
+      required_permissions:
+        - id: replay_run_read
+    read:
+      required_roles: [annotator, governance, researcher]
+      required_permissions:
+        - id: replay_run_read
+    create:
+      required_roles: [annotator, governance, researcher]
+      required_permissions:
+        - id: replay_run_create
+
+source_evidence:
+  - "docs/ssot/habdd/replay-governance.ha.feature#Scenario:研究重播比較不同規則版本"
+  - "docs/ssot/dbml/schema.dbml#Table:ReplayRun"
+  - "docs/ssot/haarm/bridge-cognitive-tutor.haarm.yaml#roles"

@@ -1,0 +1,47 @@
+audit:
+  id: PREVIEW-20260616-002
+  skill: rapt-openapi
+  generated_at: "2026-06-16T00:00:00+08:00"
+  source_artifacts:
+    - docs/ssot/haapi/*.haapi.yaml
+    - docs/ssot/dbml/schema.dbml
+    - docs/ssot/haarm/bridge-cognitive-tutor.haarm.yaml
+  output_artifact: docs/generate/openapi/openapi.yaml
+  status: ok
+  generated_summary:
+    haapi_modules: 10
+    dbml_tables: 23
+    haarm_roles: 11
+    haarm_permissions: 55
+    paths: 27
+    operations: 37
+    schemas: 46
+  assumptions:
+    - "依 arguments.yml v2 路徑解析（backend_intent_dir=docs/ssot/haapi 等）。"
+    - "path/method 由 exposes 慣例推導（base=api id，無複數轉換）；custom operations 取 haAPI 的 method/path。"
+    - "授權以 x-required-roles / x-required-permissions 擴充欄位表示（非 OpenAPI 原生 OAuth scopes）；securityScheme 為 bearer JWT。"
+    - "required_permissions 含多個 id（如 own/team/all 範圍）時，於 x-required-permissions 並列，語意為 OR（任一滿足即可），實際範圍裁決於 runtime。"
+    - "回應 schema 以 entity component 為主，requestBody 以 {entity}Request 泛型表示。"
+    - "generated.status 仍為 deferred；本次為使用者明確 on-demand preview，未改動任何 SSoT。"
+  findings:
+    - id: PREVIEW-FIND-001
+      route: NOTE_ONLY
+      can_fix: false
+      severity: low
+      category: preview_fidelity
+      artifact: docs/generate/openapi/openapi.yaml
+      location: paths.*.responses
+      summary: "operation 缺逐一回應範例（haAPI 未定義 response example），OpenAPI 使用泛型 schema $ref 與標準狀態碼描述。"
+      suggested_action: "若需更精細 API 文件，可於 haAPI 補 response example，或由下游 codegen 階段補；preview 不阻擋。"
+    - id: PREVIEW-FIND-002
+      route: NOTE_ONLY
+      can_fix: false
+      severity: low
+      category: preview_fidelity
+      artifact: docs/generate/openapi/openapi.yaml
+      location: paths.*.x-required-permissions（多範圍端點）
+      summary: "list/read 端點同時列出 own/team/all 等多個 permission，OpenAPI 以並列陣列呈現，未表達『依角色擇一範圍』之語意。"
+      suggested_action: "屬 haARM scope 語意，OpenAPI 預覽以擴充欄位近似即可；實際範圍由 haARM + runtime 解析。"
+  ssot_integrity:
+    ssot_modified: false
+    note: "Preview skill 僅寫 docs/generate/openapi/**；未觸碰 docs/ssot/**。SSoT（verify PASS / RAscore A）不受影響。所有 finding 為預覽保真度層級。"

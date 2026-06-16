@@ -1,0 +1,37 @@
+page: replay-run-list
+schema_version: "3.3"
+type: list
+entity: ReplayRun
+api: replay-run
+title: 重播紀錄
+
+view:
+  filters:
+    - {field: scope, label: 重播範圍, type: eq, ref_code: ReplayScope}
+    - {field: replayType, label: 重播用途, type: eq, ref_code: ReplayType}
+  columns:
+    - {field: replayId, label: 重播編號, link: true}
+    - {field: scope, label: 範圍, ref_code: ReplayScope}
+    - {field: replayType, label: 用途, format: badge, ref_code: ReplayType}
+    - {field: ontologyVersion, label: 本體版本}
+    - {field: ruleSetVersion, label: 規則集版本}
+    - {field: ranAt, label: 執行時間, format: date, sortable: true}
+  actions:
+    standard: [create]
+    placement:
+      header: [create]
+
+auth:
+  roles: [annotator]
+security:
+  permission_refs:
+    view:
+      - {id: replay_run_read}
+    create:
+      - {id: replay_run_create}
+  datasource_scope: all
+
+source_evidence:
+  - "docs/ssot/haapi/replay-run.haapi.yaml"
+  - "docs/ssot/habdd/replay-governance.ha.feature#Scenario:研究重播比較不同規則版本"
+  - "docs/ssot/haarm/bridge-cognitive-tutor.haarm.yaml#permission:replay_run_read"

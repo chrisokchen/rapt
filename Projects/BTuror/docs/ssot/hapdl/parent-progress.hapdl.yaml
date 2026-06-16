@@ -1,0 +1,31 @@
+page: parent-progress
+schema_version: "3.3"
+type: dashboard
+entity: StudentSkillState
+api: student-skill-state
+title: 孩子認知進展
+
+view:
+  filters:
+    - {field: studentId, label: 學習者, type: eq}
+    - {field: skillId, label: 認知技能, type: eq}
+  columns:
+    - {field: skillId, label: 技能}
+    - {field: recognitionMastery, label: 辨識}
+    - {field: executionMastery, label: 執行}
+    - {field: transferMastery, label: 遷移}
+    - {field: retentionMastery, label: 保留}
+    - {field: trend, label: 趨勢, format: badge, ref_code: MasteryTrend}
+
+auth:
+  roles: [parent-school]
+security:
+  permission_refs:
+    view:
+      - {id: student_skill_state_read_ward}
+  datasource_scope: team
+
+source_evidence:
+  - "docs/ssot/haapi/student-skill-state.haapi.yaml"
+  - "docs/ssot/habdd/parent-view.ha.feature#Scenario:檢視監護學習者的認知進展"
+  - "docs/ssot/haarm/bridge-cognitive-tutor.haarm.yaml#permission:student_skill_state_read_ward"

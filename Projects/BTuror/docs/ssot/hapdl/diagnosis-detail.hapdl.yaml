@@ -1,0 +1,30 @@
+page: diagnosis-detail
+schema_version: "3.3"
+type: detail
+entity: Diagnosis
+api: diagnosis
+title: 賽後認知診斷
+
+view:
+  fields:
+    - {field: hypothesis, label: 診斷假設}
+    - {field: confidence, label: 信心值}
+    - {field: mistakeCategory, label: 錯誤分類, ref_code: MistakeCategory}
+    - {field: cognitiveOrigin, label: 認知成因, ref_code: CognitiveOrigin}
+    - {field: severity, label: 嚴重度, ref_code: MistakeSeverity}
+    - {field: isStylistic, label: 是否為風格差異}
+    - {field: diagnosedAt, label: 診斷時間, format: date}
+
+auth:
+  roles: [student]
+security:
+  permission_refs:
+    view:
+      - {id: diagnosis_read_own}
+  datasource_scope: own
+
+source_evidence:
+  - "docs/ssot/haapi/diagnosis.haapi.yaml"
+  - "docs/ssot/haapi/coaching-feedback.haapi.yaml"
+  - "docs/ssot/habdd/diagnosis-coaching.ha.feature#Scenario:產生基於證據的診斷"
+  - "docs/ssot/haarm/bridge-cognitive-tutor.haarm.yaml#permission:diagnosis_read_own"

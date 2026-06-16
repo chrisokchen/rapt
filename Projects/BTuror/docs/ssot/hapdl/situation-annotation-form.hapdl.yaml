@@ -1,0 +1,31 @@
+page: situation-annotation-form
+schema_version: "3.3"
+type: form
+entity: SituationAnnotation
+api: situation-annotation
+title: 局面標注
+
+form:
+  mode: create
+  fields:
+    - {field: dealId, label: 牌例, type: select, required: true}
+    - {field: situationType, label: 局面類型, type: select, ref_code: SituationType, required: true}
+    - {field: ontologyVersion, label: 依據本體版本, type: select, required: true}
+    - {field: dslBody, label: Situation DSL 內文, type: textarea, required: true}
+    - {field: isComplete, label: 是否標注完整, type: checkbox}
+  actions:
+    submit: create
+    cancel: curated-deal-list
+
+auth:
+  roles: [annotator]
+security:
+  permission_refs:
+    submit:
+      - {id: situation_annotation_create}
+  datasource_scope: all
+
+source_evidence:
+  - "docs/ssot/haapi/situation-annotation.haapi.yaml"
+  - "docs/ssot/habdd/deal-authoring.ha.feature#Scenario:拒絕缺漏關鍵欄位的標注"
+  - "docs/ssot/haarm/bridge-cognitive-tutor.haarm.yaml#permission:situation_annotation_create"

@@ -1,0 +1,37 @@
+page: play-session-play
+schema_version: "3.3"
+type: detail
+entity: PlaySession
+api: play-session
+title: 橋引管理練習
+
+view:
+  fields:
+    - {field: dealId, label: 牌例}
+    - {field: status, label: 練習狀態, ref_code: SessionStatus}
+    - {field: startedAt, label: 開始時間, format: date}
+  features:
+    sortable: false
+    searchable: false
+
+actions:
+  operations: [play_card, request_hint, tag_reasoning]
+  placement:
+    row: [play_card]
+    header: [request_hint, tag_reasoning]
+
+auth:
+  roles: [student]
+security:
+  permission_refs:
+    view:
+      - {id: play_session_read_own}
+    create:
+      - {id: play_session_create}
+  datasource_scope: own
+
+source_evidence:
+  - "docs/ssot/haapi/play-session.haapi.yaml"
+  - "docs/ssot/habdd/deal-practice.ha.feature#Scenario:出牌被記錄為認知軌跡"
+  - "docs/ssot/habdd/graduated-hint.ha.feature#Scenario:請求第一級方向性提示"
+  - "docs/ssot/haarm/bridge-cognitive-tutor.haarm.yaml#permission:play_session_read_own"

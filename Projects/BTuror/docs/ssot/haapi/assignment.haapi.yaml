@@ -1,0 +1,39 @@
+api: assignment
+schema_version: "3.3"
+entity: Assignment
+title: 訓練指派 API
+description: 教練派發針對性訓練；學生讀取自己的指派（CON-ASSIGN-001 限指導關係）
+
+exposes:
+  standard: [list, read, create]
+  list:
+    filters:
+      - {field: studentId, operators: [eq]}
+      - {field: coachId, operators: [eq]}
+      - {field: targetSkillId, operators: [eq]}
+      - {field: status, operators: [eq]}
+    sorting: {fields: [assignedAt], default: assignedAt:desc}
+    pagination: {style: offset, default_size: 20}
+
+access:
+  authentication: {type: bearer, required: true}
+  endpoints:
+    list:
+      required_roles: [student, coach]
+      required_permissions:
+        - id: assignment_read_own
+        - id: assignment_read_team
+    read:
+      required_roles: [student, coach]
+      required_permissions:
+        - id: assignment_read_own
+        - id: assignment_read_team
+    create:
+      required_roles: [coach]
+      required_permissions:
+        - id: assignment_create
+
+source_evidence:
+  - "docs/ssot/habdd/coach-dashboard.ha.feature#Scenario:派發針對性訓練"
+  - "docs/ssot/dbml/schema.dbml#Table:Assignment"
+  - "docs/ssot/haarm/bridge-cognitive-tutor.haarm.yaml#roles"

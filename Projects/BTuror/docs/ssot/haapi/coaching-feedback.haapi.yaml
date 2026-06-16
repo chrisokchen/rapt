@@ -1,0 +1,32 @@
+api: coaching-feedback
+schema_version: "3.3"
+entity: CoachingFeedback
+title: 賽後教學 API
+description: 讀取賽後教學說明與下一步訓練建議（LLM 產生，只 narration）
+
+exposes:
+  standard: [list, read]
+  list:
+    filters:
+      - {field: diagnosisId, operators: [eq]}
+    sorting: {fields: [generatedAt], default: generatedAt:desc}
+    pagination: {style: offset, default_size: 20}
+
+access:
+  authentication: {type: bearer, required: true}
+  endpoints:
+    list:
+      required_roles: [student, coach]
+      required_permissions:
+        - id: coaching_feedback_read_own
+        - id: coaching_feedback_read_team
+    read:
+      required_roles: [student, coach]
+      required_permissions:
+        - id: coaching_feedback_read_own
+        - id: coaching_feedback_read_team
+
+source_evidence:
+  - "docs/ssot/habdd/diagnosis-coaching.ha.feature#Scenario:依玩家層級調整教學語氣"
+  - "docs/ssot/dbml/schema.dbml#Table:CoachingFeedback"
+  - "docs/ssot/haarm/bridge-cognitive-tutor.haarm.yaml#roles"

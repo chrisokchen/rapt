@@ -1,0 +1,46 @@
+api: situation-annotation
+schema_version: "3.3"
+entity: SituationAnnotation
+title: 局面標注 API
+description: 牌例的 Situation DSL 標注建立 / 更新（標注者）；完整性檢核見 CON-ANNO-001
+
+exposes:
+  standard: [list, read, create, update]
+  list:
+    filters:
+      - {field: dealId, operators: [eq]}
+      - {field: situationType, operators: [eq]}
+      - {field: isComplete, operators: [eq]}
+    sorting: {fields: [updatedAt], default: updatedAt:desc}
+    pagination: {style: offset, default_size: 20}
+
+access:
+  authentication: {type: bearer, required: true}
+  endpoints:
+    list:
+      required_roles: [annotator]
+      required_permissions:
+        - id: situation_annotation_read
+    read:
+      required_roles: [annotator]
+      required_permissions:
+        - id: situation_annotation_read
+    create:
+      required_roles: [annotator]
+      required_permissions:
+        - id: situation_annotation_create
+    update:
+      required_roles: [annotator]
+      required_permissions:
+        - id: situation_annotation_update
+
+source_evidence:
+  - "docs/ssot/habdd/deal-authoring.ha.feature#Scenario:拒絕缺漏關鍵欄位的標注"
+  - "docs/ssot/dbml/schema.dbml#Table:SituationAnnotation"
+  - "docs/ssot/haarm/bridge-cognitive-tutor.haarm.yaml#roles"
+
+# <!-- CiC BDY #INT-001 RESOLVED -->
+# 類型：BDY（已解決，RECON-20260616-001）
+# 描述：本 API list/read 端點引用 permission `situation_annotation_read`。
+# 解決：rapt-reconcile 已於 haARM annotator role backfill situation_annotation_read（resource: situation_annotation, action: read, scope: all）。
+# <!-- /CiC -->

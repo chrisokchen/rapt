@@ -1,0 +1,46 @@
+api: diagnosis
+schema_version: "3.3"
+entity: Diagnosis
+title: 認知診斷 API
+description: 讀取基於證據的診斷（含 DiagnosisEvidence）；教練可覆核並標記分歧（CoachReview）
+
+exposes:
+  standard: [list, read]
+  list:
+    filters:
+      - {field: sessionId, operators: [eq]}
+      - {field: targetSkillId, operators: [eq]}
+      - {field: mistakeCategory, operators: [eq]}
+    sorting: {fields: [diagnosedAt], default: diagnosedAt:desc}
+    pagination: {style: offset, default_size: 20}
+  operations:
+    - name: review
+      method: POST
+      path: /{id}/review
+
+access:
+  authentication: {type: bearer, required: true}
+  endpoints:
+    list:
+      required_roles: [student, coach, researcher]
+      required_permissions:
+        - id: diagnosis_read_own
+        - id: diagnosis_read_team
+        - id: diagnosis_read_all
+    read:
+      required_roles: [student, coach, researcher]
+      required_permissions:
+        - id: diagnosis_read_own
+        - id: diagnosis_read_team
+        - id: diagnosis_read_all
+  operations:
+    review:
+      required_roles: [coach]
+      required_permissions:
+        - id: coach_review_create
+
+source_evidence:
+  - "docs/ssot/habdd/diagnosis-coaching.ha.feature#Scenario:產生基於證據的診斷"
+  - "docs/ssot/habdd/coach-dashboard.ha.feature#Scenario:標記 AI 與教練診斷分歧"
+  - "docs/ssot/dbml/schema.dbml#Table:Diagnosis"
+  - "docs/ssot/haarm/bridge-cognitive-tutor.haarm.yaml#roles"

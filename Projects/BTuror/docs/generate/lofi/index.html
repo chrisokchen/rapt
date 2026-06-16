@@ -1,0 +1,1547 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bridge Cognitive Tutor Lo-Fi Wireframe Preview</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+:root {
+  --bg: #f5f5f0;
+  --card-bg: #ffffff;
+  --border: #d4d4d4;
+  --border-light: #e8e8e8;
+  --text: #333333;
+  --text-muted: #888888;
+  --primary: #4a6fa5;
+  --primary-light: #e8eef5;
+  --accent: #d4956a;
+  --danger: #c0392b;
+  --success: #27ae60;
+  --badge-bg: #f0f0f0;
+  --form-bg: #fafaf8;
+  --shadow: 0 2px 12px rgba(0,0,0,0.06);
+  --radius: 6px;
+  --font: 'Noto Sans TC', 'Inter', system-ui, -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  padding: 0;
+}
+
+/* ── Top Navigation ─────────────────────────────── */
+
+.top-nav {
+  background: #2c3e50;
+  color: white;
+  padding: 12px 32px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+}
+
+.top-nav h1 {
+  font-size: 18px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+.top-nav .subtitle {
+  font-size: 12px;
+  color: #95a5a6;
+  font-family: var(--font-mono);
+}
+
+.nav-links {
+  display: flex;
+  gap: 4px;
+  margin-left: auto;
+  flex-wrap: wrap;
+}
+
+.nav-link {
+  color: #bdc3c7;
+  text-decoration: none;
+  font-size: 13px;
+  padding: 4px 12px;
+  border-radius: 4px;
+  transition: all 0.2s;
+}
+
+.nav-link:hover, .nav-link.active {
+  color: white;
+  background: rgba(255,255,255,0.1);
+}
+
+/* ── Layout ─────────────────────────────────────── */
+
+.container {
+  max-width: 1100px;
+  margin: 32px auto;
+  padding: 0 24px;
+}
+
+.intro {
+  background: var(--card-bg);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius);
+  padding: 20px 28px;
+  margin-bottom: 32px;
+  box-shadow: var(--shadow);
+}
+
+.intro h2 {
+  font-size: 15px;
+  color: var(--text-muted);
+  font-weight: 500;
+  margin-bottom: 8px;
+}
+
+.intro p {
+  font-size: 13px;
+  color: var(--text-muted);
+  line-height: 1.8;
+}
+
+.intro code {
+  background: var(--badge-bg);
+  padding: 1px 6px;
+  border-radius: 3px;
+  font-family: var(--font-mono);
+  font-size: 12px;
+}
+
+/* ── Page Card ──────────────────────────────────── */
+
+.page-card {
+  background: var(--card-bg);
+  border: 2px solid var(--border);
+  border-radius: 8px;
+  margin-bottom: 40px;
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  transition: box-shadow 0.3s;
+}
+
+.page-card:hover {
+  box-shadow: 0 4px 24px rgba(0,0,0,0.1);
+}
+
+.page-header {
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  border-bottom: 2px solid var(--border);
+  padding: 16px 24px;
+}
+
+.page-title-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 8px;
+}
+
+.page-title-row h2 {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.page-type-badge {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  padding: 2px 10px;
+  border-radius: 3px;
+  font-family: var(--font-mono);
+}
+
+.list-badge   { background: #dbeafe; color: #1e40af; }
+.form-badge   { background: #fef3c7; color: #92400e; }
+.detail-badge { background: #d1fae5; color: #065f46; }
+
+.page-meta {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.actor-label {
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+.role-badges {
+  display: flex;
+  gap: 4px;
+  flex-wrap: wrap;
+}
+
+.role-badge {
+  font-size: 10px;
+  background: var(--primary-light);
+  color: var(--primary);
+  padding: 2px 8px;
+  border-radius: 10px;
+  font-weight: 500;
+}
+
+/* ── Filter & Toolbar ───────────────────────────── */
+
+.page-toolbar {
+  padding: 12px 24px;
+  border-bottom: 1px solid var(--border-light);
+  display: flex;
+  align-items: flex-end;
+  gap: 16px;
+  flex-wrap: wrap;
+  background: var(--form-bg);
+}
+
+.filter-bar {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  flex: 1;
+}
+
+.filter-group {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.filter-group label {
+  font-size: 11px;
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
+.lofi-filter-input, .lofi-filter-select {
+  border: 1px dashed var(--border);
+  background: white;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 12px;
+  min-width: 110px;
+  font-family: var(--font);
+  color: var(--text-muted);
+}
+
+.toolbar-actions {
+  display: flex;
+  gap: 8px;
+}
+
+/* ── Table ──────────────────────────────────────── */
+
+.lofi-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+
+.lofi-table th {
+  text-align: left;
+  padding: 10px 16px;
+  background: #f8f9fa;
+  border-bottom: 2px solid var(--border);
+  font-weight: 600;
+  font-size: 12px;
+  color: var(--text-muted);
+  white-space: nowrap;
+}
+
+.lofi-table td {
+  padding: 10px 16px;
+  border-bottom: 1px solid var(--border-light);
+}
+
+.lofi-table tbody tr:hover {
+  background: #f8fafb;
+}
+
+.lofi-table .actions-col {
+  text-align: right;
+  white-space: nowrap;
+}
+
+.sort-icon {
+  color: var(--border);
+  font-size: 11px;
+}
+
+.pk-icon {
+  color: var(--accent);
+  font-size: 10px;
+  font-weight: 700;
+}
+
+.lofi-badge {
+  display: inline-block;
+  background: var(--badge-bg);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 1px 8px;
+  font-size: 11px;
+  font-family: var(--font-mono);
+  color: var(--text-muted);
+}
+
+.lofi-link {
+  color: var(--primary);
+  text-decoration: underline;
+  cursor: pointer;
+  font-family: var(--font-mono);
+  font-size: 12px;
+}
+
+/* ── Pagination ─────────────────────────────────── */
+
+.pagination {
+  padding: 12px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-top: 1px solid var(--border-light);
+}
+
+.page-info {
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+.page-btns {
+  display: flex;
+  gap: 4px;
+}
+
+/* ── Form ───────────────────────────────────────── */
+
+.form-body {
+  padding: 24px;
+}
+
+.form-group {
+  display: grid;
+  grid-template-columns: 160px 1fr;
+  align-items: flex-start;
+  gap: 12px;
+  margin-bottom: 16px;
+  padding-bottom: 16px;
+  border-bottom: 1px dotted var(--border-light);
+}
+
+.form-label {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text);
+  padding-top: 6px;
+  text-align: right;
+}
+
+.required {
+  color: var(--danger);
+}
+
+.form-widget {
+  position: relative;
+}
+
+.lofi-input {
+  border: 1px dashed var(--border);
+  background: white;
+  padding: 8px 12px;
+  border-radius: 4px;
+  font-size: 13px;
+  width: 100%;
+  max-width: 400px;
+  font-family: var(--font);
+  color: var(--text-muted);
+}
+
+.lofi-textarea {
+  border: 1px dashed var(--border);
+  background: white;
+  padding: 8px 12px;
+  border-radius: 4px;
+  font-size: 13px;
+  width: 100%;
+  max-width: 400px;
+  min-height: 72px;
+  resize: vertical;
+  font-family: var(--font);
+  color: var(--text-muted);
+}
+
+.lofi-select {
+  border: 1px dashed var(--border);
+  background: white;
+  padding: 8px 12px;
+  border-radius: 4px;
+  font-size: 13px;
+  min-width: 200px;
+  font-family: var(--font);
+  color: var(--text-muted);
+}
+
+.lofi-date {
+  max-width: 180px;
+}
+
+.sensitive-icon {
+  font-size: 14px;
+  position: absolute;
+  right: calc(100% - 412px);
+  top: 8px;
+  opacity: 0.5;
+}
+
+.lofi-readonly {
+  font-size: 13px;
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+}
+
+.form-footer {
+  padding: 16px 24px;
+  border-top: 2px solid var(--border);
+  background: #f8f9fa;
+  text-align: right;
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+/* ── Detail ─────────────────────────────────────── */
+
+.detail-toolbar {
+  padding: 12px 24px;
+  border-bottom: 1px solid var(--border-light);
+  background: var(--form-bg);
+  display: flex;
+  gap: 8px;
+}
+
+.detail-body {
+  padding: 24px;
+}
+
+.detail-row {
+  display: grid;
+  grid-template-columns: 160px 1fr;
+  gap: 12px;
+  margin-bottom: 12px;
+  padding-bottom: 12px;
+  border-bottom: 1px dotted var(--border-light);
+}
+
+.detail-label {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-align: right;
+}
+
+.detail-value {
+  font-size: 13px;
+  color: var(--text);
+}
+
+/* ── Buttons ────────────────────────────────────── */
+
+.lofi-btn-primary {
+  background: var(--primary);
+  color: white;
+  border: none;
+  padding: 6px 16px;
+  border-radius: 4px;
+  font-size: 13px;
+  font-family: var(--font);
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.lofi-btn-primary:hover { opacity: 0.85; }
+
+.lofi-btn-secondary {
+  background: white;
+  color: var(--text);
+  border: 1px solid var(--border);
+  padding: 6px 16px;
+  border-radius: 4px;
+  font-size: 13px;
+  font-family: var(--font);
+  cursor: pointer;
+}
+
+.lofi-btn-sm {
+  background: white;
+  color: var(--text-muted);
+  border: 1px solid var(--border);
+  padding: 3px 10px;
+  border-radius: 3px;
+  font-size: 11px;
+  font-family: var(--font);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.lofi-btn-sm:hover { border-color: var(--primary); color: var(--primary); }
+.lofi-btn-sm.active { background: var(--primary); color: white; border-color: var(--primary); }
+
+/* ── Footer ─────────────────────────────────────── */
+
+.page-footer {
+  text-align: center;
+  padding: 32px;
+  color: var(--text-muted);
+  font-size: 12px;
+  border-top: 1px solid var(--border-light);
+  margin-top: 40px;
+}
+
+.page-footer code {
+  font-family: var(--font-mono);
+  background: var(--badge-bg);
+  padding: 1px 6px;
+  border-radius: 3px;
+}
+
+/* ── Lo-fi Watermark ────────────────────────────── */
+
+.lofi-watermark {
+  position: fixed;
+  bottom: 16px;
+  right: 16px;
+  background: rgba(44, 62, 80, 0.8);
+  color: white;
+  font-size: 10px;
+  font-family: var(--font-mono);
+  padding: 4px 10px;
+  border-radius: 4px;
+  z-index: 200;
+  letter-spacing: 1px;
+}
+
+/* ── Responsive ─────────────────────────────────── */
+
+@media (max-width: 768px) {
+  .form-group, .detail-row {
+    grid-template-columns: 1fr;
+  }
+  .form-label, .detail-label {
+    text-align: left;
+  }
+  .page-toolbar {
+    flex-direction: column;
+  }
+}
+
+:root {
+  --c-primary: #2C6ECB;
+  --c-primary-d: #1F569F;
+  --c-bg: #F4F6F9;
+  --c-surface: #FFFFFF;
+  --c-border: #E3E8EF;
+  --c-text: #1F2933;
+  --c-sub: #6B7785;
+  --c-ok: #1F9D55;
+  --c-warn: #E8A317;
+  --c-danger: #D64545;
+  --c-info: #1F569F;
+  --radius: 8px;
+  --shadow: 0 1px 3px rgba(16,24,40,.08);
+}
+
+body {
+  background: var(--c-bg);
+  color: var(--c-text);
+  line-height: 1.5;
+}
+
+.app {
+  display: flex;
+  min-height: 100vh;
+}
+
+.top-nav {
+  position: sticky;
+  top: 0;
+  width: 220px;
+  height: 100vh;
+  flex: 0 0 220px;
+  display: block;
+  overflow: auto;
+  padding: 0;
+  background: #13284a;
+  box-shadow: none;
+}
+
+.top-nav .brand {
+  padding: 18px 20px;
+  border-bottom: 1px solid rgba(255,255,255,.08);
+}
+
+.top-nav h1 {
+  font-size: 16px;
+  line-height: 1.3;
+  letter-spacing: 0;
+}
+
+.top-nav .subtitle {
+  display: block;
+  margin-top: 2px;
+  color: #8aa0c0;
+  font-family: var(--font);
+}
+
+.nav-links {
+  display: block;
+  margin: 0;
+  padding: 10px 0;
+}
+
+.nav-link {
+  display: block;
+  padding: 10px 20px;
+  border-radius: 0;
+  color: #cdd7e6;
+  font-size: 13px;
+  text-decoration: none;
+}
+
+.nav-link:hover,
+.nav-link.active {
+  background: rgba(255,255,255,.08);
+  color: #fff;
+}
+
+.main {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.app-topbar {
+  height: 56px;
+  background: var(--c-surface);
+  border-bottom: 1px solid var(--c-border);
+  padding: 0 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.app-topbar h1 {
+  font-size: 16px;
+  margin: 0;
+}
+
+.topbar-tools {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.search {
+  width: 220px;
+  border: 1px solid var(--c-border);
+  border-radius: 6px;
+  padding: 7px 10px;
+  font-size: 13px;
+}
+
+.container {
+  max-width: none;
+  margin: 0;
+  padding: 24px;
+  overflow: auto;
+}
+
+.intro,
+.page-footer,
+.lofi-watermark {
+  display: none;
+}
+
+.page-card {
+  border: 1px solid var(--c-border);
+  border-radius: var(--radius);
+  margin-bottom: 18px;
+  box-shadow: var(--shadow);
+  background: var(--c-surface);
+}
+
+.page-card:hover {
+  box-shadow: var(--shadow);
+}
+
+.page-header {
+  background: var(--c-surface);
+  border-bottom: 1px solid var(--c-border);
+  padding: 16px 18px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.page-title-row {
+  margin: 0 0 4px;
+}
+
+.page-title-row h2 {
+  font-size: 16px;
+  letter-spacing: 0;
+}
+
+.page-type-badge,
+.role-badge,
+.lofi-badge {
+  border: 0;
+  border-radius: 12px;
+  font-family: var(--font);
+  font-size: 12px;
+  letter-spacing: 0;
+  padding: 2px 8px;
+}
+
+.dashboard-badge,
+.list-badge,
+.detail-badge,
+.form-badge {
+  background: #e4edfb;
+  color: var(--c-primary-d);
+}
+
+.page-toolbar,
+.detail-toolbar,
+.form-footer {
+  background: #fafbfc;
+  border-color: var(--c-border);
+}
+
+.filter-group label,
+.actor-label,
+.page-info,
+.detail-label {
+  color: var(--c-sub);
+}
+
+.lofi-filter-input,
+.lofi-filter-select,
+.lofi-input,
+.lofi-textarea,
+.lofi-select {
+  border: 1px solid var(--c-border);
+  border-radius: 6px;
+  color: var(--c-text);
+  background: #fff;
+}
+
+.table-wrap {
+  overflow: auto;
+}
+
+.lofi-table th {
+  background: #fafbfc;
+  border-bottom: 1px solid var(--c-border);
+  color: var(--c-sub);
+}
+
+.lofi-table td {
+  border-bottom: 1px solid var(--c-border);
+}
+
+.lofi-table tbody tr:hover td {
+  background: #f7f9fb;
+}
+
+.lofi-link {
+  color: var(--c-primary);
+  font-family: var(--font);
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.lofi-badge {
+  background: #eef1f5;
+  color: var(--c-sub);
+}
+
+.lofi-badge.ok,
+.kpi-card.ok .kpi-value {
+  color: var(--c-ok);
+}
+
+.lofi-badge.warn,
+.kpi-card.warn .kpi-value {
+  color: #9a6b00;
+}
+
+.lofi-badge.danger,
+.kpi-card.danger .kpi-value {
+  color: var(--c-danger);
+}
+
+.lofi-btn-primary {
+  background: var(--c-primary);
+  border-radius: var(--radius);
+  padding: 8px 16px;
+}
+
+.lofi-btn-primary:hover {
+  background: var(--c-primary-d);
+  opacity: 1;
+}
+
+.lofi-btn-secondary,
+.lofi-btn-sm {
+  border: 1px solid var(--c-border);
+  border-radius: 6px;
+  color: var(--c-text);
+}
+
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(120px, 1fr));
+  gap: 16px;
+  padding: 18px;
+}
+
+.kpi-card {
+  border: 1px solid var(--c-border);
+  border-radius: var(--radius);
+  padding: 16px;
+  background: var(--c-surface);
+}
+
+.kpi-value {
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.kpi-label {
+  margin-top: 4px;
+  color: var(--c-sub);
+  font-size: 12px;
+}
+
+.dashboard-panels {
+  display: grid;
+  grid-template-columns: minmax(240px, .8fr) 1.2fr;
+  gap: 16px;
+  padding: 0 18px 18px;
+}
+
+.panel {
+  border: 1px solid var(--c-border);
+  border-radius: var(--radius);
+  background: var(--c-surface);
+  padding: 16px;
+}
+
+.panel-title {
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.todo-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--c-border);
+}
+
+.todo-row:last-child {
+  border-bottom: 0;
+}
+
+.compact td {
+  padding: 9px 10px;
+}
+
+@media (max-width: 900px) {
+  .app {
+    display: block;
+  }
+  .top-nav {
+    position: static;
+    width: auto;
+    height: auto;
+    display: block;
+  }
+  .nav-links {
+    display: flex;
+    overflow-x: auto;
+  }
+  .nav-link {
+    white-space: nowrap;
+  }
+  .dashboard-grid,
+  .dashboard-panels {
+    grid-template-columns: 1fr;
+  }
+  .app-topbar {
+    align-items: flex-start;
+    height: auto;
+    padding: 12px 16px;
+    flex-direction: column;
+  }
+}
+</style>
+</head>
+<body>
+
+  <div class="app">
+    <nav class="top-nav">
+      <div class="brand">
+        <h1>Bridge Cognitive Tutor</h1>
+        <span class="subtitle">Lo-Fi Preview</span>
+      </div>
+      <div class="nav-links">
+        <a class="nav-link" href="#assignment-form">派發訓練</a>
+<a class="nav-link" href="#assignment-list">訓練指派清單</a>
+<a class="nav-link" href="#coach-dashboard">教練認知儀表板</a>
+<a class="nav-link" href="#cognitive-skill-list">認知技能清單</a>
+<a class="nav-link" href="#curated-deal-form">建立 / 編輯牌例</a>
+<a class="nav-link" href="#curated-deal-list">牌例清單</a>
+<a class="nav-link" href="#diagnosis-detail">賽後認知診斷</a>
+<a class="nav-link" href="#ontology-proposal-list">本體演化提案</a>
+<a class="nav-link" href="#parent-progress">孩子認知進展</a>
+<a class="nav-link" href="#play-session-play">橋引管理練習</a>
+<a class="nav-link" href="#replay-run-list">重播紀錄</a>
+<a class="nav-link" href="#situation-annotation-form">局面標注</a>
+<a class="nav-link" href="#student-mastery-detail">我的認知精熟度</a>
+
+      </div>
+    </nav>
+
+    <main class="main">
+      <header class="app-topbar">
+        <div>
+          <h1>後台介面預覽</h1>
+          <span class="subtitle">generated from haPDL + DBML + haARM</span>
+        </div>
+        <div class="topbar-tools">
+          <input class="search" placeholder="搜尋頁面或欄位" disabled>
+          <button class="lofi-btn-secondary" disabled>角色</button>
+        </div>
+      </header>
+
+      <div class="container">
+        <div class="intro">
+          <h2>haPDL Lo-Fi Wireframe Preview</h2>
+          <p>
+            This preview is auto-generated from specs.
+          </p>
+        </div>
+
+        
+    <section class="page-card" id="assignment-form">
+      <div class="page-header">
+        <div class="page-title-row">
+          <h2>派發訓練</h2>
+          <span class="page-type-badge form-badge">FORM</span>
+        </div>
+        <div class="page-meta">
+          <span class="actor-label">&#128100; </span>
+          <div class="role-badges"><span class="role-badge">教練</span></div>
+        </div>
+      </div>
+
+      <div class="form-body">
+        
+        <div class="form-group">
+          <label class="form-label">學生 <span class="required">*</span></label>
+          <div class="form-widget"><select class="lofi-select" disabled><option value="">-- 請選擇 --</option><option value="1">選項 1</option><option value="2">選項 2</option></select></div>
+        </div>
+        
+        <div class="form-group">
+          <label class="form-label">指派牌例 <span class="required">*</span></label>
+          <div class="form-widget"><select class="lofi-select" disabled><option value="">-- 請選擇 --</option><option value="1">選項 1</option><option value="2">選項 2</option></select></div>
+        </div>
+        
+        <div class="form-group">
+          <label class="form-label">目標認知缺口技能</label>
+          <div class="form-widget"><select class="lofi-select" disabled><option value="">-- 請選擇 --</option><option value="1">選項 1</option><option value="2">選項 2</option></select></div>
+        </div>
+        
+      </div>
+
+      <div class="form-footer">
+        <button class="lofi-btn-primary">+ 新增</button> <button class="lofi-btn-primary">assignment-list</button> 
+      </div>
+    </section>
+    
+    <section class="page-card" id="assignment-list">
+      <div class="page-header">
+        <div class="page-title-row">
+          <h2>訓練指派清單</h2>
+          <span class="page-type-badge list-badge">LIST</span>
+        </div>
+        <div class="page-meta">
+          <span class="actor-label">&#128100; </span>
+          <div class="role-badges"><span class="role-badge">教練</span></div>
+        </div>
+      </div>
+
+      <div class="page-toolbar">
+        <div class="filter-bar"><div class="filter-group"><label>學生</label><input type="text" class="lofi-filter-input" placeholder="學生" disabled /></div>
+<div class="filter-group"><label>目標認知缺口技能</label><input type="text" class="lofi-filter-input" placeholder="目標認知缺口技能" disabled /></div>
+<div class="filter-group"><label>指派狀態</label><input type="text" class="lofi-filter-input" placeholder="指派狀態" disabled /></div>
+</div>
+        <div class="toolbar-actions"></div>
+      </div>
+
+      <table class="lofi-table">
+        <thead><tr><th>指派編號</th>
+<th>學生</th>
+<th>指派牌例</th>
+<th>目標認知缺口技能</th>
+<th>指派狀態</th>
+<th>指派時間 <span class="sort-icon">&#8597;</span></th>
+</tr></thead>
+        <tbody><tr><td>ID-0001</td><td>學生-1</td><td>指派牌例-1</td><td>目標認知缺口技能-1</td><td><span class="lofi-badge">Tag-1</span></td><td>2026-06-01</td></tr>
+<tr><td>ID-0002</td><td>學生-2</td><td>指派牌例-2</td><td>目標認知缺口技能-2</td><td><span class="lofi-badge">Tag-2</span></td><td>2026-06-02</td></tr>
+<tr><td>ID-0003</td><td>學生-3</td><td>指派牌例-3</td><td>目標認知缺口技能-3</td><td><span class="lofi-badge">Tag-3</span></td><td>2026-06-03</td></tr>
+<tr><td>ID-0004</td><td>學生-4</td><td>指派牌例-4</td><td>目標認知缺口技能-4</td><td><span class="lofi-badge">Tag-4</span></td><td>2026-06-04</td></tr>
+<tr><td>ID-0005</td><td>學生-5</td><td>指派牌例-5</td><td>目標認知缺口技能-5</td><td><span class="lofi-badge">Tag-5</span></td><td>2026-06-05</td></tr>
+</tbody>
+      </table>
+
+      <div class="pagination">
+        <span class="page-info">1-5 / 128 筆</span>
+        <div class="page-btns">
+          <button class="lofi-btn-sm" disabled>&laquo;</button>
+          <button class="lofi-btn-sm active">1</button>
+          <button class="lofi-btn-sm">2</button>
+          <button class="lofi-btn-sm">3</button>
+          <button class="lofi-btn-sm">&raquo;</button>
+        </div>
+      </div>
+    </section>
+    
+    <section class="page-card" id="coach-dashboard">
+      <div class="page-header">
+        <div>
+          <div class="page-title-row">
+            <h2>教練認知儀表板</h2>
+            <span class="page-type-badge dashboard-badge">DASHBOARD</span>
+          </div>
+          <div class="page-meta">
+            <span class="actor-label">StudentSkillState</span>
+          </div>
+        </div>
+        
+      </div>
+      
+      <div class="page-toolbar">
+        <div class="filter-bar"><div class="filter-group"><label>學生</label><select class="lofi-filter-select" disabled><option>全部</option><option>本館</option><option>分館 A</option></select></div><div class="filter-group"><label>認知技能</label><select class="lofi-filter-select" disabled><option>全部</option><option>本館</option><option>分館 A</option></select></div><div class="filter-group"><label>趨勢</label><select class="lofi-filter-select" disabled><option>全部</option><option>本館</option><option>分館 A</option></select></div></div>
+      </div>
+      <div class="dashboard-grid"></div>
+      <div class="dashboard-panels">
+        <div class="panel">
+          <div class="panel-title">待辦工作</div>
+          <div class="todo-row"><span>候補遞補確認</span><span class="lofi-badge">12</span></div>
+          <div class="todo-row"><span>補件審核</span><span class="lofi-badge warn">7</span></div>
+          <div class="todo-row"><span>逾期繳費處理</span><span class="lofi-badge danger">5</span></div>
+        </div>
+        <div class="panel">
+          <div class="panel-title">近期活動</div>
+          <table class="lofi-table compact">
+            <tbody>
+              <tr><td>親子故事活動</td><td><span class="lofi-badge ok">報名中</span></td><td>12/20</td></tr>
+              <tr><td>AI 入門講座</td><td><span class="lofi-badge">審核中</span></td><td>24/30</td></tr>
+              <tr><td>閱讀推廣課</td><td><span class="lofi-badge warn">候補</span></td><td>8/8</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    
+    </section>
+    
+    <section class="page-card" id="cognitive-skill-list">
+      <div class="page-header">
+        <div class="page-title-row">
+          <h2>認知技能清單</h2>
+          <span class="page-type-badge list-badge">LIST</span>
+        </div>
+        <div class="page-meta">
+          <span class="actor-label">&#128100; </span>
+          <div class="role-badges"><span class="role-badge">標注者</span></div>
+        </div>
+      </div>
+
+      <div class="page-toolbar">
+        <div class="filter-bar"><div class="filter-group"><label>所屬本體版本</label><input type="text" class="lofi-filter-input" placeholder="所屬本體版本" disabled /></div>
+<div class="filter-group"><label>認知層級</label><input type="text" class="lofi-filter-input" placeholder="認知層級" disabled /></div>
+</div>
+        <div class="toolbar-actions"></div>
+      </div>
+
+      <table class="lofi-table">
+        <thead><tr><th>技能代碼 <span class="sort-icon">&#8597;</span></th>
+<th>技能名稱</th>
+<th>認知層級</th>
+<th>所屬本體版本</th>
+</tr></thead>
+        <tbody><tr><td>技能代碼-1</td><td>技能名稱-1</td><td><span class="lofi-badge">Tag-1</span></td><td>所屬本體版本-1</td></tr>
+<tr><td>技能代碼-2</td><td>技能名稱-2</td><td><span class="lofi-badge">Tag-2</span></td><td>所屬本體版本-2</td></tr>
+<tr><td>技能代碼-3</td><td>技能名稱-3</td><td><span class="lofi-badge">Tag-3</span></td><td>所屬本體版本-3</td></tr>
+<tr><td>技能代碼-4</td><td>技能名稱-4</td><td><span class="lofi-badge">Tag-4</span></td><td>所屬本體版本-4</td></tr>
+<tr><td>技能代碼-5</td><td>技能名稱-5</td><td><span class="lofi-badge">Tag-5</span></td><td>所屬本體版本-5</td></tr>
+</tbody>
+      </table>
+
+      <div class="pagination">
+        <span class="page-info">1-5 / 128 筆</span>
+        <div class="page-btns">
+          <button class="lofi-btn-sm" disabled>&laquo;</button>
+          <button class="lofi-btn-sm active">1</button>
+          <button class="lofi-btn-sm">2</button>
+          <button class="lofi-btn-sm">3</button>
+          <button class="lofi-btn-sm">&raquo;</button>
+        </div>
+      </div>
+    </section>
+    
+    <section class="page-card" id="curated-deal-form">
+      <div class="page-header">
+        <div class="page-title-row">
+          <h2>建立 / 編輯牌例</h2>
+          <span class="page-type-badge form-badge">FORM</span>
+        </div>
+        <div class="page-meta">
+          <span class="actor-label">&#128100; </span>
+          <div class="role-badges"><span class="role-badge">標注者</span></div>
+        </div>
+      </div>
+
+      <div class="form-body">
+        
+        <div class="form-group">
+          <label class="form-label">牌例標題 <span class="required">*</span></label>
+          <div class="form-widget"><input type="text" class="lofi-input" placeholder="牌例標題" disabled /></div>
+        </div>
+        
+        <div class="form-group">
+          <label class="form-label">四家牌（PBN） <span class="required">*</span></label>
+          <div class="form-widget"><textarea class="lofi-textarea" placeholder="四家牌（PBN）" disabled></textarea></div>
+        </div>
+        
+        <div class="form-group">
+          <label class="form-label">合約 <span class="required">*</span></label>
+          <div class="form-widget"><input type="text" class="lofi-input" placeholder="合約" disabled /></div>
+        </div>
+        
+        <div class="form-group">
+          <label class="form-label">莊家方位 <span class="required">*</span></label>
+          <div class="form-widget"><select class="lofi-select" disabled><option value="">-- 請選擇 --</option><option value="1">選項 1</option><option value="2">選項 2</option></select></div>
+        </div>
+        
+        <div class="form-group">
+          <label class="form-label">計分制 <span class="required">*</span></label>
+          <div class="form-widget"><select class="lofi-select" disabled><option value="">-- 請選擇 --</option><option value="1">選項 1</option><option value="2">選項 2</option></select></div>
+        </div>
+        
+      </div>
+
+      <div class="form-footer">
+        <button class="lofi-btn-primary">+ 新增</button> <button class="lofi-btn-primary">curated-deal-list</button> 
+      </div>
+    </section>
+    
+    <section class="page-card" id="curated-deal-list">
+      <div class="page-header">
+        <div class="page-title-row">
+          <h2>牌例清單</h2>
+          <span class="page-type-badge list-badge">LIST</span>
+        </div>
+        <div class="page-meta">
+          <span class="actor-label">&#128100; </span>
+          <div class="role-badges"><span class="role-badge">標注者</span></div>
+        </div>
+      </div>
+
+      <div class="page-toolbar">
+        <div class="filter-bar"><div class="filter-group"><label>situationType</label><input type="text" class="lofi-filter-input" placeholder="situationType" disabled /></div>
+<div class="filter-group"><label>莊家方位</label><input type="text" class="lofi-filter-input" placeholder="莊家方位" disabled /></div>
+<div class="filter-group"><label>計分制</label><input type="text" class="lofi-filter-input" placeholder="計分制" disabled /></div>
+</div>
+        <div class="toolbar-actions"></div>
+      </div>
+
+      <table class="lofi-table">
+        <thead><tr><th>牌例編號</th>
+<th>牌例標題</th>
+<th>莊家方位</th>
+<th>計分制</th>
+<th>建立時間 <span class="sort-icon">&#8597;</span></th>
+</tr></thead>
+        <tbody><tr><td>ID-0001</td><td>牌例標題-1</td><td><span class="lofi-badge">Tag-1</span></td><td>計分制-1</td><td>2026-06-01</td></tr>
+<tr><td>ID-0002</td><td>牌例標題-2</td><td><span class="lofi-badge">Tag-2</span></td><td>計分制-2</td><td>2026-06-02</td></tr>
+<tr><td>ID-0003</td><td>牌例標題-3</td><td><span class="lofi-badge">Tag-3</span></td><td>計分制-3</td><td>2026-06-03</td></tr>
+<tr><td>ID-0004</td><td>牌例標題-4</td><td><span class="lofi-badge">Tag-4</span></td><td>計分制-4</td><td>2026-06-04</td></tr>
+<tr><td>ID-0005</td><td>牌例標題-5</td><td><span class="lofi-badge">Tag-5</span></td><td>計分制-5</td><td>2026-06-05</td></tr>
+</tbody>
+      </table>
+
+      <div class="pagination">
+        <span class="page-info">1-5 / 128 筆</span>
+        <div class="page-btns">
+          <button class="lofi-btn-sm" disabled>&laquo;</button>
+          <button class="lofi-btn-sm active">1</button>
+          <button class="lofi-btn-sm">2</button>
+          <button class="lofi-btn-sm">3</button>
+          <button class="lofi-btn-sm">&raquo;</button>
+        </div>
+      </div>
+    </section>
+    
+    <section class="page-card" id="diagnosis-detail">
+      <div class="page-header">
+        <div class="page-title-row">
+          <h2>賽後認知診斷</h2>
+          <span class="page-type-badge detail-badge">DETAIL</span>
+        </div>
+        <div class="page-meta">
+          <span class="actor-label">&#128100; </span>
+          <div class="role-badges"><span class="role-badge">學生</span></div>
+        </div>
+      </div>
+
+      <div class="detail-toolbar"></div>
+
+      <div class="detail-body">
+        
+        <div class="detail-row">
+          <div class="detail-label">診斷假設</div>
+          <div class="detail-value"><span class="lofi-readonly">診斷假設-001</span></div>
+        </div>
+        
+        <div class="detail-row">
+          <div class="detail-label">信心值</div>
+          <div class="detail-value"><span class="lofi-readonly">信心值-001</span></div>
+        </div>
+        
+        <div class="detail-row">
+          <div class="detail-label">錯誤分類</div>
+          <div class="detail-value"><span class="lofi-readonly">錯誤分類-001</span></div>
+        </div>
+        
+        <div class="detail-row">
+          <div class="detail-label">認知成因</div>
+          <div class="detail-value"><span class="lofi-readonly">認知成因-001</span></div>
+        </div>
+        
+        <div class="detail-row">
+          <div class="detail-label">嚴重度</div>
+          <div class="detail-value"><span class="lofi-readonly">嚴重度-001</span></div>
+        </div>
+        
+        <div class="detail-row">
+          <div class="detail-label">是否為風格差異</div>
+          <div class="detail-value"><span class="lofi-readonly">是否為風格差異-001</span></div>
+        </div>
+        
+        <div class="detail-row">
+          <div class="detail-label">診斷時間</div>
+          <div class="detail-value"><span class="lofi-readonly">診斷時間-001</span></div>
+        </div>
+        
+      </div>
+    </section>
+    
+    <section class="page-card" id="ontology-proposal-list">
+      <div class="page-header">
+        <div class="page-title-row">
+          <h2>本體演化提案</h2>
+          <span class="page-type-badge list-badge">LIST</span>
+        </div>
+        <div class="page-meta">
+          <span class="actor-label">&#128100; </span>
+          <div class="role-badges"><span class="role-badge">治理者</span></div>
+        </div>
+      </div>
+
+      <div class="page-toolbar">
+        <div class="filter-bar"><div class="filter-group"><label>基準本體版本</label><input type="text" class="lofi-filter-input" placeholder="基準本體版本" disabled /></div>
+<div class="filter-group"><label>提案狀態</label><input type="text" class="lofi-filter-input" placeholder="提案狀態" disabled /></div>
+</div>
+        <div class="toolbar-actions"></div>
+      </div>
+
+      <table class="lofi-table">
+        <thead><tr><th>提案編號</th>
+<th>基準本體版本</th>
+<th>提案狀態</th>
+<th>提出時間 <span class="sort-icon">&#8597;</span></th>
+</tr></thead>
+        <tbody><tr><td>ID-0001</td><td>基準本體版本-1</td><td><span class="lofi-badge">Tag-1</span></td><td>2026-06-01</td></tr>
+<tr><td>ID-0002</td><td>基準本體版本-2</td><td><span class="lofi-badge">Tag-2</span></td><td>2026-06-02</td></tr>
+<tr><td>ID-0003</td><td>基準本體版本-3</td><td><span class="lofi-badge">Tag-3</span></td><td>2026-06-03</td></tr>
+<tr><td>ID-0004</td><td>基準本體版本-4</td><td><span class="lofi-badge">Tag-4</span></td><td>2026-06-04</td></tr>
+<tr><td>ID-0005</td><td>基準本體版本-5</td><td><span class="lofi-badge">Tag-5</span></td><td>2026-06-05</td></tr>
+</tbody>
+      </table>
+
+      <div class="pagination">
+        <span class="page-info">1-5 / 128 筆</span>
+        <div class="page-btns">
+          <button class="lofi-btn-sm" disabled>&laquo;</button>
+          <button class="lofi-btn-sm active">1</button>
+          <button class="lofi-btn-sm">2</button>
+          <button class="lofi-btn-sm">3</button>
+          <button class="lofi-btn-sm">&raquo;</button>
+        </div>
+      </div>
+    </section>
+    
+    <section class="page-card" id="parent-progress">
+      <div class="page-header">
+        <div>
+          <div class="page-title-row">
+            <h2>孩子認知進展</h2>
+            <span class="page-type-badge dashboard-badge">DASHBOARD</span>
+          </div>
+          <div class="page-meta">
+            <span class="actor-label">StudentSkillState</span>
+          </div>
+        </div>
+        
+      </div>
+      
+      <div class="page-toolbar">
+        <div class="filter-bar"><div class="filter-group"><label>學習者</label><select class="lofi-filter-select" disabled><option>全部</option><option>本館</option><option>分館 A</option></select></div><div class="filter-group"><label>認知技能</label><select class="lofi-filter-select" disabled><option>全部</option><option>本館</option><option>分館 A</option></select></div></div>
+      </div>
+      <div class="dashboard-grid"></div>
+      <div class="dashboard-panels">
+        <div class="panel">
+          <div class="panel-title">待辦工作</div>
+          <div class="todo-row"><span>候補遞補確認</span><span class="lofi-badge">12</span></div>
+          <div class="todo-row"><span>補件審核</span><span class="lofi-badge warn">7</span></div>
+          <div class="todo-row"><span>逾期繳費處理</span><span class="lofi-badge danger">5</span></div>
+        </div>
+        <div class="panel">
+          <div class="panel-title">近期活動</div>
+          <table class="lofi-table compact">
+            <tbody>
+              <tr><td>親子故事活動</td><td><span class="lofi-badge ok">報名中</span></td><td>12/20</td></tr>
+              <tr><td>AI 入門講座</td><td><span class="lofi-badge">審核中</span></td><td>24/30</td></tr>
+              <tr><td>閱讀推廣課</td><td><span class="lofi-badge warn">候補</span></td><td>8/8</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    
+    </section>
+    
+    <section class="page-card" id="play-session-play">
+      <div class="page-header">
+        <div class="page-title-row">
+          <h2>橋引管理練習</h2>
+          <span class="page-type-badge detail-badge">DETAIL</span>
+        </div>
+        <div class="page-meta">
+          <span class="actor-label">&#128100; </span>
+          <div class="role-badges"><span class="role-badge">學生</span></div>
+        </div>
+      </div>
+
+      <div class="detail-toolbar"><button class="lofi-btn-primary">request_hint</button> <button class="lofi-btn-primary">tag_reasoning</button> </div>
+
+      <div class="detail-body">
+        
+        <div class="detail-row">
+          <div class="detail-label">牌例</div>
+          <div class="detail-value"><span class="lofi-readonly">牌例-001</span></div>
+        </div>
+        
+        <div class="detail-row">
+          <div class="detail-label">練習狀態</div>
+          <div class="detail-value"><span class="lofi-readonly">練習狀態-001</span></div>
+        </div>
+        
+        <div class="detail-row">
+          <div class="detail-label">開始時間</div>
+          <div class="detail-value"><span class="lofi-readonly">開始時間-001</span></div>
+        </div>
+        
+      </div>
+    </section>
+    
+    <section class="page-card" id="replay-run-list">
+      <div class="page-header">
+        <div class="page-title-row">
+          <h2>重播紀錄</h2>
+          <span class="page-type-badge list-badge">LIST</span>
+        </div>
+        <div class="page-meta">
+          <span class="actor-label">&#128100; </span>
+          <div class="role-badges"><span class="role-badge">標注者</span></div>
+        </div>
+      </div>
+
+      <div class="page-toolbar">
+        <div class="filter-bar"><div class="filter-group"><label>重播範圍</label><input type="text" class="lofi-filter-input" placeholder="重播範圍" disabled /></div>
+<div class="filter-group"><label>重播用途</label><input type="text" class="lofi-filter-input" placeholder="重播用途" disabled /></div>
+</div>
+        <div class="toolbar-actions"></div>
+      </div>
+
+      <table class="lofi-table">
+        <thead><tr><th>重播編號</th>
+<th>重播範圍</th>
+<th>重播用途</th>
+<th>套用本體版本</th>
+<th>套用規則集版本</th>
+<th>執行時間 <span class="sort-icon">&#8597;</span></th>
+</tr></thead>
+        <tbody><tr><td>ID-0001</td><td>重播範圍-1</td><td><span class="lofi-badge">Tag-1</span></td><td>套用本體版本-1</td><td>套用規則集版本-1</td><td>2026-06-01</td></tr>
+<tr><td>ID-0002</td><td>重播範圍-2</td><td><span class="lofi-badge">Tag-2</span></td><td>套用本體版本-2</td><td>套用規則集版本-2</td><td>2026-06-02</td></tr>
+<tr><td>ID-0003</td><td>重播範圍-3</td><td><span class="lofi-badge">Tag-3</span></td><td>套用本體版本-3</td><td>套用規則集版本-3</td><td>2026-06-03</td></tr>
+<tr><td>ID-0004</td><td>重播範圍-4</td><td><span class="lofi-badge">Tag-4</span></td><td>套用本體版本-4</td><td>套用規則集版本-4</td><td>2026-06-04</td></tr>
+<tr><td>ID-0005</td><td>重播範圍-5</td><td><span class="lofi-badge">Tag-5</span></td><td>套用本體版本-5</td><td>套用規則集版本-5</td><td>2026-06-05</td></tr>
+</tbody>
+      </table>
+
+      <div class="pagination">
+        <span class="page-info">1-5 / 128 筆</span>
+        <div class="page-btns">
+          <button class="lofi-btn-sm" disabled>&laquo;</button>
+          <button class="lofi-btn-sm active">1</button>
+          <button class="lofi-btn-sm">2</button>
+          <button class="lofi-btn-sm">3</button>
+          <button class="lofi-btn-sm">&raquo;</button>
+        </div>
+      </div>
+    </section>
+    
+    <section class="page-card" id="situation-annotation-form">
+      <div class="page-header">
+        <div class="page-title-row">
+          <h2>局面標注</h2>
+          <span class="page-type-badge form-badge">FORM</span>
+        </div>
+        <div class="page-meta">
+          <span class="actor-label">&#128100; </span>
+          <div class="role-badges"><span class="role-badge">標注者</span></div>
+        </div>
+      </div>
+
+      <div class="form-body">
+        
+        <div class="form-group">
+          <label class="form-label">牌例 <span class="required">*</span></label>
+          <div class="form-widget"><select class="lofi-select" disabled><option value="">-- 請選擇 --</option><option value="1">選項 1</option><option value="2">選項 2</option></select></div>
+        </div>
+        
+        <div class="form-group">
+          <label class="form-label">局面類型 <span class="required">*</span></label>
+          <div class="form-widget"><select class="lofi-select" disabled><option value="">-- 請選擇 --</option><option value="1">選項 1</option><option value="2">選項 2</option></select></div>
+        </div>
+        
+        <div class="form-group">
+          <label class="form-label">依據本體版本 <span class="required">*</span></label>
+          <div class="form-widget"><select class="lofi-select" disabled><option value="">-- 請選擇 --</option><option value="1">選項 1</option><option value="2">選項 2</option></select></div>
+        </div>
+        
+        <div class="form-group">
+          <label class="form-label">Situation DSL 內文 <span class="required">*</span></label>
+          <div class="form-widget"><textarea class="lofi-textarea" placeholder="Situation DSL 內文" disabled></textarea></div>
+        </div>
+        
+        <div class="form-group">
+          <label class="form-label">是否標注完整 <span class="required">*</span></label>
+          <div class="form-widget"><input type="text" class="lofi-input" placeholder="是否標注完整" disabled /></div>
+        </div>
+        
+      </div>
+
+      <div class="form-footer">
+        <button class="lofi-btn-primary">+ 新增</button> <button class="lofi-btn-primary">curated-deal-list</button> 
+      </div>
+    </section>
+    
+    <section class="page-card" id="student-mastery-detail">
+      <div class="page-header">
+        <div class="page-title-row">
+          <h2>我的認知精熟度</h2>
+          <span class="page-type-badge detail-badge">DETAIL</span>
+        </div>
+        <div class="page-meta">
+          <span class="actor-label">&#128100; </span>
+          <div class="role-badges"><span class="role-badge">學生</span></div>
+        </div>
+      </div>
+
+      <div class="detail-toolbar"></div>
+
+      <div class="detail-body">
+        
+        <div class="detail-row">
+          <div class="detail-label">技能</div>
+          <div class="detail-value"><span class="lofi-readonly">技能-001</span></div>
+        </div>
+        
+        <div class="detail-row">
+          <div class="detail-label">辨識精熟度</div>
+          <div class="detail-value"><span class="lofi-readonly">辨識精熟度-001</span></div>
+        </div>
+        
+        <div class="detail-row">
+          <div class="detail-label">執行精熟度</div>
+          <div class="detail-value"><span class="lofi-readonly">執行精熟度-001</span></div>
+        </div>
+        
+        <div class="detail-row">
+          <div class="detail-label">遷移精熟度</div>
+          <div class="detail-value"><span class="lofi-readonly">遷移精熟度-001</span></div>
+        </div>
+        
+        <div class="detail-row">
+          <div class="detail-label">保留精熟度</div>
+          <div class="detail-value"><span class="lofi-readonly">保留精熟度-001</span></div>
+        </div>
+        
+        <div class="detail-row">
+          <div class="detail-label">估計信心</div>
+          <div class="detail-value"><span class="lofi-readonly">估計信心-001</span></div>
+        </div>
+        
+        <div class="detail-row">
+          <div class="detail-label">趨勢</div>
+          <div class="detail-value"><span class="lofi-readonly">趨勢-001</span></div>
+        </div>
+        
+      </div>
+    </section>
+    
+      </div>
+
+      <footer class="page-footer">
+        Generated by <code>hapdl2lofi.py</code> from haPDL v3.3 spec &middot;
+        13 pages &middot; 23 entities
+      </footer>
+    </main>
+  </div>
+
+</body>
+</html>

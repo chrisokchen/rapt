@@ -1,0 +1,38 @@
+page: assignment-list
+schema_version: "3.3"
+type: list
+entity: Assignment
+api: assignment
+title: 訓練指派清單
+
+view:
+  filters:
+    - {field: studentId, label: 學生, type: eq}
+    - {field: targetSkillId, label: 目標技能, type: eq}
+    - {field: status, label: 狀態, type: eq, ref_code: AssignmentStatus}
+  columns:
+    - {field: assignmentId, label: 指派編號, link: true}
+    - {field: studentId, label: 學生}
+    - {field: dealId, label: 牌例}
+    - {field: targetSkillId, label: 目標技能}
+    - {field: status, label: 狀態, format: badge, ref_code: AssignmentStatus}
+    - {field: assignedAt, label: 指派時間, format: date, sortable: true}
+  actions:
+    standard: [create]
+    placement:
+      header: [create]
+
+auth:
+  roles: [coach]
+security:
+  permission_refs:
+    view:
+      - {id: assignment_read_team}
+    create:
+      - {id: assignment_create}
+  datasource_scope: team
+
+source_evidence:
+  - "docs/ssot/haapi/assignment.haapi.yaml"
+  - "docs/ssot/habdd/coach-dashboard.ha.feature#Scenario:派發針對性訓練"
+  - "docs/ssot/haarm/bridge-cognitive-tutor.haarm.yaml#permission:assignment_read_team"

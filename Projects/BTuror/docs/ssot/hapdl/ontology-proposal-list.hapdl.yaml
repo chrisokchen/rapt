@@ -1,0 +1,35 @@
+page: ontology-proposal-list
+schema_version: "3.3"
+type: list
+entity: OntologyProposal
+api: ontology-proposal
+title: 本體演化提案
+
+view:
+  filters:
+    - {field: baseVersion, label: 基準本體版本, type: eq}
+    - {field: status, label: 提案狀態, type: eq, ref_code: ProposalStatus}
+  columns:
+    - {field: proposalId, label: 提案編號, link: true}
+    - {field: baseVersion, label: 基準本體版本}
+    - {field: status, label: 提案狀態, format: badge, ref_code: ProposalStatus}
+    - {field: proposedAt, label: 提出時間, format: date, sortable: true}
+  actions:
+    operations: [approve, reject]
+    placement:
+      row: [approve, reject]
+
+auth:
+  roles: [governance]
+security:
+  permission_refs:
+    view:
+      - {id: ontology_proposal_read}
+    update:
+      - {id: ontology_proposal_review}
+  datasource_scope: all
+
+source_evidence:
+  - "docs/ssot/haapi/ontology-proposal.haapi.yaml"
+  - "docs/ssot/habdd/replay-governance.ha.feature#Scenario:本體變更需具治理權限者核可"
+  - "docs/ssot/haarm/bridge-cognitive-tutor.haarm.yaml#permission:ontology_proposal_review"

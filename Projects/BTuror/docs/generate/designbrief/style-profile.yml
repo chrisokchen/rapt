@@ -1,0 +1,51 @@
+audit:
+  id: PREVIEW-20260616-001
+  skill: rapt-design-brief
+  generated_at: "2026-06-16T00:00:00+08:00"
+  source_artifacts:
+    - docs/ssot/hapdl/*.hapdl.yaml
+    - docs/ssot/dbml/schema.dbml
+    - docs/ssot/haarm/bridge-cognitive-tutor.haarm.yaml
+  output_artifact: docs/generate/designbrief/design-brief.md
+  status: partial
+  generated_summary:
+    pages: 13
+    entities: 23
+    roles: 11
+    file_size_kb: 21.8
+  assumptions:
+    - "依 arguments.yml 解析 v2 路徑（frontend_intent_dir=docs/ssot/hapdl, data_model_dir=docs/ssot/dbml, access_control_dir=docs/ssot/haarm）。"
+    - "Allowed Roles 由 haPDL auth.roles 對應 haARM role.name（中文）正確渲染。"
+    - "List/Dashboard 頁的 filter / column / badge / sample data 正常生成。"
+    - "generated.status 仍為 deferred；本次為使用者明確 on-demand 啟用之一次性 preview，未改動任何 SSoT。"
+  findings:
+    - id: PREVIEW-FIND-001
+      route: NOTE_ONLY
+      can_fix: false
+      severity: medium
+      category: preview_script_outlier
+      artifact: .claude/skills/rapt-design-brief/scripts/hapdl2brief.py
+      location: form pages（assignment-form / curated-deal-form / situation-annotation-form）的 #### Form Fields
+      summary: "3 個 form 頁的 Form Fields 表格為空。haPDL 使用 spec-compliant 的 form.fields（已 verify PASS），但 hapdl2brief.py 未讀取該 canonical 鍵；屬 hapdl-canonical-keys.md 已記載之 script outlier，非 SSoT 缺陷。"
+      suggested_action: "修正 hapdl2brief.py 讀取 canonical form.fields（與 page/auth.roles 對齊）；SSoT 無需變更。手動使用 Design Brief 時，form 欄位可逕由對應 haPDL 補入。"
+    - id: PREVIEW-FIND-002
+      route: NOTE_ONLY
+      can_fix: false
+      severity: low
+      category: preview_script_outlier
+      artifact: .claude/skills/rapt-design-brief/scripts/hapdl2brief.py
+      location: 各頁 Property 表的 Primary Actor 欄
+      summary: "Primary Actor 欄為空。script 讀取非 canonical 的 primary_actor 鍵；haPDL 規格無此鍵（actor 由 auth.roles 推導），已正確渲染 Allowed Roles。"
+      suggested_action: "script 改由 auth.roles 推導 actor 標籤，或移除 Primary Actor 欄。"
+    - id: PREVIEW-FIND-003
+      route: NOTE_ONLY
+      can_fix: false
+      severity: low
+      category: preview_fidelity
+      artifact: docs/generate/designbrief/design-brief.md
+      location: filter bar widgets（含 ref_code 的 filter）
+      summary: "部分含 ref_code 的 filter（如 trend/situationType/declarer）在 Filter Bar 顯示為 Text input/Free text，未展開 seeds 值域為下拉選項。"
+      suggested_action: "preview 增強：filter 若有 ref_code，讀 seeds.md 對應值集渲染為 select options。屬 preview 美化，不阻擋。"
+  ssot_integrity:
+    ssot_modified: false
+    note: "Preview skill 僅寫 docs/generate/**；未觸碰 docs/ssot/**。所有 finding 皆為 preview 工具側，SSoT（已 verify PASS / RAscore A）不受影響。"

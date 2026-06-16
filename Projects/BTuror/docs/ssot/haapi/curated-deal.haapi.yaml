@@ -1,0 +1,40 @@
+api: curated-deal
+schema_version: "3.3"
+entity: CuratedDeal
+title: 牌例管理 API
+description: curated Entry Management 牌例的 CRUD（標注者管理、已登入者可讀取練習目錄）
+
+exposes:
+  standard: [list, read, create, update]
+  list:
+    filters:
+      - {field: situationType, operators: [eq]}
+      - {field: declarer, operators: [eq]}
+      - {field: scoringContext, operators: [eq]}
+    sorting: {fields: [createdAt], default: createdAt:desc}
+    pagination: {style: offset, default_size: 20}
+
+access:
+  authentication: {type: bearer, required: true}
+  endpoints:
+    list:
+      required_roles: [authenticated]
+      required_permissions:
+        - id: curated_deal_read
+    read:
+      required_roles: [authenticated]
+      required_permissions:
+        - id: curated_deal_read
+    create:
+      required_roles: [annotator]
+      required_permissions:
+        - id: curated_deal_create
+    update:
+      required_roles: [annotator]
+      required_permissions:
+        - id: curated_deal_update
+
+source_evidence:
+  - "docs/ssot/habdd/deal-authoring.ha.feature#Scenario:成功匯入並標注 curated 牌例"
+  - "docs/ssot/dbml/schema.dbml#Table:CuratedDeal"
+  - "docs/ssot/haarm/bridge-cognitive-tutor.haarm.yaml#roles"

@@ -1,0 +1,39 @@
+api: student-skill-state
+schema_version: "3.3"
+entity: StudentSkillState
+title: 認知精熟度 API
+description: 讀取學生多維 partial mastery（學生本人 / 教練 / 家長 / 研究者，依範圍）；CDM 估計見 CON-MASTERY-002
+
+exposes:
+  standard: [list, read]
+  list:
+    filters:
+      - {field: studentId, operators: [eq]}
+      - {field: skillId, operators: [eq]}
+      - {field: trend, operators: [eq]}
+    sorting: {fields: [updatedAt], default: updatedAt:desc}
+    pagination: {style: offset, default_size: 50}
+
+access:
+  authentication: {type: bearer, required: true}
+  endpoints:
+    list:
+      required_roles: [student, coach, parent-school, researcher]
+      required_permissions:
+        - id: student_skill_state_read_own
+        - id: student_skill_state_read_team
+        - id: student_skill_state_read_ward
+        - id: student_skill_state_read_all
+    read:
+      required_roles: [student, coach, parent-school, researcher]
+      required_permissions:
+        - id: student_skill_state_read_own
+        - id: student_skill_state_read_team
+        - id: student_skill_state_read_ward
+        - id: student_skill_state_read_all
+
+source_evidence:
+  - "docs/ssot/habdd/mastery-tracking.ha.feature#Scenario:呈現部分精熟狀態"
+  - "docs/ssot/habdd/parent-view.ha.feature#Scenario:檢視監護學習者的認知進展"
+  - "docs/ssot/dbml/schema.dbml#Table:StudentSkillState"
+  - "docs/ssot/haarm/bridge-cognitive-tutor.haarm.yaml#roles"

@@ -1,0 +1,40 @@
+api: cognitive-skill
+schema_version: "3.3"
+entity: CognitiveSkill
+title: 認知技能 API
+description: 認知本體技能節點的讀取（已登入者）與維護（標注者）；構成 skill graph
+
+exposes:
+  standard: [list, read, create, update]
+  list:
+    filters:
+      - {field: ontologyVersion, operators: [eq]}
+      - {field: cognitiveLevel, operators: [eq]}
+      - {field: parentSkillId, operators: [eq]}
+    sorting: {fields: [skillCode], default: skillCode:asc}
+    pagination: {style: offset, default_size: 50}
+
+access:
+  authentication: {type: bearer, required: true}
+  endpoints:
+    list:
+      required_roles: [authenticated]
+      required_permissions:
+        - id: cognitive_skill_read
+    read:
+      required_roles: [authenticated]
+      required_permissions:
+        - id: cognitive_skill_read
+    create:
+      required_roles: [annotator]
+      required_permissions:
+        - id: cognitive_skill_create
+    update:
+      required_roles: [annotator]
+      required_permissions:
+        - id: cognitive_skill_update
+
+source_evidence:
+  - "docs/ssot/habdd/mastery-tracking.ha.feature#Scenario:診斷後更新多維精熟度"
+  - "docs/ssot/dbml/schema.dbml#Table:CognitiveSkill"
+  - "docs/ssot/haarm/bridge-cognitive-tutor.haarm.yaml#roles"

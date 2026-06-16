@@ -1,0 +1,34 @@
+page: coach-dashboard
+schema_version: "3.3"
+type: dashboard
+entity: StudentSkillState
+api: student-skill-state
+title: 教練認知儀表板
+
+view:
+  filters:
+    - {field: studentId, label: 學生, type: eq}
+    - {field: skillId, label: 認知技能, type: eq}
+    - {field: trend, label: 趨勢, type: eq, ref_code: MasteryTrend}
+  columns:
+    - {field: studentId, label: 學生, link: true}
+    - {field: skillId, label: 技能}
+    - {field: recognitionMastery, label: 辨識}
+    - {field: executionMastery, label: 執行}
+    - {field: transferMastery, label: 遷移}
+    - {field: retentionMastery, label: 保留}
+    - {field: trend, label: 趨勢, format: badge, ref_code: MasteryTrend}
+
+auth:
+  roles: [coach]
+security:
+  permission_refs:
+    view:
+      - {id: student_skill_state_read_team}
+  datasource_scope: team
+
+source_evidence:
+  - "docs/ssot/haapi/student-skill-state.haapi.yaml"
+  - "docs/ssot/habdd/coach-dashboard.ha.feature#Scenario:檢視學生認知分析"
+  - "docs/ssot/habdd/coach-dashboard.ha.feature#Scenario:依學生與技能篩選認知分析"
+  - "docs/ssot/haarm/bridge-cognitive-tutor.haarm.yaml#permission:student_skill_state_read_team"

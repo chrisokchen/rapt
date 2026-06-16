@@ -1,0 +1,37 @@
+page: curated-deal-list
+schema_version: "3.3"
+type: list
+entity: CuratedDeal
+api: curated-deal
+title: 牌例清單
+
+view:
+  filters:
+    - {field: situationType, label: 局面類型, type: eq, ref_code: SituationType}
+    - {field: declarer, label: 莊家方位, type: eq, ref_code: Seat}
+    - {field: scoringContext, label: 計分制, type: eq, ref_code: ScoringContext}
+  columns:
+    - {field: dealId, label: 牌例編號, link: true}
+    - {field: title, label: 牌例標題}
+    - {field: declarer, label: 莊家方位, format: badge, ref_code: Seat}
+    - {field: scoringContext, label: 計分制, ref_code: ScoringContext}
+    - {field: createdAt, label: 建立時間, format: date, sortable: true}
+  actions:
+    standard: [create]
+    placement:
+      header: [create]
+
+auth:
+  roles: [annotator]
+security:
+  permission_refs:
+    view:
+      - {id: curated_deal_read}
+    create:
+      - {id: curated_deal_create}
+  datasource_scope: all
+
+source_evidence:
+  - "docs/ssot/haapi/curated-deal.haapi.yaml"
+  - "docs/ssot/habdd/deal-authoring.ha.feature#Scenario:成功匯入並標注 curated 牌例"
+  - "docs/ssot/haarm/bridge-cognitive-tutor.haarm.yaml#permission:curated_deal_read"
