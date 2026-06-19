@@ -1,0 +1,5 @@
+interface:
+  display_name: "RAPTor Impact"
+  short_description: "分析新功能對既有規格、風險與產品範圍的影響"
+  default_prompt: "Use $rapt-impact to evaluate a proposed brownfield change before modifying RAPTor SSoT."
+

@@ -1,0 +1,537 @@
+schema_version: 1
+id: IA-20260619-001
+revision: 1
+generated_at: "2026-06-19T00:00:00+08:00"
+advisory_only: true
+
+proposal:
+  title: 新增商品評論
+  source_ref: what-if/0619-addComment.md
+  mode: greenfield-with-ssot
+  summary: >-
+    允許顧客對「已購買」的商品撰寫評論（1~5 星評分＋文字），評論與訂單綁定；
+    商家可管理自店商品評論（顯示／隱藏／刪除），平台 admin 可管理全平台評論。
+  entities: [ProductReview, Product, Order, OrderItem, Member]
+  actions: [create_review, view_review, moderate_review, delete_review]
+  actors: [consumer, merchant, platform-admin]
+  expected_outcomes:
+    - 顧客在商品頁查看評論並對已購商品評分／留言
+    - 商家對自店評論做顯示／隱藏／刪除
+    - 平台 admin 管理所有評論
+  explicit_constraints:
+    - 僅已購買者可評論（評論 -> 訂單 -> 訂單項目 -> 商品）
+    - 評論狀態：顯示／隱藏／刪除
+  ambiguities:
+    - 「已購買」資格認定層級與門檻未定義（per OrderItem / per Product / 需訂單狀態）
+    - 刪除為軟刪除或硬刪除、商家可否任意隱藏未定義
+    - 是否在商品上反正規化平均星等／評論數未定義
+    - 商品下架／刪除後評論保留與顯示策略未定義
+    - 評論審核操作是否納入 AuditLog 未定義
+
+evidence_maturity:
+  level: high
+  extractor_used: true
+  haapi_entity_bindings: {found: 22, files: 22}
+  traceability_l2: {rows: 64, mapped_rows: 16, coverage: 0.25}
+  traceability_l3: {rows: 41, mapped_rows: 41, coverage: 1.0}
+  limitations:
+    - 提案的 ProductReview 在既有 SSoT 完全無對應節點（新 aggregate），其本身的 affected 屬 create_candidate 推斷
+    - 既有系統證據成熟度高，但「評論顯示surface」product-detail 頁面在 haPDL 尚未存在（僅 product-list/product-form/product-variant-form）
+
+classification:
+  type: scope_extension
+  confidence: medium
+  evidence:
+    - docs/discovery/04-vision-kpi-scope.md#In-Scope（未列「商品評論」）
+    - docs/ssot/habdd/product-browsing.ha.feature:21（評論將擴充既有商品頁瀏覽體驗）
+  note: >-
+    本質上是新增獨立 aggregate（ProductReview），但因依賴既有 Order 購買歷史並擴充
+    既有商品瀏覽頁（product-browsing）顯示面，依分類優先序（scope_extension > new_scope）
+    取較高風險的 scope_extension。不改變既有 scenario 結果，故非 scope_change。
+
+graph_trace:
+  - from: haapi:product.haapi
+    to: table:Product
+    edge_type: entity_table
+    path: [haapi:product, dbml:Product]
+    evidence: docs/ssot/haapi/product.haapi.yaml:5
+    confidence: high
+  - from: table:OrderItem
+    to: table:Order
+    edge_type: table_rel
+    path: [OrderItem.orderId, Order.orderId]
+    evidence: docs/ssot/dbml/schema.dbml:499
+    confidence: high
+  - from: table:OrderItem
+    to: table:ProductVariant
+    edge_type: table_rel
+    path: [OrderItem.variantId, ProductVariant.variantId]
+    evidence: docs/ssot/dbml/schema.dbml:500
+    confidence: high
+  - from: table:ProductVariant
+    to: table:Product
+    edge_type: table_rel
+    path: [ProductVariant.productId, Product.productId]
+    evidence: docs/ssot/dbml/schema.dbml:491
+    confidence: high
+  - from: table:Order
+    to: table:Member
+    edge_type: table_rel
+    path: [Order.memberId, Member.memberId]
+    evidence: docs/ssot/dbml/schema.dbml:497
+    confidence: high
+  - from: proposal:ProductReview
+    to: chain:Member-Order-OrderItem-ProductVariant-Product
+    edge_type: scenario_table
+    path: [評論者=Member, 購買憑證=Order/OrderItem, 評論對象=Product]
+    evidence: what-if/0619-addComment.md:15-17
+    confidence: medium
+  - from: proposal:ProductReview
+    to: habdd:product-browsing
+    edge_type: scenario_intent
+    path: [評論顯示於商品頁]
+    evidence: docs/ssot/habdd/product-browsing.ha.feature:21
+    confidence: low
+
+affected:
+  dbml:
+    create:
+      - artifact: docs/ssot/dbml/schema.dbml
+        target: Table ProductReview
+        evidence: inferred
+        confidence: low
+        notes: >-
+          新 aggregate；欄位推斷 reviewId, productId, memberId, orderId(或 orderItemId),
+          rating(1-5), content, status(顯示/隱藏/刪除), createdAt。FK：productId>Product,
+          memberId>Member, orderId>Order。歸入新 TableGroup（如 Review）或併入 Catalog 待 modeling 決定。
+    update: []
+    review_only:
+      - artifact: docs/ssot/dbml/schema.dbml
+        target: Table Product
+        evidence: docs/ssot/haapi/product.haapi.yaml:5
+        confidence: medium
+        notes: 是否新增反正規化 avgRating/reviewCount（比照 COMPAT-03/04 快取模式）待裁決；若採用須補 compensating rule。
+      - artifact: docs/ssot/dbml/schema.dbml
+        target: Table Order / Table OrderItem
+        evidence: docs/ssot/dbml/schema.dbml:499
+        confidence: high
+        notes: 評論資格驗證需讀取，無 schema 變更。
+  habdd:
+    create:
+      - artifact: docs/ssot/habdd/product-review.ha.feature
+        target: 顧客評論（建立/查看/限已購買）
+        evidence: what-if/0619-addComment.md:7
+        confidence: medium
+      - artifact: docs/ssot/habdd/review-moderation.ha.feature
+        target: 商家/admin 評論管理（顯示/隱藏/刪除）
+        evidence: what-if/0619-addComment.md:8-9
+        confidence: medium
+    update:
+      - artifact: docs/ssot/habdd/product-browsing.ha.feature
+        target: "Scenario: 商品頁顯示價格與庫存狀態（新增評論顯示）"
+        risk: 既有商品頁瀏覽行為新增評論區塊，屬附加性變更
+        evidence: docs/ssot/habdd/product-browsing.ha.feature:21
+        confidence: medium
+    review_only:
+      - artifact: docs/ssot/habdd/product-management.ha.feature
+        target: "SCN-PRODUCT-005 下架商品不影響既有訂單"
+        evidence: docs/ssot/habdd/product-management.ha.feature:47
+        confidence: high
+        notes: 下架/刪除商品後既有評論的顯示與保留策略未定義（與 CON-PRD-003 ref-delete 互動）。
+  haarm:
+    create:
+      - artifact: docs/ssot/haarm/smallBiz.haarm.yaml
+        target: resource product_review + permissions（review_create_own, review_read/list[public], review_list_store, review_moderate_store, review_list_all, review_moderate_all）
+        evidence: what-if/0619-addComment.md:6-9
+        confidence: medium
+        notes: 三種既有模式可直接套用——consumer 自有（比照 wishlist_*_own）、merchant 店面隔離（比照 *_update_store）、platform-admin 全域（比照 audit_log_read_all）。
+    update:
+      - artifact: docs/ssot/haarm/smallBiz.haarm.yaml
+        target: roles consumer / merchant / platform-admin（加入新 permission）
+        risk: 角色權限集合擴充；不改變既有 permission 語意
+        evidence: docs/ssot/haarm/smallBiz.haarm.yaml:56
+        confidence: medium
+    review_only:
+      - artifact: docs/ssot/dbml/constraints.md
+        target: CON-AUD-001
+        evidence: docs/ssot/dbml/constraints.md:48
+        confidence: medium
+        notes: 評論隱藏/刪除為內容移除型高風險操作，是否納入 AuditLog 稽核範圍待裁決。
+  haapi:
+    create:
+      - artifact: docs/ssot/haapi/product-review.haapi.yaml
+        target: "api: product-review, entity: ProductReview（create/list/read + moderate/hide/delete operations）"
+        evidence: what-if/0619-addComment.md:11-14
+        confidence: medium
+    update: []
+    review_only:
+      - artifact: docs/ssot/haapi/product.haapi.yaml
+        target: product.read / product.list
+        evidence: docs/ssot/haapi/product.haapi.yaml:9
+        confidence: low
+        notes: 是否於商品讀取暴露評分摘要待設計（亦可由獨立 review list 端點承接）。
+  hapdl:
+    create:
+      - artifact: docs/ssot/hapdl/product-review-form.hapdl.yaml
+        target: 顧客撰寫評論表單
+        evidence: what-if/0619-addComment.md:7
+        confidence: medium
+      - artifact: docs/ssot/hapdl/product-review-list.hapdl.yaml
+        target: 商品頁評論列表（顯示surface；product-detail 頁尚不存在，須一併建立）
+        evidence: docs/ssot/hapdl
+        confidence: medium
+      - artifact: docs/ssot/hapdl/review-moderation-list.hapdl.yaml
+        target: 商家/admin 評論管理列表
+        evidence: what-if/0619-addComment.md:8-9
+        confidence: medium
+    update: []
+    review_only:
+      - artifact: docs/ssot/hapdl/product-list.hapdl.yaml
+        target: product-list
+        evidence: docs/ssot/hapdl/product-list.hapdl.yaml
+        confidence: low
+        notes: 是否於商品列表顯示評分摘要待設計。
+  traceability:
+    create:
+      - artifact: .raptor/traceability.md
+        target: L1 新 US（商品評論）、L2 新 SCN、L3 新 intent mapping
+        evidence: .raptor/traceability.md:106
+        confidence: medium
+    update:
+      - artifact: .raptor/traceability.md
+        target: product-browsing L2/L3 列（新增評論顯示）
+        evidence: .raptor/traceability.md:103
+        confidence: medium
+    review_only: []
+  generated:
+    create: []
+    update: []
+    review_only:
+      - artifact: docs/generate/
+        target: openapi / lofi / pdl
+        evidence: .raptor/arguments.yml:25
+        confidence: high
+        notes: generated.status=deferred；accept 後需重新 generate，本 skill 不執行。
+
+regression_risks:
+  - id: RISK-001
+    scenario: SCN-PRODUCT-005
+    summary: 商品下架／刪除後既有評論的顯示與保留策略未定義；與 CON-PRD-003（被 OrderItem 引用的 SKU 不可實體刪除）的生命週期互動
+    severity: medium
+    route: NEED_TO_CLARIFY
+    can_fix: false
+    owner_skill: rapt-clarify
+    evidence: docs/ssot/habdd/product-management.ha.feature:47
+    mitigation: 先裁決下架/刪除商品時評論隱藏或保留的政策，再建模 ProductReview 生命週期。
+  - id: RISK-002
+    scenario: 評分聚合
+    summary: 若於 Product 反正規化 avgRating/reviewCount，將形成衍生資料一致性問題（比照 COMPAT-03 pointBalance / COMPAT-04 usedCount）
+    severity: medium
+    route: NEED_TO_CLARIFY
+    can_fix: true
+    owner_skill: rapt-modeling
+    evidence: docs/ssot/dbml/constraints.md:72
+    mitigation: 裁決即時計算 vs 快取；若採快取須補 compensating rule（同交易更新）。
+  - id: RISK-003
+    scenario: 評論資格（限已購買者）
+    summary: 「已購買」認定層級（per OrderItem / per Product）、所需訂單狀態（是否需已送達 D）、同商品可評論次數未定義；缺定義將無法在 haAPI/haARM 落實授權邊界，存在灌水/未授權評論風險
+    severity: medium
+    route: NEED_TO_CLARIFY
+    can_fix: false
+    owner_skill: rapt-clarify
+    evidence: what-if/0619-addComment.md:13
+    mitigation: 裁決資格規則後，以 haAPI 條件（評論者 memberId 須存在對應 Order/OrderItem）強制。
+  - id: RISK-004
+    scenario: 商品頁瀏覽
+    summary: 評論顯示surface（product-detail 頁）在 haPDL 尚不存在，product-browsing 讀取型場景目前由 list 承接；新增評論顯示需先補齊頁面
+    severity: low
+    route: NEED_TO_FIX
+    can_fix: true
+    owner_skill: rapt-lofi
+    evidence: docs/ssot/habdd/product-browsing.ha.feature:21
+    mitigation: 於 behavior/intent 補商品詳情頁與評論區塊，屬附加性變更。
+  - id: RISK-005
+    scenario: 稽核軌跡
+    summary: 評論隱藏/刪除為內容移除型操作，現行 CON-AUD-001 稽核範圍未涵蓋
+    severity: low
+    route: NEED_TO_CLARIFY
+    can_fix: true
+    owner_skill: rapt-clarify
+    evidence: docs/ssot/dbml/constraints.md:48
+    mitigation: 裁決是否將評論審核納入 AuditLog action 值域。
+
+facets:
+  data:
+    - 新 aggregate ProductReview（評分/內容/狀態/時間/評論者/評論對象/訂單綁定）
+    - 評分聚合是否反正規化至 Product（衍生資料一致性，比照 COMPAT-03/04）
+    - 評論 -> Order/OrderItem/Product/Member 外鍵與資格查詢路徑
+  api:
+    - 新 product-review API（create/list/read + moderate）
+    - 評論資格驗證（建立時檢查 memberId 對應已購 Order/OrderItem）
+    - 既有 product API 是否暴露評分摘要
+  ui:
+    - 顧客評論表單、商品頁評論列表（須補 product-detail 頁）
+    - 商家/admin 評論管理列表（顯示/隱藏/刪除）
+  permission:
+    - consumer review_create_own（比照 wishlist_*_own，memberId 條件）
+    - merchant review_list_store/review_moderate_store（store 隔離，比照 *_update_store）
+    - platform-admin review_list_all/review_moderate_all（比照 audit_log_read_all）
+    - 商家可否任意隱藏（審查/言論政策邊界）
+  behavior:
+    - 顧客評論建立（限已購）、查看；商家/admin 審核狀態流轉（顯示/隱藏/刪除）
+    - product-browsing 商品頁新增評論顯示（附加）
+    - 下架/刪除商品 vs 既有評論（SCN-PRODUCT-005 互動）
+  traceability:
+    - L1 新 US、L2 新 SCN、L3 新 intent mapping；product-browsing 列更新
+  generated:
+    - openapi/lofi/pdl 待 accept 後重新 generate（deferred）
+
+value_alignment:
+  kpi_refs: [KPI-7-訂單轉換率, KPI-9-消費者滿意度]
+  fit: medium
+  rationale: >-
+    評論可提升購買信心、間接支撐訂單轉換率（目標約 3%）與消費者滿意度（≥4.5），
+    但提案未設計直接量測機制，且非 04-vision-kpi-scope.md MVP In-Scope 項目。
+
+cost_risk:
+  breadth: wide
+  regression: medium
+  uncertainty: high
+  implementation_shape: large
+  summary: >-
+    橫跨 DBML（新表）、haBDD（2 新 feature + 1 更新）、haARM（新 resource/permission + 3 role 更新）、
+    haAPI（新 API）、haPDL（3+ 新頁，含尚不存在的商品詳情頁）、traceability（L1/L2/L3）共五層 DSL；
+    多項關鍵業務政策（資格、審核、聚合、保留、稽核）未定義，不確定性高。
+
+verification:
+  rerun:
+    - skill: rapt-verify
+      target: 跨 DSL 一致性（product_review resource/permission/api/page 互引）與 L2/L3 覆蓋
+    - skill: rapt-RAscore
+      target: 新增需求品質與可追蹤性（維持 ≥85 SSoT 門檻）
+  acceptance_evidence:
+    - 評論建立（限已購）、查看、審核（顯示/隱藏/刪除）、下架商品評論保留之 scenario 全部可追蹤
+    - product_review 三類角色權限與既有 own/store/all 模式一致且通過 cross-DSL lint
+
+recommendation:
+  decision: needs_clarification
+  reason: >-
+    商品評論不在現行 MVP In-Scope，且資格認定、審核語意、評分聚合、下架保留、稽核範圍等
+    關鍵業務政策皆未定義（impact-analysis-rules 規則 1）。須先裁決是否納入 scope 及上述政策，
+    方能安全進入 behavior/modeling。
+  next_owner: rapt-clarify
+
+confidence:
+  overall: medium
+  missing_evidence:
+    - 商品評論是否納入 MVP scope
+    - 評論資格認定規則
+    - 審核（軟/硬刪除、審查邊界）語意
+    - 評分聚合方式
+    - 下架/刪除商品評論保留策略
+    - 評論審核稽核範圍
+  opened_cic: [CiC-260619-001, CiC-260619-002, CiC-260619-003, CiC-260619-004, CiC-260619-005, CiC-260619-006]
+
+proposed_cic:
+  - id: CiC-260619-001
+    type: BDY
+    target: docs/discovery/04-vision-kpi-scope.md
+    location: In-Scope / Deferred
+    summary: 商品評論是否納入 MVP scope（目前 In-Scope 未列、Deferred 亦未列）
+    route: NEED_TO_CLARIFY
+  - id: CiC-260619-002
+    type: GAP
+    target: docs/ssot/habdd/product-review.ha.feature
+    location: 評論資格
+    summary: 「已購買」認定層級（per OrderItem / per Product）、所需訂單狀態、同商品可評論次數未定義
+    route: NEED_TO_CLARIFY
+  - id: CiC-260619-003
+    type: GAP
+    target: docs/ssot/habdd/review-moderation.ha.feature
+    location: 審核語意
+    summary: 刪除為軟刪除（隱藏）或硬刪除；商家可否任意隱藏（言論/審查邊界）；是否需理由
+    route: NEED_TO_CLARIFY
+  - id: CiC-260619-004
+    type: GAP
+    target: docs/ssot/dbml/schema.dbml
+    location: Table Product / Table ProductReview
+    summary: 商品頁是否顯示平均星等/評論數；即時計算 vs 反正規化快取（COMPAT 模式）
+    route: NEED_TO_CLARIFY
+  - id: CiC-260619-005
+    type: BDY
+    target: docs/ssot/dbml/constraints.md
+    location: CON-PRD-003 / SCN-PRODUCT-005
+    summary: 商品下架/刪除後既有評論的保留與顯示策略
+    route: NEED_TO_CLARIFY
+  - id: CiC-260619-006
+    type: GAP
+    target: docs/ssot/dbml/constraints.md
+    location: CON-AUD-001
+    summary: 評論隱藏/刪除是否納入 AuditLog 稽核 action 值域
+    route: NEED_TO_CLARIFY
+
+clarify_payload:
+  batch_id: CLR-BATCH-20260619-001
+  source_skill: rapt-impact
+  source_report: docs/reports/impact/IA-20260619-001.yml
+  questions:
+    - id: Q-001
+      route: NEED_TO_CLARIFY
+      severity: high
+      topic: scope 邊界
+      artifact: docs/discovery/04-vision-kpi-scope.md
+      location: In-Scope / Deferred
+      question: 商品評論是否納入本 MVP scope？
+      why: 評論不在現行 In-Scope/Deferred；不裁決則無法決定是否啟動 behavior/modeling 或列為 Deferred。
+      options:
+        - id: A
+          label: 納入 MVP（scope_extension）
+          impact:
+            - docs/discovery/04-vision-kpi-scope.md
+            - docs/ssot/dbml/schema.dbml
+            - docs/ssot/haarm/smallBiz.haarm.yaml
+        - id: B
+          label: 列入 Deferred（未來版本）
+          impact:
+            - docs/discovery/04-vision-kpi-scope.md
+        - id: C
+          label: 拒絕（out-of-scope）
+          impact:
+            - docs/discovery/04-vision-kpi-scope.md
+      blocking_artifacts:
+        - docs/ssot/dbml/schema.dbml
+        - docs/ssot/habdd/product-review.ha.feature
+    - id: Q-002
+      route: NEED_TO_CLARIFY
+      severity: high
+      topic: 評論資格
+      artifact: docs/ssot/habdd/product-review.ha.feature
+      location: 評論建立前置條件
+      question: 「已購買者」如何認定可評論？層級、訂單狀態與次數限制為何？
+      why: 缺定義將無法在 haAPI/haARM 落實授權，存在灌水/未授權評論風險。
+      options:
+        - id: A
+          label: 每筆已送達(D)訂單明細可評論一次
+          impact:
+            - docs/ssot/haapi/product-review.haapi.yaml
+            - docs/ssot/haarm/smallBiz.haarm.yaml
+        - id: B
+          label: 每位會員每商品一則（不限訂單）
+          impact:
+            - docs/ssot/haapi/product-review.haapi.yaml
+        - id: C
+          label: 任一已購（不限狀態/次數）
+          impact:
+            - docs/ssot/haapi/product-review.haapi.yaml
+      blocking_artifacts:
+        - docs/ssot/haapi/product-review.haapi.yaml
+    - id: Q-003
+      route: NEED_TO_CLARIFY
+      severity: medium
+      topic: 審核語意
+      artifact: docs/ssot/habdd/review-moderation.ha.feature
+      location: 評論狀態機
+      question: 商家/admin 的「刪除」是軟刪除（隱藏）或硬刪除？商家可否任意隱藏評論、是否需理由？
+      why: 影響 ProductReview 狀態欄位設計、稽核需求與言論政策邊界。
+      options:
+        - id: A
+          label: 僅軟刪除（顯示/隱藏），商家限自店、操作入稽核
+          impact:
+            - docs/ssot/dbml/schema.dbml
+            - docs/ssot/dbml/constraints.md
+        - id: B
+          label: 允許硬刪除（admin 限定）
+          impact:
+            - docs/ssot/dbml/schema.dbml
+      blocking_artifacts:
+        - docs/ssot/dbml/schema.dbml
+    - id: Q-004
+      route: NEED_TO_CLARIFY
+      severity: medium
+      topic: 評分聚合
+      artifact: docs/ssot/dbml/schema.dbml
+      location: Table Product / Table ProductReview
+      question: 商品頁是否顯示平均星等與評論數？採即時計算或反正規化快取？
+      why: 決定是否需在 Product 增欄並補 compensating rule（比照 COMPAT-03/04）。
+      options:
+        - id: A
+          label: 即時計算（不增 Product 欄位）
+          impact:
+            - docs/ssot/haapi/product-review.haapi.yaml
+        - id: B
+          label: 反正規化快取至 Product（+compensating rule）
+          impact:
+            - docs/ssot/dbml/schema.dbml
+            - docs/ssot/dbml/constraints.md
+      default_when_no_answer: A
+      blocking_artifacts: []
+    - id: Q-005
+      route: NEED_TO_CLARIFY
+      severity: medium
+      topic: 生命週期
+      artifact: docs/ssot/dbml/constraints.md
+      location: CON-PRD-003 / SCN-PRODUCT-005
+      question: 商品下架或刪除後，既有評論如何處理（保留顯示／隱藏／隨商品移除）？
+      why: 與既有「下架不影響既有訂單」語意及 SKU ref-delete 限制互動，影響評論保留策略。
+      options:
+        - id: A
+          label: 下架仍保留並顯示
+          impact:
+            - docs/ssot/habdd/product-review.ha.feature
+        - id: B
+          label: 下架即隱藏
+          impact:
+            - docs/ssot/habdd/product-review.ha.feature
+      default_when_no_answer: A
+      blocking_artifacts: []
+    - id: Q-006
+      route: NEED_TO_CLARIFY
+      severity: low
+      topic: 稽核
+      artifact: docs/ssot/dbml/constraints.md
+      location: CON-AUD-001
+      question: 評論隱藏/刪除是否納入 AuditLog 稽核範圍？
+      why: 內容移除為高風險操作；現行稽核 action 值域未涵蓋。
+      options:
+        - id: A
+          label: 納入稽核
+          impact:
+            - docs/ssot/dbml/constraints.md
+            - docs/ssot/dbml/seeds.md
+        - id: B
+          label: 暫不納入
+          impact: []
+      default_when_no_answer: A
+      blocking_artifacts: []
+
+proposed_impact_entries:
+  - source_type: clarify_decision
+    source_ref: docs/reports/impact/IA-20260619-001.yml
+    target_artifact: docs/ssot/dbml/schema.dbml
+    impact_type: create
+    status: open
+    owner_skill: rapt-modeling
+    notes: 新增 Table ProductReview；待提案 accept 與 decision apply 後正式 upsert。
+  - source_type: clarify_decision
+    source_ref: docs/reports/impact/IA-20260619-001.yml
+    target_artifact: docs/ssot/haarm/smallBiz.haarm.yaml
+    impact_type: update
+    status: open
+    owner_skill: rapt-intent
+    notes: 新增 product_review resource 與權限，更新 consumer/merchant/platform-admin 角色。
+  - source_type: clarify_decision
+    source_ref: docs/reports/impact/IA-20260619-001.yml
+    target_artifact: docs/ssot/haapi/product-review.haapi.yaml
+    impact_type: create
+    status: open
+    owner_skill: rapt-intent
+    notes: 新增 product-review API（含資格驗證與審核 operation）。
+  - source_type: clarify_decision
+    source_ref: docs/reports/impact/IA-20260619-001.yml
+    target_artifact: docs/ssot/habdd/product-browsing.ha.feature
+    impact_type: update
+    status: open
+    owner_skill: rapt-behavior
+    notes: 商品頁新增評論顯示 scenario。
+
+analysis_warnings: []
