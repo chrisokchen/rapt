@@ -17,14 +17,14 @@ metadata:
 
 ## TRIGGER
 
-- Planner DELEGATE ?? payload ? `rapt-form-gherkin`?
-- payload ?? target path?source evidence?dsl version ? write mode?
+- Planner 透過 DELEGATE 傳入 payload 呼叫 `rapt-form-gherkin`。
+- payload 含 target path、source evidence、dsl version 與 write mode。
 
 ## SKIP
 
-- payload ?? target path ? source evidence?
-- requested write path ?? Artifact Output Contract?
-- ??????????????????? DSL artifact?
+- payload 缺少 target path 或 source evidence。
+- requested write path 超出 Artifact Output Contract。
+- 需要推斷或補充 payload 以外內容才能完成的 DSL artifact。
 
 
 ## PRINCIPLE: CWD 為產出錨點
@@ -94,21 +94,21 @@ Feature: {feature_name}
 ## haBDD Lint Gate
 
 ASSERT:
-- haBDD ???? `*.ha.feature` ? legacy `*.feature`?
-- haBDD ??? selector?`data-testid`?HTTP method?URL?`/api/` ? implementation literal?
-- ????? `rapt-verify/references/dsl-lint.py --file payload.target_path --levels 3`?
-- lint ????? `failure_kind: dsl_lint_failed`??????????? artifact?
+- haBDD 檔名使用 `*.ha.feature`，不得使用 legacy `*.feature`。
+- haBDD 不得出現 selector、`data-testid`、HTTP method、URL、`/api/` 或 implementation literal。
+- 渲染後執行 `rapt-verify/references/dsl-lint.py --file payload.target_path --levels 3`。
+- lint 失敗時回傳 `failure_kind: dsl_lint_failed`，並且不得寫出任何 artifact。
 
 ## Worker Failure Contract
 
-Worker ???????????????????????????????
+Worker 遇到下列任一情況時，不得產生任何檔案，必須立即回傳結構化的失敗結果。
 
 ```yaml
 worker_result:
   status: failed
   failure_kind: invalid_payload | missing_evidence | contract_violation | dsl_lint_failed | unsupported_case
   target_path: <payload.target_path>
-  message: <????>
-  required_action: <Planner ??????????>
+  message: <失敗原因>
+  required_action: <Planner 需執行的後續修正動作>
 ```
 

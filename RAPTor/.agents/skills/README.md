@@ -13,7 +13,6 @@
 | 類型 | Skill | 用途 |
 |---|---|---|
 | Utility | `rapt-core` | 共用 reference、schema、script、template hub |
-| Utility | `rapt-human-sync` | 偵測人工修改的 SSoT，產生 HSYNC 紀錄並登錄 `manual_change` impact entries |
 | Planner | `rapt-kickoff` | 初始化 `.raptor/KICKOFF_PLAN.md`、`.raptor/arguments.yml`、`.raptor/session.md` |
 | Planner | `rapt-discovery` | Phase 1，整理來源需求、stakeholder、journey、event、vision/KPI/scope |
 | Planner | `rapt-behavior` | Phase 1.5，產生高階 haBDD / Gherkin 行為規格 |
@@ -93,8 +92,6 @@ my-project/
 │   ├── session.md
 │   ├── traceability.md
 │   ├── impact-matrix.yml
-│   ├── human-sync/
-│   │   └── HSYNC-*.yml
 │   └── reconcile/
 │       ├── sessions/
 │       └── archive/
@@ -161,25 +158,18 @@ my-project/
    → docs/ssot/haapi/*.haapi.yaml
    → docs/ssot/hapdl/*.hapdl.yaml
 
-7. 若人工修改過 SSoT：
-   /rapt-human-sync
-   → .raptor/human-sync/HSYNC-*.yml
-   → .raptor/impact-matrix.yml（source_type=manual_change）
-   → .raptor/traceability.md
-   → 接著跑 /rapt-verify
-
-8. /rapt-verify
+7. /rapt-verify
    → docs/reports/verify-report.md
    → docs/reports/verify-report.yml
 
-9. 若 PARTIAL / FAIL：
+8. 若 PARTIAL / FAIL：
    /rapt-reconcile
    → .raptor/reconcile/sessions/*.yml
    → .raptor/reconcile/archive/**
    → .raptor/impact-matrix.yml
    → 修復後再跑 /rapt-verify
 
-10. Preview：
+9. Preview：
    /rapt-openapi
    → docs/generate/openapi/openapi.yaml
    → docs/generate/openapi/openapi-audit.yml
@@ -234,19 +224,6 @@ Feature: 案件覆核
 
 `rapt-reconcile` 優先讀取 `verify-report.yml`，修改任何 SSoT 前必須建立 archive snapshot，並輸出 `.raptor/reconcile/sessions/*.yml`。
 
-## Human Sync
-
-`rapt-human-sync` 用於人工直接修改 `docs/ssot/**` 後、執行 `/rapt-verify` 前。它只登錄變更，不修改任何 SSoT，也不自動修復。
-
-輸出：
-
-- `.raptor/human-sync/HSYNC-*.yml`
-- `.raptor/impact-matrix.yml` 中的 `source_type: manual_change` entries
-- `.raptor/traceability.md` 的 Decision Traceability 摘要
-- `.raptor/session.md` 的 human-sync 摘要
-
-V1 支援 working-tree 變更；若使用者尚未 commit，who/when 會以 operator 與掃描時間記錄，並提示 commit 後 provenance 會更完整。
-
 ## Core Scripts
 
 | Script | 用途 |
@@ -255,8 +232,6 @@ V1 支援 working-tree 變更；若使用者尚未 commit，who/when 會以 oper
 | `rapt-core/scripts/manage_impact_matrix.py` | validate/query/upsert `.raptor/impact-matrix.yml` |
 | `rapt-core/scripts/migrate_docs_layout.py` | v1 到 v2 docs layout dry-run / apply |
 | `rapt-core/scripts/analyze_skill_family.py` | 檢查 skill family 一致性 |
-| `rapt-human-sync/scripts/human_sync_scan.py` | 掃描人工 SSoT 變更，產生 HSYNC 並登錄 manual_change impact entries |
-| `rapt-human-sync/scripts/detect_unsynced.py` | 唯讀偵測尚未被 HSYNC 覆蓋的 SSoT 變更 |
 
 ## Preview Audit
 

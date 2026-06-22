@@ -1,0 +1,102 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "haapi-v3.3.schema.json",
+  "title": "haAPI v3.3",
+  "description": "Structural contract for *.haapi.yaml. SSoT: RAPTor/DSLspec/haAPI-specification_v3.3.md §2.2 (exposes) and §2.3.1 (Access v2). access.endpoints/operations MUST be dict keyed by operation name; path/methods live in exposes, NOT access.",
+  "type": "object",
+  "required": ["api", "entity", "exposes", "access"],
+  "not": {
+    "required": ["endpoints"],
+    "$comment": "HAAPI-SCHEMA-002: top-level bare `endpoints:` is forbidden; endpoints derive from exposes"
+  },
+  "properties": {
+    "api": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9]*(-[a-z0-9]+)*$"
+    },
+    "title": { "type": "string" },
+    "entity": { "type": "string" },
+    "description": { "type": "string" },
+    "schema_version": { "type": "string", "pattern": "^3\\.3(\\.[0-9]+)?$" },
+    "version": { "type": "string" },
+    "integrations": {},
+    "consumers": {},
+    "advanced": {},
+    "exposes": {
+      "type": "object",
+      "properties": {
+        "standard": {
+          "oneOf": [
+            { "type": "string", "enum": ["crud", "all"] },
+            {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": ["list", "create", "read", "update", "patch", "delete", "exists"]
+              }
+            }
+          ]
+        },
+        "standard_overrides": { "type": "object" },
+        "list": { "type": "object" },
+        "operations": {
+          "type": "array",
+          "items": {
+            "oneOf": [
+              { "type": "string" },
+              { "type": "object", "required": ["name"] }
+            ]
+          }
+        }
+      }
+    },
+    "access": {
+      "type": "object",
+      "not": {
+        "required": ["permissions"],
+        "$comment": "HAAPI-SCHEMA-004: access.permissions is deprecated (v3.1 dead-letter)"
+      },
+      "properties": {
+        "authentication": { "type": "object" },
+        "endpoints": {
+          "type": "object",
+          "$comment": "HAAPI-SCHEMA-001: MUST be dict keyed by op name (list/read/...), NOT array",
+          "additionalProperties": {
+            "type": "object",
+            "properties": {
+              "required_roles": { "type": "array", "items": { "type": "string" } },
+              "required_permissions": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "required": ["id"],
+                  "$comment": "HAAPI-SCHEMA-003: each permission is {id: ...}, not a bare string"
+                }
+              },
+              "scope": { "type": "string", "enum": ["all", "own", "department", "team"] },
+              "conditions": { "type": "array" },
+              "rate_limit": { "type": "string" }
+            }
+          }
+        },
+        "operations": {
+          "type": "object",
+          "$comment": "HAAPI-SCHEMA-001: MUST be dict keyed by op name, NOT array",
+          "additionalProperties": {
+            "type": "object",
+            "properties": {
+              "required_roles": { "type": "array", "items": { "type": "string" } },
+              "required_permissions": {
+                "type": "array",
+                "items": { "type": "object", "required": ["id"] }
+              },
+              "scope": { "type": "string", "enum": ["all", "own", "department", "team"] },
+              "conditions": { "type": "array" },
+              "rate_limit": { "type": "string" }
+            }
+          }
+        }
+      }
+    }
+  }
+}

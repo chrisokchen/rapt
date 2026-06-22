@@ -26,6 +26,7 @@
 - 6 CiC（2 BDY + 4 GAP）→ clarify batch CLR-BATCH-20260619-001（Q-001~006）
 - 下一步 owner：`rapt-clarify`（先裁決 scope 與政策）｜advisory-only: true
 - 報告：docs/reports/impact/IA-20260619-001.md / .yml
+- **rev2 重跑（2026-06-20）**：相同提案、SSoT 自 06-13 未變更；extractor 重跑一致（287N/256E/0W，持久化 impact-graph-20260620.json）。分類/風險/建議無變化，仍 `needs_clarification`，下一步 owner 仍 `rapt-clarify`。advisory-only: true
 
 ## RAscore 摘要（2026-06-13，advisory-only）
 

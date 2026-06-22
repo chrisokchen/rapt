@@ -16,14 +16,14 @@ metadata:
 
 ## TRIGGER
 
-- ???????????? preview / generated artifact?
-- SSoT ???????? SSoT ????????
+- 使用者要求從既有 SSoT 產生 preview / generated artifact。
+- SSoT 已穩定，需要將 SSoT 轉為可預覽的衍生輸出。
 
 ## SKIP
 
-- ?? SSoT ?????? blocker finding?
-- ??????? DBML?haBDD?haARM?haAPI ? haPDL SSoT?
-- `generated.status` ?????? generated output?
+- 對應的 SSoT 尚未就緒，或仍有未解的 blocker finding。
+- 尚未具備 DBML、haBDD、haARM、haAPI 或 haPDL SSoT。
+- `generated.status` 尚未開啟，禁止產生 generated output。
 
 
 ## PRINCIPLE: Artifact Output Contract（只寫 HTML wireframe，不修改任何 SSoT）
@@ -119,6 +119,6 @@ EXECUTE: python rapt-lofi/scripts/hapdl2lofi.py \
 ## Preview Audit Gate
 
 ASSERT:
-- Preview skill ?? `docs/generate/**`???? `docs/ssot/**`?
-- ?? generated artifact ?????????? audit YAML?
-- audit findings ???? `route` ? `can_fix`????? `rapt-core::preview-audit-schema.md`?
+- Preview skill 僅寫入 `docs/generate/**`，不得修改 `docs/ssot/**`。
+- 每次 generated artifact 產出後都附上對應的 audit YAML。
+- audit findings 標註 `route` 與 `can_fix`，格式依 `rapt-core::preview-audit-schema.md`。

@@ -26,14 +26,14 @@ metadata:
 
 ## TRIGGER
 
-- ??????? `rapt-reconcile` ??? RAPTor phase?
-- ???? artifact ?????? phase ???????????????
+- 使用者執行或指定 `rapt-reconcile` 進入此 RAPTor phase。
+- 上一階段 artifact 已備妥，需要產出本 phase 對應的 SSoT 規格。
 
 ## SKIP
 
-- `.raptor/arguments.yml` ???????? `/rapt-kickoff`?
-- ?????? worker ? DSL ????????? `rapt-form-*` skill?
-- ??????? skill ? Artifact Output Contract?
+- `.raptor/arguments.yml` 不存在時，停止並建議改用 `/rapt-kickoff`。
+- 屬於 worker 的 DSL 純渲染工作，應改用 `rapt-form-*` skill。
+- 請求寫入的內容超出本 skill 的 Artifact Output Contract。
 
 
 ## PRINCIPLE: Artifact Output Contract（只改被授權修復的 artifacts）
@@ -48,8 +48,8 @@ metadata:
 | UPDATE | 任何 SSoT artifact | 僅限 fix-policy 定義的「機械性修復」|
 | UPDATE | `${paths.traceability_file}` | 僅限有精確 evidence 的 L2/L3 / decision traceability 修補 |
 | CREATE / UPDATE | `.raptor/reconcile/sessions/*.yml` | reconcile session record |
-| CREATE | `.raptor/reconcile/archive/**` | ??? snapshot |
-| UPDATE | `.raptor/impact-matrix.yml` | ?????? |
+| CREATE | `.raptor/reconcile/archive/**` | 修復前 snapshot |
+| UPDATE | `.raptor/impact-matrix.yml` | 登錄修復傳播 |
 | UPDATE | `.raptor/session.md` | 記錄修復摘要 |
 | **DENY** | 語意性變更（需人工決策） | 改委派 rapt-clarify |
 | **DENY** | 業務邏輯推斷 | 不自行決定語意 |

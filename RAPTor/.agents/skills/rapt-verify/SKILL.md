@@ -20,13 +20,13 @@ metadata:
 
 ## TRIGGER
 
-- ??????? RAPTor artifacts?
-- phase gate ????? completeness?consistency?traceability ? coverage report?
+- 使用者要求驗證既有的 RAPTor artifacts。
+- phase gate 需要產出 completeness、consistency、traceability 與 coverage report。
 
 ## SKIP
 
-- ???????? kickoff?
-- ????????? artifact?????? `rapt-reconcile` ? owner skill?
+- 尚未完成 kickoff。
+- 需要修復而非驗證 artifact；修復應交由 `rapt-reconcile` 等 owner skill。
 
 
 ## PRINCIPLE: Artifact Output Contract（只寫 report，不修改 SSoT）
@@ -77,16 +77,16 @@ LOAD REF [rapt-verify::references/report-schema.md]
 
 ### 步驟 6：WRITE 驗證報告
 
-依 report-schema.md 格式，將四項驗證結果彙整到 `${paths.reports_dir}/verify-report.md` ? `${paths.reports_dir}/verify-report.yml`。
+依 report-schema.md 格式，將四項驗證結果彙整到 `${paths.reports_dir}/verify-report.md` 與 `${paths.reports_dir}/verify-report.yml`。
 
 
 ## Finding Split Gate
 
 ASSERT:
-- verify ?????? `${paths.reports_dir}/verify-report.md` ? `${paths.reports_dir}/verify-report.yml`?
-- ?? finding ???? `route`?`can_fix`?`owner_skill`?`artifact`?`location`?`evidence`?`suggested_action`?
-- phase end ???? `NEED_TO_FIX`?`NEED_TO_CLARIFY`?`NOTE_ONLY`?
-- `rapt-verify` ??????? SSoT????? `rapt-reconcile` ? owner skill?
+- verify 報告同時寫出 `${paths.reports_dir}/verify-report.md` 與 `${paths.reports_dir}/verify-report.yml`。
+- 每筆 finding 都含 `route`、`can_fix`、`owner_skill`、`artifact`、`location`、`evidence`、`suggested_action`。
+- phase end 標註 `NEED_TO_FIX`、`NEED_TO_CLARIFY`、`NOTE_ONLY`。
+- `rapt-verify` 不得直接修改 SSoT；修復交由 `rapt-reconcile` 等 owner skill。
 
 ### 步驟 7：EMIT 驗證摘要
 

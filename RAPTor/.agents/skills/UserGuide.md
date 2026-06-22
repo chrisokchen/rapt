@@ -220,41 +220,7 @@ docs/reports/
 
 `rapt-verify` 只報告，不修改 SSoT。
 
-## 9. 人工修改 SSoT 後：Human Sync
-
-如果你直接用編輯器修改了 `docs/ssot/**`，請在 `/rapt-verify` 前執行：
-
-```text
-/rapt-human-sync
-```
-
-它會把人工修改納入 RAPTor traceability：
-
-```text
-.raptor/
-├── human-sync/
-│   └── HSYNC-*.yml
-├── impact-matrix.yml
-├── traceability.md
-└── session.md
-```
-
-`rapt-human-sync` 只登錄，不修復、不重產、不修改 SSoT。V1 支援尚未 commit 的 working-tree 變更；若要完整保留 who/when provenance，建議人工修改後先 commit，再執行 `/rapt-human-sync`。
-
-常用腳本：
-
-```powershell
-python RAPTor/.agents/skills/rapt-human-sync/scripts/human_sync_scan.py --root .
-python RAPTor/.agents/skills/rapt-human-sync/scripts/detect_unsynced.py --root .
-```
-
-完成後建議接續：
-
-```text
-/rapt-verify
-```
-
-## 10. Reconcile
+## 9. Reconcile
 
 如果 verify 結果是 `PARTIAL` 或 `FAIL`，執行：
 
@@ -284,7 +250,7 @@ docs/reports/verify-report.yml
 - 需決策項轉成 clarify payload。
 - 修復後應再執行 `/rapt-verify`。
 
-## 11. RAscore
+## 10. RAscore
 
 執行：
 
@@ -310,7 +276,7 @@ RAscore 是 advisory-only，不阻擋 phase gate。findings 會透過 `rascore-a
 - `NEED_TO_CLARIFY`
 - `NOTE_ONLY`
 
-## 12. Preview Tools
+## 11. Preview Tools
 
 Preview tools 只能寫 `docs/generate/**`，不可修改 `docs/ssot/**`。每個 preview 都會同步輸出 audit YAML。
 
@@ -380,7 +346,7 @@ docs/generate/designbrief/
 └── style-profile.yml
 ```
 
-## 13. 常用工具
+## 12. 常用工具
 
 ### 解析 arguments.yml
 
@@ -407,20 +373,13 @@ python RAPTor/.agents/skills/rapt-core/scripts/manage_impact_matrix.py validate
 python RAPTor/.agents/skills/rapt-core/scripts/manage_impact_matrix.py query --artifact docs/ssot/haapi
 ```
 
-### Human sync
-
-```powershell
-python RAPTor/.agents/skills/rapt-human-sync/scripts/human_sync_scan.py --root .
-python RAPTor/.agents/skills/rapt-human-sync/scripts/detect_unsynced.py --root .
-```
-
 ### v1 layout 遷移 dry-run
 
 ```powershell
 python RAPTor/.agents/skills/rapt-core/scripts/migrate_docs_layout.py --root .
 ```
 
-## 14. 一頁流程表
+## 13. 一頁流程表
 
 | 階段 | 指令 | 主要輸入 | 主要輸出 |
 |---|---|---|---|
@@ -430,7 +389,6 @@ python RAPTor/.agents/skills/rapt-core/scripts/migrate_docs_layout.py --root .
 | Modeling | `/rapt-modeling` | Discovery + haBDD | `docs/ssot/dbml/*.dbml`、`docs/ssot/haarm/*.haarm.yaml` |
 | Clarify | `/rapt-clarify` | 缺口與矛盾 | `.clarify/*`、已確認決策回寫 SSoT |
 | Intent | `/rapt-intent` | DBML + haARM + haBDD | `docs/ssot/haapi/*.haapi.yaml`、`docs/ssot/hapdl/*.hapdl.yaml` |
-| Human Sync | `/rapt-human-sync` | 人工修改後的 `docs/ssot/**` | `.raptor/human-sync/HSYNC-*.yml`、manual_change impact entries |
 | Verify | `/rapt-verify` | 所有 SSoT | `docs/reports/verify-report.md`、`docs/reports/verify-report.yml` |
 | Reconcile | `/rapt-reconcile` | `verify-report.yml` | session、archive、impact matrix、修復後 SSoT |
 | RAscore | `/rapt-RAscore` | Discovery + SSoT + verify | `docs/reports/rascore-*` |
@@ -438,7 +396,7 @@ python RAPTor/.agents/skills/rapt-core/scripts/migrate_docs_layout.py --root .
 | Lo-Fi | `/rapt-lofi` | haPDL + DBML + haARM | `docs/generate/lofi/*` |
 | Design Brief | `/rapt-design-brief` | haPDL + DBML + haARM | `docs/generate/designbrief/*` |
 
-## 15. FAQ
+## 14. FAQ
 
 ### Kickoff 後沒有 `docs/discovery/`，是不是失敗？
 
@@ -455,7 +413,3 @@ python RAPTor/.agents/skills/rapt-core/scripts/migrate_docs_layout.py --root .
 ### Preview output 可以拿來改 SSoT 嗎？
 
 不可以。Preview 是 generated artifact。若 preview audit 發現 SSoT 問題，應交給 verify/reconcile/clarify，而不是反向修改 SSoT。
-
-### 人工改了 SSoT，要先 commit 嗎？
-
-不強制。`rapt-human-sync` 可登錄 working-tree 變更；但未 commit 時 who/when 只能記錄為執行者與掃描時間。若要完整 provenance，建議 commit 後再執行 `/rapt-human-sync`。

@@ -1,0 +1,3536 @@
+{
+  "schema_version": 1,
+  "nodes": [
+    {
+      "id": "haapi-file:audit-log.haapi",
+      "type": "haapi_file",
+      "label": "audit-log.haapi",
+      "source": "ssot/haapi/audit-log.haapi.yaml:1"
+    },
+    {
+      "id": "haapi-file:brand.haapi",
+      "type": "haapi_file",
+      "label": "brand.haapi",
+      "source": "ssot/haapi/brand.haapi.yaml:1"
+    },
+    {
+      "id": "haapi-file:campaign.haapi",
+      "type": "haapi_file",
+      "label": "campaign.haapi",
+      "source": "ssot/haapi/campaign.haapi.yaml:1"
+    },
+    {
+      "id": "haapi-file:cart.haapi",
+      "type": "haapi_file",
+      "label": "cart.haapi",
+      "source": "ssot/haapi/cart.haapi.yaml:1"
+    },
+    {
+      "id": "haapi-file:category.haapi",
+      "type": "haapi_file",
+      "label": "category.haapi",
+      "source": "ssot/haapi/category.haapi.yaml:1"
+    },
+    {
+      "id": "haapi-file:coupon.haapi",
+      "type": "haapi_file",
+      "label": "coupon.haapi",
+      "source": "ssot/haapi/coupon.haapi.yaml:1"
+    },
+    {
+      "id": "haapi-file:member-address.haapi",
+      "type": "haapi_file",
+      "label": "member-address.haapi",
+      "source": "ssot/haapi/member-address.haapi.yaml:1"
+    },
+    {
+      "id": "haapi-file:member.haapi",
+      "type": "haapi_file",
+      "label": "member.haapi",
+      "source": "ssot/haapi/member.haapi.yaml:1"
+    },
+    {
+      "id": "haapi-file:merchant-operator.haapi",
+      "type": "haapi_file",
+      "label": "merchant-operator.haapi",
+      "source": "ssot/haapi/merchant-operator.haapi.yaml:1"
+    },
+    {
+      "id": "haapi-file:merchant-report.haapi",
+      "type": "haapi_file",
+      "label": "merchant-report.haapi",
+      "source": "ssot/haapi/merchant-report.haapi.yaml:1"
+    },
+    {
+      "id": "haapi-file:merchant.haapi",
+      "type": "haapi_file",
+      "label": "merchant.haapi",
+      "source": "ssot/haapi/merchant.haapi.yaml:1"
+    },
+    {
+      "id": "haapi-file:notification-log.haapi",
+      "type": "haapi_file",
+      "label": "notification-log.haapi",
+      "source": "ssot/haapi/notification-log.haapi.yaml:1"
+    },
+    {
+      "id": "haapi-file:order.haapi",
+      "type": "haapi_file",
+      "label": "order.haapi",
+      "source": "ssot/haapi/order.haapi.yaml:1"
+    },
+    {
+      "id": "haapi-file:platform-user.haapi",
+      "type": "haapi_file",
+      "label": "platform-user.haapi",
+      "source": "ssot/haapi/platform-user.haapi.yaml:1"
+    },
+    {
+      "id": "haapi-file:point-ledger.haapi",
+      "type": "haapi_file",
+      "label": "point-ledger.haapi",
+      "source": "ssot/haapi/point-ledger.haapi.yaml:1"
+    },
+    {
+      "id": "haapi-file:product-variant.haapi",
+      "type": "haapi_file",
+      "label": "product-variant.haapi",
+      "source": "ssot/haapi/product-variant.haapi.yaml:1"
+    },
+    {
+      "id": "haapi-file:product.haapi",
+      "type": "haapi_file",
+      "label": "product.haapi",
+      "source": "ssot/haapi/product.haapi.yaml:1"
+    },
+    {
+      "id": "haapi-file:return-request.haapi",
+      "type": "haapi_file",
+      "label": "return-request.haapi",
+      "source": "ssot/haapi/return-request.haapi.yaml:1"
+    },
+    {
+      "id": "haapi-file:shipment.haapi",
+      "type": "haapi_file",
+      "label": "shipment.haapi",
+      "source": "ssot/haapi/shipment.haapi.yaml:1"
+    },
+    {
+      "id": "haapi-file:stock-item.haapi",
+      "type": "haapi_file",
+      "label": "stock-item.haapi",
+      "source": "ssot/haapi/stock-item.haapi.yaml:1"
+    },
+    {
+      "id": "haapi-file:store.haapi",
+      "type": "haapi_file",
+      "label": "store.haapi",
+      "source": "ssot/haapi/store.haapi.yaml:1"
+    },
+    {
+      "id": "haapi-file:wishlist.haapi",
+      "type": "haapi_file",
+      "label": "wishlist.haapi",
+      "source": "ssot/haapi/wishlist.haapi.yaml:1"
+    },
+    {
+      "id": "haapi:audit-log",
+      "type": "haapi_operation",
+      "label": "audit-log",
+      "source": "ssot/hapdl/audit-log-list.hapdl.yaml:7"
+    },
+    {
+      "id": "haapi:audit-log.haapi",
+      "type": "haapi_operation",
+      "label": "audit-log.haapi",
+      "source": "ssot/haapi/audit-log.haapi.yaml:1"
+    },
+    {
+      "id": "haapi:audit-log.list",
+      "type": "haapi_operation",
+      "label": "audit-log.list",
+      "source": ".raptor/traceability.md:152"
+    },
+    {
+      "id": "haapi:brand",
+      "type": "haapi_operation",
+      "label": "brand",
+      "source": "ssot/hapdl/brand-form.hapdl.yaml:7"
+    },
+    {
+      "id": "haapi:brand.haapi",
+      "type": "haapi_operation",
+      "label": "brand.haapi",
+      "source": "ssot/haapi/brand.haapi.yaml:1"
+    },
+    {
+      "id": "haapi:campaign",
+      "type": "haapi_operation",
+      "label": "campaign",
+      "source": "ssot/hapdl/campaign-form.hapdl.yaml:7"
+    },
+    {
+      "id": "haapi:campaign.create",
+      "type": "haapi_operation",
+      "label": "campaign.create",
+      "source": ".raptor/traceability.md:138"
+    },
+    {
+      "id": "haapi:campaign.haapi",
+      "type": "haapi_operation",
+      "label": "campaign.haapi",
+      "source": "ssot/haapi/campaign.haapi.yaml:1"
+    },
+    {
+      "id": "haapi:campaign.update",
+      "type": "haapi_operation",
+      "label": "campaign.update",
+      "source": ".raptor/traceability.md:139"
+    },
+    {
+      "id": "haapi:cart",
+      "type": "haapi_operation",
+      "label": "cart",
+      "source": "ssot/hapdl/cart-detail.hapdl.yaml:7"
+    },
+    {
+      "id": "haapi:cart.add_item",
+      "type": "haapi_operation",
+      "label": "cart.add_item",
+      "source": ".raptor/traceability.md:115"
+    },
+    {
+      "id": "haapi:cart.haapi",
+      "type": "haapi_operation",
+      "label": "cart.haapi",
+      "source": "ssot/haapi/cart.haapi.yaml:1"
+    },
+    {
+      "id": "haapi:category",
+      "type": "haapi_operation",
+      "label": "category",
+      "source": "ssot/hapdl/category-form.hapdl.yaml:7"
+    },
+    {
+      "id": "haapi:category.haapi",
+      "type": "haapi_operation",
+      "label": "category.haapi",
+      "source": "ssot/haapi/category.haapi.yaml:1"
+    },
+    {
+      "id": "haapi:coupon",
+      "type": "haapi_operation",
+      "label": "coupon",
+      "source": "ssot/hapdl/coupon-form.hapdl.yaml:7"
+    },
+    {
+      "id": "haapi:coupon.create",
+      "type": "haapi_operation",
+      "label": "coupon.create",
+      "source": ".raptor/traceability.md:140"
+    },
+    {
+      "id": "haapi:coupon.haapi",
+      "type": "haapi_operation",
+      "label": "coupon.haapi",
+      "source": "ssot/haapi/coupon.haapi.yaml:1"
+    },
+    {
+      "id": "haapi:coupon.redeem",
+      "type": "haapi_operation",
+      "label": "coupon.redeem",
+      "source": ".raptor/traceability.md:141"
+    },
+    {
+      "id": "haapi:member",
+      "type": "haapi_operation",
+      "label": "member",
+      "source": "ssot/hapdl/member-form.hapdl.yaml:7"
+    },
+    {
+      "id": "haapi:member-address",
+      "type": "haapi_operation",
+      "label": "member-address",
+      "source": "ssot/hapdl/member-address-form.hapdl.yaml:7"
+    },
+    {
+      "id": "haapi:member-address.create",
+      "type": "haapi_operation",
+      "label": "member-address.create",
+      "source": ".raptor/traceability.md:146"
+    },
+    {
+      "id": "haapi:member-address.haapi",
+      "type": "haapi_operation",
+      "label": "member-address.haapi",
+      "source": "ssot/haapi/member-address.haapi.yaml:1"
+    },
+    {
+      "id": "haapi:member.create",
+      "type": "haapi_operation",
+      "label": "member.create",
+      "source": ".raptor/traceability.md:112"
+    },
+    {
+      "id": "haapi:member.haapi",
+      "type": "haapi_operation",
+      "label": "member.haapi",
+      "source": "ssot/haapi/member.haapi.yaml:1"
+    },
+    {
+      "id": "haapi:member.update",
+      "type": "haapi_operation",
+      "label": "member.update",
+      "source": ".raptor/traceability.md:114"
+    },
+    {
+      "id": "haapi:member.verify_email",
+      "type": "haapi_operation",
+      "label": "member.verify_email",
+      "source": ".raptor/traceability.md:113"
+    },
+    {
+      "id": "haapi:merchant",
+      "type": "haapi_operation",
+      "label": "merchant",
+      "source": "ssot/hapdl/merchant-form.hapdl.yaml:7"
+    },
+    {
+      "id": "haapi:merchant-operator",
+      "type": "haapi_operation",
+      "label": "merchant-operator",
+      "source": "ssot/hapdl/merchant-operator-form.hapdl.yaml:7"
+    },
+    {
+      "id": "haapi:merchant-operator.create",
+      "type": "haapi_operation",
+      "label": "merchant-operator.create",
+      "source": ".raptor/traceability.md:151"
+    },
+    {
+      "id": "haapi:merchant-operator.haapi",
+      "type": "haapi_operation",
+      "label": "merchant-operator.haapi",
+      "source": "ssot/haapi/merchant-operator.haapi.yaml:1"
+    },
+    {
+      "id": "haapi:merchant-report",
+      "type": "haapi_operation",
+      "label": "merchant-report",
+      "source": "ssot/hapdl/merchant-report-dashboard.hapdl.yaml:7"
+    },
+    {
+      "id": "haapi:merchant-report.haapi",
+      "type": "haapi_operation",
+      "label": "merchant-report.haapi",
+      "source": "ssot/haapi/merchant-report.haapi.yaml:1"
+    },
+    {
+      "id": "haapi:merchant-report.product_ranking",
+      "type": "haapi_operation",
+      "label": "merchant-report.product_ranking",
+      "source": ".raptor/traceability.md:149"
+    },
+    {
+      "id": "haapi:merchant-report.sales_summary",
+      "type": "haapi_operation",
+      "label": "merchant-report.sales_summary",
+      "source": ".raptor/traceability.md:148"
+    },
+    {
+      "id": "haapi:merchant.activate",
+      "type": "haapi_operation",
+      "label": "merchant.activate",
+      "source": ".raptor/traceability.md:124"
+    },
+    {
+      "id": "haapi:merchant.create",
+      "type": "haapi_operation",
+      "label": "merchant.create",
+      "source": ".raptor/traceability.md:123"
+    },
+    {
+      "id": "haapi:merchant.haapi",
+      "type": "haapi_operation",
+      "label": "merchant.haapi",
+      "source": "ssot/haapi/merchant.haapi.yaml:1"
+    },
+    {
+      "id": "haapi:merchant.suspend",
+      "type": "haapi_operation",
+      "label": "merchant.suspend",
+      "source": ".raptor/traceability.md:125"
+    },
+    {
+      "id": "haapi:notification-log",
+      "type": "haapi_operation",
+      "label": "notification-log",
+      "source": "ssot/hapdl/notification-log-list.hapdl.yaml:7"
+    },
+    {
+      "id": "haapi:notification-log.haapi",
+      "type": "haapi_operation",
+      "label": "notification-log.haapi",
+      "source": "ssot/haapi/notification-log.haapi.yaml:1"
+    },
+    {
+      "id": "haapi:notification-log.list",
+      "type": "haapi_operation",
+      "label": "notification-log.list",
+      "source": ".raptor/traceability.md:147"
+    },
+    {
+      "id": "haapi:order",
+      "type": "haapi_operation",
+      "label": "order",
+      "source": "ssot/hapdl/order-detail.hapdl.yaml:7"
+    },
+    {
+      "id": "haapi:order.apply_payment",
+      "type": "haapi_operation",
+      "label": "order.apply_payment",
+      "source": ".raptor/traceability.md:119"
+    },
+    {
+      "id": "haapi:order.cancel",
+      "type": "haapi_operation",
+      "label": "order.cancel",
+      "source": ".raptor/traceability.md:120"
+    },
+    {
+      "id": "haapi:order.confirm",
+      "type": "haapi_operation",
+      "label": "order.confirm",
+      "source": ".raptor/traceability.md:130"
+    },
+    {
+      "id": "haapi:order.create",
+      "type": "haapi_operation",
+      "label": "order.create",
+      "source": ".raptor/traceability.md:117"
+    },
+    {
+      "id": "haapi:order.haapi",
+      "type": "haapi_operation",
+      "label": "order.haapi",
+      "source": "ssot/haapi/order.haapi.yaml:1"
+    },
+    {
+      "id": "haapi:order.list",
+      "type": "haapi_operation",
+      "label": "order.list",
+      "source": ".raptor/traceability.md:132"
+    },
+    {
+      "id": "haapi:order.read",
+      "type": "haapi_operation",
+      "label": "order.read",
+      "source": ".raptor/traceability.md:122"
+    },
+    {
+      "id": "haapi:platform-user",
+      "type": "haapi_operation",
+      "label": "platform-user",
+      "source": "ssot/hapdl/platform-user-form.hapdl.yaml:7"
+    },
+    {
+      "id": "haapi:platform-user.haapi",
+      "type": "haapi_operation",
+      "label": "platform-user.haapi",
+      "source": "ssot/haapi/platform-user.haapi.yaml:1"
+    },
+    {
+      "id": "haapi:point-ledger",
+      "type": "haapi_operation",
+      "label": "point-ledger",
+      "source": "ssot/hapdl/point-ledger-list.hapdl.yaml:7"
+    },
+    {
+      "id": "haapi:point-ledger.haapi",
+      "type": "haapi_operation",
+      "label": "point-ledger.haapi",
+      "source": "ssot/haapi/point-ledger.haapi.yaml:1"
+    },
+    {
+      "id": "haapi:point-ledger.list",
+      "type": "haapi_operation",
+      "label": "point-ledger.list",
+      "source": ".raptor/traceability.md:136"
+    },
+    {
+      "id": "haapi:product",
+      "type": "haapi_operation",
+      "label": "product",
+      "source": "ssot/hapdl/product-form.hapdl.yaml:7"
+    },
+    {
+      "id": "haapi:product-variant",
+      "type": "haapi_operation",
+      "label": "product-variant",
+      "source": "ssot/hapdl/product-variant-form.hapdl.yaml:7"
+    },
+    {
+      "id": "haapi:product-variant.create",
+      "type": "haapi_operation",
+      "label": "product-variant.create",
+      "source": ".raptor/traceability.md:144"
+    },
+    {
+      "id": "haapi:product-variant.haapi",
+      "type": "haapi_operation",
+      "label": "product-variant.haapi",
+      "source": "ssot/haapi/product-variant.haapi.yaml:1"
+    },
+    {
+      "id": "haapi:product.create",
+      "type": "haapi_operation",
+      "label": "product.create",
+      "source": ".raptor/traceability.md:126"
+    },
+    {
+      "id": "haapi:product.haapi",
+      "type": "haapi_operation",
+      "label": "product.haapi",
+      "source": "ssot/haapi/product.haapi.yaml:1"
+    },
+    {
+      "id": "haapi:product.publish",
+      "type": "haapi_operation",
+      "label": "product.publish",
+      "source": ".raptor/traceability.md:127"
+    },
+    {
+      "id": "haapi:return-request",
+      "type": "haapi_operation",
+      "label": "return-request",
+      "source": "ssot/hapdl/return-request-form.hapdl.yaml:7"
+    },
+    {
+      "id": "haapi:return-request.approve",
+      "type": "haapi_operation",
+      "label": "return-request.approve",
+      "source": ".raptor/traceability.md:134"
+    },
+    {
+      "id": "haapi:return-request.create",
+      "type": "haapi_operation",
+      "label": "return-request.create",
+      "source": ".raptor/traceability.md:133"
+    },
+    {
+      "id": "haapi:return-request.haapi",
+      "type": "haapi_operation",
+      "label": "return-request.haapi",
+      "source": "ssot/haapi/return-request.haapi.yaml:1"
+    },
+    {
+      "id": "haapi:return-request.refund",
+      "type": "haapi_operation",
+      "label": "return-request.refund",
+      "source": ".raptor/traceability.md:135"
+    },
+    {
+      "id": "haapi:shipment",
+      "type": "haapi_operation",
+      "label": "shipment",
+      "source": "ssot/hapdl/shipment-form.hapdl.yaml:7"
+    },
+    {
+      "id": "haapi:shipment.create",
+      "type": "haapi_operation",
+      "label": "shipment.create",
+      "source": ".raptor/traceability.md:131"
+    },
+    {
+      "id": "haapi:shipment.haapi",
+      "type": "haapi_operation",
+      "label": "shipment.haapi",
+      "source": "ssot/haapi/shipment.haapi.yaml:1"
+    },
+    {
+      "id": "haapi:shipment.read",
+      "type": "haapi_operation",
+      "label": "shipment.read",
+      "source": ".raptor/traceability.md:121"
+    },
+    {
+      "id": "haapi:stock-item",
+      "type": "haapi_operation",
+      "label": "stock-item",
+      "source": "ssot/hapdl/stock-item-form.hapdl.yaml:7"
+    },
+    {
+      "id": "haapi:stock-item.haapi",
+      "type": "haapi_operation",
+      "label": "stock-item.haapi",
+      "source": "ssot/haapi/stock-item.haapi.yaml:1"
+    },
+    {
+      "id": "haapi:stock-item.update",
+      "type": "haapi_operation",
+      "label": "stock-item.update",
+      "source": ".raptor/traceability.md:128"
+    },
+    {
+      "id": "haapi:store",
+      "type": "haapi_operation",
+      "label": "store",
+      "source": "ssot/hapdl/store-form.hapdl.yaml:7"
+    },
+    {
+      "id": "haapi:store.haapi",
+      "type": "haapi_operation",
+      "label": "store.haapi",
+      "source": "ssot/haapi/store.haapi.yaml:1"
+    },
+    {
+      "id": "haapi:store.update",
+      "type": "haapi_operation",
+      "label": "store.update",
+      "source": ".raptor/traceability.md:150"
+    },
+    {
+      "id": "haapi:wishlist",
+      "type": "haapi_operation",
+      "label": "wishlist",
+      "source": "ssot/hapdl/wishlist-list.hapdl.yaml:7"
+    },
+    {
+      "id": "haapi:wishlist.create",
+      "type": "haapi_operation",
+      "label": "wishlist.create",
+      "source": ".raptor/traceability.md:143"
+    },
+    {
+      "id": "haapi:wishlist.haapi",
+      "type": "haapi_operation",
+      "label": "wishlist.haapi",
+      "source": "ssot/haapi/wishlist.haapi.yaml:1"
+    },
+    {
+      "id": "haarm:(public)",
+      "type": "haarm_permissions",
+      "label": "(public)",
+      "source": ".raptor/traceability.md:113"
+    },
+    {
+      "id": "haarm:audit_log_read_all",
+      "type": "haarm_permissions",
+      "label": "audit_log_read_all",
+      "source": ".raptor/traceability.md:152"
+    },
+    {
+      "id": "haarm:audit_log_read_store",
+      "type": "haarm_permissions",
+      "label": "audit_log_read_store",
+      "source": ".raptor/traceability.md:152"
+    },
+    {
+      "id": "haarm:campaign_create_store",
+      "type": "haarm_permissions",
+      "label": "campaign_create_store",
+      "source": ".raptor/traceability.md:138"
+    },
+    {
+      "id": "haarm:campaign_update_store",
+      "type": "haarm_permissions",
+      "label": "campaign_update_store",
+      "source": ".raptor/traceability.md:139"
+    },
+    {
+      "id": "haarm:cart_item_create_own",
+      "type": "haarm_permissions",
+      "label": "cart_item_create_own",
+      "source": ".raptor/traceability.md:115"
+    },
+    {
+      "id": "haarm:coupon_create_store",
+      "type": "haarm_permissions",
+      "label": "coupon_create_store",
+      "source": ".raptor/traceability.md:140"
+    },
+    {
+      "id": "haarm:coupon_redemption_create_own",
+      "type": "haarm_permissions",
+      "label": "coupon_redemption_create_own",
+      "source": ".raptor/traceability.md:141"
+    },
+    {
+      "id": "haarm:member_address_create_own",
+      "type": "haarm_permissions",
+      "label": "member_address_create_own",
+      "source": ".raptor/traceability.md:114"
+    },
+    {
+      "id": "haarm:member_create",
+      "type": "haarm_permissions",
+      "label": "member_create",
+      "source": ".raptor/traceability.md:112"
+    },
+    {
+      "id": "haarm:merchant_report_read",
+      "type": "haarm_permissions",
+      "label": "merchant_report_read",
+      "source": ".raptor/traceability.md:148"
+    },
+    {
+      "id": "haarm:merchant_update_status",
+      "type": "haarm_permissions",
+      "label": "merchant_update_status",
+      "source": ".raptor/traceability.md:124"
+    },
+    {
+      "id": "haarm:notification_list_own",
+      "type": "haarm_permissions",
+      "label": "notification_list_own",
+      "source": ".raptor/traceability.md:147"
+    },
+    {
+      "id": "haarm:operator_create_store",
+      "type": "haarm_permissions",
+      "label": "operator_create_store",
+      "source": ".raptor/traceability.md:151"
+    },
+    {
+      "id": "haarm:order_create_own",
+      "type": "haarm_permissions",
+      "label": "order_create_own",
+      "source": ".raptor/traceability.md:117"
+    },
+    {
+      "id": "haarm:order_list_store",
+      "type": "haarm_permissions",
+      "label": "order_list_store",
+      "source": ".raptor/traceability.md:132"
+    },
+    {
+      "id": "haarm:order_read_own",
+      "type": "haarm_permissions",
+      "label": "order_read_own",
+      "source": ".raptor/traceability.md:122"
+    },
+    {
+      "id": "haarm:order_update_store",
+      "type": "haarm_permissions",
+      "label": "order_update_store",
+      "source": ".raptor/traceability.md:120"
+    },
+    {
+      "id": "haarm:payment_create_own",
+      "type": "haarm_permissions",
+      "label": "payment_create_own",
+      "source": ".raptor/traceability.md:119"
+    },
+    {
+      "id": "haarm:point_ledger_read_own",
+      "type": "haarm_permissions",
+      "label": "point_ledger_read_own",
+      "source": ".raptor/traceability.md:136"
+    },
+    {
+      "id": "haarm:product_create_store",
+      "type": "haarm_permissions",
+      "label": "product_create_store",
+      "source": ".raptor/traceability.md:126"
+    },
+    {
+      "id": "haarm:product_update_store",
+      "type": "haarm_permissions",
+      "label": "product_update_store",
+      "source": ".raptor/traceability.md:127"
+    },
+    {
+      "id": "haarm:product_variant_create_store",
+      "type": "haarm_permissions",
+      "label": "product_variant_create_store",
+      "source": ".raptor/traceability.md:144"
+    },
+    {
+      "id": "haarm:refund_create_store",
+      "type": "haarm_permissions",
+      "label": "refund_create_store",
+      "source": ".raptor/traceability.md:135"
+    },
+    {
+      "id": "haarm:return_request_create_own",
+      "type": "haarm_permissions",
+      "label": "return_request_create_own",
+      "source": ".raptor/traceability.md:133"
+    },
+    {
+      "id": "haarm:return_request_update_store",
+      "type": "haarm_permissions",
+      "label": "return_request_update_store",
+      "source": ".raptor/traceability.md:134"
+    },
+    {
+      "id": "haarm:shipment_create_store",
+      "type": "haarm_permissions",
+      "label": "shipment_create_store",
+      "source": ".raptor/traceability.md:131"
+    },
+    {
+      "id": "haarm:shipment_read_store",
+      "type": "haarm_permissions",
+      "label": "shipment_read_store",
+      "source": ".raptor/traceability.md:121"
+    },
+    {
+      "id": "haarm:stock_item_update_store",
+      "type": "haarm_permissions",
+      "label": "stock_item_update_store",
+      "source": ".raptor/traceability.md:128"
+    },
+    {
+      "id": "haarm:store_update_own",
+      "type": "haarm_permissions",
+      "label": "store_update_own",
+      "source": ".raptor/traceability.md:150"
+    },
+    {
+      "id": "haarm:wishlist_create_own",
+      "type": "haarm_permissions",
+      "label": "wishlist_create_own",
+      "source": ".raptor/traceability.md:143"
+    },
+    {
+      "id": "hapdl:audit-log-list",
+      "type": "hapdl_page",
+      "label": "audit-log-list",
+      "source": ".raptor/traceability.md:152"
+    },
+    {
+      "id": "hapdl:audit-log-list.hapdl",
+      "type": "hapdl_page",
+      "label": "audit-log-list.hapdl",
+      "source": "ssot/hapdl/audit-log-list.hapdl.yaml:1"
+    },
+    {
+      "id": "hapdl:brand-form.hapdl",
+      "type": "hapdl_page",
+      "label": "brand-form.hapdl",
+      "source": "ssot/hapdl/brand-form.hapdl.yaml:1"
+    },
+    {
+      "id": "hapdl:campaign-form",
+      "type": "hapdl_page",
+      "label": "campaign-form",
+      "source": ".raptor/traceability.md:138"
+    },
+    {
+      "id": "hapdl:campaign-form.hapdl",
+      "type": "hapdl_page",
+      "label": "campaign-form.hapdl",
+      "source": "ssot/hapdl/campaign-form.hapdl.yaml:1"
+    },
+    {
+      "id": "hapdl:campaign-list",
+      "type": "hapdl_page",
+      "label": "campaign-list",
+      "source": ".raptor/traceability.md:139"
+    },
+    {
+      "id": "hapdl:campaign-list.hapdl",
+      "type": "hapdl_page",
+      "label": "campaign-list.hapdl",
+      "source": "ssot/hapdl/campaign-list.hapdl.yaml:1"
+    },
+    {
+      "id": "hapdl:cart-detail",
+      "type": "hapdl_page",
+      "label": "cart-detail",
+      "source": ".raptor/traceability.md:115"
+    },
+    {
+      "id": "hapdl:cart-detail.hapdl",
+      "type": "hapdl_page",
+      "label": "cart-detail.hapdl",
+      "source": "ssot/hapdl/cart-detail.hapdl.yaml:1"
+    },
+    {
+      "id": "hapdl:category-form.hapdl",
+      "type": "hapdl_page",
+      "label": "category-form.hapdl",
+      "source": "ssot/hapdl/category-form.hapdl.yaml:1"
+    },
+    {
+      "id": "hapdl:category-list.hapdl",
+      "type": "hapdl_page",
+      "label": "category-list.hapdl",
+      "source": "ssot/hapdl/category-list.hapdl.yaml:1"
+    },
+    {
+      "id": "hapdl:coupon-form",
+      "type": "hapdl_page",
+      "label": "coupon-form",
+      "source": ".raptor/traceability.md:140"
+    },
+    {
+      "id": "hapdl:coupon-form.hapdl",
+      "type": "hapdl_page",
+      "label": "coupon-form.hapdl",
+      "source": "ssot/hapdl/coupon-form.hapdl.yaml:1"
+    },
+    {
+      "id": "hapdl:coupon-list.hapdl",
+      "type": "hapdl_page",
+      "label": "coupon-list.hapdl",
+      "source": "ssot/hapdl/coupon-list.hapdl.yaml:1"
+    },
+    {
+      "id": "hapdl:member-address-form",
+      "type": "hapdl_page",
+      "label": "member-address-form",
+      "source": ".raptor/traceability.md:146"
+    },
+    {
+      "id": "hapdl:member-address-form.hapdl",
+      "type": "hapdl_page",
+      "label": "member-address-form.hapdl",
+      "source": "ssot/hapdl/member-address-form.hapdl.yaml:1"
+    },
+    {
+      "id": "hapdl:member-address-list.hapdl",
+      "type": "hapdl_page",
+      "label": "member-address-list.hapdl",
+      "source": "ssot/hapdl/member-address-list.hapdl.yaml:1"
+    },
+    {
+      "id": "hapdl:member-form",
+      "type": "hapdl_page",
+      "label": "member-form",
+      "source": ".raptor/traceability.md:112"
+    },
+    {
+      "id": "hapdl:member-form.hapdl",
+      "type": "hapdl_page",
+      "label": "member-form.hapdl",
+      "source": "ssot/hapdl/member-form.hapdl.yaml:1"
+    },
+    {
+      "id": "hapdl:merchant-form",
+      "type": "hapdl_page",
+      "label": "merchant-form",
+      "source": ".raptor/traceability.md:123"
+    },
+    {
+      "id": "hapdl:merchant-form.hapdl",
+      "type": "hapdl_page",
+      "label": "merchant-form.hapdl",
+      "source": "ssot/hapdl/merchant-form.hapdl.yaml:1"
+    },
+    {
+      "id": "hapdl:merchant-list",
+      "type": "hapdl_page",
+      "label": "merchant-list",
+      "source": ".raptor/traceability.md:124"
+    },
+    {
+      "id": "hapdl:merchant-list.hapdl",
+      "type": "hapdl_page",
+      "label": "merchant-list.hapdl",
+      "source": "ssot/hapdl/merchant-list.hapdl.yaml:1"
+    },
+    {
+      "id": "hapdl:merchant-operator-form",
+      "type": "hapdl_page",
+      "label": "merchant-operator-form",
+      "source": ".raptor/traceability.md:151"
+    },
+    {
+      "id": "hapdl:merchant-operator-form.hapdl",
+      "type": "hapdl_page",
+      "label": "merchant-operator-form.hapdl",
+      "source": "ssot/hapdl/merchant-operator-form.hapdl.yaml:1"
+    },
+    {
+      "id": "hapdl:merchant-operator-list.hapdl",
+      "type": "hapdl_page",
+      "label": "merchant-operator-list.hapdl",
+      "source": "ssot/hapdl/merchant-operator-list.hapdl.yaml:1"
+    },
+    {
+      "id": "hapdl:merchant-report-dashboard",
+      "type": "hapdl_page",
+      "label": "merchant-report-dashboard",
+      "source": ".raptor/traceability.md:148"
+    },
+    {
+      "id": "hapdl:merchant-report-dashboard.hapdl",
+      "type": "hapdl_page",
+      "label": "merchant-report-dashboard.hapdl",
+      "source": "ssot/hapdl/merchant-report-dashboard.hapdl.yaml:1"
+    },
+    {
+      "id": "hapdl:notification-log-list",
+      "type": "hapdl_page",
+      "label": "notification-log-list",
+      "source": ".raptor/traceability.md:147"
+    },
+    {
+      "id": "hapdl:notification-log-list.hapdl",
+      "type": "hapdl_page",
+      "label": "notification-log-list.hapdl",
+      "source": "ssot/hapdl/notification-log-list.hapdl.yaml:1"
+    },
+    {
+      "id": "hapdl:order-detail",
+      "type": "hapdl_page",
+      "label": "order-detail",
+      "source": ".raptor/traceability.md:119"
+    },
+    {
+      "id": "hapdl:order-detail.hapdl",
+      "type": "hapdl_page",
+      "label": "order-detail.hapdl",
+      "source": "ssot/hapdl/order-detail.hapdl.yaml:1"
+    },
+    {
+      "id": "hapdl:order-form",
+      "type": "hapdl_page",
+      "label": "order-form",
+      "source": ".raptor/traceability.md:117"
+    },
+    {
+      "id": "hapdl:order-form.hapdl",
+      "type": "hapdl_page",
+      "label": "order-form.hapdl",
+      "source": "ssot/hapdl/order-form.hapdl.yaml:1"
+    },
+    {
+      "id": "hapdl:order-list",
+      "type": "hapdl_page",
+      "label": "order-list",
+      "source": ".raptor/traceability.md:130"
+    },
+    {
+      "id": "hapdl:order-list.hapdl",
+      "type": "hapdl_page",
+      "label": "order-list.hapdl",
+      "source": "ssot/hapdl/order-list.hapdl.yaml:1"
+    },
+    {
+      "id": "hapdl:platform-user-form.hapdl",
+      "type": "hapdl_page",
+      "label": "platform-user-form.hapdl",
+      "source": "ssot/hapdl/platform-user-form.hapdl.yaml:1"
+    },
+    {
+      "id": "hapdl:platform-user-list.hapdl",
+      "type": "hapdl_page",
+      "label": "platform-user-list.hapdl",
+      "source": "ssot/hapdl/platform-user-list.hapdl.yaml:1"
+    },
+    {
+      "id": "hapdl:point-ledger-list",
+      "type": "hapdl_page",
+      "label": "point-ledger-list",
+      "source": ".raptor/traceability.md:136"
+    },
+    {
+      "id": "hapdl:point-ledger-list.hapdl",
+      "type": "hapdl_page",
+      "label": "point-ledger-list.hapdl",
+      "source": "ssot/hapdl/point-ledger-list.hapdl.yaml:1"
+    },
+    {
+      "id": "hapdl:product-form",
+      "type": "hapdl_page",
+      "label": "product-form",
+      "source": ".raptor/traceability.md:126"
+    },
+    {
+      "id": "hapdl:product-form.hapdl",
+      "type": "hapdl_page",
+      "label": "product-form.hapdl",
+      "source": "ssot/hapdl/product-form.hapdl.yaml:1"
+    },
+    {
+      "id": "hapdl:product-list",
+      "type": "hapdl_page",
+      "label": "product-list",
+      "source": ".raptor/traceability.md:127"
+    },
+    {
+      "id": "hapdl:product-list.hapdl",
+      "type": "hapdl_page",
+      "label": "product-list.hapdl",
+      "source": "ssot/hapdl/product-list.hapdl.yaml:1"
+    },
+    {
+      "id": "hapdl:product-variant-form",
+      "type": "hapdl_page",
+      "label": "product-variant-form",
+      "source": ".raptor/traceability.md:144"
+    },
+    {
+      "id": "hapdl:product-variant-form.hapdl",
+      "type": "hapdl_page",
+      "label": "product-variant-form.hapdl",
+      "source": "ssot/hapdl/product-variant-form.hapdl.yaml:1"
+    },
+    {
+      "id": "hapdl:return-request-form",
+      "type": "hapdl_page",
+      "label": "return-request-form",
+      "source": ".raptor/traceability.md:133"
+    },
+    {
+      "id": "hapdl:return-request-form.hapdl",
+      "type": "hapdl_page",
+      "label": "return-request-form.hapdl",
+      "source": "ssot/hapdl/return-request-form.hapdl.yaml:1"
+    },
+    {
+      "id": "hapdl:return-request-list",
+      "type": "hapdl_page",
+      "label": "return-request-list",
+      "source": ".raptor/traceability.md:134"
+    },
+    {
+      "id": "hapdl:return-request-list.hapdl",
+      "type": "hapdl_page",
+      "label": "return-request-list.hapdl",
+      "source": "ssot/hapdl/return-request-list.hapdl.yaml:1"
+    },
+    {
+      "id": "hapdl:shipment-form",
+      "type": "hapdl_page",
+      "label": "shipment-form",
+      "source": ".raptor/traceability.md:131"
+    },
+    {
+      "id": "hapdl:shipment-form.hapdl",
+      "type": "hapdl_page",
+      "label": "shipment-form.hapdl",
+      "source": "ssot/hapdl/shipment-form.hapdl.yaml:1"
+    },
+    {
+      "id": "hapdl:stock-item-form",
+      "type": "hapdl_page",
+      "label": "stock-item-form",
+      "source": ".raptor/traceability.md:128"
+    },
+    {
+      "id": "hapdl:stock-item-form.hapdl",
+      "type": "hapdl_page",
+      "label": "stock-item-form.hapdl",
+      "source": "ssot/hapdl/stock-item-form.hapdl.yaml:1"
+    },
+    {
+      "id": "hapdl:stock-item-list.hapdl",
+      "type": "hapdl_page",
+      "label": "stock-item-list.hapdl",
+      "source": "ssot/hapdl/stock-item-list.hapdl.yaml:1"
+    },
+    {
+      "id": "hapdl:store-form",
+      "type": "hapdl_page",
+      "label": "store-form",
+      "source": ".raptor/traceability.md:150"
+    },
+    {
+      "id": "hapdl:store-form.hapdl",
+      "type": "hapdl_page",
+      "label": "store-form.hapdl",
+      "source": "ssot/hapdl/store-form.hapdl.yaml:1"
+    },
+    {
+      "id": "hapdl:wishlist-list",
+      "type": "hapdl_page",
+      "label": "wishlist-list",
+      "source": ".raptor/traceability.md:143"
+    },
+    {
+      "id": "hapdl:wishlist-list.hapdl",
+      "type": "hapdl_page",
+      "label": "wishlist-list.hapdl",
+      "source": "ssot/hapdl/wishlist-list.hapdl.yaml:1"
+    },
+    {
+      "id": "scenario:ASM#004（operator）",
+      "type": "scenario",
+      "label": "ASM#004（operator）",
+      "source": ".raptor/traceability.md:151"
+    },
+    {
+      "id": "scenario:GAP#013（audit）",
+      "type": "scenario",
+      "label": "GAP#013（audit）",
+      "source": ".raptor/traceability.md:152"
+    },
+    {
+      "id": "scenario:SCN-CART-001",
+      "type": "scenario",
+      "label": "SCN-CART-001",
+      "source": ".raptor/traceability.md:41"
+    },
+    {
+      "id": "scenario:SCN-CART-002",
+      "type": "scenario",
+      "label": "SCN-CART-002",
+      "source": ".raptor/traceability.md:42"
+    },
+    {
+      "id": "scenario:SCN-CART-003",
+      "type": "scenario",
+      "label": "SCN-CART-003",
+      "source": ".raptor/traceability.md:43"
+    },
+    {
+      "id": "scenario:SCN-CART-004",
+      "type": "scenario",
+      "label": "SCN-CART-004",
+      "source": ".raptor/traceability.md:44"
+    },
+    {
+      "id": "scenario:SCN-CHECKOUT-001",
+      "type": "scenario",
+      "label": "SCN-CHECKOUT-001",
+      "source": ".raptor/traceability.md:45"
+    },
+    {
+      "id": "scenario:SCN-CHECKOUT-002",
+      "type": "scenario",
+      "label": "SCN-CHECKOUT-002",
+      "source": ".raptor/traceability.md:46"
+    },
+    {
+      "id": "scenario:SCN-CHECKOUT-003",
+      "type": "scenario",
+      "label": "SCN-CHECKOUT-003",
+      "source": ".raptor/traceability.md:47"
+    },
+    {
+      "id": "scenario:SCN-CHECKOUT-004",
+      "type": "scenario",
+      "label": "SCN-CHECKOUT-004",
+      "source": ".raptor/traceability.md:48"
+    },
+    {
+      "id": "scenario:SCN-COUPON-001",
+      "type": "scenario",
+      "label": "SCN-COUPON-001",
+      "source": ".raptor/traceability.md:85"
+    },
+    {
+      "id": "scenario:SCN-COUPON-002",
+      "type": "scenario",
+      "label": "SCN-COUPON-002",
+      "source": ".raptor/traceability.md:86"
+    },
+    {
+      "id": "scenario:SCN-COUPON-003",
+      "type": "scenario",
+      "label": "SCN-COUPON-003",
+      "source": ".raptor/traceability.md:87"
+    },
+    {
+      "id": "scenario:SCN-COUPON-004",
+      "type": "scenario",
+      "label": "SCN-COUPON-004",
+      "source": ".raptor/traceability.md:88"
+    },
+    {
+      "id": "scenario:SCN-COUPON-005",
+      "type": "scenario",
+      "label": "SCN-COUPON-005",
+      "source": ".raptor/traceability.md:89"
+    },
+    {
+      "id": "scenario:SCN-COUPON-006",
+      "type": "scenario",
+      "label": "SCN-COUPON-006",
+      "source": ".raptor/traceability.md:90"
+    },
+    {
+      "id": "scenario:SCN-FULFILL-001",
+      "type": "scenario",
+      "label": "SCN-FULFILL-001",
+      "source": ".raptor/traceability.md:69"
+    },
+    {
+      "id": "scenario:SCN-FULFILL-002",
+      "type": "scenario",
+      "label": "SCN-FULFILL-002",
+      "source": ".raptor/traceability.md:70"
+    },
+    {
+      "id": "scenario:SCN-FULFILL-003",
+      "type": "scenario",
+      "label": "SCN-FULFILL-003",
+      "source": ".raptor/traceability.md:71"
+    },
+    {
+      "id": "scenario:SCN-FULFILL-004",
+      "type": "scenario",
+      "label": "SCN-FULFILL-004",
+      "source": ".raptor/traceability.md:72"
+    },
+    {
+      "id": "scenario:SCN-MEMBER-001",
+      "type": "scenario",
+      "label": "SCN-MEMBER-001",
+      "source": ".raptor/traceability.md:37"
+    },
+    {
+      "id": "scenario:SCN-MEMBER-002",
+      "type": "scenario",
+      "label": "SCN-MEMBER-002",
+      "source": ".raptor/traceability.md:38"
+    },
+    {
+      "id": "scenario:SCN-MEMBER-003",
+      "type": "scenario",
+      "label": "SCN-MEMBER-003",
+      "source": ".raptor/traceability.md:39"
+    },
+    {
+      "id": "scenario:SCN-MEMBER-004",
+      "type": "scenario",
+      "label": "SCN-MEMBER-004",
+      "source": ".raptor/traceability.md:40"
+    },
+    {
+      "id": "scenario:SCN-ONBOARD-001",
+      "type": "scenario",
+      "label": "SCN-ONBOARD-001",
+      "source": ".raptor/traceability.md:57"
+    },
+    {
+      "id": "scenario:SCN-ONBOARD-001（store）",
+      "type": "scenario",
+      "label": "SCN-ONBOARD-001（store）",
+      "source": ".raptor/traceability.md:150"
+    },
+    {
+      "id": "scenario:SCN-ONBOARD-002",
+      "type": "scenario",
+      "label": "SCN-ONBOARD-002",
+      "source": ".raptor/traceability.md:58"
+    },
+    {
+      "id": "scenario:SCN-ONBOARD-003",
+      "type": "scenario",
+      "label": "SCN-ONBOARD-003",
+      "source": ".raptor/traceability.md:59"
+    },
+    {
+      "id": "scenario:SCN-PAY-001",
+      "type": "scenario",
+      "label": "SCN-PAY-001",
+      "source": ".raptor/traceability.md:49"
+    },
+    {
+      "id": "scenario:SCN-PAY-002",
+      "type": "scenario",
+      "label": "SCN-PAY-002",
+      "source": ".raptor/traceability.md:50"
+    },
+    {
+      "id": "scenario:SCN-PAY-003",
+      "type": "scenario",
+      "label": "SCN-PAY-003",
+      "source": ".raptor/traceability.md:51"
+    },
+    {
+      "id": "scenario:SCN-PAY-004",
+      "type": "scenario",
+      "label": "SCN-PAY-004",
+      "source": ".raptor/traceability.md:52"
+    },
+    {
+      "id": "scenario:SCN-PAY-005",
+      "type": "scenario",
+      "label": "SCN-PAY-005",
+      "source": ".raptor/traceability.md:53"
+    },
+    {
+      "id": "scenario:SCN-POINT-001",
+      "type": "scenario",
+      "label": "SCN-POINT-001",
+      "source": ".raptor/traceability.md:78"
+    },
+    {
+      "id": "scenario:SCN-POINT-002",
+      "type": "scenario",
+      "label": "SCN-POINT-002",
+      "source": ".raptor/traceability.md:79"
+    },
+    {
+      "id": "scenario:SCN-POINT-003",
+      "type": "scenario",
+      "label": "SCN-POINT-003",
+      "source": ".raptor/traceability.md:80"
+    },
+    {
+      "id": "scenario:SCN-PRODUCT-001",
+      "type": "scenario",
+      "label": "SCN-PRODUCT-001",
+      "source": ".raptor/traceability.md:60"
+    },
+    {
+      "id": "scenario:SCN-PRODUCT-002",
+      "type": "scenario",
+      "label": "SCN-PRODUCT-002",
+      "source": ".raptor/traceability.md:61"
+    },
+    {
+      "id": "scenario:SCN-PRODUCT-003",
+      "type": "scenario",
+      "label": "SCN-PRODUCT-003",
+      "source": ".raptor/traceability.md:62"
+    },
+    {
+      "id": "scenario:SCN-PRODUCT-004",
+      "type": "scenario",
+      "label": "SCN-PRODUCT-004",
+      "source": ".raptor/traceability.md:63"
+    },
+    {
+      "id": "scenario:SCN-PRODUCT-005",
+      "type": "scenario",
+      "label": "SCN-PRODUCT-005",
+      "source": ".raptor/traceability.md:64"
+    },
+    {
+      "id": "scenario:SCN-PROMO-001",
+      "type": "scenario",
+      "label": "SCN-PROMO-001",
+      "source": ".raptor/traceability.md:81"
+    },
+    {
+      "id": "scenario:SCN-PROMO-002",
+      "type": "scenario",
+      "label": "SCN-PROMO-002",
+      "source": ".raptor/traceability.md:82"
+    },
+    {
+      "id": "scenario:SCN-PROMO-003",
+      "type": "scenario",
+      "label": "SCN-PROMO-003",
+      "source": ".raptor/traceability.md:83"
+    },
+    {
+      "id": "scenario:SCN-PROMO-004",
+      "type": "scenario",
+      "label": "SCN-PROMO-004",
+      "source": ".raptor/traceability.md:84"
+    },
+    {
+      "id": "scenario:SCN-REPORT-001",
+      "type": "scenario",
+      "label": "SCN-REPORT-001",
+      "source": ".raptor/traceability.md:91"
+    },
+    {
+      "id": "scenario:SCN-REPORT-002",
+      "type": "scenario",
+      "label": "SCN-REPORT-002",
+      "source": ".raptor/traceability.md:92"
+    },
+    {
+      "id": "scenario:SCN-RETURN-001",
+      "type": "scenario",
+      "label": "SCN-RETURN-001",
+      "source": ".raptor/traceability.md:73"
+    },
+    {
+      "id": "scenario:SCN-RETURN-002",
+      "type": "scenario",
+      "label": "SCN-RETURN-002",
+      "source": ".raptor/traceability.md:74"
+    },
+    {
+      "id": "scenario:SCN-RETURN-003",
+      "type": "scenario",
+      "label": "SCN-RETURN-003",
+      "source": ".raptor/traceability.md:75"
+    },
+    {
+      "id": "scenario:SCN-RETURN-004",
+      "type": "scenario",
+      "label": "SCN-RETURN-004",
+      "source": ".raptor/traceability.md:76"
+    },
+    {
+      "id": "scenario:SCN-RETURN-005",
+      "type": "scenario",
+      "label": "SCN-RETURN-005",
+      "source": ".raptor/traceability.md:77"
+    },
+    {
+      "id": "scenario:SCN-STOCK-001",
+      "type": "scenario",
+      "label": "SCN-STOCK-001",
+      "source": ".raptor/traceability.md:65"
+    },
+    {
+      "id": "scenario:SCN-STOCK-002",
+      "type": "scenario",
+      "label": "SCN-STOCK-002",
+      "source": ".raptor/traceability.md:66"
+    },
+    {
+      "id": "scenario:SCN-STOCK-003",
+      "type": "scenario",
+      "label": "SCN-STOCK-003",
+      "source": ".raptor/traceability.md:67"
+    },
+    {
+      "id": "scenario:SCN-STOCK-004",
+      "type": "scenario",
+      "label": "SCN-STOCK-004",
+      "source": ".raptor/traceability.md:68"
+    },
+    {
+      "id": "scenario:SCN-TIER-001",
+      "type": "scenario",
+      "label": "SCN-TIER-001",
+      "source": ".raptor/traceability.md:97"
+    },
+    {
+      "id": "scenario:SCN-TIER-002",
+      "type": "scenario",
+      "label": "SCN-TIER-002",
+      "source": ".raptor/traceability.md:98"
+    },
+    {
+      "id": "scenario:SCN-TIER-003",
+      "type": "scenario",
+      "label": "SCN-TIER-003",
+      "source": ".raptor/traceability.md:99"
+    },
+    {
+      "id": "scenario:SCN-TIER-004",
+      "type": "scenario",
+      "label": "SCN-TIER-004",
+      "source": ".raptor/traceability.md:100"
+    },
+    {
+      "id": "scenario:SCN-TRACK-001",
+      "type": "scenario",
+      "label": "SCN-TRACK-001",
+      "source": ".raptor/traceability.md:54"
+    },
+    {
+      "id": "scenario:SCN-TRACK-002",
+      "type": "scenario",
+      "label": "SCN-TRACK-002",
+      "source": ".raptor/traceability.md:55"
+    },
+    {
+      "id": "scenario:SCN-TRACK-003",
+      "type": "scenario",
+      "label": "SCN-TRACK-003",
+      "source": ".raptor/traceability.md:56"
+    },
+    {
+      "id": "scenario:SCN-WISH-001",
+      "type": "scenario",
+      "label": "SCN-WISH-001",
+      "source": ".raptor/traceability.md:93"
+    },
+    {
+      "id": "scenario:SCN-WISH-002",
+      "type": "scenario",
+      "label": "SCN-WISH-002",
+      "source": ".raptor/traceability.md:94"
+    },
+    {
+      "id": "scenario:SCN-WISH-003",
+      "type": "scenario",
+      "label": "SCN-WISH-003",
+      "source": ".raptor/traceability.md:95"
+    },
+    {
+      "id": "scenario:SCN-WISH-004",
+      "type": "scenario",
+      "label": "SCN-WISH-004",
+      "source": ".raptor/traceability.md:96"
+    },
+    {
+      "id": "scenario:US-019（wishlist）",
+      "type": "scenario",
+      "label": "US-019（wishlist）",
+      "source": ".raptor/traceability.md:143"
+    },
+    {
+      "id": "table:AuditLog",
+      "type": "table",
+      "label": "AuditLog",
+      "source": "ssot/dbml/schema.dbml:464"
+    },
+    {
+      "id": "table:Brand",
+      "type": "table",
+      "label": "Brand",
+      "source": "ssot/dbml/schema.dbml:142"
+    },
+    {
+      "id": "table:Campaign",
+      "type": "table",
+      "label": "Campaign",
+      "source": "ssot/dbml/schema.dbml:397"
+    },
+    {
+      "id": "table:Cart",
+      "type": "table",
+      "label": "Cart",
+      "source": "ssot/dbml/schema.dbml:205"
+    },
+    {
+      "id": "table:CartItem",
+      "type": "table",
+      "label": "CartItem",
+      "source": "ssot/dbml/schema.dbml:213"
+    },
+    {
+      "id": "table:Category",
+      "type": "table",
+      "label": "Category",
+      "source": "ssot/dbml/schema.dbml:132"
+    },
+    {
+      "id": "table:Coupon",
+      "type": "table",
+      "label": "Coupon",
+      "source": "ssot/dbml/schema.dbml:415"
+    },
+    {
+      "id": "table:CouponRedemption",
+      "type": "table",
+      "label": "CouponRedemption",
+      "source": "ssot/dbml/schema.dbml:433"
+    },
+    {
+      "id": "table:Invoice",
+      "type": "table",
+      "label": "Invoice",
+      "source": "ssot/dbml/schema.dbml:282"
+    },
+    {
+      "id": "table:Member",
+      "type": "table",
+      "label": "Member",
+      "source": "ssot/dbml/schema.dbml:344"
+    },
+    {
+      "id": "table:MemberAddress",
+      "type": "table",
+      "label": "MemberAddress",
+      "source": "ssot/dbml/schema.dbml:359"
+    },
+    {
+      "id": "table:Merchant",
+      "type": "table",
+      "label": "Merchant",
+      "source": "ssot/dbml/schema.dbml:79"
+    },
+    {
+      "id": "table:MerchantOperator",
+      "type": "table",
+      "label": "MerchantOperator",
+      "source": "ssot/dbml/schema.dbml:93"
+    },
+    {
+      "id": "table:NotificationLog",
+      "type": "table",
+      "label": "NotificationLog",
+      "source": "ssot/dbml/schema.dbml:447"
+    },
+    {
+      "id": "table:Order",
+      "type": "table",
+      "label": "Order",
+      "source": "ssot/dbml/schema.dbml:229"
+    },
+    {
+      "id": "table:OrderItem",
+      "type": "table",
+      "label": "OrderItem",
+      "source": "ssot/dbml/schema.dbml:252"
+    },
+    {
+      "id": "table:Payment",
+      "type": "table",
+      "label": "Payment",
+      "source": "ssot/dbml/schema.dbml:269"
+    },
+    {
+      "id": "table:PlatformUser",
+      "type": "table",
+      "label": "PlatformUser",
+      "source": "ssot/dbml/schema.dbml:117"
+    },
+    {
+      "id": "table:PointLedger",
+      "type": "table",
+      "label": "PointLedger",
+      "source": "ssot/dbml/schema.dbml:370"
+    },
+    {
+      "id": "table:Product",
+      "type": "table",
+      "label": "Product",
+      "source": "ssot/dbml/schema.dbml:150"
+    },
+    {
+      "id": "table:ProductImage",
+      "type": "table",
+      "label": "ProductImage",
+      "source": "ssot/dbml/schema.dbml:164"
+    },
+    {
+      "id": "table:ProductVariant",
+      "type": "table",
+      "label": "ProductVariant",
+      "source": "ssot/dbml/schema.dbml:174"
+    },
+    {
+      "id": "table:Refund",
+      "type": "table",
+      "label": "Refund",
+      "source": "ssot/dbml/schema.dbml:294"
+    },
+    {
+      "id": "table:ReturnRequest",
+      "type": "table",
+      "label": "ReturnRequest",
+      "source": "ssot/dbml/schema.dbml:326"
+    },
+    {
+      "id": "table:Shipment",
+      "type": "table",
+      "label": "Shipment",
+      "source": "ssot/dbml/schema.dbml:310"
+    },
+    {
+      "id": "table:StockItem",
+      "type": "table",
+      "label": "StockItem",
+      "source": "ssot/dbml/schema.dbml:191"
+    },
+    {
+      "id": "table:Store",
+      "type": "table",
+      "label": "Store",
+      "source": "ssot/dbml/schema.dbml:106"
+    },
+    {
+      "id": "table:Wishlist",
+      "type": "table",
+      "label": "Wishlist",
+      "source": "ssot/dbml/schema.dbml:384"
+    }
+  ],
+  "edges": [
+    {
+      "from": "haapi-file:audit-log.haapi",
+      "to": "haapi:audit-log.haapi",
+      "type": "contains_operation",
+      "evidence": "ssot/haapi/audit-log.haapi.yaml:1",
+      "confidence": "high"
+    },
+    {
+      "from": "haapi-file:brand.haapi",
+      "to": "haapi:brand.haapi",
+      "type": "contains_operation",
+      "evidence": "ssot/haapi/brand.haapi.yaml:1",
+      "confidence": "high"
+    },
+    {
+      "from": "haapi-file:campaign.haapi",
+      "to": "haapi:campaign.haapi",
+      "type": "contains_operation",
+      "evidence": "ssot/haapi/campaign.haapi.yaml:1",
+      "confidence": "high"
+    },
+    {
+      "from": "haapi-file:cart.haapi",
+      "to": "haapi:cart.haapi",
+      "type": "contains_operation",
+      "evidence": "ssot/haapi/cart.haapi.yaml:1",
+      "confidence": "high"
+    },
+    {
+      "from": "haapi-file:category.haapi",
+      "to": "haapi:category.haapi",
+      "type": "contains_operation",
+      "evidence": "ssot/haapi/category.haapi.yaml:1",
+      "confidence": "high"
+    },
+    {
+      "from": "haapi-file:coupon.haapi",
+      "to": "haapi:coupon.haapi",
+      "type": "contains_operation",
+      "evidence": "ssot/haapi/coupon.haapi.yaml:1",
+      "confidence": "high"
+    },
+    {
+      "from": "haapi-file:member-address.haapi",
+      "to": "haapi:member-address.haapi",
+      "type": "contains_operation",
+      "evidence": "ssot/haapi/member-address.haapi.yaml:1",
+      "confidence": "high"
+    },
+    {
+      "from": "haapi-file:member.haapi",
+      "to": "haapi:member.haapi",
+      "type": "contains_operation",
+      "evidence": "ssot/haapi/member.haapi.yaml:1",
+      "confidence": "high"
+    },
+    {
+      "from": "haapi-file:merchant-operator.haapi",
+      "to": "haapi:merchant-operator.haapi",
+      "type": "contains_operation",
+      "evidence": "ssot/haapi/merchant-operator.haapi.yaml:1",
+      "confidence": "high"
+    },
+    {
+      "from": "haapi-file:merchant-report.haapi",
+      "to": "haapi:merchant-report.haapi",
+      "type": "contains_operation",
+      "evidence": "ssot/haapi/merchant-report.haapi.yaml:1",
+      "confidence": "high"
+    },
+    {
+      "from": "haapi-file:merchant.haapi",
+      "to": "haapi:merchant.haapi",
+      "type": "contains_operation",
+      "evidence": "ssot/haapi/merchant.haapi.yaml:1",
+      "confidence": "high"
+    },
+    {
+      "from": "haapi-file:notification-log.haapi",
+      "to": "haapi:notification-log.haapi",
+      "type": "contains_operation",
+      "evidence": "ssot/haapi/notification-log.haapi.yaml:1",
+      "confidence": "high"
+    },
+    {
+      "from": "haapi-file:order.haapi",
+      "to": "haapi:order.haapi",
+      "type": "contains_operation",
+      "evidence": "ssot/haapi/order.haapi.yaml:1",
+      "confidence": "high"
+    },
+    {
+      "from": "haapi-file:platform-user.haapi",
+      "to": "haapi:platform-user.haapi",
+      "type": "contains_operation",
+      "evidence": "ssot/haapi/platform-user.haapi.yaml:1",
+      "confidence": "high"
+    },
+    {
+      "from": "haapi-file:point-ledger.haapi",
+      "to": "haapi:point-ledger.haapi",
+      "type": "contains_operation",
+      "evidence": "ssot/haapi/point-ledger.haapi.yaml:1",
+      "confidence": "high"
+    },
+    {
+      "from": "haapi-file:product-variant.haapi",
+      "to": "haapi:product-variant.haapi",
+      "type": "contains_operation",
+      "evidence": "ssot/haapi/product-variant.haapi.yaml:1",
+      "confidence": "high"
+    },
+    {
+      "from": "haapi-file:product.haapi",
+      "to": "haapi:product.haapi",
+      "type": "contains_operation",
+      "evidence": "ssot/haapi/product.haapi.yaml:1",
+      "confidence": "high"
+    },
+    {
+      "from": "haapi-file:return-request.haapi",
+      "to": "haapi:return-request.haapi",
+      "type": "contains_operation",
+      "evidence": "ssot/haapi/return-request.haapi.yaml:1",
+      "confidence": "high"
+    },
+    {
+      "from": "haapi-file:shipment.haapi",
+      "to": "haapi:shipment.haapi",
+      "type": "contains_operation",
+      "evidence": "ssot/haapi/shipment.haapi.yaml:1",
+      "confidence": "high"
+    },
+    {
+      "from": "haapi-file:stock-item.haapi",
+      "to": "haapi:stock-item.haapi",
+      "type": "contains_operation",
+      "evidence": "ssot/haapi/stock-item.haapi.yaml:1",
+      "confidence": "high"
+    },
+    {
+      "from": "haapi-file:store.haapi",
+      "to": "haapi:store.haapi",
+      "type": "contains_operation",
+      "evidence": "ssot/haapi/store.haapi.yaml:1",
+      "confidence": "high"
+    },
+    {
+      "from": "haapi-file:wishlist.haapi",
+      "to": "haapi:wishlist.haapi",
+      "type": "contains_operation",
+      "evidence": "ssot/haapi/wishlist.haapi.yaml:1",
+      "confidence": "high"
+    },
+    {
+      "from": "haapi:audit-log.haapi",
+      "to": "table:AuditLog",
+      "type": "entity_table",
+      "evidence": "ssot/haapi/audit-log.haapi.yaml:5",
+      "confidence": "high"
+    },
+    {
+      "from": "haapi:brand.haapi",
+      "to": "table:Brand",
+      "type": "entity_table",
+      "evidence": "ssot/haapi/brand.haapi.yaml:5",
+      "confidence": "high"
+    },
+    {
+      "from": "haapi:campaign.haapi",
+      "to": "table:Campaign",
+      "type": "entity_table",
+      "evidence": "ssot/haapi/campaign.haapi.yaml:5",
+      "confidence": "high"
+    },
+    {
+      "from": "haapi:cart.haapi",
+      "to": "table:Cart",
+      "type": "entity_table",
+      "evidence": "ssot/haapi/cart.haapi.yaml:5",
+      "confidence": "high"
+    },
+    {
+      "from": "haapi:category.haapi",
+      "to": "table:Category",
+      "type": "entity_table",
+      "evidence": "ssot/haapi/category.haapi.yaml:5",
+      "confidence": "high"
+    },
+    {
+      "from": "haapi:coupon.haapi",
+      "to": "table:Coupon",
+      "type": "entity_table",
+      "evidence": "ssot/haapi/coupon.haapi.yaml:5",
+      "confidence": "high"
+    },
+    {
+      "from": "haapi:member-address.haapi",
+      "to": "table:MemberAddress",
+      "type": "entity_table",
+      "evidence": "ssot/haapi/member-address.haapi.yaml:5",
+      "confidence": "high"
+    },
+    {
+      "from": "haapi:member.haapi",
+      "to": "table:Member",
+      "type": "entity_table",
+      "evidence": "ssot/haapi/member.haapi.yaml:5",
+      "confidence": "high"
+    },
+    {
+      "from": "haapi:merchant-operator.haapi",
+      "to": "table:MerchantOperator",
+      "type": "entity_table",
+      "evidence": "ssot/haapi/merchant-operator.haapi.yaml:5",
+      "confidence": "high"
+    },
+    {
+      "from": "haapi:merchant-report.haapi",
+      "to": "table:Order",
+      "type": "entity_table",
+      "evidence": "ssot/haapi/merchant-report.haapi.yaml:5",
+      "confidence": "high"
+    },
+    {
+      "from": "haapi:merchant.haapi",
+      "to": "table:Merchant",
+      "type": "entity_table",
+      "evidence": "ssot/haapi/merchant.haapi.yaml:5",
+      "confidence": "high"
+    },
+    {
+      "from": "haapi:notification-log.haapi",
+      "to": "table:NotificationLog",
+      "type": "entity_table",
+      "evidence": "ssot/haapi/notification-log.haapi.yaml:5",
+      "confidence": "high"
+    },
+    {
+      "from": "haapi:order.haapi",
+      "to": "table:Order",
+      "type": "entity_table",
+      "evidence": "ssot/haapi/order.haapi.yaml:5",
+      "confidence": "high"
+    },
+    {
+      "from": "haapi:platform-user.haapi",
+      "to": "table:PlatformUser",
+      "type": "entity_table",
+      "evidence": "ssot/haapi/platform-user.haapi.yaml:5",
+      "confidence": "high"
+    },
+    {
+      "from": "haapi:point-ledger.haapi",
+      "to": "table:PointLedger",
+      "type": "entity_table",
+      "evidence": "ssot/haapi/point-ledger.haapi.yaml:5",
+      "confidence": "high"
+    },
+    {
+      "from": "haapi:product-variant.haapi",
+      "to": "table:ProductVariant",
+      "type": "entity_table",
+      "evidence": "ssot/haapi/product-variant.haapi.yaml:5",
+      "confidence": "high"
+    },
+    {
+      "from": "haapi:product.haapi",
+      "to": "table:Product",
+      "type": "entity_table",
+      "evidence": "ssot/haapi/product.haapi.yaml:5",
+      "confidence": "high"
+    },
+    {
+      "from": "haapi:return-request.haapi",
+      "to": "table:ReturnRequest",
+      "type": "entity_table",
+      "evidence": "ssot/haapi/return-request.haapi.yaml:5",
+      "confidence": "high"
+    },
+    {
+      "from": "haapi:shipment.haapi",
+      "to": "table:Shipment",
+      "type": "entity_table",
+      "evidence": "ssot/haapi/shipment.haapi.yaml:5",
+      "confidence": "high"
+    },
+    {
+      "from": "haapi:stock-item.haapi",
+      "to": "table:StockItem",
+      "type": "entity_table",
+      "evidence": "ssot/haapi/stock-item.haapi.yaml:5",
+      "confidence": "high"
+    },
+    {
+      "from": "haapi:store.haapi",
+      "to": "table:Store",
+      "type": "entity_table",
+      "evidence": "ssot/haapi/store.haapi.yaml:5",
+      "confidence": "high"
+    },
+    {
+      "from": "haapi:wishlist.haapi",
+      "to": "table:Wishlist",
+      "type": "entity_table",
+      "evidence": "ssot/haapi/wishlist.haapi.yaml:5",
+      "confidence": "high"
+    },
+    {
+      "from": "hapdl:audit-log-list.hapdl",
+      "to": "haapi:audit-log",
+      "type": "page_api",
+      "evidence": "ssot/hapdl/audit-log-list.hapdl.yaml:7",
+      "confidence": "medium"
+    },
+    {
+      "from": "hapdl:brand-form.hapdl",
+      "to": "haapi:brand",
+      "type": "page_api",
+      "evidence": "ssot/hapdl/brand-form.hapdl.yaml:7",
+      "confidence": "medium"
+    },
+    {
+      "from": "hapdl:campaign-form.hapdl",
+      "to": "haapi:campaign",
+      "type": "page_api",
+      "evidence": "ssot/hapdl/campaign-form.hapdl.yaml:7",
+      "confidence": "medium"
+    },
+    {
+      "from": "hapdl:campaign-list.hapdl",
+      "to": "haapi:campaign",
+      "type": "page_api",
+      "evidence": "ssot/hapdl/campaign-list.hapdl.yaml:7",
+      "confidence": "medium"
+    },
+    {
+      "from": "hapdl:cart-detail.hapdl",
+      "to": "haapi:cart",
+      "type": "page_api",
+      "evidence": "ssot/hapdl/cart-detail.hapdl.yaml:7",
+      "confidence": "medium"
+    },
+    {
+      "from": "hapdl:category-form.hapdl",
+      "to": "haapi:category",
+      "type": "page_api",
+      "evidence": "ssot/hapdl/category-form.hapdl.yaml:7",
+      "confidence": "medium"
+    },
+    {
+      "from": "hapdl:category-list.hapdl",
+      "to": "haapi:category",
+      "type": "page_api",
+      "evidence": "ssot/hapdl/category-list.hapdl.yaml:7",
+      "confidence": "medium"
+    },
+    {
+      "from": "hapdl:coupon-form.hapdl",
+      "to": "haapi:coupon",
+      "type": "page_api",
+      "evidence": "ssot/hapdl/coupon-form.hapdl.yaml:7",
+      "confidence": "medium"
+    },
+    {
+      "from": "hapdl:coupon-list.hapdl",
+      "to": "haapi:coupon",
+      "type": "page_api",
+      "evidence": "ssot/hapdl/coupon-list.hapdl.yaml:7",
+      "confidence": "medium"
+    },
+    {
+      "from": "hapdl:member-address-form.hapdl",
+      "to": "haapi:member-address",
+      "type": "page_api",
+      "evidence": "ssot/hapdl/member-address-form.hapdl.yaml:7",
+      "confidence": "medium"
+    },
+    {
+      "from": "hapdl:member-address-list.hapdl",
+      "to": "haapi:member-address",
+      "type": "page_api",
+      "evidence": "ssot/hapdl/member-address-list.hapdl.yaml:7",
+      "confidence": "medium"
+    },
+    {
+      "from": "hapdl:member-form.hapdl",
+      "to": "haapi:member",
+      "type": "page_api",
+      "evidence": "ssot/hapdl/member-form.hapdl.yaml:7",
+      "confidence": "medium"
+    },
+    {
+      "from": "hapdl:merchant-form.hapdl",
+      "to": "haapi:merchant",
+      "type": "page_api",
+      "evidence": "ssot/hapdl/merchant-form.hapdl.yaml:7",
+      "confidence": "medium"
+    },
+    {
+      "from": "hapdl:merchant-list.hapdl",
+      "to": "haapi:merchant",
+      "type": "page_api",
+      "evidence": "ssot/hapdl/merchant-list.hapdl.yaml:7",
+      "confidence": "medium"
+    },
+    {
+      "from": "hapdl:merchant-operator-form.hapdl",
+      "to": "haapi:merchant-operator",
+      "type": "page_api",
+      "evidence": "ssot/hapdl/merchant-operator-form.hapdl.yaml:7",
+      "confidence": "medium"
+    },
+    {
+      "from": "hapdl:merchant-operator-list.hapdl",
+      "to": "haapi:merchant-operator",
+      "type": "page_api",
+      "evidence": "ssot/hapdl/merchant-operator-list.hapdl.yaml:7",
+      "confidence": "medium"
+    },
+    {
+      "from": "hapdl:merchant-report-dashboard.hapdl",
+      "to": "haapi:merchant-report",
+      "type": "page_api",
+      "evidence": "ssot/hapdl/merchant-report-dashboard.hapdl.yaml:7",
+      "confidence": "medium"
+    },
+    {
+      "from": "hapdl:notification-log-list.hapdl",
+      "to": "haapi:notification-log",
+      "type": "page_api",
+      "evidence": "ssot/hapdl/notification-log-list.hapdl.yaml:7",
+      "confidence": "medium"
+    },
+    {
+      "from": "hapdl:order-detail.hapdl",
+      "to": "haapi:order",
+      "type": "page_api",
+      "evidence": "ssot/hapdl/order-detail.hapdl.yaml:7",
+      "confidence": "medium"
+    },
+    {
+      "from": "hapdl:order-form.hapdl",
+      "to": "haapi:order",
+      "type": "page_api",
+      "evidence": "ssot/hapdl/order-form.hapdl.yaml:7",
+      "confidence": "medium"
+    },
+    {
+      "from": "hapdl:order-list.hapdl",
+      "to": "haapi:order",
+      "type": "page_api",
+      "evidence": "ssot/hapdl/order-list.hapdl.yaml:7",
+      "confidence": "medium"
+    },
+    {
+      "from": "hapdl:platform-user-form.hapdl",
+      "to": "haapi:platform-user",
+      "type": "page_api",
+      "evidence": "ssot/hapdl/platform-user-form.hapdl.yaml:7",
+      "confidence": "medium"
+    },
+    {
+      "from": "hapdl:platform-user-list.hapdl",
+      "to": "haapi:platform-user",
+      "type": "page_api",
+      "evidence": "ssot/hapdl/platform-user-list.hapdl.yaml:7",
+      "confidence": "medium"
+    },
+    {
+      "from": "hapdl:point-ledger-list.hapdl",
+      "to": "haapi:point-ledger",
+      "type": "page_api",
+      "evidence": "ssot/hapdl/point-ledger-list.hapdl.yaml:7",
+      "confidence": "medium"
+    },
+    {
+      "from": "hapdl:product-form.hapdl",
+      "to": "haapi:product",
+      "type": "page_api",
+      "evidence": "ssot/hapdl/product-form.hapdl.yaml:7",
+      "confidence": "medium"
+    },
+    {
+      "from": "hapdl:product-list.hapdl",
+      "to": "haapi:product",
+      "type": "page_api",
+      "evidence": "ssot/hapdl/product-list.hapdl.yaml:7",
+      "confidence": "medium"
+    },
+    {
+      "from": "hapdl:product-variant-form.hapdl",
+      "to": "haapi:product-variant",
+      "type": "page_api",
+      "evidence": "ssot/hapdl/product-variant-form.hapdl.yaml:7",
+      "confidence": "medium"
+    },
+    {
+      "from": "hapdl:return-request-form.hapdl",
+      "to": "haapi:return-request",
+      "type": "page_api",
+      "evidence": "ssot/hapdl/return-request-form.hapdl.yaml:7",
+      "confidence": "medium"
+    },
+    {
+      "from": "hapdl:return-request-list.hapdl",
+      "to": "haapi:return-request",
+      "type": "page_api",
+      "evidence": "ssot/hapdl/return-request-list.hapdl.yaml:7",
+      "confidence": "medium"
+    },
+    {
+      "from": "hapdl:shipment-form.hapdl",
+      "to": "haapi:shipment",
+      "type": "page_api",
+      "evidence": "ssot/hapdl/shipment-form.hapdl.yaml:7",
+      "confidence": "medium"
+    },
+    {
+      "from": "hapdl:stock-item-form.hapdl",
+      "to": "haapi:stock-item",
+      "type": "page_api",
+      "evidence": "ssot/hapdl/stock-item-form.hapdl.yaml:7",
+      "confidence": "medium"
+    },
+    {
+      "from": "hapdl:stock-item-list.hapdl",
+      "to": "haapi:stock-item",
+      "type": "page_api",
+      "evidence": "ssot/hapdl/stock-item-list.hapdl.yaml:7",
+      "confidence": "medium"
+    },
+    {
+      "from": "hapdl:store-form.hapdl",
+      "to": "haapi:store",
+      "type": "page_api",
+      "evidence": "ssot/hapdl/store-form.hapdl.yaml:7",
+      "confidence": "medium"
+    },
+    {
+      "from": "hapdl:wishlist-list.hapdl",
+      "to": "haapi:wishlist",
+      "type": "page_api",
+      "evidence": "ssot/hapdl/wishlist-list.hapdl.yaml:7",
+      "confidence": "medium"
+    },
+    {
+      "from": "scenario:ASM#004（operator）",
+      "to": "haapi:merchant-operator.create",
+      "type": "scenario_intent",
+      "evidence": ".raptor/traceability.md:151",
+      "confidence": "high"
+    },
+    {
+      "from": "scenario:ASM#004（operator）",
+      "to": "haarm:operator_create_store",
+      "type": "scenario_intent",
+      "evidence": ".raptor/traceability.md:151",
+      "confidence": "high"
+    },
+    {
+      "from": "scenario:ASM#004（operator）",
+      "to": "hapdl:merchant-operator-form",
+      "type": "scenario_intent",
+      "evidence": ".raptor/traceability.md:151",
+      "confidence": "high"
+    },
+    {
+      "from": "scenario:GAP#013（audit）",
+      "to": "haapi:audit-log.list",
+      "type": "scenario_intent",
+      "evidence": ".raptor/traceability.md:152",
+      "confidence": "high"
+    },
+    {
+      "from": "scenario:GAP#013（audit）",
+      "to": "haarm:audit_log_read_all",
+      "type": "scenario_intent",
+      "evidence": ".raptor/traceability.md:152",
+      "confidence": "high"
+    },
+    {
+      "from": "scenario:GAP#013（audit）",
+      "to": "haarm:audit_log_read_store",
+      "type": "scenario_intent",
+      "evidence": ".raptor/traceability.md:152",
+      "confidence": "high"
+    },
+    {
+      "from": "scenario:GAP#013（audit）",
+      "to": "hapdl:audit-log-list",
+      "type": "scenario_intent",
+      "evidence": ".raptor/traceability.md:152",
+      "confidence": "high"
+    },
+    {
+      "from": "scenario:SCN-CART-001",
+      "to": "haapi:cart.add_item",
+      "type": "scenario_intent",
+      "evidence": ".raptor/traceability.md:115",
+      "confidence": "high"
+    },
+    {
+      "from": "scenario:SCN-CART-001",
+      "to": "haarm:cart_item_create_own",
+      "type": "scenario_intent",
+      "evidence": ".raptor/traceability.md:115",
+      "confidence": "high"
+    },
+    {
+      "from": "scenario:SCN-CART-001",
+      "to": "hapdl:cart-detail",
+      "type": "scenario_intent",
+      "evidence": ".raptor/traceability.md:115",
+      "confidence": "high"
+    },
+    {
+      "from": "scenario:SCN-CART-004",
+      "to": "haapi:cart.add_item",
+      "type": "scenario_intent",
+      "evidence": ".raptor/traceability.md:116",
+      "confidence": "high"
+    },
+    {
+      "from": "scenario:SCN-CART-004",
+      "to": "haarm:cart_item_create_own",
+      "type": "scenario_intent",
+      "evidence": ".raptor/traceability.md:116",
+      "confidence": "high"
+    },
+    {
+      "from": "scenario:SCN-CART-004",
+      "to": "hapdl:cart-detail",
+      "type": "scenario_intent",
+      "evidence": ".raptor/traceability.md:116",
+      "confidence": "high"
+    },
+    {
+      "from": "scenario:SCN-CHECKOUT-001",
+      "to": "haapi:order.create",
+      "type": "scenario_intent",
+      "evidence": ".raptor/traceability.md:117",
+      "confidence": "high"
+    },
+    {
+      "from": "scenario:SCN-CHECKOUT-001",
+      "to": "haarm:order_create_own",
+      "type": "scenario_intent",
+      "evidence": ".raptor/traceability.md:117",
+      "confidence": "high"
+    },
+    {
+      "from": "scenario:SCN-CHECKOUT-001",
+      "to": "hapdl:order-form",
+      "type": "scenario_intent",
+      "evidence": ".raptor/traceability.md:117",
+      "confidence": "high"
+    },
+    {
+      "from": "scenario:SCN-CHECKOUT-003",
+      "to": "haapi:order.create",
+      "type": "scenario_intent",
+      "evidence": ".raptor/traceability.md:118",
+      "confidence": "high"
+    },
+    {
+      "from": "scenario:SCN-CHECKOUT-003",
+      "to": "haarm:order_create_own",
+      "type": "scenario_intent",
+      "evidence": ".raptor/traceability.md:118",
+      "confidence": "high"
+    },
+    {
+      "from": "scenario:SCN-CHECKOUT-003",
+      "to": "hapdl:order-form",
+      "type": "scenario_intent",
+      "evidence": ".raptor/traceability.md:118",
+      "confidence": "high"
+    },
+    {
+      "from": "scenario:SCN-COUPON-001",
+      "to": "haapi:coupon.create",
+      "type": "scenario_intent",
+      "evidence": ".raptor/traceability.md:140",
+      "confidence": "high"
+    },
+    {
+      "from": "scenario:SCN-COUPON-001",
+      "to": "haarm:coupon_create_store",
+      "type": "scenario_intent",
+      "evidence": ".raptor/traceability.md:140",
+      "confidence": "high"
+    },
+    {
+      "from": "scenario:SCN-COUPON-001",
+      "to": "hapdl:coupon-form",
+      "type": "scenario_intent",
+      "evidence": ".raptor/traceability.md:140",
+      "confidence": "high"
+    },
+    {
+      "from": "scenario:SCN-COUPON-002",
+      "to": "haapi:coupon.redeem",
+      "type": "scenario_intent",
+      "evidence": ".raptor/traceability.md:141",
+      "confidence": "high"
+    },
+    {
+      "from": "scenario:SCN-COUPON-002",
+      "to": "haarm:coupon_redemption_create_own",
+      "type": "scenario_intent",
+      "evidence": ".raptor/traceability.md:141",
+      "confidence": "high"
+    },
+    {
+      "from": "scenario:SCN-COUPON-002",
+      "to": "hapdl:order-form",
+      "type": "scenario_intent",
+      "evidence": ".raptor/traceability.md:141",
+      "confidence": "high"
+    },
+    {
+      "from": "scenario:SCN-COUPON-006",
+      "to": "haapi:coupon.redeem",
+      "type": "scenario_intent",
+      "evidence": ".raptor/traceability.md:142",
+      "confidence": "high"
+    },
+    {
+      "from": "scenario:SCN-COUPON-006",
+      "to": "haarm:coupon_redemption_create_own",
+      "type": "scenario_intent",
+      "evidence": ".raptor/traceability.md:142",
+      "confidence": "high"
+    },
+    {
+      "from": "scenario:SCN-COUPON-006",
+      "to": "hapdl:order-form",
+      "type": "scenario_intent",
+      "evidence": ".raptor/traceability.md:142",
+      "confidence": "high"
+    },
+    {
+      "from": "scenario:SCN-FULFILL-002",
+      "to": "haapi:order.confirm",
+      "type": "scenario_intent",
+      "evidence": ".raptor/traceability.md:130",
+      "confidence": "high"
+    },
+    {
+      "from": "scenario:SCN-FULFILL-002",
+      "to": "haarm:order_update_store",
+      "type": "scenario_intent",
+      "evidence": ".raptor/traceability.md:130",
+      "confidence": "high"
+    },
+    {
+      "from": "scenario:SCN-FULFILL-002",
+      "to": "hapdl:order-list",
+      "type": "scenario_intent",
+      "evidence": ".raptor/traceability.md:130",
+      "confidence": "high"
+    },
+    {
+      "from": "scenario:SCN-FULFILL-003",
+      "to": "haapi:shipment.create",
+      "type": "scenario_intent",
+      "evidence": ".raptor/traceability.md:131",
+      "confidence": "high"
+    },
+    {
+      "from": "scenario:SCN-FULFILL-003",
+      "to": "haarm:shipment_create_store",
+      "type": "scenario_intent",
+      "evidence": ".raptor/traceability.md:131",
+      "confidence": "high"
+    },
+    {
+      "from": "scenario:SCN-FULFILL-003",
+      "to": "hapdl:shipment-form",
+      "type": "scenario_intent",
+      "evidence": ".raptor/traceability.md:131",
+      "confidence": "high"
+    },
+    {
+      "from": "scenario:SCN-FULFILL-004",
+      "to": "haapi:order.list",
+      "type": "scenario_intent",
+      "evidence": ".raptor/traceability.md:132",
+      "confidence": "high"
+    },
+    {
+      "from": "scenario:SCN-FULFILL-004",
+      "to": "haarm:order_list_store",
+      "type": "scenario_intent",
+      "evidence": ".raptor/traceability.md:132",
+      "confidence": "high"
+    },
+    {
+      "from": "scenario:SCN-FULFILL-004",
+      "to": "hapdl:order-list",
+      "type": "scenario_intent",
+      "evidence": ".raptor/traceability.md:132",
+      "confidence": "high"
+    },
+    {
+      "from": "scenario:SCN-MEMBER-001",
+      "to": "haapi:member.create",
+      "type": "scenario_intent",
+      "evidence": ".raptor/traceability.md:112",
+      "confidence": "high"
+    },
+    {
+      "from": "scenario:SCN-MEMBER-001",
+      "to": "haarm:member_create",
+      "type": "scenario_intent",
+      "evidence": ".raptor/traceability.md:112",
+      "confidence": "high"
+    },
+    {
+      "from": "scenario:SCN-MEMBER-001",
+      "to": "hapdl:member-form",
+      "type": "scenario_intent",
+      "evidence": ".raptor/traceability.md:112",
+      "confidence": "high"
+    },
+    {
+      "from": "scenario:SCN-MEMBER-002",
+      "to": "haapi:member.verify_email",
+      "type": "scenario_intent",
+      "evidence": ".raptor/traceability.md:113",
+      "confidence": "high"
+    },
+    {
+      "from": "scenario:SCN-MEMBER-002",
+      "to": "haarm:(public)",
+      "type": "scenario_intent",
+      "evidence": ".raptor/traceability.md:113",
+      "confidence": "high"
+    },
+    {
+      "from": "scenario:SCN-MEMBER-002",
+      "to": "hapdl:member-form",
+      "type": "scenario_intent",
+      "evidence": ".raptor/traceability.md:113",
+      "confidence": "high"
+    },
+    {
+      "from": "scenario:SCN-MEMBER-004",
+      "to": "haapi:member-address.create",
+      "type": "scenario_intent",
+      "evidence": ".raptor/traceability.md:146",
+      "confidence": "high"
+    },
+    {
+      "from": "scenario:SCN-MEMBER-004",
+      "to": "haapi:member.update",
+      "type": "scenario_intent",
+      "evidence": ".raptor/traceability.md:114",
+      "confidence": "high"
+    },
+    {
+      "from": "scenario:SCN-MEMBER-004",
+      "to": "haarm:member_address_create_own",
+      "type": "scenario_intent",
+      "evidence": ".raptor/traceability.md:114",
+      "confidence": "high"
+    },
+    {
+      "from": "scenario:SCN-MEMBER-004",
+      "to": "haarm:member_address_create_own",
+      "type": "scenario_intent",
+      "evidence": ".raptor/traceability.md:146",
+      "confidence": "high"
+    },
+    {
+      "from": "scenario:SCN-MEMBER-004",
+      "to": "hapdl:member-address-form",
+      "type": "scenario_intent",
+      "evidence": ".raptor/traceability.md:146",
+      "confidence": "high"
+    },
+    {
+      "from": "scenario:SCN-MEMBER-004",
+      "to": "hapdl:member-form",
+      "type": "scenario_intent",
+      "evidence": ".raptor/traceability.md:114",
+      "confidence": "high"
+    },
+    {
+      "from": "scenario:SCN-ONBOARD-001",
+      "to": "haapi:merchant.create",
+      "type": "scenario_intent",
+      "evidence": ".raptor/traceability.md:123",
+      "confidence": "high"
+    },
+    {
+      "from": "scenario:SCN-ONBOARD-001",
+      "to": "haarm:(public)",
+      "type": "scenario_intent",
+      "evidence": ".raptor/traceability.md:123",
+      "confidence": "high"
+    },
+    {
+      "from": "scenario:SCN-ONBOARD-001",
+      "to": "hapdl:merchant-form",
+      "type": "scenario_intent",
+      "evidence": ".raptor/traceability.md:123",
+      "confidence": "high"
+    },
+    {
+      "from": "scenario:SCN-ONBOARD-001（store）",
+      "to": "haapi:store.update",
+      "type": "scenario_intent",
+      "evidence": ".raptor/traceability.md:150",
+      "confidence": "high"
+    },
+    {
+      "from": "scenario:SCN-ONBOARD-001（store）",
+      "to": "haarm:store_update_own",
+      "type": "scenario_intent",
+      "evidence": ".raptor/traceability.md:150",
+      "confidence": "high"
+    },
+    {
+      "from": "scenario:SCN-ONBOARD-001（store）",
+      "to": "hapdl:store-form",
+      "type": "scenario_intent",
+      "evidence": ".raptor/traceability.md:150",
+      "confidence": "high"
+    },
+    {
+      "from": "scenario:SCN-ONBOARD-002",
+      "to": "haapi:merchant.activate",
+      "type": "scenario_intent",
+      "evidence": ".raptor/traceability.md:124",
+      "confidence": "high"
+    },
+    {
+      "from": "scenario:SCN-ONBOARD-002",
+      "to": "haarm:merchant_update_status",
+      "type": "scenario_intent",
+      "evidence": ".raptor/traceability.md:124",
+      "confidence": "high"
+    },
+    {
+      "from": "scenario:SCN-ONBOARD-002",
+      "to": "hapdl:merchant-list",
+      "type": "scenario_intent",
+      "evidence": ".raptor/traceability.md:124",
+      "confidence": "high"
+    },
+    {
+      "from": "scenario:SCN-ONBOARD-003",
+      "to": "haapi:merchant.suspend",
+      "type": "scenario_intent",
+      "evidence": ".raptor/traceability.md:125",
+      "confidence": "high"
+    },
+    {
+      "from": "scenario:SCN-ONBOARD-003",
+      "to": "haarm:merchant_update_status",
+      "type": "scenario_intent",
+      "evidence": ".raptor/traceability.md:125",
+      "confidence": "high"
+    },
+    {
+      "from": "scenario:SCN-ONBOARD-003",
+      "to": "hapdl:merchant-list",
+      "type": "scenario_intent",
+      "evidence": ".raptor/traceability.md:125",
+      "confidence": "high"
+    },
+    {
+      "from": "scenario:SCN-PAY-001",
+      "to": "haapi:order.apply_payment",
+      "type": "scenario_intent",
+      "evidence": ".raptor/traceability.md:119",
+      "confidence": "high"
+    },
+    {
+      "from": "scenario:SCN-PAY-001",
+      "to": "haarm:payment_create_own",
+      "type": "scenario_intent",
+      "evidence": ".raptor/traceability.md:119",
+      "confidence": "high"
+    },
+    {
+      "from": "scenario:SCN-PAY-001",
+      "to": "hapdl:order-detail",
+      "type": "scenario_intent",
+      "evidence": ".raptor/traceability.md:119",
+      "confidence": "high"
+    },
+    {
+      "from": "scenario:SCN-PAY-004",
+      "to": "haapi:order.cancel",
+      "type": "scenario_intent",
+      "evidence": ".raptor/traceability.md:120",
+      "confidence": "high"
+    },
+    {
+      "from": "scenario:SCN-PAY-004",
+      "to": "haarm:order_update_store",
+      "type": "scenario_intent",
+      "evidence": ".raptor/traceability.md:120",
+      "confidence": "high"
+    },
+    {
+      "from": "scenario:SCN-PAY-004",
+      "to": "hapdl:order-detail",
+      "type": "scenario_intent",
+      "evidence": ".raptor/traceability.md:120",
+      "confidence": "high"
+    },
+    {
+      "from": "scenario:SCN-POINT-001",
+      "to": "haapi:point-ledger.list",
+      "type": "scenario_intent",
+      "evidence": ".raptor/traceability.md:136",
+      "confidence": "high"
+    },
+    {
+      "from": "scenario:SCN-POINT-001",
+      "to": "haarm:point_ledger_read_own",
+      "type": "scenario_intent",
+      "evidence": ".raptor/traceability.md:136",
+      "confidence": "high"
+    },
+    {
+      "from": "scenario:SCN-POINT-001",
+      "to": "hapdl:point-ledger-list",
+      "type": "scenario_intent",
+      "evidence": ".raptor/traceability.md:136",
+      "confidence": "high"
+    },
+    {
+      "from": "scenario:SCN-POINT-002",
+      "to": "haapi:order.create",
+      "type": "scenario_intent",
+      "evidence": ".raptor/traceability.md:137",
+      "confidence": "high"
+    },
+    {
+      "from": "scenario:SCN-POINT-002",
+      "to": "haarm:order_create_own",
+      "type": "scenario_intent",
+      "evidence": ".raptor/traceability.md:137",
+      "confidence": "high"
+    },
+    {
+      "from": "scenario:SCN-POINT-002",
+      "to": "hapdl:order-form",
+      "type": "scenario_intent",
+      "evidence": ".raptor/traceability.md:137",
+      "confidence": "high"
+    },
+    {
+      "from": "scenario:SCN-PRODUCT-001",
+      "to": "haapi:product.create",
+      "type": "scenario_intent",
+      "evidence": ".raptor/traceability.md:126",
+      "confidence": "high"
+    },
+    {
+      "from": "scenario:SCN-PRODUCT-001",
+      "to": "haarm:product_create_store",
+      "type": "scenario_intent",
+      "evidence": ".raptor/traceability.md:126",
+      "confidence": "high"
+    },
+    {
+      "from": "scenario:SCN-PRODUCT-001",
+      "to": "hapdl:product-form",
+      "type": "scenario_intent",
+      "evidence": ".raptor/traceability.md:126",
+      "confidence": "high"
+    },
+    {
+      "from": "scenario:SCN-PRODUCT-002",
+      "to": "haapi:product-variant.create",
+      "type": "scenario_intent",
+      "evidence": ".raptor/traceability.md:144",
+      "confidence": "high"
+    },
+    {
+      "from": "scenario:SCN-PRODUCT-002",
+      "to": "haarm:product_variant_create_store",
+      "type": "scenario_intent",
+      "evidence": ".raptor/traceability.md:144",
+      "confidence": "high"
+    },
+    {
+      "from": "scenario:SCN-PRODUCT-002",
+      "to": "hapdl:product-variant-form",
+      "type": "scenario_intent",
+      "evidence": ".raptor/traceability.md:144",
+      "confidence": "high"
+    },
+    {
+      "from": "scenario:SCN-PRODUCT-003",
+      "to": "haapi:product-variant.create",
+      "type": "scenario_intent",
+      "evidence": ".raptor/traceability.md:145",
+      "confidence": "high"
+    },
+    {
+      "from": "scenario:SCN-PRODUCT-003",
+      "to": "haarm:product_variant_create_store",
+      "type": "scenario_intent",
+      "evidence": ".raptor/traceability.md:145",
+      "confidence": "high"
+    },
+    {
+      "from": "scenario:SCN-PRODUCT-003",
+      "to": "hapdl:product-variant-form",
+      "type": "scenario_intent",
+      "evidence": ".raptor/traceability.md:145",
+      "confidence": "high"
+    },
+    {
+      "from": "scenario:SCN-PRODUCT-004",
+      "to": "haapi:product.publish",
+      "type": "scenario_intent",
+      "evidence": ".raptor/traceability.md:127",
+      "confidence": "high"
+    },
+    {
+      "from": "scenario:SCN-PRODUCT-004",
+      "to": "haarm:product_update_store",
+      "type": "scenario_intent",
+      "evidence": ".raptor/traceability.md:127",
+      "confidence": "high"
+    },
+    {
+      "from": "scenario:SCN-PRODUCT-004",
+      "to": "hapdl:product-list",
+      "type": "scenario_intent",
+      "evidence": ".raptor/traceability.md:127",
+      "confidence": "high"
+    },
+    {
+      "from": "scenario:SCN-PROMO-001",
+      "to": "haapi:campaign.create",
+      "type": "scenario_intent",
+      "evidence": ".raptor/traceability.md:138",
+      "confidence": "high"
+    },
+    {
+      "from": "scenario:SCN-PROMO-001",
+      "to": "haarm:campaign_create_store",
+      "type": "scenario_intent",
+      "evidence": ".raptor/traceability.md:138",
+      "confidence": "high"
+    },
+    {
+      "from": "scenario:SCN-PROMO-001",
+      "to": "hapdl:campaign-form",
+      "type": "scenario_intent",
+      "evidence": ".raptor/traceability.md:138",
+      "confidence": "high"
+    },
+    {
+      "from": "scenario:SCN-PROMO-002",
+      "to": "haapi:campaign.update",
+      "type": "scenario_intent",
+      "evidence": ".raptor/traceability.md:139",
+      "confidence": "high"
+    },
+    {
+      "from": "scenario:SCN-PROMO-002",
+      "to": "haarm:campaign_update_store",
+      "type": "scenario_intent",
+      "evidence": ".raptor/traceability.md:139",
+      "confidence": "high"
+    },
+    {
+      "from": "scenario:SCN-PROMO-002",
+      "to": "hapdl:campaign-list",
+      "type": "scenario_intent",
+      "evidence": ".raptor/traceability.md:139",
+      "confidence": "high"
+    },
+    {
+      "from": "scenario:SCN-REPORT-001",
+      "to": "haapi:merchant-report.sales_summary",
+      "type": "scenario_intent",
+      "evidence": ".raptor/traceability.md:148",
+      "confidence": "high"
+    },
+    {
+      "from": "scenario:SCN-REPORT-001",
+      "to": "haarm:merchant_report_read",
+      "type": "scenario_intent",
+      "evidence": ".raptor/traceability.md:148",
+      "confidence": "high"
+    },
+    {
+      "from": "scenario:SCN-REPORT-001",
+      "to": "hapdl:merchant-report-dashboard",
+      "type": "scenario_intent",
+      "evidence": ".raptor/traceability.md:148",
+      "confidence": "high"
+    },
+    {
+      "from": "scenario:SCN-REPORT-002",
+      "to": "haapi:merchant-report.product_ranking",
+      "type": "scenario_intent",
+      "evidence": ".raptor/traceability.md:149",
+      "confidence": "high"
+    },
+    {
+      "from": "scenario:SCN-REPORT-002",
+      "to": "haarm:merchant_report_read",
+      "type": "scenario_intent",
+      "evidence": ".raptor/traceability.md:149",
+      "confidence": "high"
+    },
+    {
+      "from": "scenario:SCN-REPORT-002",
+      "to": "hapdl:merchant-report-dashboard",
+      "type": "scenario_intent",
+      "evidence": ".raptor/traceability.md:149",
+      "confidence": "high"
+    },
+    {
+      "from": "scenario:SCN-RETURN-001",
+      "to": "haapi:return-request.create",
+      "type": "scenario_intent",
+      "evidence": ".raptor/traceability.md:133",
+      "confidence": "high"
+    },
+    {
+      "from": "scenario:SCN-RETURN-001",
+      "to": "haarm:return_request_create_own",
+      "type": "scenario_intent",
+      "evidence": ".raptor/traceability.md:133",
+      "confidence": "high"
+    },
+    {
+      "from": "scenario:SCN-RETURN-001",
+      "to": "hapdl:return-request-form",
+      "type": "scenario_intent",
+      "evidence": ".raptor/traceability.md:133",
+      "confidence": "high"
+    },
+    {
+      "from": "scenario:SCN-RETURN-002",
+      "to": "haapi:return-request.approve",
+      "type": "scenario_intent",
+      "evidence": ".raptor/traceability.md:134",
+      "confidence": "high"
+    },
+    {
+      "from": "scenario:SCN-RETURN-002",
+      "to": "haarm:return_request_update_store",
+      "type": "scenario_intent",
+      "evidence": ".raptor/traceability.md:134",
+      "confidence": "high"
+    },
+    {
+      "from": "scenario:SCN-RETURN-002",
+      "to": "hapdl:return-request-list",
+      "type": "scenario_intent",
+      "evidence": ".raptor/traceability.md:134",
+      "confidence": "high"
+    },
+    {
+      "from": "scenario:SCN-RETURN-004",
+      "to": "haapi:return-request.refund",
+      "type": "scenario_intent",
+      "evidence": ".raptor/traceability.md:135",
+      "confidence": "high"
+    },
+    {
+      "from": "scenario:SCN-RETURN-004",
+      "to": "haarm:refund_create_store",
+      "type": "scenario_intent",
+      "evidence": ".raptor/traceability.md:135",
+      "confidence": "high"
+    },
+    {
+      "from": "scenario:SCN-RETURN-004",
+      "to": "hapdl:return-request-list",
+      "type": "scenario_intent",
+      "evidence": ".raptor/traceability.md:135",
+      "confidence": "high"
+    },
+    {
+      "from": "scenario:SCN-STOCK-001",
+      "to": "haapi:stock-item.update",
+      "type": "scenario_intent",
+      "evidence": ".raptor/traceability.md:128",
+      "confidence": "high"
+    },
+    {
+      "from": "scenario:SCN-STOCK-001",
+      "to": "haarm:stock_item_update_store",
+      "type": "scenario_intent",
+      "evidence": ".raptor/traceability.md:128",
+      "confidence": "high"
+    },
+    {
+      "from": "scenario:SCN-STOCK-001",
+      "to": "hapdl:stock-item-form",
+      "type": "scenario_intent",
+      "evidence": ".raptor/traceability.md:128",
+      "confidence": "high"
+    },
+    {
+      "from": "scenario:SCN-STOCK-004",
+      "to": "haapi:order.create",
+      "type": "scenario_intent",
+      "evidence": ".raptor/traceability.md:129",
+      "confidence": "high"
+    },
+    {
+      "from": "scenario:SCN-STOCK-004",
+      "to": "haarm:order_create_own",
+      "type": "scenario_intent",
+      "evidence": ".raptor/traceability.md:129",
+      "confidence": "high"
+    },
+    {
+      "from": "scenario:SCN-STOCK-004",
+      "to": "hapdl:order-form",
+      "type": "scenario_intent",
+      "evidence": ".raptor/traceability.md:129",
+      "confidence": "high"
+    },
+    {
+      "from": "scenario:SCN-TIER-001",
+      "to": "table:Member",
+      "type": "scenario_table",
+      "evidence": ".raptor/traceability.md:97",
+      "confidence": "medium"
+    },
+    {
+      "from": "scenario:SCN-TIER-001",
+      "to": "table:Order",
+      "type": "scenario_table",
+      "evidence": ".raptor/traceability.md:97",
+      "confidence": "medium"
+    },
+    {
+      "from": "scenario:SCN-TIER-002",
+      "to": "table:Member",
+      "type": "scenario_table",
+      "evidence": ".raptor/traceability.md:98",
+      "confidence": "medium"
+    },
+    {
+      "from": "scenario:SCN-TIER-002",
+      "to": "table:Order",
+      "type": "scenario_table",
+      "evidence": ".raptor/traceability.md:98",
+      "confidence": "medium"
+    },
+    {
+      "from": "scenario:SCN-TIER-003",
+      "to": "table:Member",
+      "type": "scenario_table",
+      "evidence": ".raptor/traceability.md:99",
+      "confidence": "medium"
+    },
+    {
+      "from": "scenario:SCN-TIER-003",
+      "to": "table:Order",
+      "type": "scenario_table",
+      "evidence": ".raptor/traceability.md:99",
+      "confidence": "medium"
+    },
+    {
+      "from": "scenario:SCN-TIER-004",
+      "to": "table:Coupon",
+      "type": "scenario_table",
+      "evidence": ".raptor/traceability.md:100",
+      "confidence": "medium"
+    },
+    {
+      "from": "scenario:SCN-TIER-004",
+      "to": "table:Member",
+      "type": "scenario_table",
+      "evidence": ".raptor/traceability.md:100",
+      "confidence": "medium"
+    },
+    {
+      "from": "scenario:SCN-TRACK-001",
+      "to": "haapi:notification-log.list",
+      "type": "scenario_intent",
+      "evidence": ".raptor/traceability.md:147",
+      "confidence": "high"
+    },
+    {
+      "from": "scenario:SCN-TRACK-001",
+      "to": "haarm:notification_list_own",
+      "type": "scenario_intent",
+      "evidence": ".raptor/traceability.md:147",
+      "confidence": "high"
+    },
+    {
+      "from": "scenario:SCN-TRACK-001",
+      "to": "hapdl:notification-log-list",
+      "type": "scenario_intent",
+      "evidence": ".raptor/traceability.md:147",
+      "confidence": "high"
+    },
+    {
+      "from": "scenario:SCN-TRACK-002",
+      "to": "haapi:shipment.read",
+      "type": "scenario_intent",
+      "evidence": ".raptor/traceability.md:121",
+      "confidence": "high"
+    },
+    {
+      "from": "scenario:SCN-TRACK-002",
+      "to": "haarm:shipment_read_store",
+      "type": "scenario_intent",
+      "evidence": ".raptor/traceability.md:121",
+      "confidence": "high"
+    },
+    {
+      "from": "scenario:SCN-TRACK-002",
+      "to": "hapdl:order-detail",
+      "type": "scenario_intent",
+      "evidence": ".raptor/traceability.md:121",
+      "confidence": "high"
+    },
+    {
+      "from": "scenario:SCN-TRACK-003",
+      "to": "haapi:order.read",
+      "type": "scenario_intent",
+      "evidence": ".raptor/traceability.md:122",
+      "confidence": "high"
+    },
+    {
+      "from": "scenario:SCN-TRACK-003",
+      "to": "haarm:order_read_own",
+      "type": "scenario_intent",
+      "evidence": ".raptor/traceability.md:122",
+      "confidence": "high"
+    },
+    {
+      "from": "scenario:SCN-TRACK-003",
+      "to": "hapdl:order-detail",
+      "type": "scenario_intent",
+      "evidence": ".raptor/traceability.md:122",
+      "confidence": "high"
+    },
+    {
+      "from": "scenario:SCN-WISH-001",
+      "to": "table:Product",
+      "type": "scenario_table",
+      "evidence": ".raptor/traceability.md:93",
+      "confidence": "medium"
+    },
+    {
+      "from": "scenario:SCN-WISH-001",
+      "to": "table:Wishlist",
+      "type": "scenario_table",
+      "evidence": ".raptor/traceability.md:93",
+      "confidence": "medium"
+    },
+    {
+      "from": "scenario:SCN-WISH-002",
+      "to": "table:NotificationLog",
+      "type": "scenario_table",
+      "evidence": ".raptor/traceability.md:94",
+      "confidence": "medium"
+    },
+    {
+      "from": "scenario:SCN-WISH-002",
+      "to": "table:ProductVariant",
+      "type": "scenario_table",
+      "evidence": ".raptor/traceability.md:94",
+      "confidence": "medium"
+    },
+    {
+      "from": "scenario:SCN-WISH-002",
+      "to": "table:Wishlist",
+      "type": "scenario_table",
+      "evidence": ".raptor/traceability.md:94",
+      "confidence": "medium"
+    },
+    {
+      "from": "scenario:SCN-WISH-003",
+      "to": "table:Wishlist",
+      "type": "scenario_table",
+      "evidence": ".raptor/traceability.md:95",
+      "confidence": "medium"
+    },
+    {
+      "from": "scenario:SCN-WISH-004",
+      "to": "table:Wishlist",
+      "type": "scenario_table",
+      "evidence": ".raptor/traceability.md:96",
+      "confidence": "medium"
+    },
+    {
+      "from": "scenario:US-019（wishlist）",
+      "to": "haapi:wishlist.create",
+      "type": "scenario_intent",
+      "evidence": ".raptor/traceability.md:143",
+      "confidence": "high"
+    },
+    {
+      "from": "scenario:US-019（wishlist）",
+      "to": "haarm:wishlist_create_own",
+      "type": "scenario_intent",
+      "evidence": ".raptor/traceability.md:143",
+      "confidence": "high"
+    },
+    {
+      "from": "scenario:US-019（wishlist）",
+      "to": "hapdl:wishlist-list",
+      "type": "scenario_intent",
+      "evidence": ".raptor/traceability.md:143",
+      "confidence": "high"
+    },
+    {
+      "from": "table:Brand",
+      "to": "table:Store",
+      "type": "table_rel",
+      "evidence": "ssot/dbml/schema.dbml:486",
+      "confidence": "high"
+    },
+    {
+      "from": "table:Campaign",
+      "to": "table:ProductVariant",
+      "type": "table_rel",
+      "evidence": "ssot/dbml/schema.dbml:512",
+      "confidence": "high"
+    },
+    {
+      "from": "table:Campaign",
+      "to": "table:Store",
+      "type": "table_rel",
+      "evidence": "ssot/dbml/schema.dbml:511",
+      "confidence": "high"
+    },
+    {
+      "from": "table:Cart",
+      "to": "table:Member",
+      "type": "table_rel",
+      "evidence": "ssot/dbml/schema.dbml:493",
+      "confidence": "high"
+    },
+    {
+      "from": "table:CartItem",
+      "to": "table:Cart",
+      "type": "table_rel",
+      "evidence": "ssot/dbml/schema.dbml:494",
+      "confidence": "high"
+    },
+    {
+      "from": "table:CartItem",
+      "to": "table:ProductVariant",
+      "type": "table_rel",
+      "evidence": "ssot/dbml/schema.dbml:495",
+      "confidence": "high"
+    },
+    {
+      "from": "table:Category",
+      "to": "table:Category",
+      "type": "table_rel",
+      "evidence": "ssot/dbml/schema.dbml:485",
+      "confidence": "high"
+    },
+    {
+      "from": "table:Category",
+      "to": "table:Store",
+      "type": "table_rel",
+      "evidence": "ssot/dbml/schema.dbml:484",
+      "confidence": "high"
+    },
+    {
+      "from": "table:Coupon",
+      "to": "table:Store",
+      "type": "table_rel",
+      "evidence": "ssot/dbml/schema.dbml:513",
+      "confidence": "high"
+    },
+    {
+      "from": "table:CouponRedemption",
+      "to": "table:Coupon",
+      "type": "table_rel",
+      "evidence": "ssot/dbml/schema.dbml:514",
+      "confidence": "high"
+    },
+    {
+      "from": "table:CouponRedemption",
+      "to": "table:Member",
+      "type": "table_rel",
+      "evidence": "ssot/dbml/schema.dbml:516",
+      "confidence": "high"
+    },
+    {
+      "from": "table:CouponRedemption",
+      "to": "table:Order",
+      "type": "table_rel",
+      "evidence": "ssot/dbml/schema.dbml:515",
+      "confidence": "high"
+    },
+    {
+      "from": "table:Invoice",
+      "to": "table:Order",
+      "type": "table_rel",
+      "evidence": "ssot/dbml/schema.dbml:502",
+      "confidence": "high"
+    },
+    {
+      "from": "table:MemberAddress",
+      "to": "table:Member",
+      "type": "table_rel",
+      "evidence": "ssot/dbml/schema.dbml:508",
+      "confidence": "high"
+    },
+    {
+      "from": "table:MerchantOperator",
+      "to": "table:Merchant",
+      "type": "table_rel",
+      "evidence": "ssot/dbml/schema.dbml:482",
+      "confidence": "high"
+    },
+    {
+      "from": "table:NotificationLog",
+      "to": "table:Member",
+      "type": "table_rel",
+      "evidence": "ssot/dbml/schema.dbml:517",
+      "confidence": "high"
+    },
+    {
+      "from": "table:NotificationLog",
+      "to": "table:Order",
+      "type": "table_rel",
+      "evidence": "ssot/dbml/schema.dbml:518",
+      "confidence": "high"
+    },
+    {
+      "from": "table:Order",
+      "to": "table:Coupon",
+      "type": "table_rel",
+      "evidence": "ssot/dbml/schema.dbml:498",
+      "confidence": "high"
+    },
+    {
+      "from": "table:Order",
+      "to": "table:Member",
+      "type": "table_rel",
+      "evidence": "ssot/dbml/schema.dbml:497",
+      "confidence": "high"
+    },
+    {
+      "from": "table:Order",
+      "to": "table:Store",
+      "type": "table_rel",
+      "evidence": "ssot/dbml/schema.dbml:496",
+      "confidence": "high"
+    },
+    {
+      "from": "table:OrderItem",
+      "to": "table:Order",
+      "type": "table_rel",
+      "evidence": "ssot/dbml/schema.dbml:499",
+      "confidence": "high"
+    },
+    {
+      "from": "table:OrderItem",
+      "to": "table:ProductVariant",
+      "type": "table_rel",
+      "evidence": "ssot/dbml/schema.dbml:500",
+      "confidence": "high"
+    },
+    {
+      "from": "table:Payment",
+      "to": "table:Order",
+      "type": "table_rel",
+      "evidence": "ssot/dbml/schema.dbml:501",
+      "confidence": "high"
+    },
+    {
+      "from": "table:PointLedger",
+      "to": "table:Member",
+      "type": "table_rel",
+      "evidence": "ssot/dbml/schema.dbml:509",
+      "confidence": "high"
+    },
+    {
+      "from": "table:PointLedger",
+      "to": "table:Order",
+      "type": "table_rel",
+      "evidence": "ssot/dbml/schema.dbml:510",
+      "confidence": "high"
+    },
+    {
+      "from": "table:Product",
+      "to": "table:Brand",
+      "type": "table_rel",
+      "evidence": "ssot/dbml/schema.dbml:489",
+      "confidence": "high"
+    },
+    {
+      "from": "table:Product",
+      "to": "table:Category",
+      "type": "table_rel",
+      "evidence": "ssot/dbml/schema.dbml:488",
+      "confidence": "high"
+    },
+    {
+      "from": "table:Product",
+      "to": "table:Store",
+      "type": "table_rel",
+      "evidence": "ssot/dbml/schema.dbml:487",
+      "confidence": "high"
+    },
+    {
+      "from": "table:ProductImage",
+      "to": "table:Product",
+      "type": "table_rel",
+      "evidence": "ssot/dbml/schema.dbml:490",
+      "confidence": "high"
+    },
+    {
+      "from": "table:ProductVariant",
+      "to": "table:Product",
+      "type": "table_rel",
+      "evidence": "ssot/dbml/schema.dbml:491",
+      "confidence": "high"
+    },
+    {
+      "from": "table:Refund",
+      "to": "table:Order",
+      "type": "table_rel",
+      "evidence": "ssot/dbml/schema.dbml:503",
+      "confidence": "high"
+    },
+    {
+      "from": "table:Refund",
+      "to": "table:Payment",
+      "type": "table_rel",
+      "evidence": "ssot/dbml/schema.dbml:504",
+      "confidence": "high"
+    },
+    {
+      "from": "table:ReturnRequest",
+      "to": "table:Member",
+      "type": "table_rel",
+      "evidence": "ssot/dbml/schema.dbml:507",
+      "confidence": "high"
+    },
+    {
+      "from": "table:ReturnRequest",
+      "to": "table:Order",
+      "type": "table_rel",
+      "evidence": "ssot/dbml/schema.dbml:506",
+      "confidence": "high"
+    },
+    {
+      "from": "table:Shipment",
+      "to": "table:Order",
+      "type": "table_rel",
+      "evidence": "ssot/dbml/schema.dbml:505",
+      "confidence": "high"
+    },
+    {
+      "from": "table:StockItem",
+      "to": "table:ProductVariant",
+      "type": "table_rel",
+      "evidence": "ssot/dbml/schema.dbml:492",
+      "confidence": "high"
+    },
+    {
+      "from": "table:Store",
+      "to": "table:Merchant",
+      "type": "table_rel",
+      "evidence": "ssot/dbml/schema.dbml:483",
+      "confidence": "high"
+    },
+    {
+      "from": "table:Wishlist",
+      "to": "table:Member",
+      "type": "table_rel",
+      "evidence": "ssot/dbml/schema.dbml:519",
+      "confidence": "high"
+    },
+    {
+      "from": "table:Wishlist",
+      "to": "table:Product",
+      "type": "table_rel",
+      "evidence": "ssot/dbml/schema.dbml:520",
+      "confidence": "high"
+    }
+  ],
+  "coverage": {
+    "dbml_tables": 28,
+    "dbml_relationships": 39,
+    "haapi_files": 22,
+    "haapi_entity_bindings": 22,
+    "hapdl_files": 34,
+    "page_api_bindings": 34,
+    "haarm_files": 1,
+    "permission_bindings": 0,
+    "l2_rows": 64,
+    "l2_table_mappings": 16,
+    "l3_rows": 41,
+    "l3_mappings": 124
+  },
+  "warnings": []
+}

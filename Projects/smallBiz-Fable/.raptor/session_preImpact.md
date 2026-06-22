@@ -17,16 +17,6 @@
 | 6. Reconcile | not-needed（0 NEED_TO_FIX） | /rapt-reconcile |
 | Preview | deferred | /rapt-openapi, /rapt-lofi, /rapt-design-brief |
 
-## Impact Analysis 摘要（2026-06-19，advisory-only）
-
-- **IA-20260619-001**（source: what-if/0619-addComment.md，新增商品評論）
-- classification: `scope_extension`｜recommendation: **`needs_clarification`**｜overall confidence: medium
-- 受影響：DBML 1 create + 2 review｜haBDD 2 create/1 update/1 review｜haAPI 1 create｜haPDL 3 create｜haARM 1 create/3-role update｜traceability L1/L2/L3
-- 最高回歸風險：medium（下架評論保留 / 評分聚合一致性 / 評論資格）
-- 6 CiC（2 BDY + 4 GAP）→ clarify batch CLR-BATCH-20260619-001（Q-001~006）
-- 下一步 owner：`rapt-clarify`（先裁決 scope 與政策）｜advisory-only: true
-- 報告：docs/reports/impact/IA-20260619-001.md / .yml
-
 ## RAscore 摘要（2026-06-13，advisory-only）
 
 分數：**95.13 / 100（等級 A）**；Veto 未觸發。

@@ -1,0 +1,69 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "hapdl-v3.3.schema.json",
+  "title": "haPDL v3.3",
+  "description": "Structural contract for *.hapdl.yaml. SSoT: RAPTor/DSLspec/haPDL-specification-v3.3.md §3.1 + hapdl-canonical-keys.md. One file = one page; top-level key MUST be `page` (not page_id); `meta`/`pages` wrappers are forbidden.",
+  "type": "object",
+  "required": ["page", "type", "title", "entity"],
+  "not": {
+    "anyOf": [
+      { "required": ["meta"] },
+      { "required": ["pages"] },
+      { "required": ["page_id"] }
+    ],
+    "$comment": "HAPDL-SCHEMA-001/002: forbid meta/pages multi-page wrappers and page_id; use top-level `page`"
+  },
+  "properties": {
+    "page": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9]*(-[a-z0-9]+)*$"
+    },
+    "type": {
+      "type": "string",
+      "enum": ["list", "form", "detail", "dashboard", "wizard"]
+    },
+    "title": { "type": "string" },
+    "entity": { "type": "string" },
+    "api": { "type": "string" },
+    "schema_version": { "type": "string", "pattern": "^3\\.3(\\.[0-9]+)?$" },
+    "version": { "type": "string" },
+    "extends": { "type": "string" },
+    "mixins": { "type": "array" },
+    "view": { "type": "object" },
+    "form": { "type": "object" },
+    "actions": { "type": "object" },
+    "state": {},
+    "auth": {
+      "type": "object",
+      "properties": {
+        "roles": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "security": {
+      "type": "object",
+      "not": {
+        "required": ["permissions"],
+        "$comment": "HAPDL-LINT-003: security.permissions is deprecated (v3.1 legacy); use permission_refs"
+      },
+      "properties": {
+        "permission_refs": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "array",
+            "items": { "type": "object", "required": ["id"] }
+          }
+        },
+        "datasource_scope": {
+          "type": "string",
+          "enum": ["own", "department", "team", "all"]
+        }
+      }
+    },
+    "error_handling": {},
+    "async": {},
+    "accessibility": {},
+    "testing": {},
+    "advanced": {},
+    "source_evidence": {}
+  }
+}

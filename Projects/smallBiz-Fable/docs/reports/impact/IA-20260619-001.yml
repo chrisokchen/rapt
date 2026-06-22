@@ -1,7 +1,8 @@
 schema_version: 1
 id: IA-20260619-001
-revision: 1
+revision: 2
 generated_at: "2026-06-19T00:00:00+08:00"
+revalidated_at: "2026-06-20T00:00:00+08:00"
 advisory_only: true
 
 proposal:
@@ -534,4 +535,6 @@ proposed_impact_entries:
     owner_skill: rapt-behavior
     notes: 商品頁新增評論顯示 scenario。
 
-analysis_warnings: []
+analysis_warnings:
+  - "rev2 (2026-06-20): re-run on unchanged inputs — proposal what-if/0619-addComment.md and all SSoT unchanged since 2026-06-13. Analysis, classification, regression risks and recommendation reproduce rev1 unchanged."
+  - "graph_source: extractor (re-run). Persisted deterministic graph to docs/reports/impact/impact-graph-20260620.json: 287 nodes / 256 edges / 0 warnings (matches rev1). coverage: 28 dbml_tables, 39 relationships, 22 haapi_entity_bindings, l2 64 rows/16 table_mappings, l3 41 rows/124 mappings."
