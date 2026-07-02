@@ -16,13 +16,14 @@ metadata:
 
 ## TRIGGER
 
-- 任一 rapt-* skill 執行前需要載入共用 reference 規範時。
-- 需要查閱跨 skill 共用的 utility 定義或 schema 時。
+- `rapt-clarify`（03-clarification-session）透過 DELEGATE 傳入 payload 呼叫 `rapt-clarify-loop`。
+- payload 含 `batch_file`、非空的 `questions` 與 `max_per_ask`。
 
 ## SKIP
 
-- 不直接接手任何會寫入 SSoT artifact 的階段工作。
-- 應改用對應的 planner、worker、verifier 或 preview skill。
+- payload 缺少 `batch_file`，或 `questions` 為空（回傳錯誤給 caller）。
+- 使用者未經 `rapt-clarify` 直接呼叫；應改用 `/rapt-clarify` 走完整 Phase 3 流程。
+- 需要掃描 CiC、打包問題或將決策回寫 SSoT 的工作；那些屬於 `rapt-clarify` 的 01/02/04 sub-SOP。
 
 
 ## PRINCIPLE: Artifact Output Contract（只更新 payload.batch_file）

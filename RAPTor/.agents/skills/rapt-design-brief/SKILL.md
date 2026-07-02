@@ -16,8 +16,8 @@ metadata:
 
 ## TRIGGER
 
-- 使用者要求從既有 SSoT 產生 preview / generated artifact。
-- SSoT 已穩定，需要將 SSoT 轉為可預覽的衍生輸出。
+- 使用者執行 `/rapt-design-brief`，或要求產生給 Claude Design / AI 設計工具的 Design Brief。
+- haPDL、DBML、haARM SSoT 已就緒，需要結構化設計稿摘要以生成 Hi-Fi mockup。
 
 ## SKIP
 

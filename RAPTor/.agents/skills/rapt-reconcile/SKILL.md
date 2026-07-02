@@ -56,12 +56,6 @@ metadata:
 
 ---
 
-## SOP
-
-### 步驟 0：READ reports
-
-```
-
 ## Reconcile Session Gate
 
 ASSERT:
@@ -70,6 +64,14 @@ ASSERT:
 - 每次 reconcile 必須建立 `.raptor/reconcile/sessions/<session-id>.yml`。
 - phase end 必須列出 `NEED_TO_FIX`、`NEED_TO_CLARIFY`、`NOTE_ONLY`。
 - 對下游 artifact 有影響的修復必須更新 `.raptor/impact-matrix.yml`。
+
+---
+
+## SOP
+
+### 步驟 0：READ reports
+
+```
 READ if exists: ${paths.reports_dir}/verify-report.yml
 READ if exists: ${paths.reports_dir}/verify-report.md
 READ if exists: ${paths.reports_dir}/rascore-findings.json

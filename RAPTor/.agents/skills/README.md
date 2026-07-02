@@ -28,6 +28,8 @@
 | Worker | `rapt-form-hapdl` | haPDL DSL renderer |
 | Utility | `rapt-clarify-loop` | 問題批次與使用者澄清互動 |
 | Utility | `rapt-RAscore` | advisory-only 品質評分、scorecard、findings、action map |
+| Utility | `rapt-human-sync` | 偵測人工直接修改的 SSoT，產生 HSYNC 變更紀錄並登錄 `manual_change` 到 impact matrix |
+| Utility | `rapt-impact` | 變更事前影響分析（advisory-only），唯讀遍歷 SSoT 與 traceability，產出受影響 artifact、風險與建議 |
 | Preview | `rapt-openapi` | 從 haAPI/DBML/haARM 產生 OpenAPI preview |
 | Preview | `rapt-lofi` | 從 haPDL/DBML/haARM 產生 Lo-Fi HTML preview |
 | Preview | `rapt-design-brief` | 從 haPDL/DBML/haARM 產生 Design Brief |
@@ -169,7 +171,18 @@ my-project/
    → .raptor/impact-matrix.yml
    → 修復後再跑 /rapt-verify
 
-9. Preview：
+9. 人工直接修改 docs/ssot/** 後：
+   /rapt-human-sync
+   → .raptor/human-sync/HSYNC-*.yml
+   → .raptor/impact-matrix.yml（manual_change entries）
+   → 接續執行 /rapt-verify
+
+10. 新功能 / 需求變更的事前評估（可選，advisory-only）：
+   /rapt-impact
+   → docs/reports/impact/IA-YYYYMMDD-NNN.md
+   → docs/reports/impact/IA-YYYYMMDD-NNN.yml
+
+11. Preview：
    /rapt-openapi
    → docs/generate/openapi/openapi.yaml
    → docs/generate/openapi/openapi-audit.yml
@@ -223,6 +236,20 @@ Feature: 案件覆核
 - `suggested_action`
 
 `rapt-reconcile` 優先讀取 `verify-report.yml`，修改任何 SSoT 前必須建立 archive snapshot，並輸出 `.raptor/reconcile/sessions/*.yml`。
+
+## Human Sync / Impact
+
+`rapt-human-sync` 處理「人工直接修改 SSoT」的治理缺口：
+
+- 以 git baseline 掃描 `docs/ssot/**` 的人工變更，產生 `.raptor/human-sync/HSYNC-*.yml`（含 who/when/why、hunk 摘要、risk）。
+- 透過 `manage_impact_matrix.py upsert` 登錄 `source_type: manual_change` entries；以 fingerprint 保證重跑冪等。
+- 只登錄、不修復；完成後建議接續 `/rapt-verify`。
+
+`rapt-impact` 是變更「事前」的影響分析（advisory-only）：
+
+- 輸入 what-if 提案（`whatif/` 或行內描述），唯讀遍歷 DBML、haBDD、haARM、haAPI、haPDL 與 traceability。
+- 產出成對的 `IA-*.md` / `IA-*.yml` 報告與 impact graph，給出 accept / defer / reject / needs_clarification 建議。
+- 不修改任何 SSoT 或 `.raptor/impact-matrix.yml`；只輸出 `proposed_impact_entries` 供後續決策。
 
 ## Core Scripts
 

@@ -276,7 +276,69 @@ RAscore 是 advisory-only，不阻擋 phase gate。findings 會透過 `rascore-a
 - `NEED_TO_CLARIFY`
 - `NOTE_ONLY`
 
-## 11. Preview Tools
+## 11. Human Sync（人工修改 SSoT 後）
+
+當你（或團隊成員）**不經 skill、直接手動修改** `docs/ssot/**` 之後，在下一次 verify 前執行：
+
+```text
+/rapt-human-sync
+```
+
+它會：
+
+1. 解析 git baseline（可用 `--baseline <commit>` 明確指定）。
+2. 掃描 SSoT 的人工變更，記錄 who/when/why 與 hunk 摘要。
+3. 產生 HSYNC 變更紀錄，並把 `manual_change` entries 登錄進 impact matrix。
+
+輸出：
+
+```text
+.raptor/human-sync/
+└── HSYNC-YYYYMMDD-NNN.yml
+
+.raptor/impact-matrix.yml   （manual_change entries，status=open）
+.raptor/traceability.md     （追加 Decision Traceability 摘要）
+```
+
+規則：
+
+- 只登錄、不修復；修復仍走 `/rapt-verify` → `/rapt-reconcile`。
+- SSoT 沒有任何變更時，不建立空 HSYNC。
+- 重跑具冪等性（以 fingerprint 去重），不會產生重複 entries。
+- 無法解析 baseline 時會停止，請以 `--baseline <commit>` 指定。
+
+建議下一步：執行 `/rapt-verify`。
+
+## 12. Impact（變更事前影響分析）
+
+在 brownfield 專案要加新功能、改需求，或 clarify 選項可能改變 scope 時，**先**執行：
+
+```text
+/rapt-impact
+```
+
+輸入（三擇一）：
+
+- `whatif/` 目錄下的提案文件
+- 你本次行內的自然語言描述
+- 指定某個既有 SSoT 檔案，分析其改動的傳播
+
+輸出：
+
+```text
+docs/reports/impact/
+├── IA-YYYYMMDD-NNN.md      （人類可讀報告）
+├── IA-YYYYMMDD-NNN.yml     （機器可讀報告）
+└── impact-graph-YYYYMMDD.json
+```
+
+規則：
+
+- **Advisory-only**：只給 accept / defer / reject / needs_clarification 建議，不修改任何 SSoT、不寫 `.raptor/impact-matrix.yml`（僅輸出 `proposed_impact_entries`）。
+- 每個影響項目都附 evidence 與 confidence；traceability L2/L3 不完整時會降級分析並明示 limitations。
+- greenfield 且尚無 DBML / haBDD 時不適用，請先跑 `/rapt-discovery`。
+
+## 13. Preview Tools
 
 Preview tools 只能寫 `docs/generate/**`，不可修改 `docs/ssot/**`。每個 preview 都會同步輸出 audit YAML。
 
@@ -346,7 +408,7 @@ docs/generate/designbrief/
 └── style-profile.yml
 ```
 
-## 12. 常用工具
+## 14. 常用工具
 
 ### 解析 arguments.yml
 
@@ -379,7 +441,19 @@ python RAPTor/.agents/skills/rapt-core/scripts/manage_impact_matrix.py query --a
 python RAPTor/.agents/skills/rapt-core/scripts/migrate_docs_layout.py --root .
 ```
 
-## 13. 一頁流程表
+### 人工 SSoT 變更偵測（唯讀，不寫任何檔案）
+
+```powershell
+python RAPTor/.agents/skills/rapt-human-sync/scripts/detect_unsynced.py --root .
+```
+
+### 影響圖譜萃取（rapt-impact 使用）
+
+```powershell
+python RAPTor/.agents/skills/rapt-impact/scripts/extract_impact_graph.py --ssot-dir docs/ssot --trace .raptor/traceability.md --format json
+```
+
+## 15. 一頁流程表
 
 | 階段 | 指令 | 主要輸入 | 主要輸出 |
 |---|---|---|---|
@@ -392,11 +466,13 @@ python RAPTor/.agents/skills/rapt-core/scripts/migrate_docs_layout.py --root .
 | Verify | `/rapt-verify` | 所有 SSoT | `docs/reports/verify-report.md`、`docs/reports/verify-report.yml` |
 | Reconcile | `/rapt-reconcile` | `verify-report.yml` | session、archive、impact matrix、修復後 SSoT |
 | RAscore | `/rapt-RAscore` | Discovery + SSoT + verify | `docs/reports/rascore-*` |
+| Human Sync | `/rapt-human-sync` | 人工修改後的 `docs/ssot/**`（git diff） | `.raptor/human-sync/HSYNC-*.yml`、`.raptor/impact-matrix.yml`（manual_change） |
+| Impact | `/rapt-impact` | what-if 提案 / 行內需求 / 指定 SSoT | `docs/reports/impact/IA-*.md`、`IA-*.yml` |
 | OpenAPI | `/rapt-openapi` | haAPI + DBML + haARM | `docs/generate/openapi/*` |
 | Lo-Fi | `/rapt-lofi` | haPDL + DBML + haARM | `docs/generate/lofi/*` |
 | Design Brief | `/rapt-design-brief` | haPDL + DBML + haARM | `docs/generate/designbrief/*` |
 
-## 14. FAQ
+## 16. FAQ
 
 ### Kickoff 後沒有 `docs/discovery/`，是不是失敗？
 

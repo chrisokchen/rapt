@@ -22,13 +22,15 @@ metadata:
 
 ## TRIGGER
 
-- 任一 rapt-* skill 執行前需要載入共用 reference 規範時。
-- 需要查閱跨 skill 共用的 utility 定義或 schema 時。
+- 使用者執行 `/rapt-RAscore` 或明確指定本 skill。
+- Phase 2（Modeling）之後，需要評估 Gherkin + DBML 是否足以作為 SSoT。
+- verify 完成後，需要 advisory-only 的品質評分、scorecard 與 machine-readable findings（供 reconcile / clarify 消費）。
 
 ## SKIP
 
-- 不直接接手任何會寫入 SSoT artifact 的階段工作。
-- 應改用對應的 planner、worker、verifier 或 preview skill。
+- `.raptor/arguments.yml` 不存在：EMIT 錯誤並建議先執行 `/rapt-kickoff`。
+- 尚無任何 Gherkin 或 DBML artifact：建議先執行 `/rapt-behavior` 或 `/rapt-modeling`。
+- 需要驗證或修復規格本身：改用 `/rapt-verify` 或 `/rapt-reconcile`；RAscore 不修改任何 SSoT，也不作為 phase gate。
 
 
 ## PRINCIPLE: Artifact Output Contract（只寫 RAscore reports）

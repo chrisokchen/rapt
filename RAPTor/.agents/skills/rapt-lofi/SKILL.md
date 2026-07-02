@@ -16,8 +16,8 @@ metadata:
 
 ## TRIGGER
 
-- 使用者要求從既有 SSoT 產生 preview / generated artifact。
-- SSoT 已穩定，需要將 SSoT 轉為可預覽的衍生輸出。
+- 使用者執行 `/rapt-lofi`，或要求產生頁面 wireframe / Lo-Fi 預覽。
+- haPDL、DBML、haARM SSoT 已就緒，需要 self-contained HTML wireframe 檢視頁面意圖。
 
 ## SKIP
 

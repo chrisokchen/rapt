@@ -16,8 +16,8 @@ metadata:
 
 ## TRIGGER
 
-- 使用者要求從既有 SSoT 產生 preview / generated artifact。
-- SSoT 已穩定，需要將 SSoT 轉為可預覽的衍生輸出。
+- 使用者執行 `/rapt-openapi`，或要求產生 OpenAPI spec / API 規格預覽。
+- haAPI、DBML、haARM SSoT 已就緒，需要可供 Swagger UI / Redocly 檢視的 OpenAPI 3.0.3 YAML。
 
 ## SKIP
 
