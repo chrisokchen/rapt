@@ -222,6 +222,9 @@ __marimo__/
 # 各專案的 skills 目錄是 Junction 指向 canonical，不需重複版控
 Projects/**/.agents/skills/
 Projects/**/.claude/skills/
+Projects/**/DSLspec/
+Projects/**/skills/
+
 
 # sync-skills.ps1 產生的舊拷貝備份
 Projects/**/*_backup_*/

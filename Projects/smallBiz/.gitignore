@@ -1,3 +1,4 @@
 # Skills 由 Junction 指向 canonical source，不需版控
 .agents/skills/
 .claude/skills/
+DSLspec/
