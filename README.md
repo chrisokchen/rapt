@@ -39,7 +39,7 @@
 
 如果您對 RAPTor 背後的理論基礎、設計思維或系統分析細節感興趣，歡迎參閱我們整理的文獻與導覽簡報：
 
-- **學術論文 (TCSE 2026)**：AI 產力左移與 Spec-as-Source 工程框架：以四維意圖規格體系與多層驗證鏈收斂生成式 AI 之隨機性  [pdf](RAPTor/references/TCSE_2026_paper_14_v2.pdf) / [Markdown 閱讀版](RAPTor/references/2026TCSE.md)
+- **學術論文 (TCSE 2026)**：AI 產力左移與 Spec-as-Source 工程框架：以四維意圖規格體系與多層驗證鏈收斂生成式 AI 之隨機性  [pdf](RAPTor/references/TCSE_2026_paper_14_v2.pdf) / [Markdown 閱讀版](RAPTor/references/2026TCSE.md) / [簡報](RAPTor/references/2026TCSE-14.pptx)
   > 深入探討 RAPTor 規格體系如何結合 BDD 與 AI 技術的學術研究。
 - **RAPTor 30 分鐘導覽簡報**：
   [PPTX](RAPTor/references/0612-RAPTor-30minSAguide_cc-Fable5.pptx) / [Markdown 講稿](RAPTor/references/0612-RAPTor簡報-30min導覽.md)
@@ -47,6 +47,10 @@
 - **rapt-human-sync 專題簡報**：
   [PPTX](RAPTor/references/0613plan-rapt-human-sync_presentation_cc-Opus48.pptx) / [Markdown 講稿](RAPTor/references/0613plan-rapt-human-sync_presentation_cc-Opus48.md)
   > 介紹 RAPTor 中如何妥善處理「人工修改 SSoT」的同步與影響分析機制。
+- [haARM 新手教學指南](RAPTor/references/haARM_新手教學指南.md)
+  > 專為初學者設計的 haARM 快速入門指南，涵蓋角色與權限管理的基本操作。
+- RAPTor 學習教材： [Fable5 版](references/0719-Tutor_ccFable5.md) / [Gpt5.6 Sol版](references/0719-Tutor_codexGpt56sol.md)
+  > 為新接觸 RAPTor 的同仁設計的完整學習教材，涵蓋 RAPTor 架構、設計理念、使用方式、開發流程、常見問題與練習題。
 
 ## 🙏 致謝 (Acknowledgments)
 
