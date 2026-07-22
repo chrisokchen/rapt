@@ -21,3 +21,15 @@
 2. 在新資料夾中放置 `raw-input`（原始需求文件）。
 3. 使用 `rapt-kickoff` 等 AI Agent 進行初始化，生成 `.raptor/arguments.yml` 與基礎目錄結構。
 4. 依循 RAPTor 的七階段流程，開始進行規格發掘與建模。
+
+1. **建立專案資料夾**：在 `Projects/` 目錄下建立一個新的資料夾（例如 `Projects/my-app`）。
+2. **準備原始需求**：在新資料夾中建立 `raw-input` 目錄，並放入您的原始需求草稿、訪談記錄或初步的系統構想。
+3. **連結 AI 技能庫**：為了能呼叫 `rapt-*` 技能，請在您的專案目錄內開啟終端機（Terminal）並建立 Junction 連結：
+   ```powershell
+   mkdir .agents
+   cmd /c mklink /J .agents\skills ..\..\RAPTor\.agents\skills
+   cmd /c mklink /J DSLspec ..\..\RAPTor\DSLspec
+   ```
+   *(註：若使用 Claude，建好後再把 .agents 目錄名稱改成 .claude)*
+4. **初始化專案**：在您的專案目錄下啟動並呼叫 `rapt-kickoff` 技能（Agent），AI 會自動幫您生成 `.raptor/arguments.yml` 專案設定檔與標準目錄結構。
+5. **展開探索之旅**：參考 [RAPTor Skills 使用手冊](RAPTor\.agents\skills\UserGuide.md)，依序使用 `rapt-discovery`、`rapt-modeling`、`rapt-intent` 等 AI 代理，將模糊的想法一步步提煉成結構化的 `DBML` 與 `haPDL`、`haAPI`、`haARM` 等可執行規格！

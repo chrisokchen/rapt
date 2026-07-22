@@ -30,8 +30,9 @@
    ```powershell
    mkdir .agents
    cmd /c mklink /J .agents\skills ..\..\RAPTor\.agents\skills
+   cmd /c mklink /J DSLspec ..\..\RAPTor\DSLspec
    ```
-   *(註：若使用 Claude，結束後再把 .agents 目錄名稱改成 .claude)*
+   *(註：若使用 Claude，建好後再把 .agents 目錄名稱改成 .claude)*
 4. **初始化專案**：在您的專案目錄下啟動並呼叫 `rapt-kickoff` 技能（Agent），AI 會自動幫您生成 `.raptor/arguments.yml` 專案設定檔與標準目錄結構。
 5. **展開探索之旅**：參考 [RAPTor Skills 使用手冊](RAPTor\.agents\skills\UserGuide.md)，依序使用 `rapt-discovery`、`rapt-modeling`、`rapt-intent` 等 AI 代理，將模糊的想法一步步提煉成結構化的 `DBML` 與 `haPDL`、`haAPI`、`haARM` 等可執行規格！
 
@@ -47,9 +48,9 @@
 - **rapt-human-sync 專題簡報**：
   [PPTX](RAPTor/references/0613plan-rapt-human-sync_presentation_cc-Opus48.pptx) / [Markdown 講稿](RAPTor/references/0613plan-rapt-human-sync_presentation_cc-Opus48.md)
   > 介紹 RAPTor 中如何妥善處理「人工修改 SSoT」的同步與影響分析機制。
-- [haARM 新手教學指南](RAPTor/references/haARM_新手教學指南.md)
+- [haARM 新手教學指南](RAPTor/references/haARM-新手教學指南.md)
   > 專為初學者設計的 haARM 快速入門指南，涵蓋角色與權限管理的基本操作。
-- RAPTor 學習教材： [Fable5 版](references/0719-Tutor_ccFable5.md) / [Gpt5.6 Sol版](references/0719-Tutor_codexGpt56sol.md)
+- RAPTor 學習教材： [Fable5 版](RAPTor/references/0719-Tutor_ccFable5.md) / [Gpt5.6 Sol版](RAPTor/references/0719-Tutor_codexGpt56sol.md)
   > 為新接觸 RAPTor 的同仁設計的完整學習教材，涵蓋 RAPTor 架構、設計理念、使用方式、開發流程、常見問題與練習題。
 
 ## 🙏 致謝 (Acknowledgments)
