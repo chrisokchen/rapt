@@ -28,3 +28,9 @@
    *(註：若使用 Claude，建好後再把 .agents 目錄名稱改成 .claude)*
 4. **初始化專案**：在您的專案目錄下啟動並呼叫 `rapt-kickoff` 技能（Agent），AI 會自動幫您生成 `.raptor/arguments.yml` 專案設定檔與標準目錄結構。
 5. **展開探索之旅**：參考 [RAPTor Skills 使用手冊](RAPTor\.agents\skills\UserGuide.md)，依序使用 `rapt-discovery`、`rapt-modeling`、`rapt-intent` 等 AI 代理，將模糊的想法一步步提煉成結構化的 `DBML` 與 `haPDL`、`haAPI`、`haARM` 等可執行規格！
+
+## CiC 整理 prompt
+
+CiC（Critical Issue & Concern）是 RAPTor 規格體系中用於記錄與追蹤專案中關鍵議題、疑慮或待解決問題的工具。每個 CiC 都有唯一的編號、標題、類型（CON 或 GAP）、以及相關選項與影響 
+
+請把目前所有 CiC 整理出來，包括它們的編號、標題、以及它們的類型（CON 或 GAP），以及有哪些選項、各選項造成的影響，並整理成表格。寫在 CWD 目錄下的 0716-Cic-01.md 檔案中。
