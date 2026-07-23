@@ -17,11 +17,6 @@
 
 若要使用 RAPTor 建立新專案，請參考以下步驟：
 
-1. 在此目錄下建立新的資料夾（例如 `Projects/my-new-app`）。
-2. 在新資料夾中放置 `raw-input`（原始需求文件）。
-3. 使用 `rapt-kickoff` 等 AI Agent 進行初始化，生成 `.raptor/arguments.yml` 與基礎目錄結構。
-4. 依循 RAPTor 的七階段流程，開始進行規格發掘與建模。
-
 1. **建立專案資料夾**：在 `Projects/` 目錄下建立一個新的資料夾（例如 `Projects/my-app`）。
 2. **準備原始需求**：在新資料夾中建立 `raw-input` 目錄，並放入您的原始需求草稿、訪談記錄或初步的系統構想。
 3. **連結 AI 技能庫**：為了能呼叫 `rapt-*` 技能，請在您的專案目錄內開啟終端機（Terminal）並建立 Junction 連結：
